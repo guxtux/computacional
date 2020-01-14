@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section><section id="estructuras-de-control." class="titleslide slide level1"><h1>Estructuras de control.</h1></section><section id="section" class="slide level2">
+<h2></h2>
+<p>En python manejaremos las estructuras más comunes que son relativamente sencillas de usar, cuidado siempre de manejar la sintaxis respectiva.</p>
+</section></section>
+<section><section id="condicionales" class="titleslide slide level1"><h1><font color="Cyan">1. Condicionales</font></h1></section><section id="section-1" class="slide level2">
+<h2></h2>
+<p>El bloque condicional más simple utiliza la instrucción <strong>if</strong>, a continuación lleva una expresión que debe de evaluarse, como se mencionó antes, el valor de la expresión debe de ser True para que se ejecute(n) la(s) instrucción(es) contenidas en el bloque.</p>
+</section><section id="section-2" class="slide level2">
+<h2></h2>
+<p>Hay dos puntos (:) que identifican el bloque y las instrucciones contenidas deben de estar identadas, en caso contrario, python nos devolverá un mensaje de error provocado por la identación equivocada.</p>
+</section><section id="la-evaluación-de-la-expresión-es-verdadera." class="slide level2">
+<h2>La evaluación de la expresión es verdadera.</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a <span class="op">=</span> <span class="dv">10</span>
+<span class="cf">if</span> a <span class="op">&gt;</span> <span class="dv">0</span>:
+    <span class="bu">print</span> (<span class="st">&#39;la variable a es positiva&#39;</span>)
+    a <span class="op">=</span> a <span class="op">+</span> <span class="dv">1</span>
+
+<span class="bu">print</span> (a)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>la variable a es positiva
+11</code></pre>
+</section><section id="section-3" class="slide level2">
+<h2></h2>
+<p>En el ejemplo asignamos a la variable <font color="yellow">a</font> el valor de <font color="yellow">10</font>, en el bloque condicional se evalúa la expresión <font color="yellow">a &gt; 0</font></p>
+</section><section id="section-4" class="slide level2">
+<h2></h2>
+<p>En el ejemplo, el valor que se obtiene es True, por tanto, se ejecutan las instrucciones que están contenidas dentro del bloque, que son:</p>
+<ol type="1">
+<li>Mostrar en pantalla la línea <em>la variable a es positiva</em></li>
+<li>Se incrementa una unidad el valor de <font color="yellow">a</font></li>
+</ol>
+</section><section id="section-5" class="slide level2">
+<h2></h2>
+<p>Aquí concluyen las instrucciones dentro del condicional, la siguiente función <em>print</em> está fuera del bloque, y nos muestra el valor de la variable <font color="yellow">a</font>, que en el ejemplo ahora es <em>11</em>.</p>
+</section><section id="la-evaluación-de-la-expresión-es-falsa." class="slide level2">
+<h2>La evaluación de la expresión es falsa.</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a <span class="op">=</span> <span class="dv">0</span>
+<span class="cf">if</span> a <span class="op">&gt;</span> <span class="dv">0</span>:
+    <span class="bu">print</span> (<span class="st">&#39;la variable a es positiva&#39;</span>)
+    a <span class="op">=</span> a <span class="op">+</span> <span class="dv">1</span>
+
+<span class="bu">print</span> (a)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>0</code></pre>
+</section><section id="section-6" class="slide level2">
+<h2></h2>
+<p>Ahora vemos que el valor de la variable <font color="yellow">a</font> es cero, y al evaluarse la expresión <font color="yellow">a &gt; 0</font>, el resultado es False</p>
+</section><section id="section-7" class="slide level2">
+<h2></h2>
+<p>Por tanto <strong>NO</strong> se ejecuta instrucción alguna que está dentro del bloque, y continua el código hacia la siguiente línea, en el ejemplo continua con la función <em>print</em>.</p>
+</section><section id="alternativas-para-la-evaluación-de-un-condicional." class="slide level2">
+<h2>Alternativas para la evaluación de un condicional.</h2>
+</section><section id="section-8" class="slide level2">
+<h2></h2>
+<p><strong>Alternativa 1 para el bloque condicional.</strong></p>
+<p>En ocasiones necesitaremos hacer que el programa realice alguna instrucción cuando la expresión que se evalúa en el <font color="yellow">if</font> sea falsa, es decir, que haya una respuesta en particular para el caso en que obtengamos un valor False en la evaluación de la expresión.</p>
+</section><section id="section-9" class="slide level2">
+<h2></h2>
+<p>Para ello, podemos ocupar la instrucción <font color="yellow">else:</font> que se escribe en el mismo nivel de identación que la instrucción <font color="yellow">if</font> y lleva también dos puntos <font color="yellow">(:)</font></p>
+</section><section id="section-10" class="slide level2">
+<h2></h2>
+<p>Las instrucciones que están contenidas dento de <font color="yellow">else:</font> se ejecutarán siempre y cuando la expresión que se evalúa, sea falsa.</p>
+<p>En python no se pide otra expresión para evaluar, sino que se ejecutan inmediatamente cuando se evalúa que el resultado de la expresión es False.</p>
+</section><section id="section-11" class="slide level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a <span class="op">=</span> <span class="op">-</span><span class="dv">2</span>
+<span class="cf">if</span> a <span class="op">&gt;</span> <span class="dv">0</span>:
+    <span class="bu">print</span> (<span class="st">&#39;la variable a es positiva&#39;</span>)
+    a <span class="op">=</span> a <span class="op">+</span> <span class="dv">1</span>
+<span class="cf">else</span>:
+    <span class="bu">print</span> (<span class="st">&#39;la variable a es negativa&#39;</span>)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>la variable a es negativa</code></pre>
+</section><section id="section-12" class="slide level2">
+<h2></h2>
+<p>En el ejemplo vemos que el valor de <font color="yellow">a</font> es <span class="math inline">−2</span>.</p>
+<p>La expresión que se evalúa en el <font color="yellow">if</font> es False, por tanto, no se ejecutan las instrucciones contenidas dentro del <font color="yellow">if</font>, sino que se va a ejecutar la(s) instrucción(es) contenida(s) en el <font color="yellow">else:</font></p>
+</section><section id="section-13" class="slide level2">
+<h2></h2>
+<p>Si la expresión inicial que se evalúa es True, se ejecutan las instrucciones contenidas en el bloque <font color="yellow">if</font>, y ya no se ejecuta instrucción alguna del bloque <font color="yellow">else:</font>, para posteriormente continuar con el programa.</p>
+</section><section id="section-14" class="slide level2">
+<h2></h2>
+<p><strong>Alternativa 2 para el bloque condicional</strong>.</p>
+<p>El uso de un bloque <font color="yellow">if ... else</font> nos da oportunidad manejar el código en caso de obtener un valor False en la evaluación de la expresión.</p>
+</section><section id="section-15" class="slide level2">
+<h2></h2>
+<p>Como ya mencionamos, no se requiere evaluar otra expresión, pero podemos usar una variante del condicional y evaluar una nueva expresión (que sería diferente de la primera) y con ello, nuestro algoritmo gana bastante potencial para responder a nuestras necesidades, y eso lo haremos con el bloque <font color="yellow">if ... elif ... else</font></p>
+</section><section id="section-16" class="slide level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a <span class="op">=</span> <span class="dv">0</span>
+<span class="cf">if</span> a <span class="op">&gt;</span> <span class="dv">0</span>:
+    <span class="bu">print</span> (<span class="st">&#39;la variable a es positiva&#39;</span>)
+    a <span class="op">=</span> a <span class="op">+</span> <span class="dv">1</span>
+<span class="cf">elif</span> a <span class="op">==</span> <span class="dv">0</span>:
+    <span class="bu">print</span> (<span class="st">&#39;la variable a es cero&#39;</span>)
+<span class="cf">else</span>:
+    <span class="bu">print</span> (<span class="st">&#39;la variable a es negativa&#39;</span>)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>la variable a es cero</code></pre>
+</section><section id="section-17" class="slide level2">
+<h2></h2>
+<p>La primera expresión <font color="yellow">a &gt; 0</font> tiene un valor False, por tanto, continua el código hasta la sentencia <font color="yellow">elif:</font></p>
+<p>En ésta se evalúa la nueva expresión <font color="yellow">a == 0</font>, que resulta ser True.</p>
+</section><section id="section-18" class="slide level2">
+<h2></h2>
+<p>Por tanto se ejecuta la instrucción contenida en el bloque <font color="yellow">elif:</font>, saliendo luego del bloque y continua el código, es decir, ya no se revisa el <font color="yellow">else:</font></p>
+</section><section id="section-19" class="slide level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a <span class="op">=</span> <span class="bu">eval</span>(<span class="bu">input</span>(<span class="st">&#39;Introduce el valor de a&#39;</span>))
+<span class="cf">if</span> a <span class="op">&gt;</span> <span class="dv">0</span>:
+    <span class="bu">print</span> (<span class="st">&quot;a es positivo&quot;</span>)
+    a <span class="op">=</span> a <span class="op">+</span> <span class="dv">1</span>
+<span class="cf">elif</span> a <span class="op">==</span> <span class="dv">0</span>:
+    <span class="bu">print</span> (<span class="st">&quot;a es 0&quot;</span>)
+<span class="cf">else</span>:
+    <span class="bu">print</span> (<span class="st">&quot;a es negativo&quot;</span>)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>Introduce el valor de a0
+a es 0</code></pre>
+</section></section>
+<section><section id="bucles" class="titleslide slide level1"><h1><font color="Cyan">2. Bucles</font></h1></section><section id="section-20" class="slide level2">
+<h2></h2>
+<p><strong>Tipos de bucles</strong></p>
+<p>Hay que considerar dos posibles casos en el manejo de los bucles:</p>
+<ol type="1">
+<li>Cuando conocemos el número de ciclos que van a realizarse.</li>
+<li>Cuando no sabemos cuántas veces se requiere que el ciclo se repita.</li>
+</ol>
+</section><section id="section-21" class="slide level2">
+<h2></h2>
+<p>En ambos casos se necesita modificar alguna variable y evaluar nuevamente una condición, de tal manera que se cumpla con cierto criterio y concluya el bucle.</p>
+</section><section id="section-22" class="slide level2">
+<h2></h2>
+<p>En caso contrario, tendremos lo que se denomina un <em>bucle infinito</em>, es decir, el conjunto de instrucciones se va a repetir indefinidamente, por lo que hay que ''cortar'' el programa en ejecución.</p>
+</section><section id="el-bucle-while" class="slide level2">
+<h2>El bucle # <font color="yellow">while</font></h2>
+<p>El ciclo/bucle <font color="yellow">while</font> tiene la siguiente sintaxis:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">while</span> condicion:
+    instruccion1
+    instruccion2
+    ....</code></pre></div>
+</section><section id="section-23" class="slide level2">
+<h2></h2>
+<p>Las instrucciones contenidas en el bloque se van a ejecutar mientras el valor de la condición sea verdadero.</p>
+<p>Para salir del ciclo, el valor de la condición debe devolver False, por lo que es necesario que dentro de este bloque, se realice alguna modificación a la(s) variable(s) contenida(s) en la condición.</p>
+</section><section id="section-24" class="slide level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">nMax <span class="op">=</span> <span class="dv">5</span>
+n <span class="op">=</span> <span class="dv">1</span>
+a <span class="op">=</span> [] 
+<span class="cf">while</span> n <span class="op">&lt;</span> nMax:
+    a.append(<span class="fl">1.0</span><span class="op">/</span>n) 
+    n <span class="op">=</span> n <span class="op">+</span> <span class="dv">1</span>
+<span class="bu">print</span> (a)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>[1.0, 0.5, 0.3333333333333333, 0.25]</code></pre>
+</section><section id="section-25" class="slide level2">
+<h2></h2>
+<p>En el ejemplo definimos la variable <font color="yellow">nMax = 5</font>, se toma un valor inicial para la variable <font color="yellow">n</font>, y se crea una lista vacía <font color="yellow">a</font>.</p>
+</section><section id="section-26" class="slide level2">
+<h2></h2>
+<p>Como la expresión que se evalúa luego del <font color="yellow">while</font> es True ya que <font color="yellow">n &lt; nMax</font></p>
+<p>Se ejecuta lo que está contenido dentro del ciclo: se agrega un nuevo elemento a la lista, mediante la instrucción <font color="yellow">a.append</font>, y luego se incrementa el valor de <font color="yellow">n</font> en una unidad.</p>
+</section><section id="section-27" class="slide level2">
+<h2></h2>
+<p>Llega el momento en que se evalúa la expresión <font color="yellow">5 &lt; 5</font> que devuelve un valor False por tanto, termina el ciclo.</p>
+</section><section id="section-28" class="slide level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> random <span class="im">import</span> random
+x <span class="op">=</span> <span class="fl">0.2</span>
+a <span class="op">=</span> <span class="dv">0</span>
+<span class="cf">while</span> x <span class="op">&lt;</span> <span class="fl">0.8</span>:
+    <span class="co"># a = a + 1</span>
+    a <span class="op">+=</span> <span class="dv">1</span>
+    x <span class="op">=</span> random()
+    <span class="bu">print</span> (x)
+<span class="bu">print</span> (<span class="st">&quot;</span><span class="ch">\n</span><span class="st"> Acabo el bucle luego de &quot;</span>, a, <span class="st">&quot; iteraciones&quot;</span>)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>0.0440045786139075
+0.7796230779526429
+0.8946464576298329
+
+ Acabo el bucle luego de  3  iteraciones</code></pre>
+</section><section id="el-ciclobucle-for." class="slide level2">
+<h2>El ciclo/bucle <font color="yellow">for</font>.</h2>
+<p>La sintaxis del bucle/ciclo <span class="math inline"><code>for</code></span> es la siguiente:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">for</span> variable <span class="kw">in</span> lista:
+    instruccion1
+    instruccion2
+    ...</code></pre></div>
+</section><section id="section-29" class="slide level2">
+<h2></h2>
+<p>El conjunto de instrucciones contenidas dentro del bucle se va a ejecutar mientras no se acabe de recorrer la lista; el valor de la variable, será el elemento de la lista que está siendo tratado en ese momento:</p>
+</section><section id="section-30" class="slide level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">cubos <span class="op">=</span>[]
+<span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">7</span>):
+    ic <span class="op">=</span> i<span class="op">**</span><span class="dv">3</span>
+    cubos.append(ic)
+    <span class="bu">print</span> (i, cubos)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>0 [0]
+1 [0, 1]
+2 [0, 1, 8]
+3 [0, 1, 8, 27]
+4 [0, 1, 8, 27, 64]
+5 [0, 1, 8, 27, 64, 125]
+6 [0, 1, 8, 27, 64, 125, 216]</code></pre>
+</section><section id="section-31" class="slide level2">
+<h2></h2>
+<p><strong>Algunas cosas más sobre el ciclo <font color="yellow">for</font></strong></p>
+<p>La instrucción <font color="yellow">for</font> no sólo itera sobre enteros: el ciclo <font color="yellow">for</font>$ itera sobre todos los elementos de una <em>secuencia</em>, asignando el valor del elemento a la variable.</p>
+<p>En el ejemplo anterior, la función <font color="yellow">range</font> es sólo una función conveniente que genera una lista de enteros.</p>
+</section><section id="section-32" class="slide level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">for</span> i <span class="kw">in</span> [ <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">9</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">3</span> ]:
+    <span class="bu">print</span> (<span class="st">&quot;Un digito de pi es&quot;</span>, i)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>Un digito de pi es 3
+Un digito de pi es 1
+Un digito de pi es 4
+Un digito de pi es 1
+Un digito de pi es 5
+Un digito de pi es 9
+Un digito de pi es 2
+Un digito de pi es 6
+Un digito de pi es 5
+Un digito de pi es 3</code></pre>
+</section><section id="section-33" class="slide level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">for</span> i <span class="kw">in</span> [ <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span> ] <span class="op">+</span> [ <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span> ]:
+    <span class="bu">print</span> (i)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>1
+2
+3
+4
+3
+2
+1</code></pre>
+<h3 id="section-34"></h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">for</span> i <span class="kw">in</span> <span class="st">&quot; estas son palabras al azar &quot;</span>.split ():
+    <span class="bu">print</span> (i)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>estas
+son
+palabras
+al
+azar</code></pre>
+</section><section id="ejemplos-del-ciclo-for" class="slide level2">
+<h2>Ejemplos del ciclo <font color="yellow">for</font></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):
+    <span class="bu">print</span> (i)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>0
+1
+2
+3
+4
+5
+6
+7
+8
+9</code></pre>
+</section><section id="section-35" class="slide level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">10</span>):
+    <span class="bu">print</span> (i)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>1
+2
+3
+4
+5
+6
+7
+8
+9</code></pre>
+</section><section id="section-36" class="slide level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>,<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>):
+    <span class="bu">print</span> (j)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>10
+9
+8
+7
+6
+5
+4
+3
+2</code></pre>
+</section><section id="section-37" class="slide level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">lista <span class="op">=</span> [<span class="st">&#39;adios&#39;</span>, <span class="st">&#39;mundo&#39;</span>, <span class="st">&#39;cruel&#39;</span>]
+<span class="cf">for</span> palabra <span class="kw">in</span> lista:
+    <span class="bu">print</span> (palabra)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>adios
+mundo
+cruel</code></pre>
+</section><section id="ciclo-for-más-elaborado." class="slide level2">
+<h2>Ciclo <font color="yellow">for</font> más elaborado.</h2>
+<p>El siguiente código usa los elementos de lista y busca la coincidencia exacta del nombre que proporciona el usuario en la línea de comandos, en caso de que no lo encuentre, le avisa al usuario que ese nombre no está en la lista inicial.</p>
+</section><section id="section-38" class="slide level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">lista <span class="op">=</span> [<span class="st">&#39;Hugo&#39;</span>, <span class="st">&#39;Paco&#39;</span>, <span class="st">&#39;Luis&#39;</span>, <span class="st">&#39;McPato&#39;</span>]
+nombre <span class="op">=</span> <span class="bu">input</span>(<span class="st">&#39;Teclea un nombre: &#39;</span>)
+
+<span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(lista)):
+    <span class="cf">if</span> lista[i] <span class="op">==</span> nombre:
+        <span class="bu">print</span> (nombre, <span class="st">&#39; es el numero &#39;</span>, i <span class="op">+</span> <span class="dv">1</span>, <span class="st">&#39; en la lista&#39;</span>)
+        <span class="cf">break</span>
+<span class="cf">else</span>:
+        <span class="bu">print</span> (nombre, <span class="st">&#39; no esta en la lista&#39;</span>)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>Teclea un nombre: Hugo
+Hugo  es el numero  1  en la lista</code></pre>
+</section><section id="section-39" class="slide level2">
+<h2></h2>
+<p>En el ejemplo anterior, vemos que hay una sentencia <font color="yellow">else:</font> al mismo nivel de alineación del ciclo <font color="yellow">for</font>, efectivamente, esta sentencia <font color="yellow">else:</font> no pertenece al condicional <font color="yellow">if</font>, sino al bloque <font color="yellow">for</font>.</p>
+</section><section id="section-40" class="slide level2">
+<h2></h2>
+<p>La sentencia <font color="yellow">else:</font> la podemos utilizar tanto para los bucles <font color="yellow">for</font> y <font color="yellow">while</font>.</p>
+</section><section id="instrucciones-break-y-continue." class="slide level2">
+<h2><strong>Instrucciones <font color="yellow">break</font> y <font color="yellow">continue</font></strong>.</h2>
+<p>Hay dos instrucciones que permiten ''salirse'' de un bucle sin necesidad de esperar a que en un ciclo <font color="yellow">while</font> la expresión que se evalúa cambie a un valor False, y para un ciclo <font color="yellow">for</font>, esperar a que se recorran todos los elementos de la lista.</p>
+</section><section id="section-41" class="slide level2">
+<h2></h2>
+<p>La instrucción es <font color="yellow">break</font>, veamos en el siguiente ejemplo, cómo se usa.</p>
+</section><section id="section-42" class="slide level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="dv">10</span>):
+    <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, n):
+        <span class="cf">if</span> n <span class="op">%</span> x <span class="op">==</span> <span class="dv">0</span>:
+            <span class="bu">print</span> (n, <span class="st">&#39; es igual a &#39;</span>, x, <span class="st">&#39;*&#39;</span>, n<span class="op">/</span>x)
+            <span class="cf">break</span>
+    <span class="cf">else</span>:
+        <span class="bu">print</span> (n, <span class="st">&#39; es numero primo&#39;</span>)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>2  es numero primo
+3  es numero primo
+4  es igual a  2 * 2.0
+5  es numero primo
+6  es igual a  2 * 3.0
+7  es numero primo
+8  es igual a  2 * 4.0
+9  es igual a  3 * 3.0</code></pre>
+</section><section id="section-43" class="slide level2">
+<h2></h2>
+<p>Tenemos dos ciclos <font color="yellow">for</font> anidados (hay que tener siempre cuidado con la identación)</p>
+<p>En el segundo ciclo, tenemos un condicional <font color="yellow">if</font> contenido, se evalúa con la función módulo, para expresar que un número es producto de otro</p>
+</section><section id="section-44" class="slide level2">
+<h2></h2>
+<p>Tenemos la instrucción <font color="yellow">break</font>, que no se espera a que se complete el recorrido de los elementos de la lista con índice <font color="yellow">x</font>, que va desde <font color="yellow">2</font> hasta <font color="yellow">n</font></p>
+</section><section id="section-45" class="slide level2">
+<h2></h2>
+<p>Continua con un incremento en el contador <font color="yellow">n</font> del primer ciclo <font color="yellow">for</font>.</p>
+<p>En caso de que no haya un residuo igual a cero, entonces el número es primo, aquí nos apoyamos en la sentencia <font color="yellow">else</font> del ciclo <font color="yellow">for</font>.</p>
+</section><section id="uso-de-la-instrucción-continue" class="slide level2">
+<h2><em>Uso de la instrucción <font color="yellow">continue</font></em></h2>
+<p>La instrucción <font color="yellow">continue</font>, lo que hace, es dar paso a la siguiente iteración del ciclo, veamos el ejemplo:</p>
+</section><section id="section-46" class="slide level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">for</span> num <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">10</span>):
+    <span class="cf">if</span> num <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:
+        <span class="bu">print</span> (<span class="st">&#39;Encontre un numero par &#39;</span>, num)
+        <span class="cf">continue</span>
+    <span class="bu">print</span> (<span class="st">&#39;Encontre un numero &#39;</span>, num)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>Encontre un numero par  2
+Encontre un numero  3
+Encontre un numero par  4
+Encontre un numero  5
+Encontre un numero par  6
+Encontre un numero  7
+Encontre un numero par  8
+Encontre un numero  9</code></pre>
+</section></section>
+<section><section id="ejercicio-completo." class="titleslide slide level1"><h1>Ejercicio completo.</h1></section><section id="carrera-de-bicicletas-el-efecto-de-la-resistencia-al-aire." class="slide level2">
+<h2>Carrera de bicicletas: el efecto de la resistencia al aire.</h2>
+</section><section id="section-47" class="slide level2">
+<h2></h2>
+<p>La bicicleta es una forma muy eficiente de transporte, esto la sabe quien se ha subido a una.</p>
+<p>El objetivo con este ejercicio es entender los factores que determinan la velocidad máxima de una bicicleta y estimar esta velocidad para un caso realista.</p>
+</section><section id="section-48" class="slide level2">
+<h2></h2>
+<p>Comenzaremos ignorando la fricción; se tiene que considerar posteriormente, pero primero vamos a entender cómo lidiar con el caso más simple sin fricción.</p>
+</section><section id="section-49" class="slide level2">
+<h2></h2>
+<p>Partimos con la ecuación de movimiento:segunda ley de Newton, que puede escribirse en la forma</p>
+<p>Donde v es la velocidad, m es la masa de la combinación bicicleta-ciclista, t es el tiempo y F es la fuerza sobre la bicicleta que viene del esfuerzo del ciclista (aquí asumiremos que la bicicleta se está moviendo en plano terreno).</p>
+</section><section id="section-50" class="slide level2">
+<h2></h2>
+<p>Manejar debidamente con F es complicado por la mecánica misma de una bicicleta: ya que la fuerza ejercida por el ciclista se transmite a las ruedas por medio del plato, engranajes, etc.</p>
+</section><section id="section-51" class="slide level2">
+<h2></h2>
+<p>Esto hace muy difícil obtener una expresión exacta para F.</p>
+<p>Sin embargo, hay otra manera de atacar este problema que evita la necesidad de conocer la fuerza.</p>
+</section><section id="section-52" class="slide level2">
+<h2></h2>
+<p>Este enfoque alternativo implica formular el problema en términos de la potencia generada por el conductor.</p>
+<p>Los estudios fisiológicos de ciclistas de élite de carreras han demostrado que estos atletas son capaces de producir una potencia de salida de aproximadamente 400 watts durante largos períodos de tiempo (1 h)</p>
+</section><section id="section-53" class="slide level2">
+<h2></h2>
+<p>Usando ideas de trabajo-energía podemos reescribir la ecuación anterior como</p>
+</section><section id="section-54" class="slide level2">
+<h2></h2>
+<p>Donde E es la energía total de la combinación bicicleta-ciclista, y P es la potencia de salida del ciclista.</p>
+<p>(Esto supone implícitamente que se pierde muy poca energía para la fricción en la propia bicicleta, incluiremos otras fuentes de fricción en un momento).</p>
+</section><section id="section-55" class="slide level2">
+<h2></h2>
+<p>Para un recorrido plano toda la energía es cinética, entonces <span class="math inline"><em>E</em> = <em>m</em><em>v</em><sup>2</sup></span> y <span class="math inline"><em>d</em><em>E</em>/<em>d</em><em>t</em> = <em>m</em><em>v</em>(<em>d</em><em>v</em>/<em>d</em><em>t</em>)</span>.</p>
+</section><section id="section-56" class="slide level2">
+<h2></h2>
+<p>Al sustituir en la ecuación anterior</p>
+</section><section id="section-57" class="slide level2">
+<h2></h2>
+<p>Si P es constante, se puede resolver analíticamente. Ordenando los términos</p>
+<p><span class="math inline">∫<sub><em>v</em><sub>0</sub><sup><em>v</em></sup></sub></span></p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+              { src: 'reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>

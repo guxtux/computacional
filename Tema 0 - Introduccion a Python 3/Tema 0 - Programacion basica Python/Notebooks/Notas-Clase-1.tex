@@ -1,0 +1,1109 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
+\usepackage[unicode=true]{hyperref}
+\hypersetup{
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{longtable,booktabs}
+% Fix footnotes in tables (requires footnote package)
+\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{long table}}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+\date{}
+
+\begin{document}
+
+\section{Operadores aritméticos}\label{operadores-aritmuxe9ticos}
+
+\subsection{Python como calculadora}\label{python-como-calculadora}
+
+Una vez abierta la sesión en \(\texttt{python}\), podemos aprovechar al
+máximo este lenguaje: contamos con una calculadora a la mano, sólo hay
+que ir escribiendo las operaciones en la línea de comandos.
+
+\subsection{Podemos hacer una suma:}\label{podemos-hacer-una-suma}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{3}\OperatorTok{+}\DecValTok{200}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+203
+\end{verbatim}
+
+\subsection{Una división entre
+enteros}\label{una-divisiuxf3n-entre-enteros}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{30}\OperatorTok{/}\DecValTok{1234}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+0.024311183144246355
+\end{verbatim}
+
+\subsection{Una división entre
+reales}\label{una-divisiuxf3n-entre-reales}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FloatTok{3.0}\OperatorTok{/}\FloatTok{4.0}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+0.75
+\end{verbatim}
+
+\subsection{Una división entera}\label{una-divisiuxf3n-entera}
+
+\subsubsection{Devuelve el cociente (sin
+decimales)}\label{devuelve-el-cociente-sin-decimales}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{30}\OperatorTok{//}\DecValTok{4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+7
+\end{verbatim}
+
+\subsection{Otro ejemplo}\label{otro-ejemplo}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{4}\OperatorTok{//}\DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+1
+\end{verbatim}
+
+\subsection{La división devuelve un determinado número de dígitos luego
+del punto
+decimal}\label{la-divisiuxf3n-devuelve-un-determinado-nuxfamero-de-duxedgitos-luego-del-punto-decimal}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{4}\OperatorTok{/}\DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+1.3333333333333333
+\end{verbatim}
+
+\subsection{Combinación de
+operadores}\label{combinaciuxf3n-de-operadores}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FloatTok{5.0} \OperatorTok{/} \DecValTok{10} \OperatorTok{*} \DecValTok{2} \OperatorTok{+} \DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+6.0
+\end{verbatim}
+
+\textbf{¿por qué obtenemos este resultado??}
+
+\subsection{El resultado cambia cuando agrupamos con
+paréntesis}\label{el-resultado-cambia-cuando-agrupamos-con-paruxe9ntesis}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FloatTok{5.0} \OperatorTok{/}\NormalTok{ (}\DecValTok{10} \OperatorTok{*} \DecValTok{2} \OperatorTok{+} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+0.2
+\end{verbatim}
+
+Como podemos ver, el uso de paréntesis en las expresiones tiene una
+particular importancia sobre la manera en que se evalúan las expresiones
+
+\subsection{Potenciación de un
+número}\label{potenciaciuxf3n-de-un-nuxfamero}
+
+Podemos elevar un número a una potencia en particular
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{2}\OperatorTok{**}\DecValTok{3}\OperatorTok{**}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+512
+\end{verbatim}
+
+\subsection{Orden para las potencias}\label{orden-para-las-potencias}
+
+Vemos que elevar a una potencia, la manera en que se ejecuta la
+expresión se realiza en un sentido en particular: de derecha a izquierda
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\DecValTok{2}\OperatorTok{**}\DecValTok{3}\NormalTok{)}\OperatorTok{**}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+64
+\end{verbatim}
+
+\subsection{Los paréntesis}\label{los-paruxe9ntesis}
+
+El uso de paréntesis nos indica que la expresión contenida dentro de
+ellos, es la que se evalúa primero, posteriormente se sigue la regla de
+precedencia de operadores
+
+\subsection{Operador módulo}\label{operador-muxf3dulo}
+
+El operador módulo \((\%)\) nos devuelve el residuo del cociente
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{17}\OperatorTok{%}\DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+2
+\end{verbatim}
+
+\section{Tabla de operadores}\label{tabla-de-operadores}
+
+\subsection{Precedencia en los operadores
+aritméticos}\label{precedencia-en-los-operadores-aritmuxe9ticos}
+
+\subsection{}\label{section}
+
+\begin{longtable}[]{@{}clll@{}}
+\toprule
+Operador & Operación & Ejemplo & Resultado\tabularnewline
+\midrule
+\endhead
+\(**\) & Potencia & \(2**3\) & \(8\)\tabularnewline
+\(*\) & Multiplicación & \(7*3\) & \(21\)\tabularnewline
+\(/\) & División & \(10.5/2\) & \(5.25\)\tabularnewline
+\(//\) & Div. entera & \(10.5//2\) & \(5.0\)\tabularnewline
+\(+\) & Suma & \(3+4\) & \(7\)\tabularnewline
+\(-\) & Resta & \(6-8\) & \(-2\)\tabularnewline
+\(\%\) & Módulo & \(15\%6\) & \(3\)\tabularnewline
+\bottomrule
+\end{longtable}
+
+\subsection{Precedencia de los operadores artiméticos
+1}\label{precedencia-de-los-operadores-artimuxe9ticos-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Las expresiones contenidas dentro de pares de paréntesis son evaluadas
+  primero. En el caso de expresiones con paréntesis anidados, los
+  operadores en el par de paréntesis más interno son aplicados primero.
+\end{enumerate}
+
+\subsection{Precedencia de los operadores artiméticos
+2}\label{precedencia-de-los-operadores-artimuxe9ticos-2}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Las operaciones de exponentes son aplicadas después. Si una expresión
+  contiene muchas operaciones de exponentes, los operadores son
+  aplicados de derecha a izquierda.
+\end{enumerate}
+
+\subsection{Precedencia de los operadores artiméticos
+3}\label{precedencia-de-los-operadores-artimuxe9ticos-3}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  La multiplicación, división y módulo son las siguientes en ser
+  aplicadas. Si una expresión contiene muchas multiplicaciones,
+  divisiones u operaciones de módulo, los operadores se aplican de
+  izquierda a derecha.
+\end{enumerate}
+
+\subsection{Precedencia de los operadores artiméticos
+4}\label{precedencia-de-los-operadores-artimuxe9ticos-4}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Suma y resta son las operaciones que se aplican por último. Si una
+  expresión contiene muchas operaciones de suma y resta, los operadores
+  son aplicados de izquierda a derecha. La suma y resta tienen el mismo
+  nivel de precedencia.
+\end{enumerate}
+
+\section{Operadores relacionales}\label{operadores-relacionales}
+
+\subsection{}\label{section-1}
+
+Se comparan dos (o más expresiones) mediante un operador, el tipo de
+dato que devuelve es lógico: \(\textbf{True}\) o \(\textbf{False}\), que
+también tienen una representación de tipo numérico:
+
+\begin{itemize}
+\tightlist
+\item
+  \(\textbf{True}\) = 1
+\item
+  \(\textbf{False}\) = 0
+\end{itemize}
+
+\subsection{Operaciones aritméticas y
+relacionales}\label{operaciones-aritmuxe9ticas-y-relacionales}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1} \OperatorTok{+} \DecValTok{2} \OperatorTok{>} \DecValTok{7}\OperatorTok{-} \DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+False
+\end{verbatim}
+
+\subsection{Se pueden combinar diferentes
+expresiones}\label{se-pueden-combinar-diferentes-expresiones}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1} \OperatorTok{<} \DecValTok{2} \OperatorTok{<} \DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+True
+\end{verbatim}
+
+\subsection{El doble signo igual (==) es el operador de
+igualdad}\label{el-doble-signo-igual-es-el-operador-de-igualdad}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1} \OperatorTok{>} \DecValTok{2} \OperatorTok{==} \DecValTok{2} \OperatorTok{<} \DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1} \OperatorTok{>}\NormalTok{ (}\DecValTok{2} \OperatorTok{==}  \DecValTok{2}\NormalTok{) }\OperatorTok{<}\DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+False
+\end{verbatim}
+
+\subsection{Combinación de
+expresiones}\label{combinaciuxf3n-de-expresiones}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{3} \OperatorTok{>} \DecValTok{4} \OperatorTok{<} \DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+False
+\end{verbatim}
+
+\subsection{}\label{section-2}
+
+Hay que tener cuidado con el uso de operadores relaciones estrictos
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FloatTok{1.0} \OperatorTok{/} \DecValTok{3} \OperatorTok{<} \FloatTok{0.3333}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+False
+\end{verbatim}
+
+\subsection{}\label{section-3}
+
+Las expresiones se pueden complicar cada vez más, por lo que hay que
+mantener atención al momento de escribirlas
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FloatTok{5.0} \OperatorTok{/} \DecValTok{3} \OperatorTok{>=} \DecValTok{11} \OperatorTok{/}\FloatTok{7.0}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+True
+\end{verbatim}
+
+\subsection{}\label{section-4}
+
+El utilizar las operaciones aritméticas y relacionales, extiende por
+mucho el uso del lenguaje.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{2}\OperatorTok{**}\NormalTok{(}\DecValTok{2}\NormalTok{. }\OperatorTok{/}\DecValTok{3}\NormalTok{) }\OperatorTok{<} \DecValTok{3}\OperatorTok{**}\NormalTok{(}\DecValTok{3}\NormalTok{.}\OperatorTok{/}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+True
+\end{verbatim}
+
+\subsection{Tabla de operadores
+relacionales}\label{tabla-de-operadores-relacionales}
+
+\begin{longtable}[]{@{}clll@{}}
+\toprule
+Operador & Operación & Ejemplo & Resultado\tabularnewline
+\midrule
+\endhead
+\(==\) & Igual a & \(4==5\) & \(\texttt{False}\)\tabularnewline
+\(!=\) & Diferente & \(2!=3\) & \(\texttt{True}\)\tabularnewline
+\(<\) & Menor que & \(10<4\) & \(\texttt{False}\)\tabularnewline
+\(>\) & Mayor que & \(5>-4\) & \(\texttt{True}\)\tabularnewline
+\(<=\) & Menor o igual & \(7<=7\) & \(\texttt{True}\)\tabularnewline
+\(>=\) & Mayor o igual & \(3.5 >= 10\) &
+\(\texttt{False}\)\tabularnewline
+\bottomrule
+\end{longtable}
+
+\section{Operadores booleanos}\label{operadores-booleanos}
+
+\subsection{Operadores booleanos}\label{operadores-booleanos-1}
+
+En el caso del operador boleano and y el operador or evalúan una
+expresión compuesta por dos (o más términos).
+
+\subsection{}\label{section-5}
+
+En ambas expresiones se espera que cada una tenga el valor de True, en
+caso de que esto ocurra, el valor que devuelve la evaluación, es
+\(\texttt{True}\).
+
+\subsection{}\label{section-6}
+
+Como se verá en la tabla de verdad, se necesita una condición particular
+para que el valor que devuelva la comparación, sea \(\texttt{False}\).
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+Operador & Operación & Ejemplo & Resultado\tabularnewline
+\midrule
+\endhead
+\(\texttt{and}\) & Conjunción & \(\texttt{False and True}\) &
+\(\texttt{False}\)\tabularnewline
+\(\texttt{or}\) & Disyunción & \(\texttt{False or True}\) &
+\(\texttt{True}\)\tabularnewline
+\(\texttt{not}\) & Negación & \(\texttt{not True}\) &
+\(\texttt{False}\)\tabularnewline
+\bottomrule
+\end{longtable}
+
+\subsection{Tabla de verdad de los operadores
+boleanos}\label{tabla-de-verdad-de-los-operadores-boleanos}
+
+\subsection{}\label{section-7}
+
+\begin{longtable}[]{@{}ccccc@{}}
+\toprule
+A & B & A and B & A or B & not A\tabularnewline
+\midrule
+\endhead
+True & True & True & True & False\tabularnewline
+True & False & False & True & False\tabularnewline
+False & True & False & True & True\tabularnewline
+False & False & False & False & True\tabularnewline
+\bottomrule
+\end{longtable}
+
+\section{Tipos de variables}\label{tipos-de-variables}
+
+\subsection{}\label{section-8}
+
+Las variables en python sólo son ubicaciones de memoria reservadas para
+almacenar valores.
+
+Esto significa que cuando se crea una variable, se reserva un poco de
+espacio disponible en la memoria.
+
+\subsection{}\label{section-9}
+
+Basándose en el tipo de datos de una variable, el intérprete asigna
+memoria y decide qué se puede almacenar en la memoria reservada.
+
+Por lo tanto, al asignar diferentes tipos de datos a las variables, se
+pueden almacenar \textbf{enteros}, \textbf{decimales} o
+\textbf{caracteres (cadenas)} en estas variables.
+
+\subsection{Asignando valores a
+variables}\label{asignando-valores-a-variables}
+
+Las variables de python no necesitan una declaración explícita para
+reservar espacio de memoria.
+
+La declaración ocurre automáticamente cuando se asigna un valor a una
+variable. \emph{El signo igual (=) se utiliza para asignar valores a las
+variables}.
+
+\subsection{}\label{section-10}
+
+El término a la izquierda del operador = es el \emph{nombre de la
+variable} y el término a la derecha del operador = es el \emph{valor
+almacenado} en la variable.
+
+\subsection{Ejemplos}\label{ejemplos}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{contador }\OperatorTok{=} \DecValTok{100}          \CommentTok{# Asignacion de tipo entero}
+\NormalTok{distancia }\OperatorTok{=} \FloatTok{1000.0}      \CommentTok{# De punto flotante}
+\NormalTok{nombre }\OperatorTok{=} \StringTok{"Chucho"}       \CommentTok{# Una cadena de caracteres}
+
+\BuiltInTok{print}\NormalTok{ (contador)}
+\BuiltInTok{print}\NormalTok{ (distancia)}
+\BuiltInTok{print}\NormalTok{ (nombre)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+100
+1000.0
+Chucho
+\end{verbatim}
+
+\subsection{Asignación múltiple de
+valores}\label{asignaciuxf3n-muxfaltiple-de-valores}
+
+En python podemos asignar un valor único a varias variables
+simultáneamente.
+
+\subsection{}\label{section-11}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A }\OperatorTok{=}\NormalTok{ b }\OperatorTok{=}\NormalTok{ c }\OperatorTok{=} \DecValTok{1}
+\BuiltInTok{print}\NormalTok{ (A)}
+\BuiltInTok{print}\NormalTok{ (b)}
+\BuiltInTok{print}\NormalTok{ (c)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+1
+1
+1
+\end{verbatim}
+
+\subsection{}\label{section-12}
+
+En el ejemplo, se crea un objeto entero con el valor \(1\), y las tres
+variables se asignan a la misma ubicación de memoria.
+
+\subsection{}\label{section-13}
+
+También puede asignar varios objetos a varias variables.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A, b, c }\OperatorTok{=} \DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\StringTok{"Alicia"}
+\BuiltInTok{print}\NormalTok{ (A)}
+\BuiltInTok{print}\NormalTok{ (b)}
+\BuiltInTok{print}\NormalTok{ (c)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+1
+2
+Ana
+\end{verbatim}
+
+\subsection{}\label{section-14}
+
+Aquí, dos objetos enteros con valores \(1\) y \(2\) se asignan a las
+variables \(A\) y \(b\) respectivamente, y un objeto de cadena con el
+valor \textbf{Alicia} se asigna a la variable \(c\).
+
+\section{Tipos de Datos Estándar}\label{tipos-de-datos-estuxe1ndar}
+
+Los datos almacenados en la memoria pueden ser de varios tipos. Por
+ejemplo, la edad de una persona se almacena como un valor numérico y su
+dirección se almacena como caracteres alfanuméricos.
+
+\subsection{}\label{section-15}
+
+En python se cuenta con varios tipos de datos estándar que se utilizan
+para definir las operaciones posibles entre ellos y el método de
+almacenamiento para cada uno de ellos.
+
+\subsection{}\label{section-16}
+
+Los tipos de datos son cinco:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+   Números.
+\item
+   Cadena.
+\item
+   Lista.
+\item
+   Tupla.
+\item
+   Diccionario.
+\end{enumerate}
+
+\subsection{Números}\label{nuxfameros}
+
+Los tipos de datos numéricos almacenan valores numéricos.
+
+Los objetos numéricos se crean cuando se les asigna un valor.
+
+\subsection{}\label{section-17}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Var1 }\OperatorTok{=}\NormalTok{ Var2 }\OperatorTok{=} \DecValTok{10}
+\BuiltInTok{print}\NormalTok{ (Var1)}
+\BuiltInTok{print}\NormalTok{ (Var2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+10
+10
+\end{verbatim}
+
+\subsection{}\label{section-18}
+
+También se puede eliminar la referencia a un objeto numérico utilizando
+la sentencia del
+
+La sintaxis de la sentencia del es:
+
+\(del\) \(var1 [, var2 [, var3 [...., varN]]]]\)
+
+\subsection{}\label{section-19}
+
+Se puede eliminar un solo objeto o varios objetos utilizando la
+sentencia del
+
+Por ejemplo:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{del}\NormalTok{ var}
+
+\KeywordTok{del}\NormalTok{ variable1, variable2}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{}\label{section-20}
+
+En python se soportan tres tipos numéricos diferentes:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Int (enteros con signo)
+\item
+  Flotante (valores reales de punto flotante)
+\item
+  Complejos (números complejos)
+\end{enumerate}
+
+\subsection{}\label{section-21}
+
+Un número complejo consiste en un par ordenado de números reales de coma
+flotante denotados por
+
+\[x + yj\]
+
+donde \(x\) e \(y\) son números reales, \(yj\) es la unidad imaginaria.
+
+\subsection{}\label{section-22}
+
+Todos los números enteros en python 3 se representan como enteros
+largos.
+
+\subsection{}\label{section-23}
+
+\begin{longtable}[]{@{}ccc@{}}
+\toprule
+\(\texttt{int}\) & \(\texttt{float}\) &
+\(\texttt{complex}\)\tabularnewline
+\midrule
+\endhead
+\(\texttt{10}\) & \(\texttt{0.0}\) & \(\texttt{3.14j}\)\tabularnewline
+\(\texttt{100}\) & \(\texttt{15.20}\) & \(\texttt{45.j}\)\tabularnewline
+\(\texttt{100}\) & \(\texttt{15.20}\) & \(\texttt{45.j}\)\tabularnewline
+\(\texttt{080}\) & \(\texttt{32.3+e18}\) &
+\(\texttt{0.876j}\)\tabularnewline
+\(\texttt{-0490}\) & \(\texttt{-90.}\) &
+\(\texttt{-.645+0j}\)\tabularnewline
+\(\texttt{-0x260}\) & \(\texttt{-32.54e100}\) &
+\(\texttt{3e+26j}\)\tabularnewline
+\(\texttt{0x69}\) & \(\texttt{70.2-E12}\) &
+\(\texttt{4.53e-7j}\)\tabularnewline
+\bottomrule
+\end{longtable}
+
+\subsection{Cadenas}\label{cadenas}
+
+Las cadenas en \(\texttt{python}\) se identifican como un conjunto
+contiguo de caracteres representados en las comillas.
+
+Con python se permite cualquier par de comillas simples o dobles.
+
+\subsection{}\label{section-24}
+
+Los subconjuntos de cadenas pueden ser tomados usando el operador de
+corte (\([\;]\) y \([:]\)) con índices comenzando en \(0\) al inicio de
+la cadena hasta llegar a \(-1\) al final de la misma.
+
+\subsection{}\label{section-25}
+
+El signo más (\(+\)) es el operador de concatenación de cadenas y el
+asterisco (\(*\)) es el operador de repetición.
+
+\subsection{}\label{section-26}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cadena }\OperatorTok{=} \StringTok{'Hola Mundo!'}
+
+\BuiltInTok{print}\NormalTok{ (cadena)          }\CommentTok{# Presenta la cadena completa}
+\BuiltInTok{print}\NormalTok{ (cadena[}\DecValTok{0}\NormalTok{])       }\CommentTok{# Presenta el primer caracter de la cadena}
+\BuiltInTok{print}\NormalTok{ (cadena[}\DecValTok{2}\NormalTok{:}\DecValTok{5}\NormalTok{])     }\CommentTok{# Presenta los caracteres de la 3a a la 5a posicion}
+\BuiltInTok{print}\NormalTok{ (cadena[}\DecValTok{2}\NormalTok{:])      }\CommentTok{# Presenta la cadena que inicia a partir del 3er caracter}
+\BuiltInTok{print}\NormalTok{ (cadena }\OperatorTok{*} \DecValTok{2}\NormalTok{)      }\CommentTok{# Presenta dos veces la cadena}
+\BuiltInTok{print}\NormalTok{ (cadena }\OperatorTok{+} \StringTok{"PUMAS"}\NormalTok{) }\CommentTok{# Presenta la cadena y concatena la segunda cadena}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+Hola Mundo!
+H
+la 
+la Mundo!
+Hola Mundo!Hola Mundo!
+Hola Mundo!PUMAS
+\end{verbatim}
+
+\subsection{Listas}\label{listas}
+
+Las listas es el tipo de dato más versátil de los tipos de datos
+compuestos de python.
+
+Una lista contiene elementos separados por comas y entre corchetes
+(\([ \; ]\)).
+
+\subsection{}\label{section-27}
+
+En cierta medida, las listas son similares a los arreglos (arrays) en el
+lenguaje C.
+
+Una de las diferencias entre ellos es que todos los elementos
+pertenecientes a una lista pueden ser de tipo de datos diferente.
+
+\subsection{}\label{section-28}
+
+Los valores almacenados en una lista se pueden acceder utilizando el
+operador de división (\([ \; ]\) y \([:]\)) con índices que empiezan en
+\(0\) al principio de la lista y opera hasta el final con \(-1\).
+
+\subsection{}\label{section-29}
+
+El signo más (\(+\)) es el operador de concatenación de lista y el
+asterisco (\(*\)) es el operador de repetición.
+
+\subsection{}\label{section-30}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{milista }\OperatorTok{=}\NormalTok{ [ }\StringTok{'abcd'}\NormalTok{, }\DecValTok{786}\NormalTok{ , }\FloatTok{2.23}\NormalTok{, }\StringTok{'salmon'}\NormalTok{, }\FloatTok{70.2}\NormalTok{ ]}
+\NormalTok{listabreve }\OperatorTok{=}\NormalTok{ [}\DecValTok{123}\NormalTok{, }\StringTok{'pizza'}\NormalTok{]}
+
+\BuiltInTok{print}\NormalTok{ (milista)              }\CommentTok{# Presenta la lista completa}
+\BuiltInTok{print}\NormalTok{ (milista[}\DecValTok{0}\NormalTok{])          }\CommentTok{# Presenta el primer elemento de la lista}
+\BuiltInTok{print}\NormalTok{ (milista[}\DecValTok{1}\NormalTok{:}\DecValTok{3}\NormalTok{])        }\CommentTok{# Presenta los elementos a partir de la 2a posiciona hasta la 3a}
+\BuiltInTok{print}\NormalTok{ (milista[}\DecValTok{2}\NormalTok{:])          }\CommentTok{# Presenta los elementos a partir del 3er elemento}
+\BuiltInTok{print}\NormalTok{ (listabreve }\OperatorTok{*} \DecValTok{2}\NormalTok{)       }\CommentTok{# Presenta dos veces la lista}
+\BuiltInTok{print}\NormalTok{ (milista }\OperatorTok{+}\NormalTok{ listabreve) }\CommentTok{# Presenta la lista concatenada con la segunda lista}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+['abcd', 786, 2.23, 'salmon', 70.2]
+abcd
+[786, 2.23]
+[2.23, 'salmon', 70.2]
+[123, 'pizza', 123, 'pizza']
+['abcd', 786, 2.23, 'salmon', 70.2, 123, 'pizza']
+\end{verbatim}
+
+\subsection{Tuplas}\label{tuplas}
+
+Una tupla es otro tipo de datos de secuencia que es similar a la lista.
+
+\subsection{}\label{section-31}
+
+Una tupla consiste en un número de valores separados por comas. Sin
+embargo, a diferencia de las listas, las tuplas se incluyen entre
+paréntesis.
+
+\subsection{}\label{section-32}
+
+La principal diferencia entre las listas y las tuplas son:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Las listas están entre corchetes \([\;]\) y sus elementos y tamaño
+  pueden cambiarse.
+\item
+  Las tuplas están entre paréntesis \((\;)\) y \emph{no se pueden
+  actualizar}.
+\end{enumerate}
+
+Las tuplas pueden ser consideradas como listas de sólo lectura.
+
+\subsection{}\label{section-33}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mitupla }\OperatorTok{=}\NormalTok{ ( }\StringTok{'abcd'}\NormalTok{, }\DecValTok{786}\NormalTok{ , }\FloatTok{2.23}\NormalTok{, }\StringTok{'arena'}\NormalTok{, }\FloatTok{70.2}\NormalTok{  )}
+\NormalTok{tuplabreve }\OperatorTok{=}\NormalTok{ (}\DecValTok{123}\NormalTok{, }\StringTok{'playa'}\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{ (mitupla)                }\CommentTok{# Presenta la tupla completa}
+\BuiltInTok{print}\NormalTok{ (mitupla[}\DecValTok{0}\NormalTok{])             }\CommentTok{# Presenta el primer elemento de la tupla}
+\BuiltInTok{print}\NormalTok{ (mitupla[}\DecValTok{1}\NormalTok{:}\DecValTok{3}\NormalTok{])           }\CommentTok{# Presenta los elementos a partir del 2o elemento hasta la 3o}
+\BuiltInTok{print}\NormalTok{ (mitupla[}\DecValTok{2}\NormalTok{:])            }\CommentTok{# Presenta los elementos a partir del 3er elemento}
+\BuiltInTok{print}\NormalTok{ (tuplabreve }\OperatorTok{*} \DecValTok{2}\NormalTok{)         }\CommentTok{# Presenta dos veces la tupla}
+\BuiltInTok{print}\NormalTok{ (mitupla }\OperatorTok{+}\NormalTok{ tuplabreve)   }\CommentTok{# Preseta la tupla concatenada con la otra tupla}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+('abcd', 786, 2.23, 'arena', 70.2)
+abcd
+(786, 2.23)
+(2.23, 'arena', 70.2)
+(123, 'playa', 123, 'playa')
+('abcd', 786, 2.23, 'arena', 70.2, 123, 'playa')
+\end{verbatim}
+
+\subsection{}\label{section-34}
+
+El siguiente código es inválido con la tupla, porque intentamos
+actualizar una tupla, que la acción no está permitida. El caso es
+similar con las listas.
+
+\subsection{}\label{section-35}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mitupla }\OperatorTok{=}\NormalTok{ ( }\StringTok{'abcd'}\NormalTok{, }\DecValTok{786}\NormalTok{ , }\FloatTok{2.23}\NormalTok{, }\StringTok{'edificio'}\NormalTok{, }\FloatTok{70.2}\NormalTok{  )}
+\NormalTok{milista }\OperatorTok{=}\NormalTok{ [ }\StringTok{'abcd'}\NormalTok{, }\DecValTok{786}\NormalTok{ , }\FloatTok{2.23}\NormalTok{, }\StringTok{'energia'}\NormalTok{, }\FloatTok{70.2}\NormalTok{  ]}
+\NormalTok{mitupla[}\DecValTok{2}\NormalTok{] }\OperatorTok{=} \DecValTok{1000}    \CommentTok{# Sintaxis invalida para la tupla}
+\NormalTok{milista[}\DecValTok{2}\NormalTok{] }\OperatorTok{=} \DecValTok{1000}     \CommentTok{# Sintaxis invalida para la lista}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+<ipython-input-19-a99f473d7b8f> in <module>()
+      1 mitupla = ( 'abcd', 786 , 2.23, 'edificio', 70.2  )
+      2 milista = [ 'abcd', 786 , 2.23, 'energia', 70.2  ]
+----> 3 mitupla[2] = 1000    # Sintaxis invalida para la tupla
+      4 milista[2] = 1000     # Sintaxis invalida para la lista
+
+
+TypeError: 'tuple' object does not support item assignment
+\end{verbatim}
+
+\subsection{}\label{section-36}
+
+Pero en la lista podemos agregar nuevos elementos que se colocan al
+final de la misma:
+
+\subsection{}\label{section-37}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{print}\NormalTok{(milista)}
+\NormalTok{milista.append(}\StringTok{'hola'}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(milista)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+['abcd', 786, 2.23, 'energia', 70.2]
+['abcd', 786, 2.23, 'energia', 70.2, 'hola']
+\end{verbatim}
+
+\subsection{ Diccionarios}\label{diccionarios}
+
+Los diccionarios de python son de tipo tabla-hash.
+
+Funcionan como arrays asociativos y consisten en pares
+\emph{clave-valor}.
+
+\subsection{}\label{section-38}
+
+Una clave de diccionario puede ser casi cualquier tipo de python, pero
+suelen ser números o cadenas.
+
+Los valores, por otra parte, pueden ser cualquier objeto arbitrario de
+python.
+
+\subsection{}\label{section-39}
+
+Los diccionarios están encerrados por llaves \(\{ \; \}\) y los valores
+se pueden asignar y acceder mediante llaves cuadradas \([ \; ]\).
+
+\subsection{}\label{section-40}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fisicos }\OperatorTok{=} \BuiltInTok{dict}\NormalTok{()}
+
+\NormalTok{fisicos }\OperatorTok{=}\NormalTok{\{}
+    \DecValTok{1}\NormalTok{ : }\StringTok{"Eistein"}\NormalTok{,}
+    \DecValTok{2}\NormalTok{ : }\StringTok{"Bohr"}\NormalTok{,}
+    \DecValTok{3}\NormalTok{ : }\StringTok{"Pauli"}\NormalTok{,}
+    \DecValTok{4}\NormalTok{ : }\StringTok{"Schrodinger"}\NormalTok{,}
+    \DecValTok{5}\NormalTok{ : }\StringTok{"Hawking"}
+\NormalTok{\}}
+
+\BuiltInTok{print}\NormalTok{(fisicos)}
+\BuiltInTok{print}\NormalTok{ (fisicos.keys())}
+\BuiltInTok{print}\NormalTok{ (fisicos.values())}
+\NormalTok{fisicos[}\StringTok{"6"}\NormalTok{] }\OperatorTok{=} \StringTok{"Planck"}    \CommentTok{#agrega un nuevo elemento al diccionario, tanto su clave como valor}
+\BuiltInTok{print}\NormalTok{(fisicos)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{verbatim}
+{1: 'Eistein', 2: 'Bohr', 3: 'Pauli', 4: 'Schrodinger', 5: 'Hawking'}
+dict_keys([1, 2, 3, 4, 5])
+dict_values(['Eistein', 'Bohr', 'Pauli', 'Schrodinger', 'Hawking'])
+{1: 'Eistein', 2: 'Bohr', 3: 'Pauli', 4: 'Schrodinger', 5: 'Hawking', '6': 'Planck'}
+\end{verbatim}
+
+\subsection{Regla para los
+identificadores}\label{regla-para-los-identificadores}
+
+Los identificadores son nombres que hacen referencia a los objetos que
+componen un programa: \textbf{constantes}, \textbf{variables},
+\textbf{funciones}, etc.
+
+\subsection{}\label{section-41}
+
+Reglas para construir identificadores:
+
+\begin{itemize}
+\tightlist
+\item
+  El primer carácter debe ser una letra o el carácter de subrayado
+  (guión bajo)
+\item
+  El primer carácter puede ir seguido de un número variable de dígitos
+  numéricos, letras o carácteres de subrayado.
+\item
+  No pueden utilizarse espacios en blanco, ni símbolos de puntuación.
+\item
+  En python se distingue de las mayúsculas y minúsculas.
+\end{itemize}
+
+\subsection{Palabras reservadas}\label{palabras-reservadas}
+
+No pueden utilizarse palabras reservadas del lenguaje.
+
+\begin{longtable}[]{@{}cccccc@{}}
+\toprule
+No usar &\tabularnewline
+\midrule
+\endhead
+del & for & is & raise & assert & elif\tabularnewline
+from & lamda & return & break & else & global\tabularnewline
+not & try & class & except & if & or\tabularnewline
+while & continue & exec & import & pass & yield\tabularnewline
+def & finally & in & print & del & system\tabularnewline
+\bottomrule
+\end{longtable}
+
+\end{document}

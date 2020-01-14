@@ -1,0 +1,63 @@
+\include{pre_documento}
+\include{pre_codigo}
+\begin{document}
+\title{Examen 3 - Ecuaciones Diferenciales Ordinarias}
+\subtitle{Soluci\'{o}n}
+%\subsubtitle{Curso de F\'{i}sica Computacional}
+\author{M. en C. Gustavo Contreras May\'{e}n}
+%\email{curso.fisica.comp@gmail.com}
+%\ptsize{10}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+\begin{frame}{Contenido}
+\tableofcontents[pausesections]
+\end{frame}
+\section{Problema 1}
+\begin{frame}[fragile]
+\frametitle{Problema 1}
+La ecuaci\'{o}n diferencial del movimiento de un p\'{e}ndulo simple es
+\[ \dfrac{d^{2} \theta}{d t^{2}} = - \dfrac{g}{L} \sin \theta \]
+donde
+$\theta$ es el desplazamiento angular a partir de la vertical, $g$ es la aceleraci\'{o}n debida a la gravedad y $L$ la longitud del p\'{e}ndulo.
+\end{frame}
+\begin{frame}
+Con el cambio de variable $\tau = t \sqrt{g/L}$, la ecuaci\'{o}n toma la forma:
+\[ \dfrac{d^{2} \theta}{d \tau^{2}} = -  \sin \theta\]
+Resuelve la ecuaci\'{o}n para determinar el per\'{i}odo del p\'{e}ndulo, si la amplitud es $\theta_{0} = 1$ rad. Considera que para pequeñas amplitudes ($\sin \theta \simeq \theta$) el per\'{i}odo es $2 \pi \sqrt{L/g}$.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Soluci\'{o}n}
+El sistema de 1-EDO que resulta es:
+\begin{lstlisting}
+def F(x,y):
+    F=zeros((2), dtype="float64")
+    F[0]=y[1]
+    F[1]=-sin(y[0])
+    return F
+
+x=0.0
+xAlto=20
+y=array([1.0,0.0])
+h=0.1
+freq=5
+
+X,Y=integra(F,x,y,xAlto,h)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Gr\'{a}fica de la soluci\'{o}n}
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.5]{Problema1_01.eps} 
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{C\'{a}lculo del per\'{i}odo}
+Sabemos de la tema anterior de integraci\'{o}n que el per\'{i}odo de un p\'{e}ndulo de longitud $L$ es $\tau = 4 \sqrt{\frac{L}{g}} h(\theta_{0})$, donde $g$ es la aceleraci\'{o}n debida a la gravedad, $\theta_{0}$, representa la amplitud angular y 
+\[ h(\theta_{0}) =  \int_{0}^{\frac{\pi}{2}} \dfrac{d\theta}{\sqrt{1 - \sin^{2} \left( \frac{\theta_{0}}{2}\right) \sin^{2} \theta}} \]
+\end{frame}
+\begin{frame}
+
+\end{frame}
+\end{document}

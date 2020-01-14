@@ -1,0 +1,15 @@
+Ejercicio 1:
+Falta discutir el error que se genera en cada período del cometa Halley,muy bien tu gráfica!
+Ejercicio 2:
+Me parece que aquí falto un poco de comprensión del problema, te están dando condiciones iniciales, te tocaba decir como ibas a hacer el análisis del problema, ¿Tiro parabólico, caída libre, etc?, de ahí solo restaba variar el ángulo y ver cual era la mayor distancia recorrida, por ejemplo.
+Ejercicio 3:
+Bueno, en realidad el problema era bastante sencillo, básicamente era hacer una comparación del mismo numero pero truncado en una mantisa de 24 bits, los valores que te arroja el programa están muy alejados a los 0.34 segundos, por ahí hay un error de operaciones supongo, sin embargo, me gusta la idea de que lo hayas programado.
+Ejercicio 4:
+Muy bien estructurado y ordenado, gracias por poner justificación teórica.
+Ejercicio 5:
+Bien
+Ejercicio 6:
+Uff, casi se convierte en un asunto infinito, el problema esta bien, aunque demasiados procesos para calcular un par de constantes.
+Notas Adicionales:
+Tu tarea, a pesar de los detalles, se nota que la trabajaste, me gusta que hayas programado todo.
+

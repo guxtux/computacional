@@ -1,0 +1,210 @@
+\documentclass{beamer}
+
+\mode<presentation> {
+  \usetheme{Warsaw}
+  \setbeamercovered{transparent}
+}
+
+\usepackage[spanish]{babel}
+\usepackage[latin1]{inputenc}
+
+
+\title[Ejemplo del uso de \textbf{Beamer}]{Ejemplo de la generación de presentaciones mediante \textbf{Beamer}}
+
+\subtitle{Algunas diapositivas hechas con \textbf{Beamer}}
+
+\author[Camilo Cubides, Ana María Rojas]
+{%
+Camilo Cubides\inst{1}\\[-2mm]
+\texttt{\tiny eccubidesg@unal.edu.co}\\
+    \and%
+Ana María Rojas\inst{2}\\[-2mm]
+\texttt{\tiny amrojasb@unal.edu.co}\\
+}
+
+\institute[Universidad Nacional de Colombia]
+{%
+  \inst{1}%
+    Profesor\vspace{-2mm}
+  \and
+  \inst{2}%
+    Monitora\vspace{-2mm}
+}
+
+\date{II semestre de 2006} %
+
+\subject{Generación de presentaciones}
+
+\pgfdeclareimage[height=0.8cm]{university-logo}{logo}
+\logo{\pgfuseimage{university-logo}}
+
+
+\AtBeginSection
+{%
+\begin{frame}<beamer>
+\frametitle{Contenido}
+\tableofcontents[currentsection,currentsubsection]
+\end{frame}
+}
+
+\AtBeginSubsection
+{%
+\begin{frame}<beamer>
+\frametitle{Contenido}
+\tableofcontents[currentsection,currentsubsection]
+\end{frame}
+}
+
+\beamerdefaultoverlayspecification{<+->}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage{}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Contenido}
+  \tableofcontents[pausesections]
+\end{frame}
+
+
+\section{Primera sección}
+
+\subsection{Primera subsección}
+
+\begin{frame}
+    \frametitle{Título de la primera diapositiva}
+
+    \framesubtitle{Subtítulo de la primera diapositiva}
+
+    \begin{itemize}
+      \item  Primer item
+      \item  Segundo item
+      \item  Tercer item
+    \end{itemize}
+
+    \begin{enumerate}
+      \item  Primer item
+      \item  Segundo item
+      \item  Tercer item
+    \end{enumerate}
+
+    \begin{description}
+      \item[Primero] item 1
+      \item[Segundo] item 2
+      \item[Tercero] item 3
+    \end{description}
+\end{frame}
+
+
+\subsection{Segunda subsección}
+
+\begin{frame}
+    \frametitle{Título de la segunda diapositiva}
+
+    \begin{itemize}
+      \item<1-> \alert{Primer} item
+      \item<2-> \alert{Segundo} item
+      \item<2-> \alert{Tercer} item
+      \item<1-> Cuarto item
+      \item<3-> Quinto item
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Comandos para la aparición de materiales}
+    \only<1>{Esta línea se inserta solamente en la diapositiva 1}
+
+    \only<2>{Esta línea se inserta solamente en la diapositiva 2}
+
+    \uncover<3->{Este texto se muestra desde la diapositiva 3 en adelante}
+
+    \visible<2->{Este texto se muestra desde la diapositiva 2 en adelante}
+
+    \invisible<2->{Este texto se oculta desde la diapositiva 2 en adelante}
+
+    \alt<2>{En la diapositiva 2}{En otra diapositiva}
+
+    \temporal<2>{Estamos en 1}{Estamos en 2}{Estamos en 3, \ldots}
+\end{frame}
+
+\section{Segunda sección}
+
+\subsection{Primera subsección de la segunda sección}
+
+\begin{frame}
+    \frametitle{Entornos I}
+
+    \begin{definition}[definición]
+        Entorno utilizado para presentar definiciones.
+    \end{definition}
+
+    \begin{example}
+        Entorno para presentar ejemplos.
+    \end{example}
+
+    \begin{theorem}
+        Entorno para presentar teoremas.
+    \end{theorem}
+
+    \begin{proof}
+        Entorno para presentar pruebas.
+    \end{proof}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Entornos II}
+
+    \begin{block}{Título del bloque}
+        Entorno para presentar bloques.
+    \end{block}
+
+    \begin{exampleblock}{Título del bloque de ejemplos}
+        Entorno para presentar bloques de ejemplos.
+    \end{exampleblock}
+
+    \begin{alertblock}{Título del bloque de alerta}
+        Entorno para presentar bloques de alerta.
+    \end{alertblock}
+
+    \begin{columns}
+        \column{.3\textwidth}
+            \begin{block}{Titulo del primer bloque}
+                Bloque de la primera columna.
+            \end{block}
+        \column{.4\textwidth}
+            \begin{block}{Titulo del segundo bloque}
+                Bloque de la segunda columna.
+            \end{block}
+    \end{columns}
+\end{frame}
+
+
+\section{Tercera sección}
+
+\begin{frame}
+    línea 1\\\pause
+    línea 2\\\pause
+    línea 3\\
+    línea 4\\\pause[2]
+    línea 5\\
+    línea 6\\\pause[4]
+    línea 7\\\pause[2]
+    línea 8\\\pause
+\end{frame}
+
+\end{document}
+
+\usetheme{default}
+\usetheme{JuanLesPins}
+\usetheme{Goettingen}
+\usetheme{Szeged}
+\usetheme{Warsaw}
+
+\usecolortheme{crane}
+
+\usefonttheme{serif}
+\usefonttheme{structuresmallcapsserif}

@@ -1,0 +1,63 @@
+\documentclass[12pt]{beamer}
+\graphicspath{{Imagenes/}{../Imagenes/}}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{hyperref}
+\usepackage{etex}
+\reserveinserts{28}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabulary}
+\usepackage{booktabs}
+\usepackage{nccmath}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{tikz}
+\usepackage[siunitx]{circuitikz}
+\usetikzlibrary{arrows,patterns,shapes}
+\usetikzlibrary{decorations.markings}
+\newcounter{nodecount}
+% Command for making a new node and naming it according to the nodecount counter
+\newcommand\tabnode[1]{\addtocounter{nodecount}{1} \tikz \node (\arabic{nodecount}) {#1};}
+\usetikzlibrary{arrows}
+\usepackage{color}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\usepackage{hyperref}
+\renewcommand {\arraystretch}{1.5}
+\newcommand{\python}{\texttt{Python}}
+\usefonttheme[onlymath]{serif}
+\setbeamertemplate{navigation symbols}{}
+%\usetikzlibrary{patterns}
+%\usetikzlibrary{decorations.markings}
+%\tikzstyle{every picture}+=[remember picture,baseline]
+%\tikzstyle{every node}+=[inner sep=0pt,anchor=base,
+%minimum width=2.2cm,align=center,text depth=.15ex,outer sep=1.5pt]
+%\tikzstyle{every path}+=[thick, rounded corners]
+% Introduce a new counter for counting the nodes needed for circling
+
+
+\mode<presentation>
+{
+  \usetheme{Warsaw}
+  \setbeamertemplate{headline}{}
+  \useoutertheme{default}
+  \setbeamercovered{invisible}
+}
+\AtBeginSection[]
+{
+\begin{frame}<beamer>{Contenido}
+\tableofcontents[currentsection]
+\end{frame}
+}
+%\mode<presentation>
+%{
+%  \usetheme{Warsaw}
+%  \setbeamertemplate{headline}{}
+%  %\useoutertheme{infolines}
+%  \useoutertheme{default}
+%  \setbeamercovered{invisible}
+%  % or whatever (possibly just delete it)
+%}

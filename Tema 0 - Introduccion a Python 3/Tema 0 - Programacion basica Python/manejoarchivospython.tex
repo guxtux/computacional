@@ -1,0 +1,79 @@
+\section{Manejo de archivos}
+\begin{frame}
+\frametitle{Manejo de archivos}
+Hemos visto que cuando realizamos una serie de instrucciones con Python, obtenemos una respuesta en la ventana de la terminal. Conforme vayamos complicando los problemas a resolver, la informaci\'{o}n de respuesta que se nos presente en la pantalla, no tendr\'{i}a mucho sentido, ya que en el an\'{a}lisis de esa informaci\'{o}n se tendr\'{i}a que hacer con todo el conjunto de datos.
+\\
+\bigskip
+En todo lenguaje de programaci\'{o}n se requiere el manejo de archivos, ya sea para \textcolor{blue}{escribir} un conjunto de datos, o para \textcolor{green}{leer} los datos contenidos en un archivo y ocuparlos dentro del programa.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejemplo}
+Es atractiva la salida de la siguiente tabla?
+\begin{exampleblock}{}
+\begin{lstlisting}
+for x in range(1,11):
+    print x, x*x, x*x*x
+\end{lstlisting}
+\end{exampleblock}
+\pause
+\begin{exampleblock}{Usando un formato}
+\begin{lstlisting}
+for x in range(1,11):
+    print '%2d %3d %4d' %(x, x*x, x*x*x)
+\end{lstlisting}
+\end{exampleblock}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Escribiendo datos en un archivo}
+Una vez que ya hemos decidido el formato de los datos, ahora los enviaremos a un archivo.
+\begin{lstlisting}
+miarchivo = open('midatos.dat','w')
+for x in range(1,11):
+    print '%2d %3d %4d' %(x,x*x,x*x*x)
+    miarchivo.write('%2d %3d %4d \n' %(x,x*x,x*x*x))
+miarchivo.close()
+\end{lstlisting}
+Revisa el archivo de datos en la carpeta en donde se guard\'{o}.
+\end{frame}
+\begin{frame}
+\frametitle{Archivos en Python}
+Los archivos en Python son objetos de tipo \texttt{file} creados mediante la funci\'{o}n \texttt{open} (abrir). Esta funci\'{o}n toma como par\'{a}metros una cadena con la ruta del archivo a abrir, que puede ser relativa o absoluta; una cadena opcional indicando el modo de acceso (si no se especifica se accede en modo lectura)
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Modos de acceso}
+El modo de acceso puede ser cualquier combinaci\'{o}n l\'{o}gica de los siguientes modos:
+\begin{itemize}[<+->]
+\item \textbf{r}: read, lectura. Abre el archivo en modo lectura. El archivo tiene que existir previamente, en caso contrario se lanzar\'{a} una excepci\'{o}n de tipo IOError.
+\item \textbf{w}: write, escritura. Abre el archivo en modo escritura. Si el archivo no existe se crea. Si existe, sobreescribe el contenido.
+\item \textbf{a}: append, añadir. Abre el archivo en modo escritura. Se diferencia del modo 'w' en que en este caso no se sobreescribe el contenido del archivo, sino que se comienza a escribir al final del archivo.
+\item \textbf{b}: binary, binario.
+\item \textbf{+}: permite lectura y escritura simult\'{a}neas.
+\end{itemize}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Lectura de archivos}
+Para la lectura de archivos se utilizan los métodos \texttt{read}, \texttt{readline} y \texttt{readlines}.
+\\
+\bigskip
+El m\'{e}todo \texttt{read} devuelve una cadena con el contenido del archivo o bien el contenido de los primeros $n$ bytes, si se especifica el tamaño m\'{a}ximo a leer.
+\begin{exampleblock}{M\'{e}todo \texttt{read}}
+completo = miarchivo.read()
+\end{exampleblock}
+\pause
+\begin{exampleblock}{M\'{e}todo \texttt{read(n)}}
+parte = miarchivo.read(512)
+\end{exampleblock}
+\end{frame}
+\begin{frame}[fragile]
+El m\'{e}todo \texttt{readline} sirve para leer las l\'{i}neas del archivo una por una. Es decir, cada vez que se llama a \'{e}ste m\'{e}todo, se devuelve el contenido del archivo desde el puntero hasta que se encuentra un car\'{a}cter de nueva l\'{i}nea, incluyendo este car\'{a}cter.
+\begin{exampleblock}{M\'{e}todo \texttt{readline()}}
+\texttt{while True: \\
+\hspace{0.2cm}linea = f.readline() \\
+\hspace{0.2cm}if not linea: break \\
+\hspace{0.2cm}print line}
+\end{exampleblock}
+Por \'{u}ltimo, \texttt{readlines}, funciona leyendo todas las l\'{i}neas del archivo y devolviendo una lista con las l\'{i}neas le\'{i}das. 
+\end{frame}
+\begin{frame}
+Para ocupar el contenido de datos de un archivo dentro de un programa con Python, se requiere manejar los arreglos de una manera din\'{a}mica, que veremos en su momento, ya que tendremos que apoyarnos en la librer\'{i}a \texttt{Numpy}.
+\end{frame}

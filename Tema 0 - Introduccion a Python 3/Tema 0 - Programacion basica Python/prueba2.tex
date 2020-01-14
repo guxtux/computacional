@@ -1,0 +1,402 @@
+\documentclass[12pt]{beamer}
+\usepackage[utf8]{inputenc}
+%\usepackage[latin1]{inputenc}
+\usepackage[spanish]{babel}
+%\usetheme{Warsaw}
+%\usepackage{euler}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{color}
+\usepackage{listings}
+\lstset{ %
+language=Python,                % choose the language of the code
+basicstyle=\footnotesize,       % the size of the fonts that are used for the code
+numbers=left,                   % where to put the line-numbers
+numberstyle=\footnotesize,      % the size of the fonts that are used for the line-numbers
+stepnumber=1,                   % the step between two line-numbers. If it is 1 each line will be numbered
+numbersep=5pt,                  % how far the line-numbers are from the code
+backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+showspaces=false,               % show spaces adding particular underscores
+showstringspaces=false,         % underline spaces within strings
+showtabs=true,                 % show tabs within strings adding particular underscores
+frame=single,   		% adds a frame around the code
+tabsize=4,  		% sets default tabsize to 2 spaces
+captionpos=b,   		% sets the caption-position to bottom
+breaklines=true,    	% sets automatic line breaking
+breakatwhitespace=false,    % sets if automatic breaks should only happen at whitespace
+escapeinside={\%}{)}          % if you want to add a comment within your code
+}
+%\usepackage{epstopdf}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\renewcommand {\arraystretch}{1.5}
+\mode<presentation>
+{
+  \usetheme{CambridgeUS}
+  \setbeamercovered{transparent}
+  % or whatever (possibly just delete it)
+}
+\title{Tema 0 - Programaci\'{o}n b\'{a}sica con Python II}
+\subtitle{Curso de F\'{i}sica Computacional}
+\author{M. en C. Gustavo Contreras May\'{e}n}
+\date{}
+%\email{curso.fisica.comp@gmail.com}
+%\ptsize{10}
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+\begin{frame}{Contenido}
+\tableofcontents[pausesections]
+\end{frame}
+\section{Instrucciones de entrada y salida}
+\subsection{Entrada de datos}
+\begin{frame}[fragile]
+\frametitle{Instrucciones de entrada y salida}
+Entrada de datos:
+\begin{itemize}
+\item \verb|raw_input("entrada")|: lee una l\'{i}nea de entrada que es convertida a \texttt{string}.
+\item \verb|eval(string)| : convierte \texttt{string} en un valor num\'{e}rico.
+\end{itemize}
+\fontsize{10}{10}\selectfont
+\begin{minipage}{5.5cm}
+\begin{exampleblock}{}<1->
+	\verb|>>> a = raw_input("Ingrese a: ")| \\
+	\pause
+	\textcolor{blue}{\texttt{Ingrese a: 2}}
+\end{exampleblock}
+\begin{exampleblock}{}<2->
+	\verb|>>> print a| \\
+	\pause
+	\textcolor{blue}{2}
+\end{exampleblock}
+\begin{exampleblock}{}<3->
+	\verb|>>> a| \\
+	\pause
+	\textcolor{blue}{'a'}
+\end{exampleblock}
+\begin{exampleblock}{}<4->
+	\verb|>>> type(a)| \\
+	\pause
+	\textcolor{blue}{\texttt{<type 'str'>}}
+\end{exampleblock}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}{5.5cm}
+\begin{exampleblock}{}<5->
+	\verb|>>> b = eval(a)|
+\end{exampleblock}
+\end{minipage}
+\end{frame}
+\begin{frame}[fragile]
+\begin{minipage}{9cm}
+\begin{exampleblock}{}<1->
+	\verb|>>> print b, type(b)| \\
+	\pause
+	\textcolor{blue}{\texttt{2 <type 'int'>}}
+\end{exampleblock}
+\begin{exampleblock}{}<2->
+	\verb|>>> s=eval(raw_input("Ingrese s :"))| \\
+	\pause
+	\textcolor{blue}{\texttt{Ingrese s: 2*3}}
+\end{exampleblock}
+\begin{exampleblock}{}<3->
+	\verb|>>> print s, type(s)| \\
+	\pause
+	\textcolor{blue}{\texttt{6 <type 'int'>}}
+\end{exampleblock}
+\begin{exampleblock}{}<4->
+	\verb|>>> m=eval(raw_input("Ingrese m :"))| \\
+	\pause
+	\textcolor{blue}{\texttt{Ingrese m: hola}} \\
+	\pause
+	\textcolor{red}{Marca un error, por qué?}
+\end{exampleblock}
+\end{minipage}
+\end{frame}
+\subsection{Salida de datos}
+\begin{frame}
+\frametitle{Salida de datos}
+La mayor\'{i}a de programas requiere mostrar un resultado, en ocasiones a la pantalla y en otras, como un conjunto de datos que se enviar\'{a}n a un archivo.
+\\
+\bigskip
+Para facilitar la lectura del resultado conviene elegir el respectivo formato de salida.
+\begin{itemize}
+\item \texttt{objeto1, objeto2, $\ldots$}
+\item $\%$formato1, $\%$formato2, $\ldots$, $\%$tupla
+\end{itemize}
+\begin{center}
+\begin{tabular}{l | c}
+\hline Entero & \texttt{d} \\
+\hline Punto flotante & \texttt{f} \\
+\hline Notaci\'{o}n cient\'{i}fica & e
+\end{tabular}
+\end{center}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Formato de salida de datos}
+\fontsize{12}{12}\selectfont
+\begin{exampleblock}{}<1->
+	\verb|>>> u=6543|
+\end{exampleblock}
+\begin{exampleblock}{}<2->
+	\verb|>>> v=1234.56789|
+\end{exampleblock}
+\begin{exampleblock}{}<3->
+	\verb|>>> print u, v| \\
+	\pause
+	\textcolor{blue}{\texttt{6543}  \texttt{1234.56789}}
+\end{exampleblock}
+\begin{exampleblock}{}<4->
+	\verb|>>> print "u = %6d" % u| \\
+	\pause
+	\textcolor{blue}{u=6543}
+\end{exampleblock}
+\begin{exampleblock}{}<5->
+	\verb|>>> print "u = %06d" % u| \\
+	\pause
+	\textcolor{blue}{\texttt{u=006543}}
+\end{exampleblock}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Formato de salida de datos}
+\fontsize{12}{12}\selectfont
+\begin{exampleblock}{}<1->
+	\verb|>>> print "v= %7.2f" % v| \\
+	\pause
+	\textcolor{blue}{\texttt{v=1234.57}}
+\end{exampleblock}
+\begin{exampleblock}{}<2->
+	\verb|>>> print "v= %9.2f" % v| \\
+	\pause
+	\textcolor{blue}{\texttt{$v=\hspace{0.5cm}1234.57$}}
+\end{exampleblock}
+\begin{exampleblock}{}<3->
+	\verb|>>> print "v= %7.8f" % v| \\
+	\pause
+	\textcolor{blue}{\texttt{v=1234.56789000}}
+\end{exampleblock}
+\begin{exampleblock}{}<4->
+	\verb|>>> print "v= %.2e" % v| \\
+	\pause
+	\textcolor{blue}{\texttt{v=1.23e+03}}
+\end{exampleblock}
+\begin{exampleblock}{}<1->
+	\verb|>>> print "u= %6d y v=%8.4e" %(u, v)| \\
+	\pause
+	\textcolor{blue}{\texttt{u = 6543 y v=1.2346e+03}}
+\end{exampleblock}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejercicio}
+A continuaci\'{o}n se presenta el c\'{o}digo que calcula el promedio de dos n\'{u}meros que se proporcionan por el usuario.
+\begin{exampleblock}{C\'{o}digo}
+\fontsize{10}{10}\selectfont
+\verb|A = eval(raw_input('Ingresa A: '))| \\
+\verb|Ingresa A: 10| \\
+\verb|B = eval(raw_input('Ingresa B: '))| \\
+\verb|Ingresa B: 20| \\
+\verb|PROM = (A+B)/2.0| \\
+\verb|print 'El promedio de %f y %f es %f' % (A,B,PROM)|
+\end{exampleblock}
+\end{frame}
+\section{Estructuras de control}
+\begin{frame}
+\frametitle{Estructuras de control}
+En cualquier lenguaje de programaci\'{o}n se incluye una serie de estructuras de control para ampliar las posibilidades de ejecuci\'{o}n de un programa.
+\\
+\bigskip
+En Python, manejaremos las m\'{a}s comunes, que son relativamente sencillas de usar, cuidado siempre la sintaxis respectiva.
+\end{frame}
+\subsection{Condicionales}
+\begin{frame}
+\frametitle{Condicionales}
+Una sentencia condicional permite evaluar si se cumple cierta condici\'{o}n, es decir, si su valor es \texttt{True}, se ejecuta una instrucci\'{o}n, en caso de que el valor de la condici\'{o}n no se cumpla, valor \texttt{False}, no se ejecuta la instrucci\'{o}n contenida y se sigue a la siguiente l\'{i}nea de c\'{o}digo.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejemplo de condicional}
+\begin{lstlisting}
+a = input('Introduce el valor de a')
+if a > 0:
+    print "a es positivo"
+    a = a + 1
+elif a == 0: 
+    print "a es 0"
+else:
+    print "a es negativo"
+\end{lstlisting}
+\end{frame}
+\subsection{Bucles o Loops}
+\begin{frame}
+\frametitle{Bucles}
+Un bucle es una sentencia que eval\'{u}a inicialmente una condici\'{o}n, en caso de que se cumple (valor \texttt{True}) se ejecuta(a) un conjunto de instrucciones, posteriormente, se revisa el valor de la condici\'{o}n, mientras sea verdadero, las instrucciones se ejecutan nuevamente.
+\\
+\bigskip
+Hay que considerar que se puede conocer de antemano, el n\'{u}mero de repeticiones, hay que evitar los bucles infinitos, es decir, sentencias que no modifican el valor de la condici\'{o}n y por tanto, siempre se mantendr\'{a} sin salir del bucle.
+\end{frame}
+\begin{frame}[fragile]
+\begin{lstlisting}
+nMax = 5
+n = 1
+a = [] # Crea una lista vacia
+while n < nMax:
+    a.append(1.0/n) # agrega un elemento a la lista
+    n = n + 1
+print a
+\end{lstlisting}
+\end{frame}
+\subsection{Sentancia \texttt{for}}
+\begin{frame}[fragile]
+\frametitle{Sentencia \texttt{for}}
+\begin{lstlisting}
+lista = ['Hugo', 'Paco', 'Luis', 'McPato']
+nombre = eval(raw_input('Teclea un nombre: '))
+for i in range(len(lista)):
+    if lista[i] == nombre:
+    print nombre, ' es el numero ', i + 1, ' en la lista'
+    break
+else:
+    print nombre, ' no esta en la lista'
+\end{lstlisting}
+\end{frame}
+\section{Control de errores}
+\begin{frame}
+\frametitle{Control de errores}
+Cuando comenzamos a programar, nos podemos encontrar con mensajes de error al momento de ejecutar el programa, siendo las causas m\'{a}s comunes:
+\begin{itemize}
+\item errores de dedo, escribiendo incorrectamente una instrucci\'{o}n, sentencia, variable o constante.
+\item errores al momento de introducir los datos, por ejemplo, si el valor que se debe de ingresar es $123.45$, y si nosotros tecleamos $1234.5$, el resultado ya se considera un error.
+\item errores que se muestran en tiempo de ejecuci\'{o}n, es decir, todo est\'{a} bien escrito y los datos est\'{a}n bien introducidos, pero hay un error debido a la l\'{o}gica del programa o del m\'{e}todo utilizado, ejemplo: divisi\'{o}n entre cero.
+\end{itemize}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Manejo de errores}
+\verb|c = 12.0/0.0| \\
+\pause
+\begin{exampleblock}{}
+\verb|Traceback (most recent call last):| \\
+\verb|File ''<pyshell#0>'', line 1, in ?| \\
+\verb|c = 12.0/0.0| \\
+\verb|ZeroDivisionError: float division|
+\end{exampleblock}
+\pause
+\begin{exampleblock}{}
+\verb|try:| \\
+\verb|     c = 12.0/0.0| \\
+\verb|except ZeroDivisionError:| \\
+\verb|     print 'Division entre cero'|
+\end{exampleblock}
+\end{frame}
+\section{Funciones}
+\begin{frame}
+\frametitle{Funciones}
+Con lo que hemos revisado sobre Python, tenemos elementos para iniciar la soluci\'{o}n de problemas, una particular manera de agrupar un conjunto de instrucciones, es a trav\'{e}s de funciones.
+\\
+\bigskip
+Las funciones intr\'{i}nsecas de cualquier lenguaje son pocas, pero podemos extenderlas con funciones definidas por el usuario.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Estructura de una funci\'{o}n}
+La estructura de una funci\'{o}n en Python es la siguiente:
+\begin{center}
+\begin{exampleblock}{}
+\verb| def nombre_funcion(parametro1, parametro2, ...):|
+\verb|     conjunto de instrucciones|
+\verb|     return valores_devueltos|
+\end{exampleblock}
+\end{center}
+donde parametro1, parametro2 son los par\'{a}metros. Un par\'{a}metro puede ser cualquier objeto de Python, incluyendo una funci\'{o}n.
+\\
+\medskip
+Los par\'{a}metros pueden darse por defecto, por lo que en la funci\'{o}n son opcionales. Si no se utiliza la instrucci\'{o}n \texttt{return}, la funci\'{o}n devuelve un objeto \texttt{null}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejemplo}
+\begin{lstlisting}
+>>> def cuadrados(a):
+     for i in range(len(a)):
+         a[i] = a[i]**2
+
+
+>>> a = [1, 2, 3, 4]
+>>> cuadrados(a)
+>>> print a
+\end{lstlisting}
+\end{frame}
+\begin{frame}
+\frametitle{C\'{a}lculo de la serie de Fibonacci}
+La sucesi\'{o}n fue descrita por Fibonacci como la soluci\'{o}n a un problema de la cr\'{i}a de conejos: ''Cierto hombre ten\'{i}a una pareja de conejos juntos en un lugar cerrado y uno desea saber cu\'{a}nntos son creados a partir de este par en un año cuando es su naturaleza parir otro par en un simple mes, y en el segundo mes los nacidos parir tambi\'{e}n"
+\\
+\bigskip
+\pause
+\textcolor{red}{c\'{o}mo le hacemos?}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Propuesta de c\'{o}digo}
+\begin{lstlisting}
+a, b= 0,1
+while b < 10:
+    print b
+    a, b = b, a+b
+\end{lstlisting}
+\pause
+\begin{lstlisting}
+a, b= 0,1
+while b < 1000:
+    print b,
+    a, b = b, a+b
+\end{lstlisting}
+\end{frame}
+\section{M\'{o}dulos}
+\begin{frame}[fragile]
+\frametitle{M\'{o}dulos}
+Es una buena pr\'{a}ctica almacenar las funciones en m\'{o}dulos. Un m\'{o}dulo es un archivo en donde se dejan las funciones, el nombre del m\'{o}dulo es el nombre del archivo.
+\\
+\bigskip
+Un m\'{o}dulo se carga al programa con la instrucci\'{o}n
+\begin{center}
+\verb|from nombre_modulo import *|
+\end{center}
+Python incluye un n\'{u}mero grande de m\'{o}dulos que contienen funciones y m\'{e}todos para varias tareas. La gran ventaja de los m\'{o}dulos es que est\'{a}n disponibles en internet y se pueden descargar, dependiendo de la tarea que se requiera atender.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{M\'{o}dulo \texttt{math}}
+Muchas funciones matem\'{a}icas no se pueden llamar directo del int\'{e}rprete, pero para ello existe el m\'{o}dulo \texttt{math}.
+\\
+\bigskip
+Hay tres diferentes maneras en las que se puede llamar y utilizar las funciones de un m\'{o}dulo.
+\begin{exampleblock}{}
+\verb|from math import *|
+\end{exampleblock}
+De esta manera, se importan todas las funciones definidas en el m\'{o}dulo \texttt{math}, siendo quiz\'{a} un gasto innecesario de recursos, pero tambi\'{e}n generar conflictos con definiciones cargadas de otros m\'{o}dulos.
+\end{frame}
+\begin{frame}[fragile]
+\begin{exampleblock}{}
+\verb|from math import func1, func2,...|
+\end{exampleblock}
+\pause
+\begin{exampleblock}{}
+\verb|>>> from math import log,sin| \\
+\verb|>>> print log(sin(0.5))| \\
+\verb|-0.735166686385|
+\end{exampleblock}
+\end{frame}
+\begin{frame}[fragile]
+El tercer m\'{e}todo que es el m\'{a}s usado en programaci\'{o}n, es tener disponible el m\'{o}dulo:
+\begin{center}
+\verb|import math|
+\end{center}
+Las funciones en el m\'{o}dulo se pueden usar con el nombre del m\'{o}dulo como prefijo:
+\begin{exampleblock}{}
+\verb|>>> import math| \\
+\verb|>>> print math.log(math.sin(0.5))|
+\verb|-0.735166686385|
+\end{exampleblock}
+Podemos ver el contenido de un m\'{o}dulo con la instrucci\'{o}n:
+\\
+\verb|>>> import math| \\
+\verb|>>> dir(math)|
+\end{frame}
+\end{document}

@@ -1,0 +1,32 @@
+bin=[]
+i=0
+n=.1
+a=n
+while i<24: #hasta 24 para truncarlo en 24 bits
+    a=a*2
+    bin.append(int(a))#expansion binaria del numero
+    if int(a)>0:
+        a=a-1
+    i=i+1
+print("expansion decimal binaria",bin)
+#va bien
+i=0
+pot=1.
+num=0
+while i<23:
+    pot=pot*.5
+    num=num+(pot*bin[i])#n pasado a binario y regresado a decimal truncado a 24bit
+    i=i+1
+
+print("numero que regresa=",num)
+    
+error=n-num
+print("error=",error)
+errtot=error*100*60*60*10 
+print("error total=",errtot)
+
+
+#Sucede que al guardar el numero 1/10 que es el numero por que se multiplica el tiempo que lleva corriendo
+#la computadora se almacena en binario. El numero binario se trunca a 24 bits (23 posiciones decimales)
+#al regresar el numero binario a decimal se genera un error (del orden de 9x10^-8)
+#pero se va acumulando en el tiempo hasta que se genera un error mayor.

@@ -1,0 +1,37 @@
+import numpy as num
+import matplotlib.pyplot as plt
+
+vo=0
+yo=2
+tao=10
+vt=tao*9.81
+v=[]
+y=[]
+dominio=[]
+y.append(yo)
+v.append(vo)
+dominio.append(0)
+t=0
+n=0
+while y[n]>0:
+    y.append((vo-vt)*tao*(1-num.exp(-t/tao))-vt*t+yo)
+    v.append((vo-vt)*num.exp(-t/tao)+vt)
+    
+    dominio.append(n)
+    t=t+.1
+    n=n+1
+
+
+tao=0
+k=[]
+velter=[]
+while tao<2:
+    k.append(tao)
+    velter.append(tao*9.81)
+    tao=tao+.01
+plt.plot(k,velter)
+plt.show()
+
+
+#la velocidad terminal aumenta linealmente con tao (m/k)
+#mientras mayor sea tao vt es mayor y el objeto cae mas deprisa y viceversa

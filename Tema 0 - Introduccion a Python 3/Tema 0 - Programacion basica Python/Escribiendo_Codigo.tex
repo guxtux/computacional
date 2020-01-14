@@ -1,0 +1,40 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol,multienum}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{color}
+\usepackage{anysize}
+\usepackage{anyfontsize}
+%Esta linea obliga a que se marque el punto como indicador de los decimales y no la coma
+\spanishdecimal{.}
+\include{pre_codigo}
+\marginsize{1.5cm}{1.5cm}{2cm}{2cm}
+\author{M. en C. Gustavo Contreras May\'{e}n.}
+\title{Escribiendo código de Python en un documento \\ \begin{Large} Curso de Física Computacional\end{Large} }
+\date{ }
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+Para escribir código de programación en un documento de \LaTeX como si estuviéramos trabajando con un editor, requiere que usemos el paquete \texttt{listings}, en donde se especifica el lenguaje con el que se trabaja, a las instrucciones y comandos propios del lenguaje, las resalta sin necesidad de hacerlo una por una, es importante tomar en cuenta que los mismos espaciamientos que se indican en el formato del paquete, para evitar que nos marque un error.
+\\
+\\
+Hay que señalar el símbolo que usaremos para los comentarios dentro del código, para que no nos marque un error durante la compilación. Cada bloque de código tendrá una numeración al lado izquierdo de la caja, así como un cuadro que encierra el código, es posible modificar el fondo del cuadro, pensando que mostraremos el código en una diapositiva, pero para los textos en pdf, basta con dejarlo en blanco.
+%Nota: aunque el paquete que se usa es listing, el bloque dentro de latex, es lstlisting
+\begin{lstlisting}
+import matplotlib.pyplot as plt
+x=[0.05,0.10,0.15,0.20,0.25,0.30]
+y=[0.2000,0.2800,0.3600,0.4200,0.5200,0.5800]
+
+plt.plot(x,y, 'r*', label='resistencia')
+plt.xlabel('longitud')
+plt.ylabel('resistencia')
+plt.legend(loc= "upper left")
+plt.show()
+\end{lstlisting}
+Con lo que tenemos dentro del documento, el código con formato y dentro de una caja.
+\end{document}

@@ -1,0 +1,14 @@
+import matplotlib as plt
+import numpy as np
+x=np.arange(-4,-0.5,.5)
+a=[2.0,-20.0,70.0,100.0,48.0]
+for m in range(len(x)):
+	b=0
+	n=len(a)
+	while n>0:
+		n=n-1
+		b=a[n]+x[m]*b 
+	print 'P(',x[m],')=', '%5f' %(b)	
+
+plt.plot(x,b)  #trate de graficarlo pero la verdad no me salio, me da un error.
+plt.show()

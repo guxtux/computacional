@@ -1,0 +1,19 @@
+# -*- coding: cp1252 -*-
+import numpy as num
+
+
+
+#epsilon de la maquina (comprueba que el epsilon sea mas pequeño que el sugerido)
+n=.5
+while n+1>1.:
+    n=n/2
+print("el epsilon de esta maquina es:",n)
+
+epsilon=(1.2*10**(-7))
+x=19+n
+while num.tanh(x)<1.:
+    y=num.tanh(x)
+    x=x+epsilon
+print("no habra desborde si x<",x)
+print("el numero mas grande que arroja la tangente antes de redondear es",y)
+

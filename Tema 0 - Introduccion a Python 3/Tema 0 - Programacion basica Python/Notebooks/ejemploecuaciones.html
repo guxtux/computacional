@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js - Math Plugin</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<div class="slides">
+
+				<section>
+					<h1>Ejercicio Completo</h1>
+				</section>
+				<section>
+					<h2>Carrera de bicicletas: el efecto de la resistencia al aire.</h2>
+				</section>
+
+				<section>
+					<section>
+						<p>La bicicleta es una forma muy eficiente de transporte, esto la sabe quien se ha subido a una.</p>
+						<br/>
+						<p>El objetivo con este ejercicio es entender los factores que determinan la velocidad máxima de una bicicleta y estimar esta velocidad para un caso realista.</p>					
+					</section>
+					<section>
+						<p>Comenzaremos ignorando la fricción; se tiene que considerar posteriormente, pero primero vamos a entender cómo lidiar con el caso más simple sin fricción.</p>
+					</section>
+					<section>
+						<p>Partimos con la ecuación de movimiento: con la segunda ley de Newton, que puede escribirse en la forma</p>
+						<br/>
+						\[\dfrac{d v}{d t} = \dfrac{F}{m}\]
+					</section>
+					<section>
+						<p>Donde $v$ es la velocidad, $m$ es la masa de la combinación bicicleta-ciclista, $t$ es el tiempo y $F$ es la fuerza sobre la bicicleta que viene del esfuerzo del ciclista (aquí asumiremos que la bicicleta se está moviendo en plano terreno).</p>
+					</section>
+					<section>
+						<p>Manejar debidamente la $F$ es complicado, por la mecánica misma de una bicicleta: ya que la fuerza ejercida por el ciclista se transmite a las ruedas por medio del plato, engranajes, etc.</p>
+						</section>
+					<section>
+						<p>Esto hace muy difícil obtener una expresión exacta para $F$.</p>
+						<br/>
+						<p>Sin embargo, hay otra manera de atacar este problema que evita la necesidad de conocer la fuerza.</p>
+					</section>
+					<section>
+						<p>Este enfoque alternativo implica formular el problema en términos de la potencia generada por el conductor.</p>
+						<br/>
+						<p>Los estudios fisiológicos de ciclistas de élite de carreras han demostrado que estos atletas son capaces de producir una potencia de salida de aproximadamente 400 watts durante largos períodos de tiempo (1 h)</p>
+					</section>
+					<section>
+						<p>Usando ideas de trabajo-energía podemos reescribir la ecuación anterior como</p>
+						\[\dfrac{d E}{d t} = P \]
+					</section>
+					<section>
+						<p>Donde $E$ es la energía total de la combinación bicicleta-ciclista, y $P$ es la potencia de salida del ciclista.</p>
+					</section>
+					<section>
+						<p>Esto supone implícitamente que se pierde muy poca energía para la fricción en la propia bicicleta, incluiremos otras fuentes de fricción en un momento.</p>
+					</section>
+					<section>
+						<p>Para un recorrido plano toda la energía es cinética, entonces</p>
+						\[ E = m v^{2} \]
+						<p>por tanto</p>
+						<br/>
+						\[ \dfrac{d E }{dt} = m v \dfrac{d v}{d t} \]
+					</section>
+					<section>
+						<p>Al sustituir en la ecuación anterior</p>
+						\[ \dfrac{dv }{d t} = \dfrac{P}{m v}\]
+					</section>
+					<section>
+						<p>Si $P$ es constante, se puede resolver analíticamente.</p>
+					</section>
+					<section>
+						<p>Reagrupando los términos, tenemos que</p>
+						<br/>
+						\[ \int_{v_0}^v  v^{\prime} d v^{\prime} = \int_0^t \dfrac{P}{m} d t^{\prime} \]
+						<p>donde $v_0$ es la velocidad de la bicicleta al tiempo $t = 0$
+					</section>
+					<section>
+						<p>Integrando ambas expresiones y resolviendo para $v$, se obtiene</p>
+						<br/>
+						\[ v = \sqrt{v_0^2 + 2 P \frac{t}{m}} \]
+					</section>
+					<section>
+						<p>Esta es la solución correcta a la ecuación de movimiento.</p>
+						<br/>
+						<p>Pero vemos que predice que la velocidad aumentará sin límite conforme transcurre el tiempo</p>
+						<br/>
+						<p class="fragment"><font color="yellow">¿La solución es congruente con la física del mundo real?</font></p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Corrigiendo el modelo</h3>
+					</section>
+					<section>
+						<p>Para poder generalizar nuestro modelo, hay que considerar el efecto de la resistencia del aire.</p>
+						<br/>	
+						<p class="fragment">Un nuevo término se va a agregar a la ecuación de movimiento y por tanto, debemos de resolver numéricamente el problema.</p>
+					</section>
+					<section>
+						<p>Consideremos la expresión de una diferencia finita de la derivada de la velocidad</p>
+						<br/>
+						\[ \dfrac{d v}{d t} \simeq \dfrac{v_{i+1} - v_{i}}{\Delta t} \]
+					</section>
+					<section>
+						<p>Donde hemos supuesto que el intervalo de tiempo $\Delta t$ es pequeño y discreto.</p>
+						<br/>
+						<p>Así mismo, tomamos $v_i$ como la velocidad al tiempo $t_{i} \equiv i \Delta t$, donde $i$ es un valor entero.</p>
+					</section>
+					<section>
+						<p>Ocupando esta aproximación en la expresión de la derivada de la velocidad, y al hacer un arreglo de los términos:</p>
+						<br/>
+						\[ v_{i+1} = v_{i} + \dfrac{P}{m \; v_i} \Delta \; t \]
+					</section>
+					<section>
+						<p>Esta aproximación nos lleva a una correción que es proporcional a $(\Delta \; t)^2$</p>
+					</section>
+					<section>
+						<p>Dada la velocidad al tiempo $i$, es decir $v_i$, podemos utilizar la expresión anterior para calcular una <em>aproximación</em> de la velocidad en el tiempo $v_{i+1}$</p>
+					</section>
+					<section>
+						<p>Por lo que si conocemos la velocidad inicial $v_0$, podemos obtener $v_1$, y a su vez, $v_2$, y así sucesivamente calculamos para estimar la velocidad en tiempos posteriores.</p>
+					</section>
+					<section>
+						<p class = "fragment highlight-current-blue">A este método se le conoce como el método de Euler.</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Usemos python para la solución!!</h2>
+					</section>
+					<section>
+						<p>Veamos qué información ya tenemos disponible:
+						<ol>
+							<li>El intervalo de tiempo $\Delta \: t = 1$</li>
+							<li>La potencia generada: $P = 400$ W</li>
+							<li>La masa del sistema bicicleta-ciclista: $70$ kg</li>
+							<li>El tiempo de seguimiento: $tmax = 200$ segundos.</li>
+						</ol>
+						</p>
+					</section>
+					<section>
+						<p>¿Qué vamos a calcular?</p>
+						<br/
+						<p>Vamos a calcular el valor de velocidad a partir de la expresión de Euler, y por tanto, necesitamos "guardar" ese valor en alguna parte.</p>
+					</section>
+					<section>
+						<p>Necesitamos usar arreglos para almacenar los datos tanto del tiempo y el valor de velocidad</p>
+						<p class="fragment">Usamos dos arreglos que inicialmente se encontrarán vacíos:
+						<br/>
+						$t = []$
+						<br/>
+						$v = []$
+						</p>
+					</section>
+					<section>
+						<p>No olvidemos las condiciones iniciales de nuestro problema:
+						<br/>
+						Suponemos que el ciclista parte con una velocidad inicial de $4 m/s$ al tiempo $t = 0$</p>
+					</section>
+					<section>
+						<p>Estos valores los almacenamos en los arreglos, para ello ya conocemos la manera de hacerlo
+						<br/>
+						<pre class="stretch highlight python"><code style="text-align: left;">
+							<mark>t.append(0)</mark>
+							<mark>v.append(4)</mark>
+						</code></pre></p>
+					</section>
+					<section>
+						<p>Dividimos el intervalo completo de tiempo, en unidades discretas para evaluar la aproximación con el método de Euler</p>
+						<br/>
+						<p>
+							<pre><code>
+								<mark>nmax = tmax/dt</mark>
+							</code></pre>
+						</p>
+					</section>
+					<section>
+						<p>Necesitamos iterar en un ciclo para obtener los valores de velocidad a partir de valores anteriores, para ello, usamos un ciclo <font color ="yellow">for</font>, ya que sabemos cuántas veces se debe de repetir el ciclo.</p>
+						<br/>
+						<p>Se requiere el uso de una función matemática que no está dentro del kernel de python, y se llama mediante una sentencia:</p>
+						<br/>
+						<p>
+							<font color="yellow">from math import sqrt</font>
+						</p>
+					</section>
+					<section>
+						<p>El código para el ciclo es:</p>
+						<br/>
+						<p class="fragment">
+							<pre><code>
+								for i in range(int(tmax/dt)):
+									ti = t[i-1] + dt
+									vi = sqrt(v[i]**2 + (2 * potencia * dt)/masa)
+							</code></pre>
+						</p>
+					</section>
+					<section>
+						<p>Una vez que hemos recuperado un conjunto de valores en los arreglos, ahora nos interesa su representación en una gráfica, por lo que vamos a usar las librerías de pyhton que presentan un conjunto de valores en una gráfica.</p>
+					</section>
+					<section>
+						<p>Hay que llamar la librería:</p>
+						<br/>
+						<p>
+							<font color="Cyan">import matplotlib.pyplot as plt</font>
+						</p>
+					</section>
+					<section>
+						<p>Código para generar la gráfica</p>
+						<p>
+							<pre><code>
+								plt.plot(v, "r-")
+								plt.xlabel("tiempo [$10^{-1}$ s]")
+								plt.ylabel("velocidad m/s")
+								plt.show()
+							</code></pre>
+						</p>
+					</section>
+					<section>
+						<p>El código completo quedaría de la siguiente manera:</p>
+						<pre><code>
+							import matplotlib.pyplot as plt
+							from math import sqrt
+
+							t = []
+							v = []
+
+							dt = 1
+							potencia = 400
+							masa = 70
+							tmax = 200
+							nmax = tmax/dt
+
+							t.append(0)
+							v.append(4)
+
+							for i in range(int(tmax/dt)):
+								ti = t[i-1] + dt
+								vi = sqrt(v[i]**2 + (2 * potencia * dt)/masa)
+								t.append(ti)
+								v.append(vi)
+
+							plt.plot(v, "r-")
+							plt.xlabel("tiempo [$10^{-1}$ s]")
+							plt.ylabel("velocidad m/s")
+							plt.show()
+						</code></pre>
+					</section>
+					<section>
+						<p>Obtenemos el siguiente resultado</p>
+						<p><img src="bici_01.png" alt="Figura_10" width="80%"></p>
+					</section>
+					<section>
+						<p>Pero vemos que no logramos que el modelo sea congruente con la física del mundo real!</p>
+						<br/>
+						La velocidad del ciclista se incrementa cada vez más, por lo que la energía cinética también aumenta conforme transcurre el tiempo.
+					</section>
+					<section>
+						<p>Necesitamos incluir algún mecanismo de pérdida de la energía.</p>
+						<br/>
+						<p>Para un ciclista entrenado, la pérdida de energía por fricción en las llantas y en el eje, es mucho menor comparada con la pérdida provocada por la fricción con el aire.</p>
+					</section>
+					<section>
+						<p>Que a su vez tiene un problema, dada la naturaleza de la combinación de elementos.</p>
+						<br/>
+						<p class="fragment">La fuerza de resistencia se puede expresar inicialmente como
+						<br/>
+						\[ F_r \simeq - B_1 \; v - B_2 \; v^2 \]</p>
+					</section>
+					<section>
+						<p>Vemos que se parece a una expansión en series de Taylor.</p>
+						<br/>
+						<p>Para velocidades bajas, el primer término domina y el coeficiente $B_1$ puede calcularse a partir de objetos con formas simples.</p>
+					</section>
+					<section>
+						<p>Pero para cualquier velocidad razonable, el término $v^2$ domina; pero el valor de $B_2$ no se puede calcular mediante formas simples, y es más complicado para el sistema bicicleta-ciclista.</p>
+					</section>
+					<section>
+						<p>Si pensamos que un objeto se mueve en la atmósfera, éste debe de empujar el aire frente a él.</p>
+						<br/>
+						<p>La masa de aire desplazado en el tiempo $d t$ es</p>
+						\[ m_{aire} \sim \rho \: A \: v \ dt \]
+					</section>
+					<section>
+						<p>Donde $\rho$ es la densidad del aire, $A$ es el área frontal del objeto.</p>
+						<br/>
+						<p>Este aire tiene una velocidad $v$, así que su energía cinética es</p>
+						\[ E_{aire} = m_{aire} \; \frac{v^2}{2} \]
+					</section>
+					<section>
+						<p>Esto debido al trabajo hecho por la fuerza de arrastre (la fuerza en el objeto debida a la resistencia del aire) en el tiempo $dt$ </p>
+						<br/>
+						<p>por tanto</p>
+						\[ F_a \; v \; dt = E_a \]
+					</section>
+					<section>
+						<p>Al juntar todo en una expresión</p>
+						\[ F_a \simeq - C \; \rho \; A \; v^2 \]
+						<p class="fragment">$C$ es conocido como el coeficiente de arrastre y podemos tomar el valor de $1/2$</p>
+					</section>
+					<section>
+						<p>Al incluir esta fuerza de arrastre en la expresión del movimiento, tenemos ahora</p>
+						\[ v_{i+1} = v_i + \dfrac{P}{m \: v_i} \: \Delta \: t - \dfrac{C \: \rho \: A \: v_i^2}{m} \: \Delta \: t \]
+					</section>
+					<section>
+						<p>Al incluir la expresión en el código, obtenemos</p>
+						<p><img src="bici_02.png" alt="Figura_02" width="80%"></p>
+					</section>
+				</section>
+				</section>
+
+				<!-- <section>
+					<h2>reveal.js Math Plugin</h2>
+					<p>A thin wrapper for MathJax</p>
+				</section>
+
+				<section>
+					<h3>The Lorenz Equations</h3>
+
+					\[\dfrac{d v}{d t} = \dfrac{F}{m}\]
+				</section>
+
+				<section>
+					<h3>The Cauchy-Schwarz Inequality</h3>
+
+					<script type="math/tex; mode=display">
+						\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
+					</script>
+				</section>
+
+				<section>
+					<h3>A Cross Product Formula</h3>
+
+					\[\mathbf{V}_1 \times \mathbf{V}_2 =  \begin{vmatrix}
+					\mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\
+					\frac{\partial X}{\partial u} &amp;  \frac{\partial Y}{\partial u} &amp; 0 \\
+					\frac{\partial X}{\partial v} &amp;  \frac{\partial Y}{\partial v} &amp; 0
+					\end{vmatrix}  \]
+				</section>
+
+				<section>
+					<h3>The probability of getting \(k\) heads when flipping \(n\) coins is</h3>
+
+					\[P(E)   = {n \choose k} p^k (1-p)^{ n-k} \]
+				</section>
+
+				<section>
+					<h3>An Identity of Ramanujan</h3>
+
+					\[ \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} =
+					1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
+					{1+\frac{e^{-8\pi}} {1+\ldots} } } } \]
+				</section>
+
+				<section>
+					<h3>A Rogers-Ramanujan Identity</h3>
+
+					\[  1 +  \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots =
+					\prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})}\]
+				</section>
+
+				<section>
+					<h3>Maxwell&#8217;s Equations</h3>
+
+					\[  \begin{aligned}
+					\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &amp; = \frac{4\pi}{c}\vec{\mathbf{j}} \\   \nabla \cdot \vec{\mathbf{E}} &amp; = 4 \pi \rho \\
+					\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} &amp; = \vec{\mathbf{0}} \\
+					\nabla \cdot \vec{\mathbf{B}} &amp; = 0 \end{aligned}
+					\]
+				</section>
+
+				<section>
+					<section>
+						<h3>The Lorenz Equations</h3>
+
+						<div class="fragment">
+							\[\begin{aligned}
+							\dot{x} &amp; = \sigma(y-x) \\
+							\dot{y} &amp; = \rho x - y - xz \\
+							\dot{z} &amp; = -\beta z + xy
+							\end{aligned} \]
+						</div>
+					</section>
+
+					<section>
+						<h3>The Cauchy-Schwarz Inequality</h3>
+
+						<div class="fragment">
+							\[ \left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right) \]
+						</div>
+					</section>
+
+					<section>
+						<h3>A Cross Product Formula</h3>
+
+						<div class="fragment">
+							\[\mathbf{V}_1 \times \mathbf{V}_2 =  \begin{vmatrix}
+							\mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\
+							\frac{\partial X}{\partial u} &amp;  \frac{\partial Y}{\partial u} &amp; 0 \\
+							\frac{\partial X}{\partial v} &amp;  \frac{\partial Y}{\partial v} &amp; 0
+							\end{vmatrix}  \]
+						</div>
+					</section>
+
+					<section>
+						<h3>The probability of getting \(k\) heads when flipping \(n\) coins is</h3>
+
+						<div class="fragment">
+							\[P(E)   = {n \choose k} p^k (1-p)^{ n-k} \]
+						</div>
+					</section>
+
+					<section>
+						<h3>An Identity of Ramanujan</h3>
+
+						<div class="fragment">
+							\[ \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} =
+							1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
+							{1+\frac{e^{-8\pi}} {1+\ldots} } } } \]
+						</div>
+					</section>
+
+					<section>
+						<h3>A Rogers-Ramanujan Identity</h3>
+
+						<div class="fragment">
+							\[  1 +  \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots =
+							\prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})}\]
+						</div>
+					</section>
+
+					<section>
+						<h3>Maxwell&#8217;s Equations</h3>
+
+						<div class="fragment">
+							\[  \begin{aligned}
+							\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &amp; = \frac{4\pi}{c}\vec{\mathbf{j}} \\   \nabla \cdot \vec{\mathbf{E}} &amp; = 4 \pi \rho \\
+							\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} &amp; = \vec{\mathbf{0}} \\
+							\nabla \cdot \vec{\mathbf{B}} &amp; = 0 \end{aligned}
+							\]
+						</div>
+					</section>
+				</section>
+
+			</div>
+
+		</div> -->
+
+		<script src="reveal.js/lib/js/head.min.js"></script>
+		<script src="reveal.js/js/reveal.js"></script>
+
+		<script>
+
+			Reveal.initialize({
+				history: true,
+				transition: 'linear',
+
+				math: {
+					 mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full'
+				},
+
+				dependencies: [
+					{ src: 'reveal.js/lib/js/classList.js' },
+					{ src: 'reveal.js/plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

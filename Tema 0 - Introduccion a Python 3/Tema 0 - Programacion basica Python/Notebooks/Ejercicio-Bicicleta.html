@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+ 
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section><section id="ejercicio-completo" class="titleslide slide level1"><h1>Ejercicio Completo</h1></section><section id="carrera-de-bicicletas-el-efecto-de-la-resistencia-al-aire." class="slide level2">
+<h2>Carrera de bicicletas: el efecto de la resistencia al aire.</h2>
+<p>La bicicleta es una forma muy eficiente de transporte, esto la sabe quien se ha subido a una.</p>
+<p>El objetivo con este ejercicio es entender los factores que determinan la velocidad máxima de una bicicleta y estimar esta velocidad para un caso realista.</p>
+</section><section id="section" class="slide level2">
+<h2></h2>
+<p>Comenzaremos ignorando la fricción; se tiene que considerar posteriormente, pero primero vamos a entender cómo lidiar con el caso más simple sin fricción.</p>
+</section><section id="section-1" class="slide level2">
+<h2></h2>
+<p>Partimos con la ecuación de movimiento: con la segunda ley de Newton, que puede escribirse en la forma</p>
+<section>
+  \[\dfrac{d v}{d t} = \dfrac{F}{m} \]
+</section>
+
+<p>Donde <span class="math inline">\(v\)</span> es la velocidad, <span class="math inline">\(m\)</span> es la masa de la combinación bicicleta-ciclista, <span class="math inline">\(t\)</span> es el tiempo y <span class="math inline">\(F\)</span> es la fuerza sobre la bicicleta que viene del esfuerzo del ciclista (aquí asumiremos que la bicicleta se está moviendo en plano terreno).</p>
+</section><section id="section-2" class="slide level2">
+<h2></h2>
+<p>Manejar debidamente la <span class="math inline">\(F\)</span> es complicado, por la mecánica misma de una bicicleta: ya que la fuerza ejercida por el ciclista se transmite a las ruedas por medio del plato, engranajes, etc.</p>
+<p>Esto hace muy difícil obtener una expresión exacta para <span class="math inline">\(F\)</span>.</p>
+</section><section id="section-3" class="slide level2">
+<h2></h2>
+<p>Sin embargo, hay otra manera de atacar este problema que evita la necesidad de conocer la fuerza.</p>
+<p>Este enfoque alternativo implica formular el problema en términos de la potencia generada por el conductor.</p>
+</section><section id="section-4" class="slide level2">
+<h2></h2>
+<p>Los estudios fisiológicos de ciclistas de élite de carreras han demostrado que estos atletas son capaces de producir una potencia de salida de aproximadamente 400 watts durante largos períodos de tiempo (1 h)</p>
+</section><section id="section-5" class="slide level2">
+<h2></h2>
+<p>Usando ideas de trabajo-energía podemos reescribir la ecuación anterior como</p>
+<span class="math display">\[\begin{equation*}
+\dfrac{d E}{d t} = P
+\end{equation*}\]</span>
+<p>Donde <span class="math inline">\(E\)</span> es la energía total de la combinación bicicleta-ciclista, y <span class="math inline">\(P\)</span> es la potencia de salida del ciclista.</p>
+</section><section id="section-6" class="slide level2">
+<h2></h2>
+<p>Esto supone implícitamente que se pierde muy poca energía para la fricción en la propia bicicleta, incluiremos otras fuentes de fricción en un momento.</p>
+</section><section id="section-7" class="slide level2">
+<h2></h2>
+<p>Para un recorrido plano toda la energía es cinética, entonces</p>
+<p>$ E = m v^{2} $</p>
+<p>por tanto</p>
+<span class="math display">\[\begin{equation*}
+\dfrac{d E }{dt} = m v \dfrac{d v}{d t}
+\end{equation*}\]</span>
+</section><section id="section-8" class="slide level2">
+<h2></h2>
+<p>Al sustituir en la ecuación anterior</p>
+<span class="math display">\[\begin{equation*}
+\dfrac{dv }{d t} = \dfrac{P}{m v}
+\end{equation*}\]</span>
+<p>Si <span class="math inline">\(P\)</span> es constante, se puede resolver analíticamente.</p>
+</section><section id="section-9" class="slide level2">
+<h2></h2>
+<p>Ordenando los términos</p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+        transition: 'linear',
+
+        math: {
+           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full'
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+              { src: 'reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>

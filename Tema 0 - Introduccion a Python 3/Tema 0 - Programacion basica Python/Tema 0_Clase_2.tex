@@ -1,0 +1,669 @@
+\include{pre_documento}
+\usefonttheme[onlymath]{serif}
+\include{pre_codigo}
+\begin{document}
+\title{Tema 0 - Programación Básica con \python \\ Clase 2}
+\subtitle{Curso de Física Computacional}
+\author[]{M. en C. Gustavo Contreras Mayén}
+\date{ }
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+\begin{frame}
+\frametitle{Contenido}
+\tableofcontents[pausesections]
+\end{frame}
+\section{Estructuras de control}
+\begin{frame}
+\frametitle{Estructuras de control}
+En cualquier lenguaje de programación se incluye una serie de estructuras de control para ampliar las posibilidades de ejecución de un programa.
+\\
+\bigskip
+Manejaremos las más comunes que son relativamente sencillas de usar, cuidado siempre de manejar la sintaxis respectiva.
+\end{frame}
+\subsection{Condicionales}
+\begin{frame}
+\frametitle{Condicionales}
+Una sentencia condicional permite evaluar si se cumple cierta condición, es decir, si su valor es \texttt{True}, se ejecuta una instrucción, en caso de que el valor de la condición no se cumpla, valor \texttt{False}, no se ejecuta la instrucción contenida y se sigue a la siguiente línea de código.
+\end{frame}
+\begin{frame}
+\frametitle{El condicional \texttt{if}}
+El bloque condicional más simple utiliza la instrucción \texttt{if}, a continuación lleva una expresión que debe de evaluarse, como se mencionó antes, el valor de la expresión debe de ser \texttt{True} para que se ejecute(n) la(s) instrucción(es) contenidas en el bloque, hay dos puntos (:) que identifican el bloque y las instrucciones contenidas deben de estar identadas, en caso contrario, \python\ nos devolverá un mensaje de error provocado por la identación equivocada.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejemplo de \texttt{if}}
+\begin{lstlisting}
+a = 10
+if a > 0:
+    print 'la variable a es positiva'
+    a = a + 1
+
+print a
+\end{lstlisting}
+\fontsize{12}{12}\selectfont
+En el ejemplo asignamos a la variable \texttt{a} el valor de 10, en el bloque condicional se evalúa la expresión \texttt{a > 10}, y en este caso, el valor que se obtiene es \textcolor{red}{\texttt{True}}, por tanto, se ejecutan las instrucciones que están contenidas dentro del bloque, que son: 1) mostrar en pantalla la línea \texttt{la variable a es positiva}, 2) se incrementa una unidad el valor de \texttt{a}. Aquí ya concluyen las instrucciones dentro del condicional, la siguiente instrucción \texttt{print} está fuera del bloque, y nos muestra el valor de la variable \texttt{a}, que en el ejemplo ahora es 11.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Cuando la expresión evaluada es falsa}
+\begin{lstlisting}
+a = 0
+if a > 0:
+    print 'la variable a es positiva'
+    a = a + 1
+
+print a
+\end{lstlisting}
+Ahora vemos que el valor de la variable \texttt{a} es cero, y al evaluarse la expresión \texttt{a > 10}, el resultado es \textcolor{blue}{False}, por tanto NO se ejecuta instrucción alguna que está dentro del bloque, y continua el código hacia la siguiente línea, en el ejemplo, con la instrucción \texttt{print}.
+\end{frame}
+\begin{frame}
+\frametitle{Alternativa 1 para el bloque condicional}
+En ocasiones necesitaremos hacer algo cuando la expresión que se evalúa en el \texttt{if} sea falsa, el programa realice alguna instrucción, es decir, que haya una respuesta en particular para el caso en que obtengamos un valor \texttt{False} en la evaluación de la expresión.
+\\
+\medskip
+Para ello, podemos ocupar la instrucción \texttt{else:} que se escribe en el mismo nivel de identación que la instrucción \texttt{if} y lleva también dos puntos (:); las instrucciones que están contenidas dento de \texttt{else:} se ejecutarán siempre y cuando la expresión que se evalúa, sea falsa, \python\ no pide otra expresión para evaluar.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Condicional \texttt{if .. else}}
+\begin{lstlisting}
+a = -2
+if a > 0:
+    print 'la variable a es positiva'
+    a = a + 1
+else:
+	print 'la variable a es negativa'
+print a
+\end{lstlisting}
+\fontsize{12}{12}\selectfont
+En el ejemplo vemos que el valor de \texttt{a} es $-2$, la expresión que se evalúa en el \texttt{if} es \textcolor{blue}{\texttt{False}}, por tanto, no se ejecutan las instrucciones del \texttt{if}, sino que se va a ejecutar la instrucción contenida en el \texttt{else:}
+\\
+\medskip
+Si la expresión inicial que se evaluá es \textcolor{red}{\texttt{True}}, se ejecutan las instrucciones contenidas en el bloque \texttt{if}, ya no se ejecuta instrucción alguna del bloque \texttt{else:} y continua el programa.
+\end{frame}
+\begin{frame}
+\frametitle{Alternativa 2 para el bloque condicional}
+El uso de un bloque \texttt{if .. else} nos da oportunidad manejar el código en caso de obtener un valor \texttt{False} en la evaluación de la expresión, como ya mencionamos, no se requiere evaluar otra expresión, pero podemos usar una variante del condicional y evaluar una nueva expresión (que sería diferente de la primera) y con ello, nuestro algoritmo gana bastante potencial para responder a nuestras necesidades, y eso lo haremos con el bloque \texttt{if .. elif .. else}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{El bloque \texttt{if..elif..else}}
+\begin{lstlisting}
+a = 0
+if a > 0:
+    print 'la variable a es positiva'
+    a = a + 1
+elif a == 0:
+    print 'la variable a es cero'
+else:
+    print 'la variable a es negativa'
+
+print a
+\end{lstlisting}
+\fontsize{12}{12}\selectfont
+La primera expresión \texttt{a>0} es \textcolor{blue}{\texttt{False}}, por tanto, continua el código hasta la sentencia \texttt{elif:}, aquí se evalúa la nueva expresión \texttt{a == 0}, que resulta ser \textcolor{red}{\texttt{True}} y por tanto se ejecuta la instrucción contenida en el bloque \texttt{elif:}, saliendo luego del bloque y continua el código, es decir, ya no se revisa el \texttt{else:}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejemplo de condicional}
+\begin{lstlisting}
+a = input('Introduce el valor de a')
+if a > 0:
+    print "a es positivo"
+    a = a + 1
+elif a == 0:
+    print "a es 0"
+else:
+    print "a es negativo"
+
+print a:
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Uso de los condicionales}
+Para imprimir formas plurales
+\begin{lstlisting}
+print "Hay % d % s en el banco " % \
+(N, (" peso " if N == 1 else " pesos "))
+\end{lstlisting}
+\pause
+Para funciones por tramos
+\begin{lstlisting}
+y = (x if x < 10.0 else (x**2)/10.0)
+\end{lstlisting}
+\pause
+Para evaluar funciones condicionalmente
+\begin{lstlisting}
+def Perim ( radius ): return 2* pi* radius
+def Area ( radius ): return pi* radius **2
+v = ( Perim if q == 'perim ' else Area )(1.0)
+\end{lstlisting}
+\end{frame}
+\subsection{Bucles o Loops}
+\begin{frame}
+\frametitle{Bucles o Loops}
+Un bucle es una sentencia que evalúa inicialmente una condición, en caso de que se cumple (valor \texttt{True}) se ejecuta(n) un conjunto de instrucciones, posteriormente, se revisa el valor de la condición, mientras sea verdadero, las instrucciones se ejecutan nuevamente.
+\end{frame}
+\begin{frame}
+\frametitle{Tipos de bucles}
+Hay que considerar dos posibles casos en el manejo de los bucles:
+\begin{enumerate}
+\item Cuando conocemos el número de ciclos que van a realizarse.
+\item Cuando no sabemos cuántas veces se requiere que se repita el ciclo.
+\end{enumerate}
+En ambos casos se necesita modificar alguna variable y evaluar nuevamente una condición, de tal manera que se cumpla con cierto criterio y concluya el bucle, en caso contrario, tendremos lo que se denomina un \emph{bucle infinito}, es decir, el conjunto de instrucciones se va a repetir indefinidamente, por lo que hay que ''cortar'' el programa en ejecución.
+\end{frame}
+\subsubsection{El bucle \texttt{while}}
+\begin{frame}[fragile]
+\frametitle{El ciclo \texttt{while}}
+El ciclo \texttt{while} tiene la siguiente sintaxis:
+\\
+\medskip
+\begin{verbatim}
+while condicion:
+    instruccion1
+    instruccion2
+    ....
+\end{verbatim}
+Las instrucciones contenidas en el bloque se van a ejecutar mientras el valor de la condición sea verdadero, para salir del ciclo, el valor de la condición debe devolver \textcolor{blue}{\texttt{False}}, por lo que es necesario que dentro de este bloque, se realice alguna modificación a la(s) variable(s) contenida(s) en la condición.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejemplo del ciclo \texttt{while:}}
+\begin{lstlisting}
+nMax = 5
+n = 1
+a = [] 
+while n < nMax:
+    a.append(1.0/n) 
+    n = n + 1
+print a
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Otro ejemplo del ciclo \texttt{while:}}
+\begin{minipage}{5.5cm}
+\begin{lstlisting}
+from random import random
+x = 0.2
+while x < 0.6:
+    x = random()
+    print x
+print "Acabo el bucle"
+\end{lstlisting}
+\end{minipage}
+\hspace{1cm}
+\pause
+\begin{minipage}{4cm}
+\texttt{
+0.452132471948
+0.492677330538
+0.539594612795
+0.0865775779807
+0.0861402799157
+0.96555312462
+Acabó el bucle
+}
+\end{minipage}
+\end{frame}
+\subsubsection{El bucle \texttt{for}}
+\begin{frame}[fragile]
+\frametitle{El bucle \texttt{for}}
+La sintaxis del bucle/ciclo \texttt{for} es la siguiente:
+\\
+\medskip
+\begin{verbatim}
+for variable in lista:
+    instruccion1
+    instruccion2
+    ...
+\end{verbatim}
+El conjunto de instrucciones contenidas dentro del bucle se va a ejecutar mientras no se acabe de recorrer la lista; el valor de la variable, será el elemento de la lista que está siendo tratado en ese momento:
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejemplo del ciclo \texttt{for}}
+\begin{minipage}{5cm}
+\begin{lstlisting}
+cubos =[]
+for i in range(7):
+    ic = i**3
+    cubos.append(ic)
+    print i, cubos
+\end{lstlisting}
+\end{minipage}
+\pause
+\\
+\medskip
+\texttt{
+0 [0] \\
+1 [0, 1] \\
+2 [0, 1, 8] \\
+3 [0, 1, 8, 27] \\
+4 [0, 1, 8, 27, 64] \\
+5 [0, 1, 8, 27, 64, 125] \\
+6 [0, 1, 8, 27, 64, 125, 216]
+}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Algunas cosas más sobre el ciclo \texttt{for}}
+La instrucción \texttt{for} no sólo itera sobre enteros: \texttt{for} itera sobre todos los elementos de una \emph{secuencia}, asignando el valor del elemento a la variable, en el ejemplo anterior, la función \texttt{range} es sólo una función conveniente que genera una lista de enteros.
+\begin{verbatim}
+for i in [ 3, 1, 4, 1, 5, 9, 2, 6, 5, 3 ]:
+print "Un digito de pi es", i
+\end{verbatim}
+\begin{verbatim}
+for i in [ 1, 2, 3, 4 ] + [ 3, 2, 1 ]:
+print i
+\end{verbatim}
+\begin{verbatim}
+for i in " estas son palabras al azar ".split ():
+print i
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejemplos del ciclo \texttt{for}}
+\begin{lstlisting}
+for i in range(10):
+    print i
+\end{lstlisting}
+Al usar la función \texttt{range},  podemos extender el uso del ciclo \texttt{for}
+\begin{lstlisting}
+for i in range(1,10):
+    print i
+
+for j in range(10,1,-1):
+    print j
+
+lista = ['adios', 'mundo', 'cruel']
+for palabra in lista:
+    print palabra
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ciclo \texttt{for} más elaborado}
+El siguiente código usa los elementos de lista y busca la coincidencia exacta del nombre que proporciona el usuario en la línea de comandos, en caso de que no lo encuentre, le avisa al usuario que ese nombre no está en la lista inicial.
+\begin{lstlisting}
+lista = ['Hugo', 'Paco', 'Luis', 'McPato']
+nombre = raw_input('Teclea un nombre: ')
+
+for i in range(len(lista)):
+    if lista[i] == nombre:
+    	print nombre, ' es el numero ', i + 1, ' en la lista'
+    break
+else:
+    print nombre, ' no esta en la lista'
+\end{lstlisting}
+\end{frame}
+\begin{frame}
+\frametitle{El uso de \texttt{else} en el bloque \texttt{for}}
+En el ejemplo anterior, vemos que hay una sentencia \texttt{else:} al mismo nivel de alineación del ciclo \texttt{for}, efectivamente, esta sentencia \texttt{else:} no pertenece al condicional \texttt{if}, sino al bloque \texttt{for}.
+\\
+\medskip
+La sentencia \texttt{else:} la podemos utilizar tanto para los bucles \texttt{for} y \texttt{while}.
+\end{frame}
+\begin{frame}
+\frametitle{Instrucciones \texttt{break} y \texttt{continue}}
+Hay dos instrucciones que permiten ''salirse'' de un bucle sin necesidad de esperar a que en un ciclo \texttt{while}, la expresión que se evalúa, cambie a un valor \textcolor{blue}{False}, y para un ciclo \texttt{for}, esperar a que se recorran todos los elementos de la lista.
+\\
+\medskip
+La instrucción es \texttt{break}, veamos en el siguiente ejemplo, cómo se usa.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Uso de la instrucción \texttt{break}}
+\begin{lstlisting}
+for n in range(2, 10):
+    for x in range(2, n):
+        if n % x == 0:
+            print n, ' es igual a ', x, '*', n/x
+            break
+    else:
+        print n, ' es numero primo'
+\end{lstlisting}
+\end{frame}
+\begin{frame}
+Tenemos dos ciclos \texttt{for} anidados (hay que tener siempre cuidado con la identación) y en el segundo ciclo, tenemos un condicional \texttt{if} contenido, se evalúa con la función módulo, para expresar que un número es producto de otro, y tenemos la instrucción \texttt{break}, que no se espera a que se complete el recorrido de los elementos de la lista con índice \texttt{x}, que va desde 2 hasta n, y continua con un incremento en el contador n del primer ciclo \texttt{for}, en caso de que no haya un residuo igual a cero, entonces el número es primo, aquí nos apoyamos en la sentencia \texttt{else} del ciclo \texttt{for}.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Uso de la instrucción \texttt{continue}}
+La instrucción \texttt{continue}, lo que hace, es dar paso a la siguiente iteración del ciclo, veamos el ejemplo:
+\begin{lstlisting}
+for num in range(2,10):
+    if num % 2 == 0:
+        print 'Encontre un numero par ', num
+        continue
+    print 'Encontre un numero ', num
+\end{lstlisting}
+\end{frame}
+\section{Control de errores}
+\begin{frame}[fragile]
+\frametitle{Control de errores}
+Cuando comenzamos a programar, nos podemos encontrar con mensajes de error al momento de ejecutar el programa, siendo las causas más comunes:
+\begin{itemize}[<+->]
+\item errores de dedo, escribiendo incorrectamente una instrucción, sentencia, variable o constante.
+\item errores al momento de introducir los datos, por ejemplo, si el valor que se debe de ingresar es $123.45$, y si nosotros tecleamos $1234.5$, el resultado ya se considera un error.
+\item errores que se muestran en tiempo de ejecución, es decir, todo está bien escrito y los datos están bien introducidos, pero hay un error debido a la lógica del programa o del método utilizado, ejemplo: división entre cero.
+\end{itemize}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Manejo de errores}
+\verb|c = 12.0/0.0| \\
+\pause
+\begin{exampleblock}{}
+\verb|Traceback (most recent call last):| \\
+\verb|File ''<pyshell#0>'', line 1, in ?| \\
+\verb|c = 12.0/0.0| \\
+\verb|ZeroDivisionError: float division|
+\end{exampleblock}
+\pause
+\begin{exampleblock}{}
+\verb|try:| \\
+\verb|     c = 12.0/0.0| \\
+\verb|except ZeroDivisionError:| \\
+\verb|     print 'Division entre cero'|
+\end{exampleblock}
+\end{frame}
+\section{Uso de Intefases de Desarrollo -IDE-}
+\begin{frame}
+\frametitle{Por qué usar una interfaz de desarrollo?}
+Para el desarrollo de problemas científicos con \python, hemos visto y recurrido a la sintaxis y estrucutras de control propias del lenguaje, así como ejecutar un programa (o script) desde la terminal.
+\\
+\medskip
+Cada vez, nuestros códigos aumentarán de tamaño y el riesgo también se incrementa, si omitimos alguna instrucción o dejamos un bloque sin identar, no cerramos un paréntesis, etc. Además, la interacción con varias terminales en linux, hace más complicado el orden y control.
+\end{frame}
+\begin{frame}
+Tenemos disponibles bajo licencia GNU, varios IDEs para programar con \python. La ventaja es que precisamente integran mucho el trabajo que tenemos que hacer a mano, resalta con colores las instrucciones, nos ofrece ventanas para visualizar los resultados, sin necesidad de tener abiertas varias terminales.
+\end{frame}
+\begin{frame}
+\frametitle{Usando \texttt{gEdit}}
+\texttt{gedit} es un editor de textos compatible con UTF-8 para GNU/Linux, Mac OS X y Microsoft Windows. Diseñado como un editor de textos de propósito general, \texttt{gedit} enfatiza la simplicidad y  facilidad de uso. Incluye herramientas para la edición de código fuente y textos estructurados, como lenguajes de marcado.
+\\
+\medskip
+Es el editor predeterminado de GNOME.
+\\
+\medskip
+Distribuido bajo las condiciones de la licencia GPL, \texttt{gedit} es software libre.\\
+\medskip
+\texttt{https://wiki.gnome.org/Apps/Gedit}
+\end{frame}
+\begin{frame}[fragile]
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.5]{gedit1.eps}<1> 
+	\includegraphics[scale=0.5]{gedit2.eps}<2>
+	\includegraphics[scale=0.5]{gedit3.eps}<3>
+	\includegraphics[scale=0.5]{gedit4.eps}<4>
+	\includegraphics[scale=0.5]{gedit5.eps}<5>
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{El entorno Spyder2}
+Spyder es un entorno de desarrollo integrado para el lenguaje \python\ con pruebas interactivas y funciones avanzadas de depuración, introspección y edición.
+\\
+\medskip
+Spyder permite trabajar fácilmente con las mejores herramientas de la pila científica de \python\ en un entorno sencillo y potente.
+\\
+\medskip
+\texttt{https://code.google.com/p/spyderlib/}
+\end{frame}
+\begin{frame}[fragile]
+Estas son algunas de las características clave de Spyder:
+\begin{enumerate}[<+->]
+\item Cuadro de diálogo de administración de \texttt{PYTHONPATH} como de MATLAB (funciona con todas las consolas)
+\item Editor de variables de entorno de usuario actual.
+\item Enlaces directos a la documentación (\python, Matplotlib, NumPy, Spicy, etc.)
+\item Enlace directo al lanzador de Python(x,y)
+\item Enlaces directos a QtDesigner, QtLinguist y QtAssistant (documentación de Qt)
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.5]{spyder-windows.eps}<1>
+	\includegraphics[scale=0.5]{spyder-linux.eps}<2> 
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Otros IDEs para \python}
+Pueden probar los IDE mencionados, pero también es importante señalar que hay otros entornos, cada uno con ciertas características que lo hacen particular. El punto es que si trabajan con uno, lo puedan explotar al máximo.
+\\
+\medskip
+Una lista de otros IDEs para programar con \python, la pueden consultar en:
+\\
+\medskip
+\texttt{https://wiki.python.org/moin/PythonEditors}
+\end{frame}
+\section{Funciones}
+\begin{frame}
+\frametitle{Funciones}
+Con lo que hemos revisado sobre \python, tenemos elementos para iniciar la solución de problemas, una manera particular de agrupar un conjunto de instrucciones, es a través de funciones.
+\\
+\bigskip
+Las funciones intrínsecas de cualquier lenguaje son pocas, pero podemos extenderlas con funciones definidas por el usuario.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Estructura de una función}
+La estructura de una función en \python\ es la siguiente:
+\begin{center}
+\begin{exampleblock}{}
+\verb| def nombre_funcion(parametro1, parametro2, ...):|
+\verb|     conjunto de instrucciones|
+\verb|     return valores_devueltos|
+\end{exampleblock}
+\end{center}
+donde parametro1, parametro2 son los parámetros. Un parámetro puede ser cualquier objeto de \python, incluyendo una función.
+\\
+\medskip
+Los parámetros pueden darse por defecto, por lo que en la función son opcionales. Si no se utiliza la instrucción \texttt{return}, la función devuelve un objeto \texttt{null}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejemplo}
+\begin{lstlisting}
+def cuadrados(a):
+    for i in range(len(a)):
+        a[i] = a[i]**2
+
+a = [1, 2, 3, 4]
+cuadrados(a)
+print a
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Paso de argumentos}
+Para que una función sea en verdad útil (y reutilizable), es necesario que podamos pasarle entradas. Los nombres de las entradas (o argumentos) que requiere una función se declaran a continuación del nombre en \texttt{def} (siempre entre paréntesis)
+\end{frame}
+\begin{frame}[fragile]
+\begin{verbatim}
+def FuncionSuma (x, y):
+    return x + y
+
+print FuncionSuma (5, 3)
+print FuncionSuma (7, 42.0)
+print FuncionSuma (" hola ", " mundo ")
+\end{verbatim}
+\textbf{Nota:} 
+\begin{itemize}
+\item Nunca se mencionan los tipos de datos de x e y, ni el tipo de datos que devuelve FuncionSuma.
+\item Los argumentos y el valor devuelto son, tal como las variables, simples etiquetas a zonas de memoria.
+\end{itemize}  
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Validar el tipo de dato}
+A veces se va a requerir la validación del tipo de dato de manera explícita (aunque no es para nada pitónico!).
+\\
+\medskip
+Un truco más o menos claro para emular lenguajes estáticos es usar la función \texttt{type} y la instrucción \texttt{assert}.
+\end{frame}
+\begin{frame}[fragile]
+\begin{verbatim}
+def SumaEnteros (x, y):
+    assert type (x) == int
+    assert type (y) == int
+    return x+y
+    
+print SumaEnteros (5, 3) # -> 8
+print SumaEnteros (7, 42.0) # -> AssertionError
+\end{verbatim}
+La instrucción \texttt{assert} actúaa como filtro si la expresión que le sigue es verdadera, pero falla con \texttt{AssertionError} si es falsa.
+\\
+\medskip
+Es más común usar \texttt{try} y \texttt{except} para ''atrapar"" el error si los tipos no son los adecuados.
+\end{frame}
+\begin{frame}
+\frametitle{Paso de argumentos con nombre}
+Si la función que definimos tiene muchos argumentos, es fácil olvidar el orden en que fueron declarados.
+\\
+\medskip
+Como un argumento no lleva asociado un tipo, \python no tiene manera de saber que los argumentos están cambiados.
+\\
+\medskip
+Para evitar este tipo de errores, hay una manera de llamar a una función pasando los argumentos en cualquier orden arbitrario: se pasan usando el nombre usado en la declaración.
+\end{frame}
+\begin{frame}[fragile]
+\begin{verbatim}
+def Prueba (a, b, c):
+# %r formatea automaticamente cualquier valor
+    print "a= %r, b= %r, c= %r" % (a, b, c)
+
+Prueba (1, 2, 3)
+Prueba (b=3, a=2, c=1)
+
+a=1, b=2, c=3
+a=2, b=3, c=1
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Argumentos con valores por omisión}
+Para hacer que algunos argumentos sean opcionales, se les da valores por omisión en el momento de declararlos:
+\begin{verbatim}
+from math import sqrt
+# argumento v es requerido , c es opcional
+# c toma el valor 3.0e8 por omision
+def Gamma (v, c = 3.0e+8):
+    return sqrt (1.0 -(v/c)**2)
+
+print Gamma (0.1 , 1.0)
+print Gamma (1.e+7) # usa c = 3.0e+8
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Regresando varios valores en una función}
+Para hacer que una función devuelva más de un valor, en lenguajes como Fortran, C o C++, lo que se hace es definir argumentos de entrada y argumentos de salida.
+\\
+\medskip
+Para devolver múltiples valores en \python, lo usual es devolver los valores ''empaquetados"" en una tupla:
+\begin{verbatim}
+from math import atan , sqrt
+
+def ModuloArgumento (x, y):
+    norm = sqrt (x**2 + y**2)
+    arg = atan2 (y, x)
+    return (norm,arg)
+    
+n, a = ModuloArgumento (3.0,4.0)
+print " Modulo es:", n
+print " Argumento es:", a
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Número variable de argumentos}
+¿Cómo le hacemos para que una función acepte un número no prefijado de argumentos?
+\\
+\medskip
+Es posible pasar una lista o tupla, pero \python\ ofrece una mejor solución:
+\begin{verbatim}
+def atan(*args ):
+# args es una tupla de argumentos
+    if len(args) == 1:
+        return math.atan(args[0])
+    else :
+        return math.atan2(args[0],args[1])
+
+print atan (0.2) # 0.19739
+print atan (2.0,10.0) # 0.19739
+print atan (-2.0,-10.0) # -2.94419
+\end{verbatim}
+\end{frame}
+\begin{frame}
+\frametitle{Cálculo de la serie de Fibonacci}
+La sucesión fue descrita por Fibonacci como la solución a un problema de la cría de conejos: ''Cierto hombre tenía una pareja de conejos juntos en un lugar cerrado y uno desea saber cuántos son creados a partir de este par en un año cuando es su naturaleza parir otro par en un simple mes, y en el segundo mes los nacidos parir también''
+\\
+\bigskip
+\pause
+\textcolor{red}{cómo le hacemos?}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Propuesta de código}
+\begin{lstlisting}
+a, b = 0, 1
+while b < 10:
+    print b
+    a, b = b, a+b
+\end{lstlisting}
+\pause
+\begin{lstlisting}
+a, b= 0, 1
+while b < 1000:
+    print b,
+    a, b = b, a+b
+\end{lstlisting}
+\end{frame}
+\section{Módulos}
+\begin{frame}[fragile]
+\frametitle{Módulos}
+Es una buena práctica almacenar las funciones en módulos. Un módulo es un archivo en donde se dejan las funciones, el nombre del módulo es el nombre del archivo.
+\\
+\bigskip
+Un módulo se carga al programa con la instrucción
+\begin{center}
+\verb|from nombre_modulo import *|
+\end{center}
+Python incluye un número grande de módulos que contienen funciones y métodos para varias tareas. La gran ventaja de los módulos es que están disponibles en internet y se pueden descargar, dependiendo de la tarea que se requiera atender.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Módulo \texttt{math}}
+Muchas funciones matemáicas no se pueden llamar directo del intérprete, pero para ello existe el módulo \texttt{math}.
+\\
+\bigskip
+Hay tres diferentes maneras en las que se puede llamar y utilizar las funciones de un módulo.
+\begin{exampleblock}{}
+\verb|from math import *|
+\end{exampleblock}
+De esta manera, se importan todas las funciones definidas en el módulo \texttt{math}, siendo quizá un gasto innecesario de recursos, pero también generar conflictos con definiciones cargadas de otros módulos.
+\end{frame}
+\begin{frame}[fragile]
+\begin{exampleblock}{}
+\verb|from math import func1, func2,...|
+\end{exampleblock}
+\pause
+\begin{exampleblock}{}
+\verb|>>> from math import log,sin| \\
+\verb|>>> print log(sin(0.5))| \\
+\verb|-0.735166686385|
+\end{exampleblock}
+\end{frame}
+\begin{frame}[fragile]
+El tercer método que es el más usado en programación, es tener disponible el módulo:
+\begin{center}
+\verb|import math|
+\end{center}
+Las funciones en el módulo se pueden usar con el nombre del módulo como prefijo:
+\begin{exampleblock}{}
+\verb|>>> import math| \\
+\verb|>>> print math.log(math.sin(0.5))|
+\verb|-0.735166686385|
+\end{exampleblock}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Contenido del módulo \texttt{math}}
+Podemos ver el contenido de un módulo con la instrucción:
+\\
+\verb|>>> import math| \\
+\verb|>>> dir(math)|
+\begin{verbatim}
+['__doc__', '__name__', '__package__', 'acos',
+'acosh',  'asin', 'asinh', 'atan', 'atan2',
+'atanh', 'ceil', 'copysign', 'cos', 'cosh',
+'degrees', 'e', 'erf', 'erfc', 'exp', 'expm1',
+'fabs', 'factorial', 'floor', 'fmod', 'frexp',
+'fsum', 'gamma', 'hypot', 'isinf', 'isnan',
+'ldexp', 'lgamma', 'log', 'log10', 'log1p',
+'modf', 'pi', 'pow', 'radians', 'sin', 'sinh',
+'sqrt', 'tan', 'tanh', 'trunc']
+\end{verbatim}
+\end{frame}
+\end{document}

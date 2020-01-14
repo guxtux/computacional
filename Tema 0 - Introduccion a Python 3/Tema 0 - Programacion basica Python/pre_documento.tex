@@ -1,0 +1,32 @@
+%\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass[12pt]{beamer}
+\graphicspath{{Imagenes/}{../Imagenes/}}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{color}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\renewcommand {\arraystretch}{1.5}
+\newcommand{\python}{\texttt{Python}}
+\mode<presentation>
+{
+  \usetheme{Warsaw}
+  \setbeamertemplate{headline}{}
+  %\useoutertheme{infolines}
+  \useoutertheme{default}
+  \setbeamercovered{invisible}
+  % or whatever (possibly just delete it)
+}
+\AtBeginSection[] 
+{ 
+\begin{frame}<beamer>{Contenido} 
+\tableofcontents[currentsection] 
+\end{frame} 
+}

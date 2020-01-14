@@ -1,0 +1,36 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Mar 25 11:40:26 2013
+
+@author: Acesimbrote
+"""
+from raices import ]*
+from math import *
+
+x0 = -2.5
+x1 = -1.5
+
+f0 = g5(x0)
+f1 = g5(x1)
+fy0= g5(y0)
+fy1= g5(y1)
+tol = 0.0001
+if f0 * f1 < 0.0:
+    while abs((x1 - x0) / x1) > tol:
+        R = x1 - (f1 * (x0 - x1)) / (f0 - f1)
+        fR = g5(R)
+        if f0 * fR < 0.0:
+            x1 = R
+            f1 = fR
+            f0=g5(x0)/2
+        if fR * f1 < 0.0:
+            x0 = R
+            f0 = fR
+            f1=g5(x1)/2
+         
+
+       
+if f0 * f1 < 0.0:
+    print "La raiz es:", R
+else:
+    print "Valores iniciales malos"

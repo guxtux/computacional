@@ -1,0 +1,33 @@
+
+##module secante
+
+from math import *
+def secante(x0, x1, ite, tol, fx ):
+		y0 = eval(fx.replace("x","x0"))
+		y1 = eval(fx.replace("x", "x1"))
+		error = tol + 1
+		cont = 0
+		x2 = 0
+		while y0 != 0 and error > tol and cont < ite and y1 - y0 != 0:
+			x2 = x1 - (y1*(x1-x0)) / (y1-y0)
+			y2 = eval(fx.replace("x","x2"))
+			print x0,x1, y0, y1, error	        
+			error = abs(x2 - x1)
+			cont = cont + 1
+			x0 = x1
+			y0 = y1
+			x1 = x2
+			y1 = y2
+		if y0 == 0:
+				print str(x0) + " es raiz"
+		else:
+				if error < tol:
+						print str(x0), " es raiz con un error: ", error, x1, y0, y1
+				else:
+						if y1 - y0 == 0:
+								print "Division por cero"
+						else:
+								print "No se encontro la raiz"
+
+#if __name__=="__main__":
+#		secante(1,2,20,0.005,"x-2")

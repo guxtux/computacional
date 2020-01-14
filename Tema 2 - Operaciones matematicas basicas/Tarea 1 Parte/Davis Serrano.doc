@@ -1,0 +1,23 @@
+Ejercicio 1:
+Buen intento!
+Ejercicio 2:
+lo que pide el problema, es precisamente el ángulo, en tu programa, es el usuario quien lo debe ingresar, y luego de esto, el programa no hace nada, mostrando el siguiente error:
+Traceback (most recent call last):
+  File "/Users/Lud/Documents/Fisicacomp/2013-2/David Michel Serrano Solís/Evaluacion 1/Tarea 1/tarea1DavidSerrao/Tiroparabolico.py", line 42, in <module>
+    z = ((g*x) * (1 + j - math.exp(j))) + y
+NameError: name 'j' is not defined
+El detalle es que en tu ciclo while, estas usando a i como contador y en la línea 42 hay un j que usas, ¿de donde salió?
+
+El problema comienza con la comprensión del ejercicio, no obtienes lo que te esta pidiendo, que es precisamente el ángulo.
+
+Ejercicio 3:
+Ok la explicación.
+Ejercicio 4:
+Falta discusión y una gráfica que ayude a entender tus resultados, nuevamente pides los valores al usuario, primero de m/k, luego el tiempo, y por último la altura, sería mejor que el programa tomara un intervalo de análisis, luego, ¿tienen sentido los resultados, son correctos?, una gráfica ayudaría bastante.
+Ejercicio 5:
+Falta
+Ejercicio 6:
+Ok.
+
+Notas:
+No entendí que significaba el programa de gravitacionuniversal.py

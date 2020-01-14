@@ -1,0 +1,14 @@
+from math import*
+#from numpy import*
+
+R = 0.09
+i = -1
+h = 0.087266
+#Esta en radianes ya
+x = [0,h*5,h*10,h*15,h*20,h*25,h*30,h*35,h*40,h*45,h*50,h*55,h*60,h*65,h*70,h*75,h*80,h*85,h*90,h*95,h*100,h*105,h*110,h*115,h*120,h*125,h*130,h*135,h*140,h*145,h*150,h*155,h*160,h*165,h*170,h*175,h*180]
+
+for r in x:
+     
+     f = R*(cos(r) + sqrt(2.5**2 - (sin(r))*(sin(r))))
+     print    f
+     

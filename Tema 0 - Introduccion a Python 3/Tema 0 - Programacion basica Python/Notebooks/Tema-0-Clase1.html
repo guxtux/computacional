@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section><section id="operadores-aritméticos" class="titleslide slide level1"><h1>Operadores aritméticos</h1></section><section id="python-como-calculadora" class="slide level2">
+<h2>Python como calculadora</h2>
+<p>Una vez abierta la sesión en <span class="math inline"><code>python</code></span>, podemos aprovechar al máximo este lenguaje: contamos con una calculadora a la mano, sólo hay que ir escribiendo las operaciones en la línea de comandos.</p>
+</section><section id="podemos-hacer-una-suma" class="slide level2">
+<h2>Podemos hacer una suma:</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="dv">3</span><span class="op">+</span><span class="dv">200</span></code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>203</code></pre>
+</section><section id="una-división-entre-enteros" class="slide level2">
+<h2>Una división entre enteros</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="dv">30</span><span class="op">/</span><span class="dv">1234</span></code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>0.024311183144246355</code></pre>
+</section><section id="una-división-entre-reales" class="slide level2">
+<h2>Una división entre reales</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="fl">3.0</span><span class="op">/</span><span class="fl">4.0</span></code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>0.75</code></pre>
+</section><section id="una-división-entera" class="slide level2">
+<h2>Una división entera</h2>
+<h3 id="devuelve-el-cociente-sin-decimales">Devuelve el cociente (sin decimales)</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="dv">30</span><span class="op">//</span><span class="dv">4</span></code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>7</code></pre>
+</section><section id="otro-ejemplo" class="slide level2">
+<h2>Otro ejemplo</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="dv">4</span><span class="op">//</span><span class="dv">3</span></code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>1</code></pre>
+</section><section id="la-división-devuelve-un-determinado-número-de-dígitos-luego-del-punto-decimal" class="slide level2">
+<h2>La división devuelve un determinado número de dígitos luego del punto decimal</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="dv">4</span><span class="op">/</span><span class="dv">3</span></code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>1.3333333333333333</code></pre>
+</section><section id="combinación-de-operadores" class="slide level2">
+<h2>Combinación de operadores</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="fl">5.0</span> <span class="op">/</span> <span class="dv">10</span> <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">5</span></code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>6.0</code></pre>
+<p><strong>¿por qué obtenemos este resultado??</strong></p>
+</section><section id="el-resultado-cambia-cuando-agrupamos-con-paréntesis" class="slide level2">
+<h2>El resultado cambia cuando agrupamos con paréntesis</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="fl">5.0</span> <span class="op">/</span> (<span class="dv">10</span> <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">5</span>)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>0.2</code></pre>
+<p>Como podemos ver, el uso de paréntesis en las expresiones tiene una particular importancia sobre la manera en que se evalúan las expresiones</p>
+</section><section id="potenciación-de-un-número" class="slide level2">
+<h2>Potenciación de un número</h2>
+<p>Podemos elevar un número a una potencia en particular</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="dv">2</span><span class="op">**</span><span class="dv">3</span><span class="op">**</span><span class="dv">2</span></code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>512</code></pre>
+</section><section id="orden-para-las-potencias" class="slide level2">
+<h2>Orden para las potencias</h2>
+<p>Vemos que elevar a una potencia, la manera en que se ejecuta la expresión se realiza en un sentido en particular: de derecha a izquierda</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">(<span class="dv">2</span><span class="op">**</span><span class="dv">3</span>)<span class="op">**</span><span class="dv">2</span></code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>64</code></pre>
+</section><section id="los-paréntesis" class="slide level2">
+<h2>Los paréntesis</h2>
+<p>El uso de paréntesis nos indica que la expresión contenida dentro de ellos, es la que se evalúa primero, posteriormente se sigue la regla de precedencia de operadores</p>
+</section><section id="operador-módulo" class="slide level2">
+<h2>Operador módulo</h2>
+<p>El operador módulo <span class="math inline">(%)</span> nos devuelve el residuo del cociente</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="dv">17</span><span class="op">%</span><span class="dv">3</span></code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>2</code></pre>
+</section></section>
+<section><section id="tabla-de-operadores" class="titleslide slide level1"><h1>Tabla de operadores</h1></section><section id="precedencia-en-los-operadores-aritméticos" class="slide level2">
+<h2>Precedencia en los operadores aritméticos</h2>
+</section><section id="section" class="slide level2">
+<h2></h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Operador</th>
+<th>Operación</th>
+<th>Ejemplo</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">**</span></td>
+<td>Potencia</td>
+<td><span class="math inline">2 * *3</span></td>
+<td><span class="math inline">8</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">*</span></td>
+<td>Multiplicación</td>
+<td><span class="math inline">7 * 3</span></td>
+<td><span class="math inline">21</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">/</span></td>
+<td>División</td>
+<td><span class="math inline">10.5/2</span></td>
+<td><span class="math inline">5.25</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">//</span></td>
+<td>Div. entera</td>
+<td><span class="math inline">10.5//2</span></td>
+<td><span class="math inline">5.0</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">+</span></td>
+<td>Suma</td>
+<td><span class="math inline">3 + 4</span></td>
+<td><span class="math inline">7</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">−</span></td>
+<td>Resta</td>
+<td><span class="math inline">6 − 8</span></td>
+<td><span class="math inline">−2</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">%</span></td>
+<td>Módulo</td>
+<td><span class="math inline">15%6</span></td>
+<td><span class="math inline">3</span></td>
+</tr>
+</tbody>
+</table>
+</section><section id="precedencia-de-los-operadores-artiméticos-1" class="slide level2">
+<h2>Precedencia de los operadores artiméticos 1</h2>
+<ol type="1">
+<li>Las expresiones contenidas dentro de pares de paréntesis son evaluadas primero. En el caso de expresiones con paréntesis anidados, los operadores en el par de paréntesis más interno son aplicados primero.</li>
+</ol>
+</section><section id="precedencia-de-los-operadores-artiméticos-2" class="slide level2">
+<h2>Precedencia de los operadores artiméticos 2</h2>
+<ol start="2" type="1">
+<li>Las operaciones de exponentes son aplicadas después. Si una expresión contiene muchas operaciones de exponentes, los operadores son aplicados de derecha a izquierda.</li>
+</ol>
+</section><section id="precedencia-de-los-operadores-artiméticos-3" class="slide level2">
+<h2>Precedencia de los operadores artiméticos 3</h2>
+<ol start="3" type="1">
+<li>La multiplicación, división y módulo son las siguientes en ser aplicadas. Si una expresión contiene muchas multiplicaciones, divisiones u operaciones de módulo, los operadores se aplican de izquierda a derecha.</li>
+</ol>
+</section><section id="precedencia-de-los-operadores-artiméticos-4" class="slide level2">
+<h2>Precedencia de los operadores artiméticos 4</h2>
+<ol start="4" type="1">
+<li>Suma y resta son las operaciones que se aplican por último. Si una expresión contiene muchas operaciones de suma y resta, los operadores son aplicados de izquierda a derecha. La suma y resta tienen el mismo nivel de precedencia.</li>
+</ol>
+</section></section>
+<section><section id="operadores-relacionales" class="titleslide slide level1"><h1>Operadores relacionales</h1></section><section id="section-1" class="slide level2">
+<h2></h2>
+<p>Se comparan dos (o más expresiones) mediante un operador, el tipo de dato que devuelve es lógico: <span class="math inline"><strong>True</strong></span> o <span class="math inline"><strong>False</strong></span>, que también tienen una representación de tipo numérico:</p>
+<ul>
+<li><span class="math inline"><strong>True</strong></span> = 1</li>
+<li><span class="math inline"><strong>False</strong></span> = 0</li>
+</ul>
+</section><section id="operaciones-aritméticas-y-relacionales" class="slide level2">
+<h2>Operaciones aritméticas y relacionales</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="dv">1</span> <span class="op">+</span> <span class="dv">2</span> <span class="op">&gt;</span> <span class="dv">7</span><span class="op">-</span> <span class="dv">3</span></code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>False</code></pre>
+</section><section id="se-pueden-combinar-diferentes-expresiones" class="slide level2">
+<h2>Se pueden combinar diferentes expresiones</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="dv">1</span> <span class="op">&lt;</span> <span class="dv">2</span> <span class="op">&lt;</span> <span class="dv">3</span></code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>True</code></pre>
+</section><section id="el-doble-signo-igual-es-el-operador-de-igualdad" class="slide level2">
+<h2>El doble signo igual (==) es el operador de igualdad</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="dv">1</span> <span class="op">&gt;</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">2</span> <span class="op">&lt;</span> <span class="dv">3</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="dv">1</span> <span class="op">&gt;</span> (<span class="dv">2</span> <span class="op">==</span>  <span class="dv">2</span>) <span class="op">&lt;</span><span class="dv">3</span></code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>False</code></pre>
+</section><section id="combinación-de-expresiones" class="slide level2">
+<h2>Combinación de expresiones</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="dv">3</span> <span class="op">&gt;</span> <span class="dv">4</span> <span class="op">&lt;</span> <span class="dv">5</span></code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>False</code></pre>
+</section><section id="section-2" class="slide level2">
+<h2></h2>
+<p>Hay que tener cuidado con el uso de operadores relaciones estrictos</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="fl">1.0</span> <span class="op">/</span> <span class="dv">3</span> <span class="op">&lt;</span> <span class="fl">0.3333</span></code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>False</code></pre>
+</section><section id="section-3" class="slide level2">
+<h2></h2>
+<p>Las expresiones se pueden complicar cada vez más, por lo que hay que mantener atención al momento de escribirlas</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="fl">5.0</span> <span class="op">/</span> <span class="dv">3</span> <span class="op">&gt;=</span> <span class="dv">11</span> <span class="op">/</span><span class="fl">7.0</span></code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>True</code></pre>
+</section><section id="section-4" class="slide level2">
+<h2></h2>
+<p>El utilizar las operaciones aritméticas y relacionales, extiende por mucho el uso del lenguaje.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="dv">2</span><span class="op">**</span>(<span class="dv">2</span>. <span class="op">/</span><span class="dv">3</span>) <span class="op">&lt;</span> <span class="dv">3</span><span class="op">**</span>(<span class="dv">3</span>.<span class="op">/</span><span class="dv">4</span>)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>True</code></pre>
+</section><section id="tabla-de-operadores-relacionales" class="slide level2">
+<h2>Tabla de operadores relacionales</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Operador</th>
+<th>Operación</th>
+<th>Ejemplo</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">==</span></td>
+<td>Igual a</td>
+<td><span class="math inline">4 = =5</span></td>
+<td><span class="math inline"><code>False</code></span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">!=</span></td>
+<td>Diferente</td>
+<td><span class="math inline">2!=3</span></td>
+<td><span class="math inline"><code>True</code></span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">&lt;</span></td>
+<td>Menor que</td>
+<td><span class="math inline">10 &lt; 4</span></td>
+<td><span class="math inline"><code>False</code></span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">&gt;</span></td>
+<td>Mayor que</td>
+<td><span class="math inline">5 &gt; −4</span></td>
+<td><span class="math inline"><code>True</code></span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">&lt;=</span></td>
+<td>Menor o igual</td>
+<td><span class="math inline">7 &lt; =7</span></td>
+<td><span class="math inline"><code>True</code></span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">&gt;=</span></td>
+<td>Mayor o igual</td>
+<td><span class="math inline">3.5 &gt; =10</span></td>
+<td><span class="math inline"><code>False</code></span></td>
+</tr>
+</tbody>
+</table>
+</section></section>
+<section><section id="operadores-booleanos" class="titleslide slide level1"><h1>Operadores booleanos</h1></section><section id="operadores-booleanos-1" class="slide level2">
+<h2>Operadores booleanos</h2>
+<p>En el caso del operador boleano <font color="yellow"><b>and</b></font> y el operador <font color="yellow"><b>or</b></font> evalúan una expresión compuesta por dos (o más términos).</p>
+</section><section id="section-5" class="slide level2">
+<h2></h2>
+<p>En ambas expresiones se espera que cada una tenga el valor de <font color='green'>True</font>, en caso de que esto ocurra, el valor que devuelve la evaluación, es <font color='green'><span class="math inline"><code>True</code></span></font>.</p>
+</section><section id="section-6" class="slide level2">
+<h2></h2>
+<p>Como se verá en la tabla de verdad, se necesita una condición particular para que el valor que devuelva la comparación, sea <font color='red'><span class="math inline"><code>False</code></span></font>.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Operador</th>
+<th>Operación</th>
+<th>Ejemplo</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline"><code>and</code></span></td>
+<td>Conjunción</td>
+<td><span class="math inline"><code>False and True</code></span></td>
+<td><span class="math inline"><code>False</code></span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline"><code>or</code></span></td>
+<td>Disyunción</td>
+<td><span class="math inline"><code>False or True</code></span></td>
+<td><span class="math inline"><code>True</code></span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline"><code>not</code></span></td>
+<td>Negación</td>
+<td><span class="math inline"><code>not True</code></span></td>
+<td><span class="math inline"><code>False</code></span></td>
+</tr>
+</tbody>
+</table>
+</section><section id="tabla-de-verdad-de-los-operadores-boleanos" class="slide level2">
+<h2>Tabla de verdad de los operadores boleanos</h2>
+</section><section id="section-7" class="slide level2">
+<h2></h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">A</th>
+<th style="text-align: center;">B</th>
+<th style="text-align: center;">A and B</th>
+<th style="text-align: center;">A or B</th>
+<th style="text-align: center;">not A</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">True</td>
+<td style="text-align: center;">True</td>
+<td style="text-align: center;">True</td>
+<td style="text-align: center;">True</td>
+<td style="text-align: center;"><font color=red>False</font></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">True</td>
+<td style="text-align: center;"><font color=red>False</font></td>
+<td style="text-align: center;"><font color=red>False</font></td>
+<td style="text-align: center;">True</td>
+<td style="text-align: center;"><font color=red>False</font></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><font color=red>False</font></td>
+<td style="text-align: center;">True</td>
+<td style="text-align: center;"><font color=red>False</font></td>
+<td style="text-align: center;">True</td>
+<td style="text-align: center;">True</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><font color=red>False</font></td>
+<td style="text-align: center;"><font color=red>False</font></td>
+<td style="text-align: center;"><font color=red>False</font></td>
+<td style="text-align: center;"><font color=red>False</font></td>
+<td style="text-align: center;">True</td>
+</tr>
+</tbody>
+</table>
+</section></section>
+<section><section id="tipos-de-variables" class="titleslide slide level1"><h1>Tipos de variables</h1></section><section id="section-8" class="slide level2">
+<h2></h2>
+<p>Las variables en python sólo son ubicaciones de memoria reservadas para almacenar valores.</p>
+<p>Esto significa que cuando se crea una variable, se reserva un poco de espacio disponible en la memoria.</p>
+</section><section id="section-9" class="slide level2">
+<h2></h2>
+<p>Basándose en el tipo de datos de una variable, el intérprete asigna memoria y decide qué se puede almacenar en la memoria reservada.</p>
+<p>Por lo tanto, al asignar diferentes tipos de datos a las variables, se pueden almacenar <strong>enteros</strong>, <strong>decimales</strong> o <strong>caracteres (cadenas)</strong> en estas variables.</p>
+</section><section id="asignando-valores-a-variables" class="slide level2">
+<h2>Asignando valores a variables</h2>
+<p>Las variables de python no necesitan una declaración explícita para reservar espacio de memoria.</p>
+<p>La declaración ocurre automáticamente cuando se asigna un valor a una variable. <em>El signo igual (=) se utiliza para asignar valores a las variables</em>.</p>
+</section><section id="section-10" class="slide level2">
+<h2></h2>
+<p>El término a la izquierda del operador = es el <em>nombre de la variable</em> y el término a la derecha del operador = es el <em>valor almacenado</em> en la variable.</p>
+</section><section id="ejemplos" class="slide level2">
+<h2>Ejemplos</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">contador <span class="op">=</span> <span class="dv">100</span>          <span class="co"># Asignacion de tipo entero</span>
+distancia <span class="op">=</span> <span class="fl">1000.0</span>      <span class="co"># De punto flotante</span>
+nombre <span class="op">=</span> <span class="st">&quot;Chucho&quot;</span>       <span class="co"># Una cadena de caracteres</span>
+
+<span class="bu">print</span> (contador)
+<span class="bu">print</span> (distancia)
+<span class="bu">print</span> (nombre)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>100
+1000.0
+Chucho</code></pre>
+</section><section id="asignación-múltiple-de-valores" class="slide level2">
+<h2>Asignación múltiple de valores</h2>
+<p>En python podemos asignar un valor único a varias variables simultáneamente.</p>
+</section><section id="section-11" class="slide level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">A <span class="op">=</span> b <span class="op">=</span> c <span class="op">=</span> <span class="dv">1</span>
+<span class="bu">print</span> (A)
+<span class="bu">print</span> (b)
+<span class="bu">print</span> (c)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>1
+1
+1</code></pre>
+</section><section id="section-12" class="slide level2">
+<h2></h2>
+<p>En el ejemplo, se crea un objeto entero con el valor <span class="math inline">1</span>, y las tres variables se asignan a la misma ubicación de memoria.</p>
+</section><section id="section-13" class="slide level2">
+<h2></h2>
+<p>También puede asignar varios objetos a varias variables.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">A, b, c <span class="op">=</span> <span class="dv">1</span>, <span class="dv">2</span>, <span class="st">&quot;Alicia&quot;</span>
+<span class="bu">print</span> (A)
+<span class="bu">print</span> (b)
+<span class="bu">print</span> (c)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>1
+2
+Ana</code></pre>
+</section><section id="section-14" class="slide level2">
+<h2></h2>
+<p>Aquí, dos objetos enteros con valores <span class="math inline">1</span> y <span class="math inline">2</span> se asignan a las variables <span class="math inline"><em>A</em></span> y <span class="math inline"><em>b</em></span> respectivamente, y un objeto de cadena con el valor <strong>Alicia</strong> se asigna a la variable <span class="math inline"><em>c</em></span>.</p>
+</section></section>
+<section><section id="tipos-de-datos-estándar" class="titleslide slide level1"><h1>Tipos de Datos Estándar</h1></section><section id="section-15" class="slide level2">
+<h2></h2>
+<p>En python se cuenta con varios tipos de datos estándar que se utilizan para definir las operaciones posibles entre ellos y el método de almacenamiento para cada uno de ellos.</p>
+</section><section id="section-16" class="slide level2">
+<h2></h2>
+<p>Los tipos de datos son cinco:</p>
+<ol type="1">
+<li><font color="yellow"> Números</font>.</li>
+<li><font color="yellow"> Cadena</font>.</li>
+<li><font color="yellow"> Lista</font>.</li>
+<li><font color="yellow"> Tupla</font>.</li>
+<li><font color="yellow"> Diccionario</font>.</li>
+</ol>
+</section><section id="números" class="slide level2">
+<h2><font color="yellow">Números</font></h2>
+<p>Los tipos de datos numéricos almacenan valores numéricos.</p>
+<p>Los objetos numéricos se crean cuando se les asigna un valor.</p>
+</section><section id="section-17" class="slide level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Var1 <span class="op">=</span> Var2 <span class="op">=</span> <span class="dv">10</span>
+<span class="bu">print</span> (Var1)
+<span class="bu">print</span> (Var2)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>10
+10</code></pre>
+</section><section id="section-18" class="slide level2">
+<h2></h2>
+<p>También se puede eliminar la referencia a un objeto numérico utilizando la sentencia <font color= "Chartreuse ">del</font></p>
+<p>La sintaxis de la sentencia <font color= "Chartreuse ">del</font> es:</p>
+<p><span class="math inline"><em>d</em><em>e</em><em>l</em></span> <span class="math inline"><em>v</em><em>a</em><em>r</em>1[,<em>v</em><em>a</em><em>r</em>2[,<em>v</em><em>a</em><em>r</em>3[....,<em>v</em><em>a</em><em>r</em><em>N</em>]]]]</span></p>
+</section><section id="section-19" class="slide level2">
+<h2></h2>
+<p>Se puede eliminar un solo objeto o varios objetos utilizando la sentencia <font color= "Chartreuse ">del</font></p>
+<p>Por ejemplo:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">del</span> var
+
+<span class="kw">del</span> variable1, variable2</code></pre></div>
+</section><section id="section-20" class="slide level2">
+<h2></h2>
+<p>En python se soportan tres tipos numéricos diferentes:</p>
+<ol type="1">
+<li><font color="Cyan">Int (enteros con signo)</font></li>
+<li><font color="DarkOrange">Flotante (valores reales de punto flotante)</font></li>
+<li><font color="Snow">Complejos (números complejos)</font></li>
+</ol>
+</section><section id="section-21" class="slide level2">
+<h2></h2>
+<p>Un número complejo consiste en un par ordenado de números reales de coma flotante denotados por</p>
+<p><br /><span class="math display"><em>x</em> + <em>y</em><em>j</em></span><br /></p>
+<p>donde <span class="math inline"><em>x</em></span> e <span class="math inline"><em>y</em></span> son números reales, <span class="math inline"><em>y</em><em>j</em></span> es la unidad imaginaria.</p>
+</section><section id="section-22" class="slide level2">
+<h2></h2>
+<p>Todos los números enteros en python 3 se representan como enteros largos.</p>
+</section><section id="section-23" class="slide level2">
+<h2></h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline"><code>int</code></span></th>
+<th style="text-align: center;"><span class="math inline"><code>float</code></span></th>
+<th style="text-align: center;"><span class="math inline"><code>complex</code></span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline"><code>10</code></span></td>
+<td style="text-align: center;"><span class="math inline"><code>0.0</code></span></td>
+<td style="text-align: center;"><span class="math inline"><code>3.14j</code></span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline"><code>100</code></span></td>
+<td style="text-align: center;"><span class="math inline"><code>15.20</code></span></td>
+<td style="text-align: center;"><span class="math inline"><code>45.j</code></span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline"><code>100</code></span></td>
+<td style="text-align: center;"><span class="math inline"><code>15.20</code></span></td>
+<td style="text-align: center;"><span class="math inline"><code>45.j</code></span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline"><code>080</code></span></td>
+<td style="text-align: center;"><span class="math inline"><code>32.3+e18</code></span></td>
+<td style="text-align: center;"><span class="math inline"><code>0.876j</code></span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline"><code>-0490</code></span></td>
+<td style="text-align: center;"><span class="math inline"><code>-90.</code></span></td>
+<td style="text-align: center;"><span class="math inline"><code>-.645+0j</code></span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline"><code>-0x260</code></span></td>
+<td style="text-align: center;"><span class="math inline"><code>-32.54e100</code></span></td>
+<td style="text-align: center;"><span class="math inline"><code>3e+26j</code></span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline"><code>0x69</code></span></td>
+<td style="text-align: center;"><span class="math inline"><code>70.2-E12</code></span></td>
+<td style="text-align: center;"><span class="math inline"><code>4.53e-7j</code></span></td>
+</tr>
+</tbody>
+</table>
+</section><section id="cadenas" class="slide level2">
+<h2><font color="yellow">Cadenas</font></h2>
+<p>Las cadenas en <span class="math inline"><code>python</code></span> se identifican como un conjunto contiguo de caracteres representados en las comillas.</p>
+<p>Con python se permite cualquier par de comillas simples o dobles.</p>
+</section><section id="section-24" class="slide level2">
+<h2></h2>
+<p>Los subconjuntos de cadenas pueden ser tomados usando el operador de corte (<span class="math inline">[ ]</span> y <span class="math inline">[ : ]</span>) con índices comenzando en <span class="math inline">0</span> al inicio de la cadena hasta llegar a <span class="math inline">−1</span> al final de la misma.</p>
+</section><section id="section-25" class="slide level2">
+<h2></h2>
+<p>El signo más (<span class="math inline">+</span>) es el operador de concatenación de cadenas y el asterisco (<span class="math inline">*</span>) es el operador de repetición.</p>
+</section><section id="section-26" class="slide level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">cadena <span class="op">=</span> <span class="st">&#39;Hola Mundo!&#39;</span>
+
+<span class="bu">print</span> (cadena)          <span class="co"># Presenta la cadena completa</span>
+<span class="bu">print</span> (cadena[<span class="dv">0</span>])       <span class="co"># Presenta el primer caracter de la cadena</span>
+<span class="bu">print</span> (cadena[<span class="dv">2</span>:<span class="dv">5</span>])     <span class="co"># Presenta los caracteres de la 3a a la 5a posicion</span>
+<span class="bu">print</span> (cadena[<span class="dv">2</span>:])      <span class="co"># Presenta la cadena que inicia a partir del 3er caracter</span>
+<span class="bu">print</span> (cadena <span class="op">*</span> <span class="dv">2</span>)      <span class="co"># Presenta dos veces la cadena</span>
+<span class="bu">print</span> (cadena <span class="op">+</span> <span class="st">&quot;PUMAS&quot;</span>) <span class="co"># Presenta la cadena y concatena la segunda cadena</span></code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>Hola Mundo!
+H
+la 
+la Mundo!
+Hola Mundo!Hola Mundo!
+Hola Mundo!PUMAS</code></pre>
+</section><section id="listas" class="slide level2">
+<h2><font color="yellow">Listas</font></h2>
+<p>Las listas es el tipo de dato más versátil de los tipos de datos compuestos de python.</p>
+<p>Una lista contiene elementos separados por comas y entre corchetes (<span class="math inline">[ ]</span>).</p>
+</section><section id="section-27" class="slide level2">
+<h2></h2>
+<p>En cierta medida, las listas son similares a los arreglos (arrays) en el lenguaje C.</p>
+<p>Una de las diferencias entre ellos es que todos los elementos pertenecientes a una lista pueden ser de tipo de datos diferente.</p>
+</section><section id="section-28" class="slide level2">
+<h2></h2>
+<p>Los valores almacenados en una lista se pueden acceder utilizando el operador de división (<span class="math inline">[ ]</span> y <span class="math inline">[ : ]</span>) con índices que empiezan en <span class="math inline">0</span> al principio de la lista y opera hasta el final con <span class="math inline">−1</span>.</p>
+</section><section id="section-29" class="slide level2">
+<h2></h2>
+<p>El signo más (<span class="math inline">+</span>) es el operador de concatenación de lista y el asterisco (<span class="math inline">*</span>) es el operador de repetición.</p>
+</section><section id="section-30" class="slide level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">milista <span class="op">=</span> [ <span class="st">&#39;abcd&#39;</span>, <span class="dv">786</span> , <span class="fl">2.23</span>, <span class="st">&#39;salmon&#39;</span>, <span class="fl">70.2</span> ]
+listabreve <span class="op">=</span> [<span class="dv">123</span>, <span class="st">&#39;pizza&#39;</span>]
+
+<span class="bu">print</span> (milista)              <span class="co"># Presenta la lista completa</span>
+<span class="bu">print</span> (milista[<span class="dv">0</span>])          <span class="co"># Presenta el primer elemento de la lista</span>
+<span class="bu">print</span> (milista[<span class="dv">1</span>:<span class="dv">3</span>])        <span class="co"># Presenta los elementos a partir de la 2a posiciona hasta la 3a</span>
+<span class="bu">print</span> (milista[<span class="dv">2</span>:])          <span class="co"># Presenta los elementos a partir del 3er elemento</span>
+<span class="bu">print</span> (listabreve <span class="op">*</span> <span class="dv">2</span>)       <span class="co"># Presenta dos veces la lista</span>
+<span class="bu">print</span> (milista <span class="op">+</span> listabreve) <span class="co"># Presenta la lista concatenada con la segunda lista</span></code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>[&#39;abcd&#39;, 786, 2.23, &#39;salmon&#39;, 70.2]
+abcd
+[786, 2.23]
+[2.23, &#39;salmon&#39;, 70.2]
+[123, &#39;pizza&#39;, 123, &#39;pizza&#39;]
+[&#39;abcd&#39;, 786, 2.23, &#39;salmon&#39;, 70.2, 123, &#39;pizza&#39;]</code></pre>
+</section><section id="tuplas" class="slide level2">
+<h2><font color="yellow">Tuplas</font></h2>
+<p>Una tupla es otro tipo de datos de secuencia que es similar a la lista.</p>
+</section><section id="section-31" class="slide level2">
+<h2></h2>
+<p>Una tupla consiste en un número de valores separados por comas. Sin embargo, a diferencia de las listas, las tuplas se incluyen entre <font color="Cyan">paréntesis</font>.</p>
+</section><section id="section-32" class="slide level2">
+<h2></h2>
+<p>La principal diferencia entre las listas y las tuplas son:</p>
+<ol type="1">
+<li>Las listas están entre corchetes <span class="math inline">[ ]</span> y sus elementos y tamaño pueden cambiarse.</li>
+<li>Las tuplas están entre paréntesis <span class="math inline">( )</span> y <font colo="Cyan"><em>no se pueden actualizar</em></font>.</li>
+</ol>
+<p>Las tuplas pueden ser consideradas como listas de sólo lectura.</p>
+</section><section id="section-33" class="slide level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">mitupla <span class="op">=</span> ( <span class="st">&#39;abcd&#39;</span>, <span class="dv">786</span> , <span class="fl">2.23</span>, <span class="st">&#39;arena&#39;</span>, <span class="fl">70.2</span>  )
+tuplabreve <span class="op">=</span> (<span class="dv">123</span>, <span class="st">&#39;playa&#39;</span>)
+
+<span class="bu">print</span> (mitupla)                <span class="co"># Presenta la tupla completa</span>
+<span class="bu">print</span> (mitupla[<span class="dv">0</span>])             <span class="co"># Presenta el primer elemento de la tupla</span>
+<span class="bu">print</span> (mitupla[<span class="dv">1</span>:<span class="dv">3</span>])           <span class="co"># Presenta los elementos a partir del 2o elemento hasta la 3o</span>
+<span class="bu">print</span> (mitupla[<span class="dv">2</span>:])            <span class="co"># Presenta los elementos a partir del 3er elemento</span>
+<span class="bu">print</span> (tuplabreve <span class="op">*</span> <span class="dv">2</span>)         <span class="co"># Presenta dos veces la tupla</span>
+<span class="bu">print</span> (mitupla <span class="op">+</span> tuplabreve)   <span class="co"># Preseta la tupla concatenada con la otra tupla</span></code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>(&#39;abcd&#39;, 786, 2.23, &#39;arena&#39;, 70.2)
+abcd
+(786, 2.23)
+(2.23, &#39;arena&#39;, 70.2)
+(123, &#39;playa&#39;, 123, &#39;playa&#39;)
+(&#39;abcd&#39;, 786, 2.23, &#39;arena&#39;, 70.2, 123, &#39;playa&#39;)</code></pre>
+</section><section id="section-34" class="slide level2">
+<h2></h2>
+<p>El siguiente código es inválido con la tupla, porque intentamos actualizar una tupla, que la acción no está permitida. El caso es similar con las listas.</p>
+</section><section id="section-35" class="slide level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">mitupla <span class="op">=</span> ( <span class="st">&#39;abcd&#39;</span>, <span class="dv">786</span> , <span class="fl">2.23</span>, <span class="st">&#39;edificio&#39;</span>, <span class="fl">70.2</span>  )
+milista <span class="op">=</span> [ <span class="st">&#39;abcd&#39;</span>, <span class="dv">786</span> , <span class="fl">2.23</span>, <span class="st">&#39;energia&#39;</span>, <span class="fl">70.2</span>  ]
+mitupla[<span class="dv">2</span>] <span class="op">=</span> <span class="dv">1000</span>    <span class="co"># Sintaxis invalida para la tupla</span>
+milista[<span class="dv">2</span>] <span class="op">=</span> <span class="dv">1000</span>     <span class="co"># Sintaxis invalida para la lista</span></code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-19-a99f473d7b8f&gt; in &lt;module&gt;()
+      1 mitupla = ( &#39;abcd&#39;, 786 , 2.23, &#39;edificio&#39;, 70.2  )
+      2 milista = [ &#39;abcd&#39;, 786 , 2.23, &#39;energia&#39;, 70.2  ]
+----&gt; 3 mitupla[2] = 1000    # Sintaxis invalida para la tupla
+      4 milista[2] = 1000     # Sintaxis invalida para la lista
+
+
+TypeError: &#39;tuple&#39; object does not support item assignment</code></pre>
+</section><section id="section-36" class="slide level2">
+<h2></h2>
+<p>Pero en la lista podemos agregar nuevos elementos que se colocan al final de la misma:</p>
+</section><section id="section-37" class="slide level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(milista)
+milista.append(<span class="st">&#39;hola&#39;</span>)
+<span class="bu">print</span>(milista)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>[&#39;abcd&#39;, 786, 2.23, &#39;energia&#39;, 70.2]
+[&#39;abcd&#39;, 786, 2.23, &#39;energia&#39;, 70.2, &#39;hola&#39;]</code></pre>
+</section><section id="diccionarios" class="slide level2">
+<h2><font color="yellow"> Diccionarios</font></h2>
+<p>Los diccionarios de python son de tipo tabla-hash.</p>
+<p>Funcionan como arrays asociativos y consisten en pares <em>clave-valor</em>.</p>
+</section><section id="section-38" class="slide level2">
+<h2></h2>
+<p>Una clave de diccionario puede ser casi cualquier tipo de python, pero suelen ser números o cadenas.</p>
+<p>Los valores, por otra parte, pueden ser cualquier objeto arbitrario de python.</p>
+</section><section id="section-39" class="slide level2">
+<h2></h2>
+<p>Los diccionarios están encerrados por llaves <span class="math inline">{ }</span> y los valores se pueden asignar y acceder mediante llaves cuadradas <span class="math inline">[ ]</span>.</p>
+</section><section id="section-40" class="slide level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">fisicos <span class="op">=</span> <span class="bu">dict</span>()
+
+fisicos <span class="op">=</span>{
+    <span class="dv">1</span> : <span class="st">&quot;Eistein&quot;</span>,
+    <span class="dv">2</span> : <span class="st">&quot;Bohr&quot;</span>,
+    <span class="dv">3</span> : <span class="st">&quot;Pauli&quot;</span>,
+    <span class="dv">4</span> : <span class="st">&quot;Schrodinger&quot;</span>,
+    <span class="dv">5</span> : <span class="st">&quot;Hawking&quot;</span>
+}
+
+<span class="bu">print</span>(fisicos)
+<span class="bu">print</span> (fisicos.keys())
+<span class="bu">print</span> (fisicos.values())
+fisicos[<span class="st">&quot;6&quot;</span>] <span class="op">=</span> <span class="st">&quot;Planck&quot;</span>    <span class="co">#agrega un nuevo elemento al diccionario, tanto su clave como valor</span>
+<span class="bu">print</span>(fisicos)</code></pre></div>
+</section><section class="slide level2">
+
+<pre><code>{1: &#39;Eistein&#39;, 2: &#39;Bohr&#39;, 3: &#39;Pauli&#39;, 4: &#39;Schrodinger&#39;, 5: &#39;Hawking&#39;}
+dict_keys([1, 2, 3, 4, 5])
+dict_values([&#39;Eistein&#39;, &#39;Bohr&#39;, &#39;Pauli&#39;, &#39;Schrodinger&#39;, &#39;Hawking&#39;])
+{1: &#39;Eistein&#39;, 2: &#39;Bohr&#39;, 3: &#39;Pauli&#39;, 4: &#39;Schrodinger&#39;, 5: &#39;Hawking&#39;, &#39;6&#39;: &#39;Planck&#39;}</code></pre>
+</section><section id="regla-para-los-identificadores" class="slide level2">
+<h2>Regla para los identificadores</h2>
+<p>Los identificadores son nombres que hacen referencia a los objetos que componen un programa: <strong>constantes</strong>, <strong>variables</strong>, <strong>funciones</strong>, etc.</p>
+</section><section id="section-41" class="slide level2">
+<h2></h2>
+<p>Reglas para construir identificadores:</p>
+<ul>
+<li>El primer carácter debe ser una letra o el carácter de subrayado (guión bajo)</li>
+<li>El primer carácter puede ir seguido de un número variable de dígitos numéricos, letras o carácteres de subrayado.</li>
+<li>No pueden utilizarse espacios en blanco, ni símbolos de puntuación.</li>
+<li>En python se distingue de las mayúsculas y minúsculas.</li>
+</ul>
+</section><section id="palabras-reservadas" class="slide level2">
+<h2>Palabras reservadas</h2>
+<p>No pueden utilizarse palabras reservadas del lenguaje.</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">No usar</th>
+<th style="text-align: center;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">del</td>
+<td style="text-align: center;">for</td>
+<td style="text-align: center;">is</td>
+<td style="text-align: center;">raise</td>
+<td style="text-align: center;">assert</td>
+<td style="text-align: center;">elif</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">from</td>
+<td style="text-align: center;">lamda</td>
+<td style="text-align: center;">return</td>
+<td style="text-align: center;">break</td>
+<td style="text-align: center;">else</td>
+<td style="text-align: center;">global</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">not</td>
+<td style="text-align: center;">try</td>
+<td style="text-align: center;">class</td>
+<td style="text-align: center;">except</td>
+<td style="text-align: center;">if</td>
+<td style="text-align: center;">or</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">while</td>
+<td style="text-align: center;">continue</td>
+<td style="text-align: center;">exec</td>
+<td style="text-align: center;">import</td>
+<td style="text-align: center;">pass</td>
+<td style="text-align: center;">yield</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">def</td>
+<td style="text-align: center;">finally</td>
+<td style="text-align: center;">in</td>
+<td style="text-align: center;">print</td>
+<td style="text-align: center;">del</td>
+<td style="text-align: center;">system</td>
+</tr>
+</tbody>
+</table>
+</section></section>
+    </div>
+  </div>
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+              { src: 'reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>

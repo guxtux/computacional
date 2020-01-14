@@ -1,0 +1,18 @@
+\documentclass[tikz]{standalone}
+\usepackage[utf8x]{inputenc}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[every text node part/.style={align=center}]
+	\draw (0,0) circle (0.3);
+	\draw [->, thick] (0,-0.3) -- (0, -3);
+	\node[draw,rectangle, rotate=45, minimum size=2cm] at (0,-4.4) {\rotatebox{-45}{Condicional}};
+	\draw [->, thick] (0,-5.8) -- (0, -8) node [left, midway] {Si la condición \\ es verdadera};
+	\node[draw,rectangle, minimum size=2cm] at (0,-9) {Código a ejecutarse};
+	\draw [thick] (1.4,-4.4) -- (7,-4.4);
+	\draw [thick] (7, -4.4) -- (7, -6);
+	\node[draw,rectangle, minimum size=2cm] at (7,-7) {Código a ejecutarse \\ si la condición es falsa };
+	\draw [->, thick] (0,-10) -- (0,-13);
+	\draw [thick] (7,-8) -- (7,-11);
+	\draw [->, thick] (7,-11) -- (0,-11);
+\end{tikzpicture}
+\end{document}

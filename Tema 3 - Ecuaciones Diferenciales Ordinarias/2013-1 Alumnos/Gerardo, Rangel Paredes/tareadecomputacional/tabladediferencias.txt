@@ -1,0 +1,51 @@
+###
+print "Tabla de Diferencias"
+
+x0 = -3.0
+x1 = -1.0
+x2 = 1.0
+x3 = 2
+x4 = 3
+f0 = 0.0
+f1 = -4.0
+f2 = 0.0
+f3 = -5.0
+f4 = 12.0
+i = -1
+k = -1
+j = -1
+n = -1
+x = [x0,x1,x2,x3,x4]
+f = [f0,f1,f2,f3,f4]
+print "Las diferencias de orden cero son: "
+print f
+
+print "Diferencias de Orden uno"
+
+while i<3:
+    i = i + 1
+    g = (f[i+1] - f[i])/(x[i+1] - x[i])
+    print g
+    
+print "Las diferencias de orden 2 son: "
+while k<2:
+    k = k + 1
+    l = (((f[k+2]-f[k+1])/(x[k+2] - x[k+1]))-(((f[k+1]-f[k]))/(x[k+1] - x[k])))/(x[k+2] - x[k])
+    print l
+    
+print "Las diferencias de orden 3 son: "
+while j<1:
+    j = j + 1
+    p = (((((f[j+3]-f[j+2])/(x[j+3] - x[j+2]))-(((f[j+2]-f[j+1]))/(x[j+2] - x[j+1])))/(x[j+3] - x[j+1])) - ((((f[j+2]-f[j+1])/(x[j+2] - x[j+1]))-(((f[j+1]-f[j]))/(x[j+1] - x[j])))/(x[j+2] - x[j])))/(x[j+3]-x[j])  
+    print p
+
+print "Las diferencias de orden 4 son: "
+
+while n<0:
+    n = n + 1
+    q = (((((((f[n+4]-f[n+3])/(x[n+4] - x[n+3]))-(((f[n+3]-f[n+2]))/(x[n+3] - x[n+2])))/(x[n+4] - x[n+2])) - ((((f[n+3]-f[n+2])/(x[n+3] - x[n+2]))-(((f[n+2]-f[n+1]))/(x[n+2] - x[n+1])))/(x[n+3] - x[n+1])))/(x[n+4]-x[n+1]))  -  ((((((f[n+3]-f[n+2])/(x[n+3] - x[n+2]))-(((f[n+2]-f[n+1]))/(x[n+2] - x[n+1])))/(x[n+3] - x[n+1])) - ((((f[n+2]-f[n+1])/(x[n+2] - x[n+1]))-(((f[n+1]-f[n]))/(x[n+1] - x[n])))/(x[n+2] - x[n])))/(x[n+4]-x[n])))/(x[n+4]-x[n])
+    print q
+   
+
+    
+   

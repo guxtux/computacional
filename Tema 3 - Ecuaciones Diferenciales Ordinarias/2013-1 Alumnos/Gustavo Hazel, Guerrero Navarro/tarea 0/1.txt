@@ -1,0 +1,26 @@
+a) >>>37/3
+12  #es válida y da un resultado entero
+
+b) >>> 37 + 17/3
+42  #es válida y da un resultado entero
+
+c) >>> 28/3/4
+2  
+
+d) >>> 28/(3/4)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ZeroDivisionError: integer division or modulo by zero  # esto ocurre pues
+el denominador es el mínimo entero, que es cero.
+
+e) >>> -3. ** 4. / 2.
+-40.5
+
+f) >>> 3. ** (-4./2.)
+0.1111111111111111
+
+g) >>> (28/3)/4
+2
+ 
+h) >>> 4. ** -3
+0.015625

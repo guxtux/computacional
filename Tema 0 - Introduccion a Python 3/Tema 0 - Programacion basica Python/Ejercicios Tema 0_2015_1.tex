@@ -1,0 +1,124 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol,multienum}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{color}
+\usepackage{anysize}
+\usepackage{anyfontsize}
+%Este paquete permite manejar los encabezados del documento
+\usepackage{fancyhdr}
+%hay que definir el ambiente de la página
+\pagestyle{fancy}
+%aqui va el texto para todas las paginas l--> izquierda, r--> derecha, hay un C--> para centrar el texto deseado
+%\lhead{Curso de Física Computacional}
+\fancyhead[R]{\nouppercase{\leftmark}}
+%define el ancho de la linea que separa el encabezado del cuerpo del texto
+\renewcommand{\headrulewidth}{0.5pt}
+\usepackage{hyperref}
+%esta parte define el color del marco que aparece en las hiperreferencias.
+\definecolor{links}{HTML}{2A1B81}
+\hypersetup{colorlinks,linkcolor=,urlcolor=links}
+\spanishdecimal{.}
+\marginsize{1.5cm}{1.5cm}{0cm}{2cm}
+\author{M. en C. Gustavo Contreras Mayén.}
+\title{Ejercicios del Tema 0 \\ \begin{Large} Curso de Física Computacional\end{Large} \\
+\begin{small}
+\texttt{curso.fisica.comp@gmail.com}
+\end{small}}
+\date{ }
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+Los ejercicios que se indican a continuación, tienen la finalidad de que practiques con lo que hemos revisado en el Tema 0 del curso. No contabilizan para la calificación final, por tanto, el que los resuelvas, ya es un compromiso moral contigo mismo.
+\\
+\\
+Se recomienda altamente que trabajes en ellos, ya que te permitirá identificar en qué partes debes de reforzar y recuperar en cuanto a programación con \texttt{Python} se refiere. Puedes enviar un correo para consultar alguna duda. La idea es que cada problema lo guardes en un archivo \texttt{*.py} y lo identifiques como \texttt{Tema0-Ejercicio1.py}, \texttt{Tema0-Ejercicio2.py}, etc.
+\begin{enumerate}
+\item Escribe un programa que convierta un valor dado en metros y devuelva el valor correspondiente en: pulgadas, pies, yardas y millas. Como sabemos, una pulgada equivale a 2.54 cm, un pie tiene 12 pulgadas, una yarda tiene 3 pies y una milla tiene 1760 yardas. El valor lo debe de proporcionar el usuario; para verificar tu programa, revisa que 640 metros equivalen a 25196.85 pulgadas.
+\item La densidad de una sustancia está definida como $\rho = \frac{m}{V}$, donde $m$ es la masa y $V$ el volumen. Calcula y muestra el valor de la masa que hay en un litro de las siguientes sustancias (tendrás que consultar el valor, donde las unidades de la densidad estén en $\frac{g}{cm^{3}}$): hierro, aire, gasolina, hielo, cuerpo humano, palta y platino.
+\item Sea $p$ la tasa de interés de un banco en porciento anual. Una cantidad inicial $A$ ha crecido entonces a
+\[ A \left( 1 + \dfrac{p}{100} \right)^{n} \]
+luego de $n$ años- Elabora un programa que calcule cuánto dinero se tiene luego de $1000$ pesos iniciales a los tres años con una tasa de interes del $5\%$.
+\item Alguien escribió la siguiente línea de código para calcular el valor de $\sin(1)$:
+\begin{verbatim}
+x=1; print 'sin(%g)=%g' % (x, sin(x))
+\end{verbatim}
+Ejecuta esta línea en una terminal, luego responde: ¿dónde está el problema?¿cómo se corrige ese problema?
+\item Teclea el siguiente programa y ejecútalo. Si el problema no funciona, revisa que lo tengas tal cual.
+\begin{verbatim}
+from math import pi
+
+h= 5.0 #altura
+b= 2.0 #base
+r= 1.5 #radio
+
+area_paralelogramo = h*b
+print 'El area del paralelogramo es %.3f' % area_paralelogramo
+
+area_cuadrado = b**2
+print 'El area del cuadrado es %g' % area_cuadrado
+
+area_circunferencia = pi*r**2
+print 'El area de la circunferencia es %8.3f' % area_circunferencia
+
+volumen_cono = 1.0/3*pi*r**2*h
+print 'El volumen del cono es %3.f' % volumen_cono
+\end{verbatim}
+\item Ejecuta los siguientes programas, si no funcionan: identifica y corrige la(s) instrucción(es)
+\begin{enumerate}
+\item Identidad trigonométrica.
+\begin{verbatim}
+from math import, sin, cos
+x = pi/4
+1_val = sin^2(x) + cos^2(x)
+print 1_VAL
+\end{verbatim}
+\item Movimiento con aceleración constante.
+\begin{verbatim}
+v0 = 3 m/s
+t = 1 s
+a = 2 m/s**2
+s = v0*t + 1/2 a*t**2
+print s
+\end{verbatim}
+\item Verifica las ecuaciones:
+\begin{eqnarray*}
+(a+b)^{2} = a^{2} + 2ab + b^{2} \\
+(a-b)^{2} = a^{2} - 2ab + b^{2}
+\end{eqnarray*}
+\begin{verbatim}
+a= 3,3    b= 5,3
+a2= a**2
+b2= b**2
+
+eq1_suma = a2 + 2ab + b2
+eq2_suma = a2 - 2ab + b2
+
+eq1_pot = (a + b)**2
+eq2_pot = (a - b)**2
+
+print 'Primera ecuacion: %g = %g' , %(eq1_suma, eq1_pot)
+print 'Segunda ecuacion: %h = %h' , %(eq2_pot, eq2_pot)
+\end{verbatim}
+\end{enumerate}
+\item La función Gaussina
+\[ f(x) = \dfrac{1}{\sqrt{2\pi}s} \exp	\left[ - \dfrac{1}{2} \left( \dfrac{x-m}{s} \right)^{2} \right] \]
+es una de las funciones más utilizadas en ciencias y tecnología. Los parámetros $m$ y $s$ son números reales, donde $s$ debe ser mayor que cero. Elabora un prograa que evalúe la función con $m=0$, $s=2$ y $x=1$. Verifica tu resultado comparando con lo que obtengas a mano o con una calculadora.
+\item A continuación se presenta una línea de código para convertir grados centígrados a Fahrenheit, algunas líneas no funcionan: identifica cuál(es) es(son) y explica por qué.
+\begin{enumerate}
+\item \verb|C = 21;   F = 9/5*C + 32;      print F |
+\item \verb|C = 21.0; F = (9/5)*C + 32;    print F|
+\item \verb|C = 21.0; F = 9*C/5 + 32;      print F|
+\item \verb|C = 21.0; F = 9.*(C/5.0) + 32; print F|
+\item \verb|C = 21.0; F = 9.0*C/5.0 + 32;  print F|
+\item \verb|C = 21;   F = 9*C/5 + 32;      print F|
+\item \verb|C = 21.0; F = (1/5)*9*C + 32;  print F|
+\item \verb|C = 21;   F = (1./5)*9*C + 32; print F|
+\end{enumerate}
+\end{enumerate}
+\end{document}

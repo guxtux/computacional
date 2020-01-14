@@ -1,0 +1,38 @@
+import numpy as num
+import matplotlib.pyplot as plt
+
+vo=67#m/s
+m=250#kg
+c=1
+A=0.93#m2
+ro=1.2#kg/m3
+
+b=c*A*ro/2
+tao=m/b
+vt=9.81*tao
+angulo =1.
+pi=num.pi
+xmax=0
+
+
+
+while angulo<90:
+    voy=vo*num.sin(angulo)
+    vox=vo*num.cos(angulo)
+    t=1
+    y=1.
+    while y>0:
+        y=(voy-vt)*tao*(1-num.exp(-t/tao))-vt*t
+        t=t+.1
+    x=-vox*tao*num.exp(-t/tao)+vox*tao
+    if x>xmax:
+        xmax=x
+        angulomax=angulo
+    angulo =angulo+1
+print("xmax=",xmax)
+print("angulomax=",angulomax)
+
+
+#el angulo que da la maxima distancia horizontal es 44 grados
+
+

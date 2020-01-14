@@ -1,0 +1,42 @@
+#constantes
+import numpy as num
+
+#constatne e
+N=100
+sum=1. #se inicializa en 1 para tomar en cuenta el primer termino de la serie
+x=1
+fact=1
+pot=1.
+n=1
+while n<N:
+    fact=fact*n
+    pot=pot*x
+    sum=sum+(pot/fact)
+    n=n+1
+print("e=",sum)
+#se realizan 2*n productos para calcular la constante (3*n si se toma en cuenta la division) 
+
+# pi
+pottres=3**.5
+sum=2*pottres #se inicializa en 1 para tomar en cuenta el primer termino de la serie
+n=1
+while n<N:
+    if n%2==0:
+        sum=sum+(2*pottres/(3*(2*n+1)))
+    else:
+        sum=sum-(2*pottres/(3*(2*n+1)))
+    n=n+1
+print("pi=",sum)
+#se realizan 5*n productos para realizar la constante
+
+#constante de euler
+sum=0
+n=1
+while n<N+1:
+    sum=sum+1./n
+    n=n+1
+sum=sum-num.log(N)
+print("gamma=",sum)
+# se realizan n productos para calcular la constante
+
+#
