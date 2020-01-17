@@ -1,4 +1,4 @@
-|
+
 # Created by https://www.gitignore.io/api/tex
 # Edit at https://www.gitignore.io/?templates=tex
 
@@ -272,12 +272,6 @@ TSWLatexianTemp*
 # glossaries
 *.glstex
 
-Alumnos*/
-Libro*/
-Video*/
-Codigos*/
-Platica*/
-Parcial*/
-PresentacionReveal/
+
 
 # End of https://www.gitignore.io/api/tex
