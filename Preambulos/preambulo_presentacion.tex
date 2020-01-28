@@ -1,0 +1,70 @@
+\documentclass[12pt]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage[autostyle,spanish=mexican]{csquotes}
+%\usepackage[sfdefault]{roboto}  %% Option 'sfdefault' only if the base font of the document is to be sans serif
+\renewcommand{\arraystretch}{1.5}
+\renewcommand{\rmdefault}{cmr}% cmr = Computer Modern Roman
+\usefonttheme[onlymath]{serif}
+
+\newcommand{\python}{\texttt{python}}
+\newcommand{\textoazul}[1]{\textcolor{blue}{#1}}
+\newcommand{\azulfuerte}[1]{\textcolor{blue}{\textbf{#1}}}
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+
+\linespread{1.5}
+\beamertemplatenavigationsymbolsempty
+\usefonttheme{professionalfonts}
+\usefonttheme{serif}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\renewcommand {\arraystretch}{1.25}
+\mode<presentation>
+{
+  \usetheme{Warsaw}
+  \setbeamertemplate{headline}{}
+  %\useoutertheme{infolines}
+  \useoutertheme{default}
+  \setbeamercovered{invisible}
+  % or whatever (possibly just delete it)
+  \setbeamertemplate{section in toc}[sections numbered]
+  \setbeamertemplate{subsection in toc}[subsections numbered]
+  \setbeamertemplate{subsection in toc}{\leavevmode\leftskip=3.2em\rlap{\hskip-2em\inserttocsectionnumber.\inserttocsubsectionnumber}\inserttocsubsection\par}
+  \setbeamercolor{section in toc}{fg=blue}
+  \setbeamercolor{subsection in toc}{fg=blue}
+  \setbeamercolor{frametitle}{fg=yellow}
+
+  \setbeamertemplate{footline} 
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertsection
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\textcolor{yellow}{\insertsubsection}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+}
+\makeatother
+
+\makeatletter
+\patchcmd{\beamer@sectionintoc}
+  {\vfill}
+  {\vskip\itemsep}
+  {}
+  {}
+\makeatother

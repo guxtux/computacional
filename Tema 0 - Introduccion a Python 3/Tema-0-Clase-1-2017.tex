@@ -1,11 +1,23 @@
-\input{../Preambulos/pre_documento}
-\input{../Preambulos/pre_plantilla_CambridgeUS_beaver_2}
+\input{../Preambulos/preambulo_presentacion}
+\usepackage[os=win]{menukeys}
+\usepackage{pifont}
+\usepackage{caption}
+\captionsetup{font=scriptsize,labelfont=scriptsize}
+\definecolor{ao}{rgb}{0.0, 0.5, 0.0}
+\definecolor{bisque}{rgb}{1.0, 0.89, 0.77}
+\definecolor{amber}{rgb}{1.0, 0.75, 0.0}
+\definecolor{armygreen}{rgb}{0.29, 0.33, 0.13}
+\definecolor{alizarin}{rgb}{0.82, 0.1, 0.26}
+\definecolor{cadetblue}{rgb}{0.37, 0.62, 0.63}
+%\input{../Preambulos/pre_documento}
+%\usetheme{CambridgeUS}
+%\input{../Preambulos/pre_plantilla_Berlin_beaver}
 %\usepackage[backend=biber]{biblatex}
 %\bibliography{LibrosFC.bib}
-\input{../Preambulos/pre_codigo}
-\input{../Preambulos/pre_define_footers}
+%\input{../Preambulos/pre_codigo}
+%\input{../Preambulos/pre_define_footers}
 \title{Tema 0 - Introducción a \python}
-\subtitle{Semestre 2018-2}
+%\subtitle{Semestre 2018-2}
 \author[]{M. en C. Gustavo Contreras Mayén \\ M. en C. Abraham Lima Buendía}
 \institute{Facultad de Ciencias - UNAM}
 \titlegraphic{\includegraphics[width=2cm]{escudo-facultad-ciencias}\hspace*{4.75cm}~%
@@ -59,11 +71,13 @@ Tengan en cuenta que linux es un sistema operativo diferente, ya que una vez que
 \end{frame}
 \begin{frame}
 \frametitle{Usar python desde la terminal}
-Para usar \python desde la terminal, basta con que ingresemos la siguiente instrucción en la terminal:
+Para usar \python{} desde la terminal, basta con que ingresemos la siguiente instrucción en la terminal:
 \begin{center}
 \textasciitilde $\$$ \texttt{python} \keys{\return}
 \end{center}
-\pause
+\end{frame}
+\begin{frame}
+\frametitle{Usar python desde la terminal}
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.25]{Terminal_02}
@@ -72,7 +86,7 @@ Para usar \python desde la terminal, basta con que ingresemos la siguiente instr
 \end{frame}
 \begin{frame}
 \frametitle{El entorno de python en la terminal}
-Una vez que ya ingresamos en \python desde la terminal, destacamos el hecho de que el prompt ya cambió: ahora se presenta como $>>>$
+Una vez que ya ingresamos al entorno de \python{} desde la terminal, destacamos el hecho de que el prompt ya cambió: ahora se presenta como $>>>$
 \\
 \bigskip
 Y de nueva cuenta, ahora las instrucciones se deben de escribir en la línea de comandos, pero son instrucciones del lenguaje \python.	
@@ -83,7 +97,9 @@ Para ver un saludo en pantalla, escribimos lo siguiente:
 \begin{center}
 $>>>$ \texttt{print("Hola mundo!")} \keys{\return}
 \end{center}
-\pause
+\end{frame}
+\begin{frame}
+\frametitle{Todo listo para trabajar con \python}
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.25]{Terminal_03}
@@ -91,16 +107,18 @@ $>>>$ \texttt{print("Hola mundo!")} \keys{\return}
 \end{figure}
 \end{frame}
 \begin{frame}
-\frametitle{Salir del entorno de \python en la terminal}
+\frametitle{Salir del entorno de \python{} en la terminal}
 Par salir del entorno de python en la terminal de linux, basta con escribir:
 \begin{center}
 $>>>$ \texttt{exit()} \keys{\return}
 \end{center}
-\pause
+\end{frame}
+\begin{frame}
+\frametitle{Salir del entorno de \python{} en la terminal}
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.25]{Terminal_04}
-	\caption{Regresamos al entorno de linux, revisa el prompt de la terminal}
+	\caption{Regresamos al entorno de linux, revisa el prompt de la terminal.}
 \end{figure}
 \end{frame}
 {
@@ -124,7 +142,7 @@ Para trabajar con \textoazul{qtConsole}, con la terminal llamamos a la suite ana
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.2]{anaconda_01.png}
-	\caption{La suite Anaconda}
+	%\caption{La suite Anaconda}
 \end{figure}
 \end{frame}
 \begin{frame}
@@ -147,10 +165,6 @@ Para trabajar con \textoazul{qtConsole}, con la terminal llamamos a la suite ana
 \frame{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Usando Anaconda}
 \begin{frame}
-\frametitle{Usando \python como una calculadora}
-Una vez abierta la sesión en \texttt{python}, podemos aprovechar al máximo este lenguaje: contamos con una calculadora a la mano, sólo hay que ir escribiendo las operaciones en la línea de comandos.
-\end{frame}
-\begin{frame}
 \frametitle{Personalización de qtConsole}
 \begin{figure}
 	\centering
@@ -162,7 +176,7 @@ Una vez abierta la sesión en \texttt{python}, podemos aprovechar al máximo est
 \frametitle{Combinación de estilos}
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.325]{qtConsole_03}
+	\includegraphics[scale=0.3]{qtConsole_03}
 	\caption{Cambio en la tipografía y tamaño de letra en qtConsole}
 \end{figure}
 \end{frame}
@@ -170,7 +184,7 @@ Una vez abierta la sesión en \texttt{python}, podemos aprovechar al máximo est
 \frame{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Operadores aritméticos}
 \begin{frame}
-\frametitle{\python como calculadora}
+\frametitle{\python{} como calculadora}
 Una vez abierta la sesión en \python, podemos aprovechar al máximo este lenguaje: contamos con una calculadora a la mano, sólo hay que ir escribiendo las operaciones en la línea de comandos.
 \end{frame}
 \setbeamercolor{block title}{bg=red!50,fg=black}
@@ -951,5 +965,4 @@ def & finally & in & print & del \\ \hline
 \end{table}
 }
 \end{frame}
-}
 \end{document}

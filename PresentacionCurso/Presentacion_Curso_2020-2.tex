@@ -1,74 +1,4 @@
-\documentclass[12pt]{beamer}
-\usepackage[utf8]{inputenc}
-\usepackage[spanish]{babel}
-\usepackage{color}
-\usepackage{hyperref}
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{multicol}
-\usepackage{graphicx}
-\usepackage{tikz}
-\usepackage[autostyle,spanish=mexican]{csquotes}
-%\usepackage[sfdefault]{roboto}  %% Option 'sfdefault' only if the base font of the document is to be sans serif
-\renewcommand{\arraystretch}{1.5}
-\renewcommand{\rmdefault}{cmr}% cmr = Computer Modern Roman
-\usefonttheme[onlymath]{serif}
-
-\newcommand{\python}{\texttt{python}}
-\newcommand{\textoazul}[1]{\textcolor{blue}{#1}}
-\newcommand{\azulfuerte}[1]{\textcolor{blue}{\textbf{#1}}}
-\newcounter{saveenumi}
-\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
-\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
-
-\linespread{1.5}
-\beamertemplatenavigationsymbolsempty
-\usefonttheme{professionalfonts}
-\usefonttheme{serif}
-\DeclareGraphicsExtensions{.pdf,.png,.jpg}
-\renewcommand {\arraystretch}{1.25}
-\mode<presentation>
-{
-  \usetheme{Warsaw}
-  \setbeamertemplate{headline}{}
-  %\useoutertheme{infolines}
-  \useoutertheme{default}
-  \setbeamercovered{invisible}
-  % or whatever (possibly just delete it)
-  \setbeamertemplate{section in toc}[sections numbered]
-  \setbeamertemplate{subsection in toc}[subsections numbered]
-  \setbeamertemplate{subsection in toc}{\leavevmode\leftskip=3.2em\rlap{\hskip-2em\inserttocsectionnumber.\inserttocsubsectionnumber}\inserttocsubsection\par}
-  \setbeamercolor{section in toc}{fg=blue}
-  \setbeamercolor{subsection in toc}{fg=blue}
-  \setbeamercolor{frametitle}{fg=yellow}
-
-  \setbeamertemplate{footline} 
-{
-  \leavevmode%
-  \hbox{%
-  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
-    \usebeamerfont{author in head/foot}\insertsection
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
-    \usebeamerfont{title in head/foot}\textcolor{yellow}{\insertsubsection}
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
-    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
-    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
-  \end{beamercolorbox}}%
-  \vskip0pt%
-}
-}
-\makeatother
-
-\makeatletter
-\patchcmd{\beamer@sectionintoc}
-  {\vfill}
-  {\vskip\itemsep}
-  {}
-  {}
-\makeatother
-
+\input{../Preambulos/preambulo_presentacion}
 \title{Curso de Física Computacional}
 \subtitle{Semestre 2020-2}
 \author[]{M. en C. Gustavo Contreras Mayén \\ M. en C. Abraham Lima Buendía}
@@ -251,6 +181,41 @@ Pueden traer una laptop para el trabajo en el curso, no es requisito, ya que ten
 Se recomienda que cuenten en sus equipos con el mismo software, las guías que hemos comentado, les brindarán la información para instalar los programas.
 \end{frame}
 \begin{frame}
+\frametitle{Reglas dentro del aula de clase}
+Habrá que seguir una serie de puntos tanto académicos como \enquote{administrativos} dentro del aula de clase para un buen desenvolvimiento y tener una clase amena. 
+\end{frame}
+\begin{frame}
+\frametitle{Puntos académicos}
+Consideren los siguientes puntos:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item La clase inicia a las 6 pm.
+\item Se utilizarán los equipos de cómputo del laboratorio.
+\item Los equipos cuentan con conexión a internet, pero se espera que se utilice para atender la clase. En caso de que se detecte una actividad ajena al curso (facebook, chats, etc.) se hará una primera llamada de aviso.
+\item A la segunda llamada de aviso, se cancelará la evaluación correspondiente.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Puntos administrativos}
+En lo que corresponde a la parte administrativa:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item No se permite el consumo de alimentos y/o bebidas dentro del aula.
+\item Se solicita dejen en modo silencioso el celular.
+\item En caso de alguna eventualidad, se atenderán los protocolos de seguridad.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Trabajo durante la clase}
+Los alumnos del curso contarán con una cuenta de acceso a los equipos.
+\\
+\bigskip
+\pause
+El uso y manejo de cada equipo pasa a ser responsabilidad de cada alumno. En caso de que algún periférico no funcione debidamente, se les pide lo reporten para que se solicite al área respectiva, su reparación o reemplazo.
+\end{frame}
+\begin{frame}
 \frametitle{Metodología de Enseñanza - 3}
 \textbf{Después de la clase.}
 \\
@@ -264,6 +229,34 @@ Les va a demandar al menos seis horas de trabajo como mínimo.
 \begin{frame}
 \frametitle{Metodología de Enseñanza - 3}
 Si cuentan con una experiencia en programación, tienen un paso adelantado, pero si no han programado, se verán en la necesidad de dedicarle más tiempo.
+\end{frame}
+\begin{frame}
+\frametitle{Apoyo con la plataforma Edmodo}
+Hoy en día es necesario contar con el apoyo de herramientas TIC's, la plataforma \textoazul{Edmodo} brinda los elementos necesarios que servirán de apoyo para el curso.
+\end{frame}
+\begin{frame}
+\frametitle{Características de Edmodo}
+La plataforma permite:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Comunicación sincrónica y asincrónica.
+\item Flexibilidad de horarios.
+\item Aprendizaje colaborativo.
+\item Construcción del conocimiento constante, dinámica y compartida.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{La plataforma Edmodo}
+Dentro de Edmodo se tendrán disponibles las notas del curso, los materiales adicionales de consulta, y servirá como medio de entrega para las actividades tales como ejercicios y tareas.
+\end{frame}
+\begin{frame}
+\frametitle{La plataforma Edmodo}
+Considera que para la entrega de una actividad, se programa tanto la fecha como hora de entrega, una vez que se alcanza la hora definida, la plataforma ya no permitirá la carga de archivos.
+\\
+\bigskip
+\pause
+No se recibirán las actividades que se envíen por correo electrónico. La plataforma será el canal de comunicación.
 \end{frame}
 \section{Temario oficial}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
@@ -530,4 +523,4 @@ De acuerdo al Reglamento General de Exámenes de la UNAM, se considera una calif
 \item Del 1 al 5 de junio, segunda semana de finales.
 \end{enumerate}
 \end{frame}
-\end{document}
+\end{document}\end{document}
