@@ -1,6 +1,8 @@
+\RequirePackage{currfile}
 \documentclass[12pt]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
+\usepackage{standalone}
 \usepackage{color}
 \usepackage{hyperref}
 \usepackage{amsmath}
@@ -8,7 +10,18 @@
 \usepackage{multicol}
 \usepackage{graphicx}
 \usepackage{tikz}
+\usetikzlibrary{matrix,backgrounds}
 \usepackage[autostyle,spanish=mexican]{csquotes}
+\usepackage[os=win]{menukeys}
+\usepackage{pifont}
+\usepackage{caption}
+\captionsetup{font=scriptsize,labelfont=scriptsize}
+\definecolor{ao}{rgb}{0.0, 0.5, 0.0}
+\definecolor{bisque}{rgb}{1.0, 0.89, 0.77}
+\definecolor{amber}{rgb}{1.0, 0.75, 0.0}
+\definecolor{armygreen}{rgb}{0.29, 0.33, 0.13}
+\definecolor{alizarin}{rgb}{0.82, 0.1, 0.26}
+\definecolor{cadetblue}{rgb}{0.37, 0.62, 0.63}
 %\usepackage[sfdefault]{roboto}  %% Option 'sfdefault' only if the base font of the document is to be sans serif
 \renewcommand{\arraystretch}{1.5}
 \renewcommand{\rmdefault}{cmr}% cmr = Computer Modern Roman
@@ -24,7 +37,7 @@
 \linespread{1.5}
 \beamertemplatenavigationsymbolsempty
 \usefonttheme{professionalfonts}
-\usefonttheme{serif}
+%\usefonttheme{serif}
 \DeclareGraphicsExtensions{.pdf,.png,.jpg}
 \renewcommand {\arraystretch}{1.25}
 \mode<presentation>

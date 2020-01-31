@@ -1,14 +1,5 @@
 \input{../Preambulos/preambulo_presentacion}
-\usepackage[os=win]{menukeys}
-\usepackage{pifont}
-\usepackage{caption}
-\captionsetup{font=scriptsize,labelfont=scriptsize}
-\definecolor{ao}{rgb}{0.0, 0.5, 0.0}
-\definecolor{bisque}{rgb}{1.0, 0.89, 0.77}
-\definecolor{amber}{rgb}{1.0, 0.75, 0.0}
-\definecolor{armygreen}{rgb}{0.29, 0.33, 0.13}
-\definecolor{alizarin}{rgb}{0.82, 0.1, 0.26}
-\definecolor{cadetblue}{rgb}{0.37, 0.62, 0.63}
+
 %\input{../Preambulos/pre_documento}
 %\usetheme{CambridgeUS}
 %\input{../Preambulos/pre_plantilla_Berlin_beaver}
@@ -38,7 +29,7 @@
 Dentro de un entorno linux, es necesario la operación de comandos, programas, etc. dentro de una terminal.
 \\
 \bigskip
-Que es una ventana en donde debemos de escribir los comandos necesarios para que el sistema operativo ejecute la tarea.
+La terminal es una ventana en donde debemos de escribir los comandos necesarios para que el sistema operativo ejecute la tarea.
 \end{frame}
 \begin{frame}
 \frametitle{Abrir una terminal en linux}
@@ -54,7 +45,7 @@ Con la siguiente combinación de teclas, tendremos una terminal en la pantalla d
 \frametitle{La terminal común en linux}
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.25]{Terminal_01}
+	\includegraphics[scale=0.4]{Terminal_01}
 	\caption{Pantalla de una terminal en linux.}
 \end{figure}
 \end{frame}
@@ -121,6 +112,9 @@ $>>>$ \texttt{exit()} \keys{\return}
 	\caption{Regresamos al entorno de linux, revisa el prompt de la terminal.}
 \end{figure}
 \end{frame}
+\section{Anaconda y python}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Usando Anaconda}
 {
 \setbeamercolor{frametitle}{fg=bisque,bg=ao!90!white}
 \begin{frame}
@@ -132,7 +126,7 @@ Pero podemos aprovechar al máximo otra herramienta para el curso: \textoazul{\t
 \end{frame}
 \begin{frame}
 \frametitle{Usaremos ahora qtConsole}
-Para trabajar con \textoazul{qtConsole}, con la terminal llamamos a la suite anaconda, por lo que escribrimos:
+Para trabajar con \textoazul{qtConsole}, con la terminal llamamos a la suite \textoazul{Anaconda}, por lo que escribrimos:
 \begin{center}
 \textasciitilde $\$$ \texttt{anaconda-navigator} \keys{\return}
 \end{center}
@@ -147,10 +141,11 @@ Para trabajar con \textoazul{qtConsole}, con la terminal llamamos a la suite ana
 \end{frame}
 \begin{frame}
 \frametitle{Elegimos qtConsole}
+Veremos diferentes programas que están incluidos en la suite, presionamos el botón \textoazul{Launch}, de \textoazul{qtConsole}:
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.35]{qtConsole_01.png}
-	\caption{La ventana de trabajo de qtConsole}
+	\includegraphics[scale=0.35]{qtConsole_00.png}
+	%\caption{Para ejecutar \textoazul{qtConsole}, presionamos \textoazul{Launch}}
 \end{figure}
 \end{frame}
 \begin{frame}
@@ -161,23 +156,12 @@ Para trabajar con \textoazul{qtConsole}, con la terminal llamamos a la suite ana
 	\caption{La ventana de trabajo de qtConsole}
 \end{figure}
 \end{frame}
-\section{Anaconda y python}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
-\subsection{Usando Anaconda}
 \begin{frame}
 \frametitle{Personalización de qtConsole}
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.35]{qtConsole_02}
-	\caption{Podemos pesonalizar la ventana de trabajo}
-\end{figure}
-\end{frame}
-\begin{frame}
-\frametitle{Combinación de estilos}
-\begin{figure}
-	\centering
-	\includegraphics[scale=0.3]{qtConsole_03}
-	\caption{Cambio en la tipografía y tamaño de letra en qtConsole}
+	\caption{Podemos pesonalizar la ventana de trabajo, al seleccionar un estilo de colores y resaltado en el Menú: View $>$ Syntax style}
 \end{figure}
 \end{frame}
 \section{python como una calculadora}
@@ -190,91 +174,114 @@ Una vez abierta la sesión en \python, podemos aprovechar al máximo este lengua
 \setbeamercolor{block title}{bg=red!50,fg=black}
 \begin{frame}[fragile]
 \frametitle{Algunas operaciones}
-\begin{block}{Podemos hacer una suma}
-\verb|>>>3 + 200| \\
+Podemos hacer una suma
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[1]: }} \verb|3 + 200| \\
 \pause
-\verb|203|
-\end{block}
+\textcolor{red}{\texttt{Out[1]: }} \verb|203|
 \end{frame}
 \begin{frame}[fragile]
-\begin{block}{Divisón entre enteros}
-\verb|>>>30 / 1234| \\
+\frametitle{Identificador en la línea de comandos}
+Nótese que en cada línea tendremos un \enquote{prompt} que nos indica la \emph{entrada}, 
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[1]: }}
 \pause
-\verb| 0.024311183144246355|
-\end{block}
+\\
+\bigskip
+y se le asigna un número consecutivo.
 \end{frame}
 \begin{frame}[fragile]
-\begin{block}{Una división entre reales}
-\verb|>>>3.0 / 4.0| \\
+\frametitle{Identificador en la línea de comandos}
+Dependiendo de la tarea que se ejecute, podemos tener una línea de \emph{salida} con el mismo número
+\\
+\bigskip
+\textcolor{red}{\texttt{Out[1]: }}
+\\
+\bigskip
 \pause
-\verb| 0.75|
-\end{block}
+En ciertas tareas, no se presentará esa línea de salida, sino que se mostrará una nueva línea de entrada, con su número consecutivo.
 \end{frame}
 \begin{frame}[fragile]
-\begin{block}{Una división entera}
-Devuelve el cociente sin decimales \\
-\verb|>>>30 // 4| \\
+\frametitle{Algunas operaciones}
+Ahora hagamos una divisón entre enteros
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[2]: }} \verb|30 / 1234| \\
 \pause
-\verb| 7|
-\end{block}
+\textcolor{red}{\texttt{Out[2]: }} \verb|0.024311183144246355|
 \end{frame}
 \begin{frame}[fragile]
-\begin{block}{Una división entera}
-Otro ejemplo de un cociente sin decimales \\
-\verb|>>>4 // 3| \\
+\frametitle{Algunas operaciones}
+Una división entre reales
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[3]: }} \verb| 3.0 / 4.0| \\
 \pause
-\verb| 1|
-\end{block}
+\textcolor{red}{\texttt{Out[3]: }} \verb| 0.75|
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Algunas operaciones}
+Una división entera: devuelve el cociente sin decimales
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[4]: }} \verb|30 // 4| \\
+\pause
+\textcolor{red}{\texttt{Out[4]: }} \verb| 7|
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Algunas operaciones}
+Una división entera: Otro ejemplo de un cociente sin decimales
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[5]: }} \verb|4 // 3| \\
+\pause
+\textcolor{red}{\texttt{Out[5]: }} \verb| 1|
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Combinación de operadores artiméticos}
-\begin{block}{Combinando operadores}
-\verb|>>>5.0 / 10 * 2 + 5| \\
+En ocasiones tendremos que realizar en una misma línea de código, varias operaciones artiméticas:
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[6]: }} \verb| 5.0 / 10 * 2 + 5| \\
 \pause
-\verb| 6.0|
-\end{block}
+\textcolor{red}{\texttt{Out[6]: }} \verb| 6.0|
 \pause
-\textbf{¿por qué obtenemos este resultado??}
+\\
+\bigskip
+\textbf{¿por qué obtenemos este resultado?}
 \end{frame}
 \begin{frame}[fragile]
-El resultado cambia cuando agrupamos con paréntesis
-\begin{block}{}
-\verb|>>>5.0 / (10 * 2 + 5)| \\
+\frametitle{Uso de paréntesis}
+El resultado cambia cuando agrupamos con paréntesis:
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[7]: }} \verb| 5.0 / (10 * 2 + 5)| \\
 \pause
-\verb| 0.2|
-\end{block}
+\textcolor{red}{\texttt{Out[7]: }} \verb| 0.2|
 \pause
-Como podemos ver, el uso de paréntesis en las expresiones tiene una  particular importancia sobre la manera en que se evalúan las expresiones.
+\\
+\bigskip
+Como podemos ver, el uso de paréntesis en las expresiones tiene una particular importancia sobre el orden en que se evalúan las expresiones.
 \end{frame}
 \begin{frame}[fragile]
-\begin{block}{Potenciación de un número}
-Podemos elevar a una potencia en particular, cualquier número
-\verb|>>>2 ** 3 ** 2| \\
+\frametitle{Más operaciones artiméticas}
+Potenciación de un número: podemos elevar cualquier número a una potencia en particular
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[8]: }}  \verb| 2 ** 3| \\
 \pause
-\verb| 512|
-\end{block}
-\pause
-\textbf{¿de qué manera se evaluó esta expresión?}
+\textcolor{red}{\texttt{Out[8]: }} \verb| 8|
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Orden en que se evaluán las potencias}
-Vemos que elevar a una potencia, la manera en que se ejecuta la expresión se realiza en un sentido en particular: de derecha a izquierda.
-\begin{block}{Potenciación de un número}
-Podemos elevar a una potencia en particular, cualquier número
-\verb|>>>(2 ** 3) ** 2| \\
+\frametitle{Más operaciones artiméticas}
+Operador módulo: el operador módulo $\%$ nos devuelve el residuo del cociente:
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[9]: }} \verb| 17 % 3| \\
 \pause
-\verb| 64|
-\end{block}
-\pause
-El uso de paréntesis nos indica que la expresión contenida dentro de ellos, es la que se evalúa primero, posteriormente se sigue la regla de precedencia de operadores.
-\end{frame}
-\begin{frame}[fragile]
-\begin{block}{Operador módulo}
-El operador módulo $\%$ nos devuelve el residuo del cociente.\\
-\verb|>>>17 // 3| \\
-\pause
-\verb| 2|
-\end{block}
+\textcolor{red}{\texttt{Out[9]: }} \verb| 2|
 \end{frame}
 \subsection{Tabla de operadores}
 \begin{frame}
@@ -299,8 +306,9 @@ $\%$ & Módulo & $15\%6$ & $3$ \\ \hline
 \setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}[<+->]
-\item Las expresiones contenidas dentro de pares de paréntesis son evaluadas primero. En el caso de expresiones con paréntesis anidados, los operadores en el par de paréntesis más interno son aplicados primero.
-\item Las operaciones de exponentes son aplicadas después. Si una expresión contiene muchas operaciones de exponentes, los operadores son aplicados de derecha a izquierda.
+\item Las expresiones contenidas dentro de pares de paréntesis se evalúan primero. 
+\item En el caso de expresiones con paréntesis anidados, los operadores en el par de paréntesis más interno se evalúan primero.
+\item Las operaciones de exponentes se evalúan después. Si una expresión contiene muchas operaciones de exponentes, los operadores se evalúan de derecha a izquierda.
 \end{enumerate}
 \end{frame}
 \begin{frame}
@@ -308,12 +316,23 @@ $\%$ & Módulo & $15\%6$ & $3$ \\ \hline
 \setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}[<+->]
-\setcounter{enumi}{2}
-\item La multiplicación, división y módulo son las siguientes en ser aplicadas. Si una expresión contiene muchas multiplicaciones, divisiones u operaciones de módulo, los operadores se aplican de izquierda a derecha.
-\item Suma y resta son las operaciones que se aplican por último. Si una expresión contiene muchas operaciones de suma y resta, los operadores son aplicados de izquierda a derecha. La suma y resta tienen el mismo nivel de precedencia.
+\setcounter{enumi}{3}
+\item La multiplicación, división y módulo son las siguientes en ser evaluadas. 
+\item Si una expresión contiene muchas multiplicaciones, divisiones u operaciones de módulo, los operadores se evaláun de izquierda a derecha.
 \end{enumerate}
 \end{frame}
-\section{Operadores relaciones en python}
+\begin{frame}
+\frametitle{Precedencia de los operadores aritméticos}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\setcounter{enumi}{5}
+\item La suma y resta son las operaciones que se evalúan al último. 
+\item Si una expresión contiene muchas operaciones de suma y resta, los operadores se evalúan de izquierda a derecha.
+\item La suma y resta tienen el mismo nivel de precedencia.
+\end{enumerate}
+\end{frame}
+\section{Operadores relacionales en python}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Operadores relacionales}
 \begin{frame}
@@ -326,47 +345,50 @@ Cuando se comparan dos (o más expresiones) mediante un operador, el tipo de dat
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Operaciones aritméticas y relacionales}
-Podemos extender el manejo con \python, al combinar las operaciones aritméticas y relaciones, nótese que siempre tendremos un valor booleano que se devuelve.
-\begin{block}{}
-\verb|>>> 1 + 2 > 7 - 3| \\
+Podemos extender el manejo con \python, al combinar las operaciones aritméticas y relacionales, nótese que siempre tendremos como respuesta un valor booleano:
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[10]: }} \verb| 1 + 2 > 7 - 3| \\
 \pause
-\verb| False|
-\end{block}
+\textcolor{red}{\texttt{Out[10]: }} \verb| False|
 \end{frame}
 \begin{frame}[fragile]
-\begin{block}{}
-\verb|>>> 1 < 2 < 3| \\
+\frametitle{Operaciones aritméticas y relacionales}
+Otro ejemplo en donde ahora tenemos dos expresiones relacionales:
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[11]: }} \verb| 1 < 2 < 3| \\
 \pause
-\verb| True|
-\end{block}
+\textcolor{red}{\texttt{Out[11]: }} \verb| True|
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{El operador de comparación de igualdad}
 El doble signo igual ($==$) es el operador de igualdad, a diferencia del operador $=$ que es el operador de asignación.
-\begin{block}{}
-\verb|>>> 1 > 2 == 2 < 3| \\
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[12]: }} \verb| 1 > 2 == 2 < 3| \\
 \pause
-\verb| False|
-\end{block}
+\textcolor{red}{\texttt{In[12]: }} \verb| False|
 \end{frame}
 \begin{frame}[fragile]
-\begin{block}{}
-\verb|>>> 3 > 4 < 5| \\
+\frametitle{Combinación de expresiones}
+\textcolor{ao}{\texttt{In[13]: }} \verb| 3 > 4 < 5| \\
 \pause
-\verb| False|
-\end{block}
+\textcolor{red}{\texttt{In[13]: }} \verb| False|
+\\
+\bigskip
 \pause
-\begin{block}{}
-\verb|>>> 1.0 / 3 < 0.3333| \\
+\textcolor{ao}{\texttt{In[14]: }} \verb| 1.0 / 3 < 0.3333| \\
 \pause
-\verb| False|
-\end{block}
+\textcolor{red}{\texttt{In[14]: }} \verb| False|
+\\
+\bigskip
 \pause
-\begin{block}{}
-\verb|>>> 5.0 / 3 >= 11 /7.0| \\
+\textcolor{ao}{\texttt{In[15]: }} \verb| 5.0 / 3 >= 11 /7.0| \\
 \pause
-\verb| True|
-\end{block}
+\textcolor{red}{\texttt{In[15]: }} \verb| True|
+\\
+\bigskip
 Las expresiones se pueden complicar cada vez más, por lo que hay que mantener atención al momento de escribirlas.
 \end{frame}
 \begin{frame}
@@ -385,32 +407,124 @@ $>=$ & Mayor o igual & $3.5 >= 10$ & \textcolor{red}{\texttt{False}} \\ \hline
 \end{tabular}
 \end{table}
 \end{frame}
+\begin{frame}[fragile]
+\frametitle{Posibles errores al introducir valores/operaciones}
+Será muy común al inicio encontrar errores cuando se teclean las instrucciones en el código, por lo que hay que tomar en cuenta los avisos que nos devuelve \python:
+\\
+\bigskip
+\pause
+\textcolor{ao}{\texttt{In[16]: }} \verb| 5 + |
+\\
+\pause
+\verb| File "<stdin>", line 1| \\
+\verb|      5 +  | \\
+\verb|         ^| \\
+\textcolor{red}{\texttt{SyntaxError:}}\verb| invalid syntax|
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Posibles errores al introducir valores/operaciones}
+\textcolor{ao}{\texttt{In[17]: }} \verb| 42 + 5 + * 2 |
+\\
+\pause
+\verb| File "<stdin>", line 1| \\
+\verb|   42 + 5 + * 2 | \\
+\verb|            ^| \\
+\textcolor{red}{\texttt{SyntaxError:}}\verb| invalid syntax|
+\end{frame}
 \section{Operadores booleanos en python}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Operadores booleanos}
 \begin{frame}
 \frametitle{Operadores booleanos}
-En el caso del operador boleano \texttt{and} y el operador \texttt{or} evalúan una expresión compuesta por dos (o más términos).
+Existen en \python{} tres operadores booleanos:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item \azulfuerte{and}
+\item \azulfuerte{or}
+\item \azulfuerte{not}
+\end{enumerate}
+\pause
+Estos operadores comparan valores booleanos, el resultado de ésta comparación se expresa en un valor booleano.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{El operador booleano \texttt{and}}
+Cuando comparamos dos expresiones con el operador booleano \azulfuerte{and}, tendremos de respuesta un valor \textoazul{True}, siempre y cuando ambas expresiones sean verdaderas:
 \\
 \bigskip
-Si ambas expresiones tienen el valor \textoazul{True}, el valor que devuelve la evaluación de la expresión que involucra a las dos primeras, es \textoazul{True}.
+\pause
+\textcolor{ao}{\texttt{In[18]: }} \verb| (4 < 5) and (5 < 6)| \\
+\pause
+\textcolor{red}{\texttt{Out[18]: }} \verb| True|
 \end{frame}
-\begin{frame}
-Como se verá en la tabla de verdad, se necesita una condición particular para que el valor que devuelva la comparación, sea \textcolor{red}{\texttt{False}}.
-\begin{table}
-\fontsize{12}{12}\selectfont
-\begin{tabular}{| c | l | c | c |}
-\hline
-Operador & Operación & Ejemplo & Resultado \\ \hline
-\texttt{and} & Conjunción & \textcolor{red}{False} and \textoazul{True} & \textcolor{red}{False} \\ \hline
-\texttt{or} & Disyunción & \textcolor{red}{False} or \textoazul{True}  &
-\textoazul{True} \\ \hline
-\texttt{not} & Negación & \texttt{not} \textoazul{True} & \textcolor{red}{False} \\ \hline
-\end{tabular}
-\end{table}
+\begin{frame}[fragile]
+\frametitle{El operador booleano \texttt{and}}
+En caso de que una de las expresiones sea \textoazul{False} (incluso las dos expresiones), al momento de compararlas con el operador booleano \azulfuerte{and}, el resultado que se devuelve es \azulfuerte{False}:
+\\
+\bigskip
+\pause
+\textcolor{ao}{\texttt{In[19]: }} \verb| (4 < 5) and (9 < 6)| \\
+\pause
+\textcolor{red}{\texttt{Out[19]: }} \verb| False|
 \end{frame}
+\begin{frame}[fragile]
+\frametitle{El operador booleano \texttt{or}}
+El operador booleano \azulfuerte{or} devuelve un valor \textoazul{True}, cuando una de las expresiones es verdadera (incluso ambas):
+\\
+\bigskip
+\pause
+\textcolor{ao}{\texttt{In[20]: }} \verb| (1==2) or (2 == 2)| \\
+\pause
+\textcolor{red}{\texttt{Out[20]: }} \verb| True|
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{El operador booleano \texttt{or}}
+Si las expresiones que se comparan con el operador booleano \azulfuerte{or} son ambas falsas, se tendrá como respuesta un valor \textoazul{False}:
+\\
+\bigskip
+\pause
+\textcolor{ao}{\texttt{In[21]: }} \verb| (1 > 2) or (8 == 2)| \\
+\pause
+\textcolor{red}{\texttt{Out[21]: }} \verb| False|
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{El operador booleano \texttt{not}}
+El operador booleano \azulfuerte{not} \enquote{niega} (invierte) el valor booleano de la expresión que evalúa:
+\\
+\bigskip
+\pause
+\textcolor{ao}{\texttt{In[22]: }} \verb| not(True)| \\
+\pause
+\textcolor{red}{\texttt{Out[22]: }} \verb| False|
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{El operador booleano \texttt{not}}
+Podemos ocupar una expresión más elaborada en la que anticipamos el resultado y entonces se ocupa el operador \azulfuerte{not}, para negar el resultado:
+\\
+\bigskip
+\pause
+\textcolor{ao}{\texttt{In[23]: }} \verb| ((2 + 2) == 4) and (not ((2 + 2) == 5)))| \\
+\pause
+\textcolor{red}{\texttt{Out[23]: }} \verb| True|
+\end{frame}
+% \begin{frame}
+% \frametitle{Tabla de resumen}
+% Como se verá en la siguiente tabla, se necesita una condición particular para que el valor que devuelva la comparación, sea \textcolor{red}{\texttt{False}}.
+% \begin{table}
+% \fontsize{12}{12}\selectfont
+% \begin{tabular}{| c | l | c | c |}
+% \hline
+% Operador & Operación & Ejemplo & Resultado \\ \hline
+% \texttt{and} & Conjunción & \textcolor{red}{False} and \textoazul{True} & \textcolor{red}{False} \\ \hline
+% \texttt{or} & Disyunción & \textcolor{red}{False} or \textoazul{True}  &
+% \textoazul{True} \\ \hline
+% \texttt{not} & Negación & \texttt{not} \textoazul{True} & \textcolor{red}{False} \\ \hline
+% \end{tabular}
+% \end{table}
+% \end{frame}
 \begin{frame}
 \frametitle{Tabla de verdad de los operadores booleanos}
+Se utilizan dos expresiones booleanas \textbf{A} y \textbf{B}, y se comparan con los operadores booleanos de \python{}:
 \begin{table}
 \begin{tabular}{| c | c | c | c | c |}
 \hline
@@ -433,108 +547,115 @@ Las variables en \python{} sólo son ubicaciones de memoria reservadas para alma
 Esto significa que cuando se crea una variable, se reserva un poco de espacio disponible en la memoria.
 \end{frame}
 \begin{frame}
+\frametitle{Tipos de variables}
 Basándose en el tipo de datos de una variable, el intérprete asigna memoria y decide qué se puede almacenar en la memoria reservada.
 \\
 \bigskip
-Por lo tanto, al asignar diferentes tipos de datos a las variables, se pueden almacenar \textbf{enteros}, \textbf{decimales} o \textbf{caracteres (cadenas)} en estas variables.
+Presentamos tres tipos de datos:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Tipo \textbf{Entero}: números con signo, sin decimales.
+\item Tipo \textbf{Punto flotante}: números con decimales.
+\item Tipo \textbf{Cadenas}: caracteres.
+\end{enumerate}
 \end{frame}
 \begin{frame}
 \frametitle{Asignando valores a variables}
-Las variables de \python{} no necesitan una declaración explícita para reservar espacio de memoria.
+Las variables en \python{} no necesitan una declaración explícita para reservar el espacio en memoria. La declaración ocurre automáticamente cuando se asigna un valor a una variable.
 \\
 \bigskip
-La declaración ocurre automáticamente cuando se asigna un valor a una variable. \emph{El signo igual (=) se utiliza para asignar valores a las variables}.
-\end{frame}
-\begin{frame}
-El término a la izquierda del operador $=$ es el \emph{nombre de la variable} y el término a la derecha del operador $=$ es el \emph{valor almacenado} en la variable.
+\pause
+\emph{El signo igual (=) se utiliza para asignar valores a las variables}.
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Ejemplos}
-Los comentarios en \python{} se indican con el símbolo $\#$, el texto no se interpreta como una instrucción.
-\begin{exampleblock}{}
-\fontsize{10}{10}\selectfont
-\begin{verbatim}
->>>contador = 100				# Asignacion de tipo entero
->>>distancia = 1000.0			# De punto flotante
->>>nombre = "Chucho"			# Una cadena de caracteres
-
->>>print(contador)
->>>print(distancia)
->>>print(nombre)
-\end{verbatim}
-\end{exampleblock}
+\frametitle{Asignando valores a variables}
+\textcolor{blue}{temperatura} = \textcolor{brown}{37.8}
+\\
+\bigskip
+El término a la izquierda del operador $=$ es el \textoazul{\emph{nombre de la variable}} y el término a la derecha del operador $=$ es el \textcolor{brown}{\emph{valor almacenado}} en la variable.
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Resultado}
-\begin{verbatim}
-100
-1000.0
-Chucho
-\end{verbatim}
+\frametitle{Ejemplos de asignación de variables}
+A continuación se asigna un valor a tres tipos de variables\footnote{Nótese que no se genera una línea de salida en qtConsole.}: entera, de punto flotante y de cadena:
+\\
+\bigskip
+\pause
+\textcolor{ao}{\texttt{In[24]: }} \verb| contador = 100| \\ \pause
+\textcolor{ao}{\texttt{In[25]: }} \verb| distancia = 1000.50| \\ \pause
+\textcolor{ao}{\texttt{In[26]: }} \verb| nombre = "Goyo"|
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Visualización del contenido de las variables}
+Para \enquote{ver} el contenido de una variable, escribimos el nombre de la misma, al presionar la tecla Enter, se devuelve el valor asignado:
+\\
+\bigskip
+\pause
+\textcolor{ao}{\texttt{In[27]: }} \verb| contador| \\
+\pause
+\textcolor{red}{\texttt{Out[27]: }} \verb| 100| \\
+\pause
+\textcolor{ao}{\texttt{In[28]: }} \verb| distancia| \\
+\pause
+\textcolor{red}{\texttt{Out[28]: }} \verb| 1000.50| \\
+\pause
+\textcolor{ao}{\texttt{In[29]: }} \verb| nombre| \\
+\pause
+\textcolor{red}{\texttt{Out[29]: }} \verb| Goyo|
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Asignación múltiple de valores}
-En \python podemos asignar un valor único a varias variables simultáneamente.
+En \python{} podemos asignar un valor único a varias variables de manera simultánea:
 \\
 \bigskip
-\begin{minipage}{0.37\textwidth}
-\begin{verbatim}
->>> A = b = c = 1
->>> print(A)
->>> print(b}
->>> print(c)
-\end{verbatim}
 \pause
-\begin{verbatim}
-1
-1
-1
-\end{verbatim}
-\end{minipage}
-\hspace{1cm}
+\textcolor{ao}{\texttt{In[30]: }} \verb| A = b = c = 1 | \\
 \pause
-\begin{minipage}{0.47\textwidth}
-En el ejemplo, se crea un objeto entero con el valor $1$, y las tres variables se asignan a la misma ubicación de memoria.
-\end{minipage}
+\textcolor{ao}{\texttt{In[31]: }} \verb| A | \\
+\pause
+\textcolor{red}{\texttt{Out[31]: }} \verb| 1 | \\
+\pause
+\textcolor{ao}{\texttt{In[32]: }} \verb| b | \\
+\pause
+\textcolor{red}{\texttt{Out[32]: }} \verb| 1 | \\
+\pause
+\textcolor{ao}{\texttt{In[33]: }} \verb| c | \\
+\pause
+\textcolor{red}{\texttt{Out[33]: }} \verb| 1 |
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Asignación múltiple a varias variables}
-También puede asignar varios objetos a varias variables.
-\\
-\bigskip
-\begin{verbatim}
->>> A, b, c = 1, 2, "Alicia"
->>> print (A)
->>> print (b)
->>> print (c)
-\end{verbatim}
+También podemos asignar varios valores a varias variables de manera simultánea, separando con una coma tanto a las variables como a los valores:
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Asignación múltiple a varias variables}
+\textcolor{ao}{\texttt{In[34]: }} \verb| usuario, folio, temp = "Poncho", 100, 37.3 | \\
 \pause
-\begin{minipage}{0.3\textwidth}
-\begin{verbatim}
-1
-2
-Alicia
-\end{verbatim}
-\end{minipage}
+\textcolor{ao}{\texttt{In[35]: }} \verb| usuario | \\
 \pause
-\hspace{1.5cm}
-\begin{minipage}{0.55\textwidth}
-\fontsize{12}{12}\selectfont
-Aquí, dos objetos enteros con valores $1$ y $2$ se asignan a las variables $A$ y $b$ respectivamente, y un objeto de cadena con el valor \textbf{Alicia} se asigna a la variable $c$.
-\end{minipage}
+\textcolor{red}{\texttt{Out[35]: }} \verb| 'Poncho'| \\
+\pause
+\textcolor{ao}{\texttt{In[36]: }} \verb| folio | \\
+\pause
+\textcolor{red}{\texttt{Out[36]: }} \verb| 100| \\
+\pause
+\textcolor{ao}{\texttt{In[37]: }} \verb| temp| \\
+\pause
+\textcolor{red}{\texttt{Out[37]: }} \verb| 37.3|
 \end{frame}
 \section{Tipos de Datos Estándar}
 \frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Los tipos de datos en \python}
 \begin{frame}
+\frametitle{Tipos de datos}
 Los datos almacenados en la memoria pueden ser de varios tipos. Por ejemplo, la edad de una persona se almacena como un valor numérico y su dirección se almacena como caracteres alfanuméricos.
 \\
 \bigskip
-En \python se cuenta con varios tipos de datos estándar que se utilizan para definir las operaciones posibles entre ellos y el método de almacenamiento para cada uno de ellos.
+En \python{} se cuenta con varios tipos de datos estándar que se utilizan para definir las operaciones posibles entre ellos y el método de almacenamiento para cada uno de ellos.
 \end{frame}
 \begin{frame}
 \frametitle{Tipos de datos}
-Los tipos de datos que se utilizan en \python son cinco:
+Los tipos de datos que se utilizan en \python{} son cinco:
 \setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}[<+->]
@@ -554,47 +675,61 @@ Los objetos numéricos se crean cuando se les asigna un valor.
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Declaración en variables}
-\begin{verbatim}
->>> Var1 = Var2 = 10
->>> print (Var1)
->>> print (Var2)
-\end{verbatim}
+\textcolor{ao}{\texttt{In[38]: }} \verb| var1 = var2 = 10| \\
 \pause
-\begin{verbatim}
-10
-10
-\end{verbatim}
+\textcolor{ao}{\texttt{In[39]: }} \verb| var1| \\
+\pause
+\textcolor{red}{\texttt{Out[39]: }} \verb| 10| \\
+\pause
+\textcolor{ao}{\texttt{In[40]: }} \verb| var2| \\
+\pause
+\textcolor{red}{\texttt{Out[40]: }} \verb| 10|
 \end{frame}
 \begin{frame}
-\frametitle{Eliminar variables en \python}
-También se puede eliminar la referencia a un objeto numérico utilizando la sentencia \texttt{del}
+\frametitle{Eliminando variables en \python}
+También se puede eliminar la referencia a una variable numérica utilizando la sentencia \azulfuerte{del}
 \\
 \bigskip
 La sintaxis de la sentencia \texttt{del} es:
 \\
 \bigskip
 \texttt{del var1 [, var2 [, var3 [...., varN]]]]}
-\end{frame}
-\begin{frame}[fragile]
-Se puede eliminar un solo objeto o varios objetos utilizando la sentencia \texttt{del}
 \\
 \bigskip
-Por ejemplo:
+los corchetes indican que hay parámetros que son opcionales.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Eliminando variables en \python}
+Se puede eliminar una sola variable o varias utilizando la sentencia \azulfuerte{del}
+\\
+\bigskip
+Por ejemplo, la variable \textoazul{var1} que ya teníamos referenciada previamente:
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[41]: }} \verb| del var1|
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Eliminando variables en \python{arg}}
+Si desde la terminal hacemos referencia a la variable eliminada, tendremos un mensaje como el siguiente:
+\textcolor{ao}{\texttt{In[42]: }} \verb| var1|
 \begin{verbatim}
-del var
+NameError   Traceback (most recent call last)
+<stdin> in <module>
+----> 1 var1
 
-del variable1, variable2
+NameError: name 'var1' is not defined
 \end{verbatim}
+La variable ya no existe y no podemos recuperarla.
 \end{frame}
 \subsection{Tipos de datos numéricos}
 \begin{frame}
 \frametitle{Tipos de datos numéricos}
-En python se soportan tres tipos numéricos diferentes:
+En \python{} se soportan tres tipos numéricos diferentes:
 \setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}[<+->]
 \item Int (enteros con signo)
-\item Flotante (valores reales de punto flotante)
+\item De punto flotante (valores reales con decimales)
 \item Complejos (números complejos)
 \end{enumerate}
 \end{frame}
@@ -606,7 +741,7 @@ Los números enteros son aquellos que no tienen decimales, tanto positivos como 
 Todos los números enteros en \python 3 se representan como enteros largos.
 \end{frame}
 \begin{frame}
-\frametitle{Números reales o flotantes}
+\frametitle{Números flotantes o reales}
 Los números reales son los que tienen decimales. En \python{} se expresan mediante el tipo \texttt{float}.
 \\
 \bigskip
@@ -644,42 +779,60 @@ Con \python{} se permite cualquier par de 'comillas simples' o comillas \enquote
 \end{frame}
 \begin{frame}
 \frametitle{Operación con cadenas}
-Los subconjuntos de cadenas pueden ser tomados usando el operador de corte $[]$ y $[:]$ con los índices comenzando en $0$ al inicio de la cadena hasta llegar a $-1$ al final de la misma.
+Los subconjuntos de cadenas pueden ser tomados usando el operador de corte $[ \quad ]$ y $[:]$ con los índices comenzando en $0$ al inicio de la cadena hasta llegar a $-1$ al final de la misma.
 \pause
 El signo más $+$ es el operador de concatenación de cadenas y el asterisco $*$ es el operador de repetición.
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Ejemplos}
-\begin{verbatim}
->>> cadena = 'Hola Mundo!'
+\frametitle{Ejemplo de una variable de tipo cadena}
+Declaremos una variable con un tipo de dato cadena:
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[43]: }} \verb| facultad = "Ciencias"|
+\end{frame}
+\begin{frame}
+\frametitle{Manipulando la variable de tipo cadena}
+Es necesario conocer la manera en la que se almacena una variable de tipo cadena:
+\begin{figure}
+\includestandalone{Figuras/variablecadena01}
+\end{figure}
+cada caracter se almacena en un espacio que se identifica mediante un índice, en \python{} los índices comienzan en cero.
 
->>> print (cadena)
->>> print (cadena[0])
->>> print (cadena[2:5])     
->>> print (cadena[2:])
->>> print (cadena * 2)
->>> print (cadena + "PUMAS")
-\end{verbatim}
+% >>> cadena = 'Hola Mundo!'
+
+% >>> print (cadena)
+% >>> print (cadena[0])
+% >>> print (cadena[2:5])     
+% >>> print (cadena[2:])
+% >>> print (cadena * 2)
+% >>> print (cadena + "PUMAS")
+% \end{verbatim}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Resultados}
-\begin{verbatim}
->>> print (cadena[0])
-\end{verbatim}
+\frametitle{Recuperando el contenido de la cadena}
+Con el debido manejo de los índices podemos recuperar el contenido de la variable de tipo cadena, para ello recurrimos al manejo de los índices con corchetes:
+\\
+\bigskip
 \pause
-Presenta el primer caracter de la cadena
-\begin{verbatim}
-H
-\end{verbatim}
+\textcolor{ao}{\texttt{In[44]: }} \verb| facultad[0]|
+\\
 \pause
-\begin{verbatim}
->>> print (cadena[2:5])
-\end{verbatim}
-\pause
-Presenta los caracteres de la 3a a la 5a posicion
-\begin{verbatim}
-la
-\end{verbatim}
+\textcolor{red}{\texttt{Out[44]: }} \verb| 'C'|
+\\
+\medskip
+Como vemos, se recupera el primer caracter de la variable.
+% \begin{verbatim}
+% H
+% \end{verbatim}
+% \pause
+% \begin{verbatim}
+% >>> print (cadena[2:5])
+% \end{verbatim}
+% \pause
+% Presenta los caracteres de la 3a a la 5a posicion
+% \begin{verbatim}
+% la
+% \end{verbatim}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Resultados}

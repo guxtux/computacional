@@ -1,9 +1,23 @@
-\input{../Preambulos/pre_documento}
-\input{../Preambulos/pre_plantilla_Berlin_beaver}
-%\usepackage[backend=biber]{biblatex}
-%\bibliography{LibrosFC.bib}
-\input{../Preambulos/pre_codigo}
-\input{../Preambulos/pre_define_footers}
+\input{../Preambulos/preambulo_presentacion}
+% \usepackage[os=win]{menukeys}
+% \usepackage{pifont}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{siunitx}
+\newcommand{\funcionazul}[1]{\textcolor{blue}{\textbf{\texttt{#1}}}}
+\captionsetup{font=scriptsize,labelfont=scriptsize}
+\definecolor{ao}{rgb}{0.0, 0.5, 0.0}
+\definecolor{bisque}{rgb}{1.0, 0.89, 0.77}
+\definecolor{amber}{rgb}{1.0, 0.75, 0.0}
+\definecolor{armygreen}{rgb}{0.29, 0.33, 0.13}
+\definecolor{alizarin}{rgb}{0.82, 0.1, 0.26}
+\definecolor{cadetblue}{rgb}{0.37, 0.62, 0.63}
+% \input{../Preambulos/pre_documento}
+% \input{../Preambulos/pre_plantilla_Berlin_beaver}
+% %\usepackage[backend=biber]{biblatex}
+% %\bibliography{LibrosFC.bib}
+% \input{../Preambulos/pre_codigo}
+% \input{../Preambulos/pre_define_footers}
 \title{Tema 0 - Graficación con \python}
 \subtitle{Semestre 2018-1}
 \author[]{M. en C. Gustavo Contreras Mayén \\ M. en C. Abraham Lima Buendía}
@@ -52,7 +66,7 @@ plt.show()
 \frametitle{Ejercicio 1}
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.35]{plotEjercicio1.eps}
+	\includegraphics[scale=0.35]{Imagenes/plotEjercicio1.eps}
 	\caption{Gráfica obtenida por el primer código.}
 \end{figure}
 \end{frame}
@@ -60,7 +74,7 @@ plt.show()
 \frametitle{Ejercicio 1}
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.25]{plotEjercicio1.eps}
+	\includegraphics[scale=0.25]{Imagenes/plotEjercicio1.eps}
 	\caption{Grafica que devuelve el primer código.}
 \end{figure}
 Te estarás preguntando: \textcolor{red}{ ¿por qué tenemos en el eje $x$ el rango $0-3$ y en el eje $y$ el rango  $1-4$?}
@@ -120,7 +134,7 @@ plt.axis(\tikzmark{b1}x1, x2, \tikzmark{b2}y1, y2)
 \frametitle{Ejercicio 2}
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.35]{plotEjercicio2.eps}
+	\includegraphics[scale=0.35]{Imagenes/plotEjercicio2.eps}
 	\caption{Gráfica obtenida con dos listas de números. Nótese que los puntos no están unidos entre sí.}
 \end{figure}
 \end{frame}
@@ -210,7 +224,7 @@ t = np.arange(\tikzmark{a2}inicio, \tikzmark{b2}fin, \tikzmark{c2}paso)
 \begin{frame}[fragile]
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.5]{plotEjercicio3.eps}
+	\includegraphics[scale=0.5]{Imagenes/plotEjercicio3.eps}
 	\caption{Gráfica con tres curvas.}
 \end{figure}
 \end{frame}
@@ -238,7 +252,7 @@ plt.plot(t2, np.cos(2*np.pi*t2), 'r--')
 \begin{frame}[fragile]
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.5]{plotEjercicio4.eps}
+	\includegraphics[scale=0.5]{Imagenes/plotEjercicio4.eps}
 \end{figure}
 \end{frame}
 \begin{frame}
@@ -277,8 +291,8 @@ plt.show()
 \begin{frame}[fragile]
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.5]{plotEjercicio5_1.eps}<1>
-	\includegraphics[scale=0.5]{plotEjercicio5_2.eps}<2>
+	\includegraphics[scale=0.5]{Imagenes/plotEjercicio5_1.eps}<1>
+	\includegraphics[scale=0.5]{Imagenes/plotEjercicio5_2.eps}<2>
 \end{figure}
 \end{frame}
 \subsection{Recursos para \texttt{matplotlib}}
