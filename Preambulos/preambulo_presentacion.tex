@@ -5,9 +5,20 @@
 \usepackage{standalone}
 \usepackage{color}
 \usepackage{hyperref}
+%\hypersetup{colorlinks,linkcolor=,urlcolor=blue}
+%\hypersetup{colorlinks,urlcolor=blue}
+\usepackage{xcolor,soul}
+\usepackage{etoolbox}
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{multicol}
+\usepackage{bookmark}
+\usepackage{listings}
+\lstset{
+basicstyle=\ttfamily,
+columns=flexible,
+breaklines=true
+}
 \usepackage{graphicx}
 \usepackage{tikz}
 \usetikzlibrary{matrix,backgrounds}
@@ -81,3 +92,10 @@
   {}
   {}
 \makeatother
+
+% \makeatletter
+% \patchcmd{\hyper@link@}
+%   {{\Hy@tempb}{#4}}
+%   {{\Hy@tempb}{\ul{#4}}}
+%   {}{}
+% \makeatother

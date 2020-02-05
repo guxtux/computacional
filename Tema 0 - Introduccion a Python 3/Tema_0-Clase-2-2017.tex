@@ -17,8 +17,8 @@
 \definecolor{armygreen}{rgb}{0.29, 0.33, 0.13}
 \definecolor{alizarin}{rgb}{0.82, 0.1, 0.26}
 \definecolor{cadetblue}{rgb}{0.37, 0.62, 0.63}
-\title{Tema 0 - Introducción a \python - 2}
-\subtitle{Semestre 2018-1}
+\title{Tema 0 - Introducción a \python{} - 2}
+%\subtitle{Semestre 2018-1}
 \author[]{M. en C. Gustavo Contreras Mayén \\ M. en C. Abraham Lima Buendía}
 \institute{Facultad de Ciencias - UNAM}
 \titlegraphic{\includegraphics[width=2cm]{escudo-facultad-ciencias}\hspace*{4.75cm}~%
@@ -39,20 +39,20 @@
 Una buena parte de la solución de problemas mediante el uso de un lenguaje, se realiza con los valores que se hayan ingresado previamente en el algoritmo.
 \\
 \bigskip
-Pero será muy común que proporcionemos los valores manualmente, para que se ejecuten los cálculos.
+Pero será muy común que proporcionemos como usuarios los valores manualmente, para que se ejecuten los cálculos.
 \end{frame}
 \begin{frame}\frametitle{Entrada estándar en un programa}
-Se le denomina entrada estándar al procedimiento en el cual se ingresan valores en un programa.
+Se le denomina \emph{entrada estándar} al procedimiento en el cual se ingresan valores en un programa.
 \\
 \bigskip
-El dispositivo estándar de entrada de una computadora, es el teclado. Existen otros dispositivos de entradasda tales como los puertos serial, paralelo, usb, etc.
+El dispositivo estándar de entrada de una computadora, es el teclado. Existen otros dispositivos de entrada tales como los puertos serial, paralelo, usb, etc.
 \end{frame}
 \begin{frame}
 \frametitle{Instrucciones de entrada con \python}
 Existen dos maneras de ingresar valores a un programa de \python.
 \\
 \bigskip
-El usuario al concluir el ingreso de la información, debe de presionar la tecla Enter \keys{\return}, para que continue la ejecución de las instrucciones.
+El usuario al concluir el ingreso de la información mediante el teclado, debe de presionar la tecla Enter \keys{\return}, para que continue la ejecución de las instrucciones.
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{La función input()}
@@ -63,33 +63,136 @@ En la llamada a la función, el programa se detiene esperando que se escriba alg
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{La función input()}
+Veamos un ejemplo\footnote{En esta presentación se reinicia el contador de instrucciones.}
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[1]: }} \verb| nombre = input("¿Cómo te llamas? ")|
+\\
+\pause
+\verb|¿Cómo te llamas?|
+\\
+\pause
+\verb|¿Cómo te llamas? Gustavo|
+\\
+\pause
+\textcolor{ao}{\texttt{In[2]: }} \verb|print("Mucho gusto en conocerte:" , nombre)|
+\\
+\pause
+\textcolor{red}{\texttt{Out[2]: }} \verb| Mucho gusto en conocerte, Gustavo|
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{La función input()}
+Consideremos ahora el caso en donde queremos ingresar un valor de velocidad inicial para un cálculo de caída libre:
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[3]: }} \verb| vel = input("Ingresa la velocidad en m/s :")|
+\\
+\pause
+\verb|Ingresa la velocidad en m/s: |
+\\
+\pause
+\verb|Ingresa la velocidad en m/s:  3.5|
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{La función input()}
+Parece que todo va bien, pero veamos qué ocurre cuando queremos realizar una operación aritmética con el contenido de la variable \textoazul{vel}:
+\\
+\pause
+\textcolor{ao}{\texttt{In[4]: }} \verb|vel / 10.0|
+\\
+\pause
 \fontsize{12}{12}\selectfont
-\begin{exampleblock}{}
-	\verb|>>> nombre = input("¿Cómo te llamas? ")| \\
-	\verb|¿Cómo te llamas? Gustavo| \\
-	\verb|>>> print("Mucho gusto en conocerte, ", nombre)| \\
-	\verb|Mucho gusto en conocerte, Gustavo|
-\end{exampleblock}
+\begin{verbatim}
+TypeError    Traceback (most recent call last)
+<stdin> in <module>
+----> 1 velocidad_inicial/10.0
+
+TypeError: unsupported operand type(s) for /: 'str'
+and 'float'
+\end{verbatim}
+\end{frame}
+\begin{frame}
+\frametitle{La función input() devuelve cadenas}
+Se presenta un error debido a que no podemos realizar operaciones entre distintos tipos de datos, el tipo de dato contenido en \textoazul{vel}, es una cadena, mientras que el valor $10.0$ es un tipo de dato de punto flotante.
+\\
+\bigskip
+\pause
+¿Qué podemos hacer para realizar operaciones aritméticas con datos obtenidos con la función \textoazul{input()}?
 \end{frame}
 \begin{frame}
 \frametitle{Conversión de tipos de datos}
 De forma predeterminada, la función \funcionazul{input(\ )} convierte la entrada en un tipo de dato \textoazul{cadena}.
 \\
 \bigskip
-Si se quiere que \python{} interprete la entrada a un tipo de dato en particular, se debe de usar la respectiva función de conversión.
+Si queremos que \python{} interprete la entrada con un tipo de dato en particular, debemos de usar la respectiva función que convierte el tipo de dato.
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Funciones de conversión}
-La función \funcionazul{int(\ )} convierte a un tipo de dato entero.
-\begin{verbatim}
->>>a = int(input("Ingrese un entero"))
-\end{verbatim}
+\frametitle{Funciones para conversión de tipos de dato}
+En \python{} se tienen tres funciones con las que podemos cambiar el tipo de dato y con ello, realizar las operaciones y/o funciones pertinentes, las funciones son
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item \textoazul{\texttt{int(arg)}}
+\item \textoazul{\texttt{float(arg)}}
+\item \textoazul{\texttt{srt(arg)}}
+\end{enumerate}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{La función \texttt{int(\ )}}
+La función \funcionazul{int(arg)} convierte el argumento \texttt{(arg)} a un tipo de dato entero.
+\\
 \bigskip
+\textcolor{ao}{\texttt{In[5]: }} \verb|a = int(input("Ingrese un entero: "))|
+\\
 \pause
-La función \funcionazul{float(\ )} convierte a un tipo de dato real.
-\begin{verbatim}
->>> b = float(input("Ingrese un real"))
-\end{verbatim}
+\verb| Ingrese un entero: |
+\\
+\pause
+\verb| Ingrese un entero: 10|
+\\
+\pause
+\textcolor{ao}{\texttt{In[6]: }} \verb| a + 123|
+\\
+\pause
+\textcolor{red}{\texttt{Out[6]: }} \verb| 133|
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{La función \texttt{float(\ )}}
+La función \funcionazul{float(arg)} convierte el argumento \texttt{(arg)} a un tipo de dato de punto flotante.
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[7]: }} \verb|b = float(input("Ingrese un valor real: "))|
+\\
+\pause
+\verb| Ingrese un valor real: |
+\\
+\pause
+\verb| Ingrese un valor real: 3.14|
+\\
+\pause
+\textcolor{ao}{\texttt{In[8]: }} \verb| b**2|
+\\
+\pause
+\textcolor{red}{\texttt{Out[8]: }} \verb| 9.8596|
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{La función \texttt{str(\ )}}
+La función \funcionazul{str(arg)} convierte el argumento \texttt{(arg)} a un tipo de dato de cadena.
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[9]: }} \verb|c = str(input("Ingrese el dia del mes: "))|
+\\
+\pause
+\verb| Ingrese el dia del mes: |
+\\
+\pause
+\verb| Ingrese el dia del mes: 14|
+\\
+\pause
+\textcolor{ao}{\texttt{In[10]: }} \verb|'Febrero ' + c + ' de 2020'|
+\\
+\pause
+\textcolor{red}{\texttt{Out[10]: }} \verb| 'Febrero 14 de 2020'|
 \end{frame}
 \subsection{Salida de datos}
 \begin{frame}
@@ -97,7 +200,7 @@ La función \funcionazul{float(\ )} convierte a un tipo de dato real.
 La salida estándar de datos en \python{} es a través de la pantalla.
 \\
 \bigskip
-Otros tipos de salida son: la impresora, a un archivo de datos, a un plotter, etc.
+Otros tipos de salida son: la impresora, a un archivo de datos, un plotter, etc.
 \end{frame}
 \begin{frame}
 \frametitle{La función \texttt{print()}}

@@ -821,65 +821,138 @@ Con el debido manejo de los índices podemos recuperar el contenido de la variab
 \\
 \medskip
 Como vemos, se recupera el primer caracter de la variable.
-% \begin{verbatim}
-% H
-% \end{verbatim}
-% \pause
-% \begin{verbatim}
-% >>> print (cadena[2:5])
-% \end{verbatim}
-% \pause
-% Presenta los caracteres de la 3a a la 5a posicion
-% \begin{verbatim}
-% la
-% \end{verbatim}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Resultados}
-\begin{verbatim}
->>> print (cadena[2:])
-\end{verbatim}
-\pause
-Presenta la cadena que inicia a partir del 3er caracter
-\begin{verbatim}
-la Mundo!
-\end{verbatim}
-\pause
-\begin{verbatim}
->>> print (cadena * 2)
-\end{verbatim}
-\pause
-Presenta dos veces la cadena
-\begin{verbatim}
-Hola Mundo!Hola Mundo!
-\end{verbatim}
+\frametitle{Recuperando el contenido de la cadena}
+\begin{figure}
+	 \includestandalone{Figuras/variablecadena02}
+\end{figure}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Resultados}
-\begin{verbatim}
->>> print (cadena + "PUMAS")
-\end{verbatim}
+\frametitle{Recuperando el contenido de la cadena}
+El manejo de los índices en \python{} es muy versátil, al utilizar un número negativo podemos recorrer en sentido inverso el contenido de la variable de cadena, por ejemplo:
+\\
+\bigskip
 \pause
-Presenta la cadena y concatena la segunda cadena
-\begin{verbatim}
-Hola Mundo!PUMAS
-\end{verbatim}
+\textcolor{ao}{\texttt{In[45]: }} \verb| facultad[-1]|
+\\
+\pause
+\textcolor{red}{\texttt{Out[45]: }} \verb| 's'|
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Recuperando el contenido de la cadena}
+En sentido inverso, los índices en \python{} inician en $-1$:
+\begin{figure}
+		\includestandalone{Figuras/variablecadena03}
+\end{figure}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Recuperando el contenido con slicing}
+El término \emph{slicing} hace referencia a un \enquote{rebanado o corte} en una cadena, que es una seleción de la misma, para ello se utilizan los dos puntos dentro del corchete, teniendo las distintas opciones:
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Recuperando el contenido con slicing}
+Recupera el contenido desde \emph{inicio} hasta \emph{fin - 1:}
+\\
+\bigskip
+\verb|cadena[inicio:fin]|
+\\
+\bigskip
+\pause
+Recupera el contenido desde \emph{inicio} hasta el resto de la cadena
+\\
+\bigskip
+\verb|cadena[inicio:]|
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Recuperando el contenido con slicing}
+Recupera el contenido desde el inicio hasta \emph{fin - 1:}
+\\
+\bigskip
+\verb|cadena[:fin]|
+\\
+\bigskip
+\pause
+Recupera una copia de toda la cadena
+\\
+\bigskip
+\verb|cadena[:]|
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejemplos con el uso del slicing en cadenas}
+\textcolor{ao}{\texttt{In[46]: }} \verb| facultad[2:4]|
+\\
+\pause
+\textcolor{red}{\texttt{Out[46]: }} \verb| 'en'|
+\\
+\bigskip
+\pause
+\textcolor{ao}{\texttt{In[47]: }} \verb| facultad[2:]|
+\\
+\pause
+\textcolor{red}{\texttt{Out[47]: }} \verb| 'encias'|
+\pause
+\\
+\bigskip
+\pause
+\textcolor{ao}{\texttt{In[48]: }} \verb| facultad[6:8]|
+\\
+\pause
+\textcolor{red}{\texttt{Out[48]: }} \verb| 'as'|
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Representación de los índices en el slicing}
+Vemos que al usar el \emph{slicing}, algo pasa al momento de asignar los índices, y no recupera propiamente lo que pedimos devuelta, veamos en el siguiente diagrama los índices del contenido de la variable y los índices del \emph{slicing}:
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Índices de contenido y de slicing}
+\begin{figure}
+	\includestandalone[scale=0.8]{Figuras/variablecadena05}
+\end{figure}
+Como vemos, cuando usamos el \emph{slicing} los índices cambian a una posición, no al contenido de la cadena.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Operador de repetición}
+Cuando tenemos una cadena, es posible repetir un determinado número de veces la misma, para ello se utiliza el operador de repetición $*$:
+\\
+\bigskip
+\pause
+\textcolor{ao}{\texttt{In[49]: }} \verb| facultad*2|
+\\
+\pause
+\textcolor{red}{\texttt{Out[49]: }} \verb| 'CienciasCiencias'|
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Operador de concatenación}
+Las variables de tipo cadena se pueden concatenar, es decir, se pueden unir mediante el operador $+$:
+\\
+\bigskip
+\pause
+\textcolor{ao}{\texttt{In[50]: }} \verb| Dependencia = 'Facultad de '|
+\\
+\pause
+\textcolor{ao}{\texttt{In[51]: }} \verb| Dependencia + facultad|
+\\
+\pause
+\textcolor{red}{\texttt{Out[51]: }} \verb| 'Facultad de Ciencias'|
 \end{frame}
 \subsection{Listas}
 \begin{frame}
-\frametitle{Lista in \python}
-Las listas es el tipo de dato más versátil de los tipos de datos compuestos de \python.
+\frametitle{Las listas en \python}
+Las listas son el tipo de dato más versátil de los datos compuestos de \python.
 \\
 \bigskip
-Una lista contiene elementos separados por comas y entre corchetes $[ ]$.
+Una lista contiene elementos separados por comas y entre corchetes $[ \quad ]$.
 \end{frame}
 \begin{frame}
+\frametitle{Las listas en \python}
 En cierta medida, las listas son similares a los arreglos (arrays) en el lenguaje C.
 \\
 \bigskip
-Una de las diferencias entre ellos es que todos los elementos pertenecientes a una lista pueden ser de tipo de datos diferente.
+Una de las diferencias entre ellos, es que todos los elementos pertenecientes a una lista pueden ser de tipo de datos diferente.
 \end{frame}
 \begin{frame}
+\frametitle{Las listas en \python}
 Los valores almacenados en una lista se pueden acceder utilizando el operador de división $[ \: ]$ y $[:]$ con índices que empiezan en $0$ al principio de la lista y opera hasta el final con $-1$.
 \\
 \bigskip
@@ -887,204 +960,290 @@ El signo más $+$ es el operador de concatenación de lista y el asterisco $*$ e
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Ejemplos con listas}
-\fontsize{12}{12}\selectfont
-\begin{verbatim}
-milista = [ 'abcd', 786 , 2.23, 'salmon', 70.2 ]
-
-listabreve = [123, 'pizza']
-\end{verbatim}
+%\fontsize{12}{12}\selectfont
+Para introducir una lista, abrimos corchetes y separamos mediante comas los elementos de la misma:
+\\
+\pause
+\textcolor{ao}{\texttt{In[52]: }} \verb| lista1 = ['abcd', 786, 2.23, 'salmon', 70.2]|
+\\
+\textcolor{ao}{\texttt{In[53]: }} \verb| lista2 = [ 123, 'pizza']|
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Operaciones con las listas}
-\begin{verbatim}
->>> print (milista)
-\end{verbatim}
+Al igual que con las variables, podemos visualizar el contenido de una lista, al indicarla en la línea de comandos:
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[54]: }} \verb| lista1|
+\\
 \pause
-\begin{verbatim}
-['abcd', 786, 2.23, 'salmon', 70.2]
-\end{verbatim}
-\pause
-\begin{verbatim}
->>> print (milista[0])
-\end{verbatim}
-\pause
-\begin{verbatim}
-abcd
-\end{verbatim}
-\pause
-\begin{verbatim}
->>> print (milista[1:3])
-\end{verbatim}
-\pause
-\begin{verbatim}
-[786, 2.23]
-\end{verbatim}
+\textcolor{red}{\texttt{Out[54]: }} \verb| ['abcd', 786, 2.23, 'salmon', 70.2]|
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Operaciones con las listas 2}
-\begin{verbatim}
->>> print (milista[2:])
-\end{verbatim}
+Como en una variable de tipo cadena, el contenido de las listas se realiza con índices: tanto de contenido como de \emph{slicing}:
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[55]: }} \verb| lista1[2:]|
+\\
 \pause
-\begin{verbatim}
-[2.23, 'salmon', 70.2]
-\end{verbatim}
+\textcolor{red}{\texttt{Out[55]: }} \verb| [2.23, 'salmon', 70.2]|
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Operaciones con las listas 2}
+\textcolor{ao}{\texttt{In[56]: }} \verb| lista1[-1]|
+\\
 \pause
-\begin{verbatim}
->>> print (listabreve * 2)
-\end{verbatim}
+\textcolor{red}{\texttt{Out[56]: }} \verb| [70.2]|
+\\
+\bigskip
 \pause
-\begin{verbatim}
-[123, 'pizza', 123, 'pizza']
-\end{verbatim}
+\textcolor{ao}{\texttt{In[57]: }} \verb| lista1[2:4]|
+\\
 \pause
-\begin{verbatim}
->>> print (milista + listabreve)
-\end{verbatim}
+\textcolor{red}{\texttt{Out[57]: }} \verb| [2.23, 'salmon']|
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Operaciones con las listas 2}
+También se ocupan las operaciones de concatenación y repetición en las listas:
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[58]: }} \verb| lista1 + lista2|
+\\
 \pause
-\begin{verbatim}
-['abcd', 786, 2.23, 'salmon', 70.2, 123, 'pizza']
-\end{verbatim}
+\begingroup
+\fontsize{13}{13}\selectfont
+\textcolor{red}{\texttt{Out[58]: }} \verb| ['abcd', 786, 2.23, 'salmon', 70.2, 123, 'pizza']|
+\endgroup
+\\
+\bigskip
+\pause
+\textcolor{ao}{\texttt{In[59]: }} \verb| lista2*2|
+\\
+\pause
+\textcolor{red}{\texttt{Out[59]: }} \verb| [123, 'pizza', 123, 'pizza']|
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Agregar elementos a una lista}
+Las listas en \python{} son los únicos objetos en los que podemos agregar nuevos elementos, para ello hay que utilizar la instrucción \textoazul{append}:
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[60]: }} \verb| lista1.append(654.321)|
+\\
+\pause
+\textcolor{ao}{\texttt{In[61]: }} \verb|  lista1|
+\\
+\pause
+\textcolor{red}{\texttt{Out[61]: }} \verb| ['abcd', 786, 2.23, 'salmon', 70.2, 654.321]|
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Reemplazo de un elemento de la lista}
+Con una lista en \python{} se puede reemplazar el contenido específico de un elemento, haciendo referencia al índice en particular:
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[62]: }} \verb|  lista2[1] = 'coordenada'|
+\\
+\pause
+\textcolor{ao}{\texttt{In[63]: }} \verb|  lista2|
+\\
+\pause
+\textcolor{red}{\texttt{Out[63]: }} \verb| [123, 'coordenada']|
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Característica de las listas}
+Las listas son un tipo de objeto en \python{} que permite que dentro de la misma, pueda contener a su vez, otra lista:
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[64]: }} \verb|  lista1.append(lista2)|
+\\
+\pause
+\textcolor{ao}{\texttt{In[65]: }} \verb|  lista1|
+\\
+\pause
+\textcolor{red}{\texttt{Out[65]: }}  
+\begin{lstlisting}
+['abcd', 786, 2.23, 'salmon', 70.2, 654.321, [123, 'coordenada']]
+\end{lstlisting}
 \end{frame}
 \subsection{Tuplas}
 \begin{frame}
-\frametitle{Tuplas en \python}
+\frametitle{Las tuplas en \python}
 Una tupla es otro tipo de datos de secuencia que es similar a la lista.
 \\
 \bigskip
-Una tupla consiste en un número de valores separados por comas. Sin embargo, a diferencia de las listas, las tuplas se incluyen entre paréntesis.
+Una tupla consiste en un grupo de valores separados por comas, identificamos a una tupla por que ésta usa paréntesis $( \quad )$.
 \end{frame}
 \begin{frame}
-\frametitle{Diferencias entre listas y tuplas}
-Las principales diferencias entre las listas y las tuplas son:
+\frametitle{Característica de las tuplas}
+Las principales características de las tuplas son:
 \setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}[<+->]
-\item Las listas están entre corchetes $[\;]$ y sus elementos y tamaño pueden cambiarse.
-\item Las tuplas están entre paréntesis $(\;)$ y \emph{no se pueden actualizar}.
+\item Los elementos de las tuplas no pueden modificarse.
+\item No es posible agregar nuevos elementos a un tupla.
+\item Identificamos lo que una tupla contiene mediante índices: tanto de contenido como de \emph{slicing}.
 \end{enumerate}
 \pause
 Las tuplas pueden ser consideradas como listas de sólo lectura.
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Ejemplos con tuplas}
-\begin{verbatim}
-mitupla = ( 'abcd', 786 , 2.23, 'arena', 70.2  )
-tuplabreve = (123, 'playa')
-\end{verbatim}
+\textcolor{ao}{\texttt{In[66]: }} \verb|  tupla1 = ('abcd', 786, 2.23, 'arena', 70.2)|
+\\
 \pause
-\begin{verbatim}
->>> print (mitupla)
-\end{verbatim}
+\textcolor{ao}{\texttt{In[67]: }} \verb|  tupla2 = (3.14, 'playa')|
+\\
+\bigskip
 \pause
-\begin{verbatim}
-('abcd', 786, 2.23, 'arena', 70.2)
-\end{verbatim}
-\pause
-\begin{verbatim}
->>> print (mitupla[0])
-\end{verbatim}
-\pause
-\begin{verbatim}
-abcd
-\end{verbatim}
+\textcolor{ao}{\texttt{In[68]: }} \verb| tupla1|
+\\
+\textcolor{red}{\texttt{Out[68]: }} \verb| ('abcd', 786, 2.23, 'arena', 70.2)|
 \end{frame}
+
 \begin{frame}[fragile]
-\frametitle{Ejemplos con tuplas 2}
-\begin{verbatim}
->>> print (mitupla[1:3])
-\end{verbatim}
+\frametitle{Operación con tuplas}
+Podemos seleccionar los elementos de la tupla mediante el uso de índices de contenido
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[69]: }} \verb| tupla1[0]|
+\\
 \pause
-\begin{verbatim}
-(2.23, 'arena', 70.2)
-\end{verbatim}
+\textcolor{red}{\texttt{Out[69]: }} \verb| 'abcd'|
+\\
+\bigskip
 \pause
-\begin{verbatim}
->>> print (tuplabreve * 2)  
-\end{verbatim}
+Así como usando índices de selección:
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[70]: }} \verb| tupla1[1:3]|
+\\
 \pause
-\begin{verbatim}
-(123, 'playa', 123, 'playa')
-\end{verbatim}
-\pause
-\begin{verbatim}
->>> print (mitupla + tuplabreve)
-\end{verbatim}
-\pause
-\begin{verbatim}
-('abcd', 786, 2.23, 'arena', 70.2, 123, 'playa')
-\end{verbatim}
+\textcolor{red}{\texttt{Out[70]: }} \verb| (7.86, 2.23)|
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Errores con el manejo de tuplas}
-El siguiente código es inválido con la tupla, porque intentamos actualizar una tupla, ya que la acción de incluir un elemento en la tupla no está permitida.
+Si queremos modificar el contenido de una tupla, obtendremos un mensaje de error
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[71]: }} \verb| tupla1[2] = 'hola'|
+\\
+\pause
+\textcolor{red}{\texttt{Out[71]: }} 
+\begingroup
+\fontsize{12}{12}\selectfont
 \begin{verbatim}
->>> mitupla = ( 'abcd', 786 , 2.23, 'edificio', 70.2  )
->>> mitupla[2] = 1000
+TypeError     Traceback (most recent call last)
+
+<stdin> in <module>()
+----> 1 tupla1[2] = 'hola'
+
+TypeError: 'tuple' object does not support
+ item assignment
 \end{verbatim}
-\fontsize{8}{8}\selectfont
-\begin{verbatim}
------------------------------
-
- TypeError           Traceback (most recent call last)
-
-<ipython-input-19-a99f473d7b8f> in <module>()
-       1 mitupla = ( 'abcd', 786 , 2.23, 'edificio', 70.2  )
-       2 mitupla[2] = 1000
-
- TypeError: 'tuple' object does not support item assignment
-\end{verbatim}
+\endgroup
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Agregar elementos a la lista}
-Pero en la lista podemos agregar nuevos elementos que se colocan al  final de la misma:
+\frametitle{Errores con el manejo de tuplas}
+Si queremos agregar un elemento a la tupla, obtendremos un mensaje de error
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[72]: }} \verb| tupla1.append(100.56)|
+\\
+\pause
+\textcolor{red}{\texttt{Out[72]: }} 
+\begingroup
+\fontsize{12}{12}\selectfont
 \begin{verbatim}
->>> print(milista)
-[ 'abcd', 786 , 2.23, 'salmon', 70.2 ]
+TypeError     Traceback (most recent call last)
 
->>> milista.append('hola')
->>> print(milista)
-[ 'abcd', 786 , 2.23, 'salmon', 70.2,'hola' ]
+<stdin> in <module>()
+----> 1 tupla1.append(100.56)
+
+AttributeError: 'tuple' object has no 
+  attribute 'append'
 \end{verbatim}
+\endgroup
 \end{frame}
 \subsection{Diccionarios}
 \begin{frame}
 \frametitle{Diccionarios}
-Los diccionarios de python son de tipo tabla-hash.
+Los diccionarios de \python{} son de tipo tabla-hash.
 \\
 \bigskip
-Funcionan como arrays asociativos y consisten en pares \emph{clave-valor}.
+Funcionan como arrays asociativos y consisten en pares \emph{clave - valor}.
 \end{frame}
 \begin{frame}
 \frametitle{Elementos del diccinario}
-La clave de diccionario puede ser casi cualquier tipo de \python, pero suelen ser números o cadenas.
+La \emph{clave} del diccionario puede ser casi de cualquier tipo  de dato, pero suelen ser comúnmente números o cadenas.
 \\
 \bigskip
-Los valores, por otra parte, pueden ser cualquier objeto arbitrario de \python.
+Los \emph{valores}, por otra parte, pueden ser cualquier tipo de objeto arbitrario de \python.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Escribir un diccionario}
+Para crear un diccionario se debe de iniciar con las llaves $\{ \quad \}$, el siguiente valor corresponde a la llave seguida de dos puntos y a continuación, el valor:
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Escribir un diccionario}
+La siguiente instrucción se escribe en una sola línea:
+\textcolor{ao}{\texttt{In[73]: }}
+\\
+\begin{verbatim}
+	fisicos = {1 : "Eistein", 2 : "Bohr", 
+	3 : "Pauli", 4 : "Schrodinger", 
+	5 : "Hawking"}
+\end{verbatim}
+\pause
+\textcolor{ao}{\texttt{In[74]: }} \verb| fisicos|
+\\
+\pause
+\textcolor{red}{\texttt{Out[74]: }}
+\\
+\begin{verbatim}
+	{1 : "Eistein", 2 : "Bohr", 3 : "Pauli",
+	4 : "Schrodinger", 5 : "Hawking"}
+\end{verbatim}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Ejemplo de diccionarios}
-\begin{verbatim}
->>> fisicos = dict()
->>> fisicos = {
-     	1 : "Eistein",
-		2 : "Bohr",
-		3 : "Pauli",
-		4 : "Schrodinger",
-		5 : "Hawking"
-	}
-\end{verbatim}
-\end{frame}
+Hay un conjunto de instrucciones que nos permiten recuperar tanto las llaves como los valores de un diccionario:
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[75]: }} \verb| fisicos.keys()|
+\\
+\pause
+\textcolor{red}{\texttt{Out[75]: }} \verb|dict_keys([1, 2, 3, 4, 5])|
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[76]: }} \verb| fisicos.values()|
+\\
+\pause
+\textcolor{red}{\texttt{Out[76]: }}
+\begingroup
+\fontsize{12}{12}\selectfont
+\begin{lstlisting}
+dict_values(['Eistein', 'Bohr', 'Pauli',
+	'Schrodinger', 'Hawking'])
+\end{lstlisting}
+\endgroup
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Ejemplo de diccionarios}
-\begin{verbatim}
->>> print(fisicos)}
->>> print (fisicos.keys())
->>> print (fisicos.values())
->>> fisicos[6] = "Planck"
->>> print(fisicos)
-\end{verbatim}
+\frametitle{Agregar un nuevo elemento al diccionario}
+Es posible agregar un nuevo elemento al diccionario con la siguiente instrucción
+\\
+\bigskip
+\textcolor{ao}{\texttt{In[77]: }} \verb| fisicos.update({6:'Dirac'})|
+\\
+\pause
+\bigskip
+\textcolor{ao}{\texttt{In[78]: }} \verb| fisicos|
+\\
+\pause
+\textcolor{red}{\texttt{Out[78]: }}
+\\
+\begin{lstlisting}
+dict_values(['Eistein', 'Bohr', 
+	'Schrodinger', 'Hawking', Dirac'])
+\end{lstlisting}
 \end{frame}
 \section{Identificadores en \python}
 \frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
@@ -1094,17 +1253,28 @@ Los valores, por otra parte, pueden ser cualquier objeto arbitrario de \python.
 Los identificadores son nombres que hacen referencia a los objetos que componen un programa: \textbf{constantes}, \textbf{variables}, \textbf{funciones}, etc.
 \end{frame}
 \begin{frame}
-Reglas para construir identificadores:
+\frametitle{Reglas para los identificadores}
+Se recomienda seguir las reglas para construir identificadores:
 \begin{itemize}[<+->]
 \item El primer carácter debe ser una letra o el carácter de subrayado (guión bajo)
 \item El primer carácter puede ir seguido de un número variable de dígitos numéricos, letras o carácteres de subrayado.
-\item No pueden utilizarse espacios en blanco, ni símbolos de puntuación.
-\item En python se distingue de las mayúsculas y minúsculas.
 \end{itemize}
 \end{frame}
 \begin{frame}
+\frametitle{Reglas para los identificadores}
+\begin{itemize}[<+->]
+\item No pueden utilizarse espacios en blanco, ni símbolos de puntuación.
+\item En python se distingue de las mayúsculas y minúsculas.
+\end{itemize}
+\pause
+Existe un estándar para la escritura del código en \python, revisa en la siguiente liga, el manejo de los nombres de los identificadores en: \href{shorturl.at/fOUV7}{\color{blue}{\underline{Referencia para nombres de objetos en \python{}}}}, del estándar PEP-8.
+\end{frame}
+\begin{frame}
 \frametitle{Palabras reservadas}
-No pueden utilizarse las palabras reservadas del lenguaje para ningún tipo de identificador.
+No pueden utilizarse las palabras reservadas de \python{} para ningún tipo de identificador, ya que son palabras reservadas para la ejecución de comandos, tareas, etc. propias de \python{} (de igual manera que son reservadas en otros lenguajes de programación), entre las más comunes tenemos:
+\end{frame}
+\begin{frame}
+\frametitle{Palabras reservadas}
 \texttt{
 \begin{table}
 \begin{tabular}{c c c c c }

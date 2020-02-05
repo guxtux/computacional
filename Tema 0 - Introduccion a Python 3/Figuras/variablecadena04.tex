@@ -5,9 +5,9 @@
 \usetikzlibrary{matrix, backgrounds, arrows, decorations.markings}
 \begin{document}
 \begin{tikzpicture}
-\node at (-4.5, 0.4) {$\textbf{Contenido}$};
-\node at (-4.5, -0.4) {$\textbf{Indice}$};
-\draw [->, thick] (-2.8, -1.6) -- (-2.8, -1.2);
+\node at (-4.5, 0.8) {$\textbf{Contenido}$};
+\node at (-4.5, 0) {$\textbf{Indice}$};
+\draw [->, thick] (-2.4, -2) -- (-2.4, -1.6);
 \matrix (m) [matrix of nodes,
              nodes={draw, minimum size=8mm,anchor=center},
              nodes in empty cells, minimum height = 1cm,
@@ -16,6 +16,6 @@
   C & i & e & n & c & i & a & s  \\
   0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\
 };
-\node at (-4.2, -2) {facultad[0] = 'C'};
+\node at (-2.4, -3) {facultad[2:] = 'encias'};
 \end{tikzpicture}
 \end{document}
