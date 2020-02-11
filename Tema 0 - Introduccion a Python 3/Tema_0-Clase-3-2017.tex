@@ -1,5 +1,5 @@
 \input{../Preambulos/preambulo_presentacion}
-\title{Tema 0 - Graficación con \python}
+\title{Tema 0 - Funciones y Graficación con \python}
 \author[]{M. en C. Gustavo Contreras Mayén \\ M. en C. Abraham Lima Buendía}
 \institute{Facultad de Ciencias - UNAM}
 \titlegraphic{\includegraphics[width=2cm]{escudo-facultad-ciencias}\hspace*{4.75cm}~%
@@ -12,6 +12,426 @@
 \frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
 \fontsize{14}{14}\selectfont
 \spanishdecimal{.}
+\section{Funciones}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Estructura de una función}
+\begin{frame}
+\frametitle{Las funciones en \python}
+Con lo que hemos revisado sobre \python, tenemos elementos para iniciar la solución de problemas.
+\\
+\bigskip
+Si agrupamos de manera particular un conjunto de instrucciones, entonces estaremos usando las llamadas \emph{funciones}.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Estructura de una función}
+La palabra reservada \azulfuerte{def} se usa para definir funciones. 
+\\
+\bigskip
+ Debe seguirle el nombre de la función (identificador), así como una lista de argumentos entre paréntesis, puede ocurrir que haya funciones que no ocupen argumentos.
+ \\
+\bigskip
+Las sentencias que forman el cuerpo de la función empiezan en la línea siguiente, y deben estar con sangría.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Estructura de una función}
+La estructura de una función en \python{} es la siguiente:
+\fontsize{12}{12}\selectfont
+\begin{lstlisting}
+def nombre_funcion(parametro1, parametro2, ...):
+    conjunto de instrucciones
+    return valores_devueltos
+\end{lstlisting}
+donde \texttt{parametro1,} \texttt{parametro2} son los parámetros. Un parámetro puede ser cualquier objeto de \python, incluyendo una función.
+\end{frame}
+\begin{frame}
+\frametitle{Estructura de una función}
+Los parámetros pueden darse por defecto, por lo que en la función son opcionales. 
+\\
+\bigskip
+Si no se utiliza la instrucción \azulfuerte{return}, la función devuelve un objeto de tipo \azulfuerte{None}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejemplo de una función}
+\begin{lstlisting}[style=codigopython]
+def cuadrados(entrada):
+    for i in range(len(entrada)):
+        entrada[i] = entrada[i]**2
+    return entrada
+
+a = [1, 2, 3, 4]
+respuesta = cuadrados(a)
+print(respuesta)
+\end{lstlisting}
+\end{frame}
+\begin{frame}
+\frametitle{Cálculo de la serie de Fibonacci}
+La sucesión fue descrita por Fibonacci como la solución a un problema de la cría de conejos: 
+\\
+\bigskip
+\enquote{Cierto hombre tenía una pareja de conejos juntos en un lugar cerrado y uno desea saber cuántos son creados a partir de este par en un año, cuando es su naturaleza parir otro par en un simple mes, y en el segundo mes los nacidos parir también}
+\\
+\bigskip
+\pause
+\textcolor{red}{cómo le hacemos para calcular cuántos conejos hay?}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Propuesta de código}
+\begin{lstlisting}[style=codigopython]
+def fib(n):
+    a, b = 0, 1
+    while b < n:
+        print (b)
+        a, b = b, a + b
+
+fib(2000)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Segunda propuesta de código}
+\begin{lstlisting}[style=codigopython]
+def fib_2_(n):
+    resultado = []
+    a, b = 0, 1
+    while a < n:
+        resultado.append(a)
+        a, b = b, a + b
+    return resultado
+
+fibo100 = fib2(100)
+print(fibo100)
+\end{lstlisting}
+\end{frame}
+\subsection{Paso de argumentos}
+\begin{frame}[fragile]
+\frametitle{Paso de argumentos}
+Para que una función sea en verdad útil (y reutilizable), es necesario que podamos pasarle datos a modo de \emph{entradas}. 
+\\
+\bigskip
+Los nombres de las entradas (o argumentos) que requiere una función se declaran a continuación del nombre en \azulfuerte{def} (siempre entre paréntesis)
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejemplo de función con argumentos}
+\begin{lstlisting}
+def FuncionSuma (x, y):
+    return x + y
+
+print(FuncionSuma(5, 3))
+print(FuncionSuma(7, 42.0))
+print(FuncionSuma(" hola ", " mundo "))
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejemplo de función con argumentos}
+\textbf{Notas:} 
+\begin{itemize}[<+->]
+\item Nunca se mencionan los tipos de datos para $x$ e $y$, ni el tipo de datos que devuelve FuncionSuma.
+\item Los argumentos y el valor devuelto son, tal como las variables, simples etiquetas a zonas de memoria.
+\end{itemize}  
+\end{frame}
+\subsection{Paso de argumento con nombre}
+\begin{frame}
+\frametitle{Paso de argumentos con nombre}
+Si la función que definimos tiene muchos argumentos, es fácil olvidar el orden en que fueron declarados.
+\\
+\medskip
+Como un argumento no lleva asociado un tipo, \python{} no tiene manera de saber que los argumentos están cambiados.
+\end{frame}
+\begin{frame}
+\frametitle{Paso de argumentos con nombre}
+Para evitar este tipo de errores, hay una manera de llamar a una función pasando los argumentos en cualquier orden arbitrario: se pasan usando el nombre usado en la declaración.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejemplo de paso de argumentos con nombre}
+\begin{lstlisting}[style=codigopython]
+def Prueba (a, b, c):
+    print("a = {}, b = {}, c = {}".format(a, b, c)
+
+
+
+Prueba (1, 2, 3)
+Prueba (b = 3, a = 2, c = 1)
+\end{lstlisting}
+\end{frame}
+\subsection{Argumentos con valores por omisión}
+\begin{frame}[fragile, allowframebreaks]
+\frametitle{Argumentos con valores por omisión}
+Para hacer que algunos argumentos sean opcionales, se les da valores por omisión en el momento de declararlos:
+\begin{lstlisting}[style=codigopython]
+from math import sqrt
+
+# argumento v es requerido , c es opcional
+# c toma el valor 3.0e+8 por omision
+
+def Gamma(v, c = 3.0e+8):
+    return sqrt(1.0 -(v/c)**2)
+
+print(Gamma(0.1, 1.0))
+print(Gamma(1.e+7)) # usa c = 3.0e+8
+\end{lstlisting}
+\end{frame}
+\subsection{Devolviendo varios valores en una función}
+\begin{frame}[fragile]
+\frametitle{Devolviendo varios valores en una función}
+Para hacer que una función devuelva más de un valor, lo que hacemos| es definir argumentos de entrada y argumentos de salida.
+\\
+\bigskip
+Veremos la manera en que se deben de ocupar los valores de salida, una vez que se cumple la función.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Devolviendo varios valores en una función}
+Para devolver múltiples valores en \python, lo usual es devolver los valores \enquote{empaquetados} en una tupla:
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Regresando varios valores en una función}
+\begin{lstlisting}[style=codigopython]
+from math import atan_2_, sqrt
+
+def ModuloArgumento(x, y):
+    norma = sqrt(x**2 + y**2)
+    argumento = atan_2_(y, x)
+    return (norma, argumento)
+    
+n, a = ModuloArgumento(3.0, 4.0)
+print(" El modulo es: ", n)
+print(" El argumento es: ", a)
+\end{lstlisting}
+\end{frame}
+\subsection{Número variable de argumentos}
+\begin{frame}[fragile]
+\frametitle{Número variable de argumentos}
+¿Cómo le hacemos para que una función acepte un número no prefijado de argumentos?
+\\
+\medskip
+Es posible pasar una lista o tupla, pero \python{} ofrece una mejor solución:
+\end{frame}
+\begin{frame}[fragile, allowframebreaks]
+\frametitle{Número variable de argumentos}
+\begin{lstlisting}[style=codigopython]
+from math import atan, atan_2_
+
+def atanVariable(*args ):
+
+# args es una tupla de argumentos
+    if len(args) == 1:
+        return atan(args[0])
+    else :
+        return atan_2_(args[0], args[1])
+
+
+print (atanVariable(0.2)) # 0.19739
+print (atanVariable(2.0,10.0)) # 0.19739
+print (atanVariable(-2.0,-10.0)) # -2.94419
+\end{lstlisting}
+\end{frame}
+\subsection{Funciones lambda}
+\begin{frame}
+\frametitle{Funciones lambda}
+\python{} admite una interesante sintaxis que permite definir funciones mínimas, de una línea, sobre la marcha. 
+\\
+\bigskip
+Se trata de las denominadas funciones \azulfuerte{lambda}, que pueden utilizarse en cualquier lugar donde se necesite una función.
+\end{frame}
+\begin{frame}[fragile, allowframebreaks]
+\frametitle{Funciones lambda}
+\begin{lstlisting}[style=codigopython]
+#primera forma de una funcion lambda
+
+numero = float(input("Introduce un numero real"))
+
+g = lambda x: x*2
+print(g(numero))
+
+#segunda forma de escribir una funcion lambda
+
+print((lambda x: x*2)(numero)) 
+\end{lstlisting}
+\end{frame}
+\begin{frame}
+\frametitle{Funciones lambda}
+Nótese que: la lista de argumentos no está entre paréntesis, y falta la palabra reservada \azulfuerte{return} (está implícita, ya que la función entera debe ser una única expresión). 
+\\
+\bigskip
+Igualmente, la función no tiene nombre, pero puede ser llamada mediante la variable a que se ha asignado.
+\end{frame}
+\section{Módulos}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Módulos en \python}
+\begin{frame}[fragile]
+\frametitle{Módulos}
+Es una buena práctica de programación almacenar las funciones en módulos.
+\\
+\bigskip
+\pause
+Un \emph{módulo} es un archivo en donde se almacenan las funciones, el nombre del módulo es el nombre del archivo.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Cargando una función de un módulo}
+Un módulo se carga al programa principal con la instrucción
+{\fontsize{12}{12}\selectfont
+\begin{lstlisting}
+from nombre_modulo import funcion1 [, funcion2, ]
+\end{lstlisting}}
+\pause
+De esta manera tendremos disponibles las funciones del módulo en el código principal. En caso de que sean pocas las funciones, esta manera de llamar a las funciones es la más conveniente.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Funciones definidas por el usuario}
+Tenemos en \python{} un conjunto de paquetes, librerías y funciones que nos van a ser de utilidad, no sólo para el curso de Física Computacional, sino para resolver algún problema en general.
+\end{frame} 
+\begin{frame}[fragile]
+\frametitle{Funciones definidas por el usuario}
+En el caso de que elaboremos nuestras funciones, tendremos entonces un conjunto de \emph{funciones definidas por el usuario}.
+\\
+\bigskip
+En un primer momento las podemos tener incluidas dentro de nuestro código principal y en un sólo archivo.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Funciones definidas por el usuario}
+En un segundo momento, debido a la extensión de nuestro código será necesario elaborar un módulo de funciones para utilizarlo.
+\\
+\bigskip
+Por lo que debemos de revisar la manera en la que se deben de llamar las funciones. 
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Funciones definidas por el usuario}
+Usemos como ejemplo en un solo archivo \texttt{fibonacci.py} las funciones para calcular la serie de Fibonacci: \texttt{fib(n)} y \texttt{fib2(n)}
+\\
+\bigskip
+El archivo \texttt{fibonacci.py} debe de estar en la misma ruta que el archivo que va a llamar a las funciones.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Llamada a un módulo de usuario}
+\begin{lstlisting}[style=codigopython]
+from fibonacci import fib, fib_2_
+
+print('Llamada a fib(n) del modulo de usuario\n')
+fib(2000)
+
+print('\nLlamada a fib_2_(n) del modulo de usuario\n')
+fibo_100_ = fib_2_(100)
+print(fibo_100_)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Cargando todo de un paquete}
+Es posible cargar en memoria todo el contenido de un paquete:
+\begin{center}
+\verb|import math|
+\end{center}
+\pause
+El único inconveniente de este llamado es que debemos de hacer la referencia correcta a cada función contenida en el módulo o paquete.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Sintaxis para llamar una función de un paquete}
+Una vez cargado el paquete, ahora tenemos que llamar debidamente a la función de interés:
+\begin{center}
+\verb|alfa = math.sqrt(3.14)|
+\end{center}
+\pause
+Esta forma de escritura se vuelve en ocasiones larga, para ello, es posible simplificar su escritura.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Uso de un alias para la carga de módulos}
+Al momento de cargar un paquete, podemos establecer un \emph{alias} que nos va a ahorrar la escritura
+\begin{lstlisting}[style=codigopython]
+import numpy as np
+
+numero = int(input("Escribe un numero positivo: "))
+
+raiz = np.sqrt(numero)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Uso de un alias para la carga de módulos}
+En caso de que hayamos hecho referencia a una función y no se utilice, \funcionazul{spyder} va a detectar esta situación y nos va a alertar de ello.
+\\
+\bigskip
+Este tipo de advertencias se conocen como \textcolor{red}{warning}, el programa se ejecuta y se mantiene ese aviso.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{El paquete \texttt{math}}
+Muchas funciones matemáticas no se pueden llamar directo del intérprete, pero para ello existe el paquete \texttt{math}.
+\\
+\bigskip
+Podemos ver el contenido de un módulo con la instrucción:
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{El paquete \texttt{math}}
+\verb|import math| \\
+\verb|dir(math)|
+\fontsize{10}{10}\selectfont
+\begin{verbatim}
+['__doc__', '__name__', '__package__', 'acos',
+'acosh',  'asin', 'asinh', 'atan', 'atan2',
+'atanh', 'ceil', 'copysign', 'cos', 'cosh',
+'degrees', 'e', 'erf', 'erfc', 'exp', 'expm1',
+'fabs', 'factorial', 'floor', 'fmod', 'frexp',
+'fsum', 'gamma', 'hypot', 'isinf', 'isnan',
+'ldexp', 'lgamma', 'log', 'log10', 'log1p',
+'modf', 'pi', 'pow', 'radians', 'sin', 'sinh',
+'sqrt', 'tan', 'tanh', 'trunc']
+\end{verbatim}
+\end{frame}
+\begin{frame}
+\frametitle{Total de funciones de \texttt{math}}
+El paquete \texttt{math} contiene $56$ funciones.
+\\
+\bigskip
+Existen otros paquetes con funciones matemáticas que extienden al paquete \texttt{math}, por ejemplo, el paquete \funcionazul{numpy}, contiene las funciones de \funcionazul{math}, mas otras adicionales, con un total de $634$ funciones.
+\end{frame}
+\begin{frame}
+\frametitle{Otros paquetes de \python}
+El paquete \texttt{math} contiene $56$ funciones.
+\\
+\bigskip
+Existen otros paquetes con funciones matemáticas que extienden al paquete \texttt{math}, por ejemplo, el paquete \funcionazul{numpy}, contiene las funciones de \funcionazul{math}, mas otras adicionales, con un total de $634$ funciones.
+\end{frame}
+\begin{frame}
+\frametitle{Paquetes no estándar}
+Existe una gran variedad de paquetes en \python, prácticamente para todas las áreas de trabajo: científica, programación web, audio, imagen, etc.
+\\
+\bigskip
+Mencionaremos algunos paquetes importantes para el área de ciencias.
+\end{frame}
+\begin{frame}
+\frametitle{Paquete \texttt{numpy}}
+\begin{figure}
+    \includegraphics[scale=0.15]{./Imagenes/numpy.png}
+\end{figure}
+Su característica más potente es que puede trabajar con matrices de $n$ dimensiones. Ofrece funciones básicas de algebra lineal, transformada de Fourier, capacidades avanzadas con números aleatorios, y herramientas de integración con otros lenguajes de bajo nivel como Fortran, C y C++.
+\end{frame}
+\begin{frame}
+\frametitle{Paquete \texttt{scipy}}
+\begin{figure}
+    \includegraphics[scale=0.15]{./Imagenes/scipy.png}
+\end{figure}
+\funcionazul{scipy} está construida sobre la librería \funcionazul{numpy}. Es una de las más útiles por la gran variedad que tiene de módulos de alto nivel sobre ciencia e ingeniería, como transformada discreta de Fourier, álgebra lineal, funciones especiales y matrices de optimización.
+\end{frame}
+\begin{frame}
+\frametitle{Paquete \texttt{matplotlib}}
+\frametitle{Paquete \texttt{numpy}}
+\begin{figure}
+    \includegraphics[scale=0.15]{./Imagenes/matplotlib.png}
+\end{figure}
+Es una librería de gráficos, desde histogramas, hasta gráficos de líneas o mapas de color. También se pueden usar comandos de \LaTeX para agregar expresiones matemáticas a la gráfica.
+\end{frame}
+\begin{frame}
+\frametitle{Paquete \texttt{pandas}}
+\begin{figure}
+    \includegraphics[scale=0.15]{./Imagenes/pandas.png}
+\end{figure}
+Se utiliza para operaciones y manipulaciones de datos estructurados. Es muy habitual usarlo en la fase de depuración y preparación de los datos. 
+\end{frame}
+\begin{frame}
+\frametitle{Paquete \texttt{seaborn}}
+\begin{figure}
+    \includegraphics[scale=0.25]{./Imagenes/seaborn.png}
+\end{figure}
+Está basada en \funcionazul{matplotlib}, se usa para hacer más atractivos los gráficos e información estadística en \python.
+\\
+\bigskip
+Su objetivo es darle una mayor relevancia a las visualizaciones, dentro  de las tareas de exploración e interpretación de los datos.
+\end{frame}
 \section{Graficación con \python}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Librería para graficación}
@@ -198,31 +618,31 @@ carácter & descripción \\ \hline
 Esta lista muestra el caracter para definir el tipo de línea en el argumento de la función la función \funcionazul{plot(\ )}.
 \end{minipage}
 \end{frame}
-% \begin{frame}
-% \frametitle{Alcance de \texttt{matplotlib}}
-% La librería \funcionazul{matplotlib} se limita a trabajar con listas, por lo que sería bastante acotado para el procesamiento y análisis numérico.
-% \\
-% \medskip
-% Por lo general, se utilizan los arreglos del módulo \funcionazul{numpy}.
-% \end{frame}
-% \begin{frame}
-% \frametitle{Extendiendo \texttt{matplotlib}}
-% De hecho, todas las secuencias se convierten en matrices de \funcionazul{numpy} internamente.
-% \\
-% \medskip
-% El siguiente ejemplo ilustra un trazado de líneas con varios estilos diferentes en una sola instucción utilizando arreglos.
-% \end{frame}
-% \begin{frame}[fragile]
-% \frametitle{Ejercicio 3}
-% \begin{lstlisting}
-% import numpy as np
-% import matplotlib.pyplot as plt
+\begin{frame}
+\frametitle{Alcance de \texttt{matplotlib}}
+El paquete \funcionazul{matplotlib} se limita a trabajar con listas, por lo que su uso sería bastante acotado para el procesamiento y análisis numérico.
+\\
+\medskip
+Por lo general, se utilizan los arreglos del paquete \funcionazul{numpy}.
+\end{frame}
+\begin{frame}
+\frametitle{Extendiendo \texttt{matplotlib}}
+De hecho, todas las secuencias se convierten en arreglos de \funcionazul{numpy} internamente.
+\\
+\medskip
+El siguiente ejemplo ilustra un trazado de líneas con varios estilos diferentes en una sola instucción utilizando arreglos.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Código para el Ejercicio 3}
+\begin{lstlisting}[style=codigopython]
+import numpy as np
+import matplotlib.pyplot as plt
 
-% t = np.arange(0., 5., 0.2)
-% plt.plot(t, t, 'r--', t, t**2, 'bs', t, t**3, 'g^')
-% plt.show()
-% \end{lstlisting}
-% \end{frame}
+t = np.arange(0., 5., 0.2)
+plt.plot(t, t, 'r--', t, t**2, 'bs', t, t**3, 'g^')
+plt.show()
+\end{lstlisting}
+\end{frame}
 % \begin{frame}[fragile]
 % \frametitle{Elementos en el código}
 % \texttt{
@@ -238,74 +658,92 @@ Esta lista muestra el caracter para definir el tipo de línea en el argumento de
 %     \path[draw=magenta,thick,->] ([xshift=2mm, yshift=3mm]c2) -- ([xshift=5mm, yshift=-2mm]c1);
 % \end{tikzpicture}
 % \end{frame}
+\begin{frame}[fragile]
+\begin{figure}
+	\centering
+ 	\includegraphics[scale=0.5]{Imagenes/plotEjercicio3.eps}
+ 	\caption{Gráfica con tres curvas.}
+ \end{figure}
+\end{frame}
+\subsection{Trabajando con subplots}
+\begin{frame}
+\frametitle{Los subplots en \python}
+Ya hemos generado una gráfica que contenga un trazo para una función en particular.
+\\
+\bigskip
+Pero hay que considerar que a veces necesitaremos mostrar dos (o más) gráficas dentro de la misma ventana), en éste caso usaremos los \emph{subplots}.
+\end{frame}
+\begin{frame}[allowframebreaks, fragile]
+\frametitle{Código para el Ejercicio 4}
+\begin{lstlisting}[style=codigopython]
+import numpy as np
+import matplotlib.pyplot as plt
 
-% \begin{frame}[fragile]
-% \begin{figure}
-% 	\centering
-% 	\includegraphics[scale=0.5]{Imagenes/plotEjercicio3.eps}
-% 	\caption{Gráfica con tres curvas.}
-% \end{figure}
-% \end{frame}
-% \subsection{Trabajando con subplots}
-% \begin{frame}[allowframebreaks, fragile]
-% \frametitle{Ejercicio 4}
-% \begin{lstlisting}
-% import numpy as np
-% import matplotlib.pyplot as plt
+def f(t):
+    return np.exp(-t) * np.cos(2*np.pi*t)
 
-% def f(t):
-%     return np.exp(-t) * np.cos(2*np.pi*t)
+t_1_ = np.arange(0.0, 5.0, 0.1)
+t_2_ = np.arange(0.0, 5.0, 0.02)
 
-% t1 = np.arange(0.0, 5.0, 0.1)
-% t2 = np.arange(0.0, 5.0, 0.02)
+plt.figure(1)
+plt.subplot(211)
+plt.plot(t_1_, f(t1), 'bo', t_2_, f(t_2_), 'k')
 
-% plt.figure(1)
-% plt.subplot(211)
-% plt.plot(t1, f(t1), 'bo', t2, f(t2), 'k')
+plt.subplot(212)
+plt.plot(t_2_, np.cos(2*np.pi*t2), 'r--')
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.5]{Imagenes/plotEjercicio4.eps}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Especificar los \texttt{subplots}}
+El comando \funcionazul{figure(\ )} aquí es opcional, ya \funcionazul{figure(1)} se crea de forma predeterminada, así mismo \funcionazul{subplot(111)} se crea de forma predeterminada si no se especifica manualmente un eje.
+\end{frame}
+\begin{frame}
+\frametitle{Especificar los \texttt{subplots}}
+La función \funcionazul{figure1()} está avisando el uso de una ventana para mostrar la gráfica.
+\\
+\bigskip
+La función \funcionazul{subplot()} requiere que se señale como parámetros: \texttt{(numrows, numcols, fignum)} donde \texttt{fignum} varía en rango de $1$ a \texttt{numrows * numcols}.
+\end{frame}
+\begin{frame}
+\frametitle{Especificar los \texttt{subplots}}
+Las comas en la función \funcionazul{subplot()} son opcionales si \texttt{numrows * numcols} $<10$. 
+\\
+\bigskip
+Por tanto \funcionazul{subplot(211)} es idéntica a la \funcionazul{subplot(2,1,1)}.
+\end{frame}
+\begin{frame}[allowframebreaks, fragile]
+\frametitle{Código para el Ejercicio 5}
+\begin{lstlisting}[style=codigopython]
+import matplotlib.pyplot as plt
+import numpy as np
 
-% plt.subplot(212)
-% plt.plot(t2, np.cos(2*np.pi*t2), 'r--')
-% \end{lstlisting}
-% \end{frame}
-% \begin{frame}[fragile]
-% \begin{figure}
-% 	\centering
-% 	\includegraphics[scale=0.5]{Imagenes/plotEjercicio4.eps}
-% \end{figure}
-% \end{frame}
-% \begin{frame}
-% El comando \funcionazul{figure(\ )} aquí es opcional, ya \funcionazul{figure(1)} se crea de forma predeterminada, así mismo \funcionazul{subplot(111)} se crea de forma predeterminada si no se especifica manualmente un eje.
-% \end{frame}
-% \begin{frame}
-% El comando \funcionazul{subplot()} especifica \texttt{numrows, numcols, fignum} donde \texttt{fignum} varía en rango de $1$ a \texttt{numrows * numcols}.
-% \\
-% \bigskip
-% Las comas en el comando \funcionazul{subplot()} son opcionales si \texttt{numrows * numcols} $<10$. Por tanto \funcionazul{subplot(211)} es idéntica a la \texttt{subplot(2,1,1)}.
-% \end{frame}
-% \begin{frame}[allowframebreaks, fragile]
-% \frametitle{Ejercicio 5}
-% \begin{lstlisting}
-% import matplotlib.pyplot as plt
+x1 = np.linspace(0,18, 200)
+x2 = np.linspace(0, 5, 100)
 
-% plt.figure(1)                
+plt.figure(1)                
+plt.subplots_adjust(hspace=0.5)
 
-% plt.subplot(211)        
-% plt.plot([1,2,3])
+plt.subplot(211)        
+plt.plot([1, 2, 3])
+plt.title('Ventana 1 - Subplot 1')
 
-% plt.subplot(212)         
-% plt.plot([4,5,6])
+plt.subplot(212)         
+plt.plot(x1, np.cos(x1))
+plt.title('Ventana 1 - Subplot 2')
 
+plt.figure(2)                
+plt.plot(x2, np.exp(x2))           
+plt.title('Ventana 2')
 
-% plt.figure(2)                
-% plt.plot([4,5,6])           
-
-% plt.figure(1)                
-% plt.subplot(211)         
-
-% plt.title('Tan facil como 1,2,3')
-% plt.show()
-% \end{lstlisting}
-% \end{frame}
+plt.show()
+\end{lstlisting}
+\end{frame}
 % \begin{frame}[fragile]
 % \begin{figure}
 % 	\centering
