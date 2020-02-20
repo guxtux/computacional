@@ -24,7 +24,7 @@ plt.plot(x1, np.cos(x1))
 plt.title('Ventana 1 - Subplot 2')
 
 plt.figure(2)                
-plt.plot(x2, np.exp(x2))           
+plt.plot(x2, np.exp(x2), 'r')           
 plt.title('Ventana 2')
 
 plt.show()

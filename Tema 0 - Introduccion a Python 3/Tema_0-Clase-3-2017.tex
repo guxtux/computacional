@@ -153,26 +153,28 @@ Prueba (b = 3, a = 2, c = 1)
 \end{lstlisting}
 \end{frame}
 \subsection{Argumentos con valores por omisión}
-\begin{frame}[fragile, allowframebreaks]
+\begin{frame}[allowframebreaks, fragile]
 \frametitle{Argumentos con valores por omisión}
 Para hacer que algunos argumentos sean opcionales, se les da valores por omisión en el momento de declararlos:
 \begin{lstlisting}[style=codigopython]
 from math import sqrt
 
-# argumento v es requerido , c es opcional
-# c toma el valor 3.0e+8 por omision
+#el argumento v es necesario
+def Gamma(v, c=3.0e+8):
+    return sqrt(1.0-(v/c)A_**_B2)
 
-def Gamma(v, c = 3.0e+8):
-    return sqrt(1.0 -(v/c)**2)
 
+#se modifica el valor de c
 print(Gamma(0.1, 1.0))
-print(Gamma(1.e+7)) # usa c = 3.0e+8
+
+#solo se pasa el valor de v
+print(Gamma(1.e+7))
 \end{lstlisting}
 \end{frame}
 \subsection{Devolviendo varios valores en una función}
 \begin{frame}[fragile]
 \frametitle{Devolviendo varios valores en una función}
-Para hacer que una función devuelva más de un valor, lo que hacemos| es definir argumentos de entrada y argumentos de salida.
+Para hacer que una función devuelva más de un valor, lo que hacemos es definir argumentos de entrada y argumentos de salida.
 \\
 \bigskip
 Veremos la manera en que se deben de ocupar los valores de salida, una vez que se cumple la función.
@@ -181,19 +183,20 @@ Veremos la manera en que se deben de ocupar los valores de salida, una vez que s
 \frametitle{Devolviendo varios valores en una función}
 Para devolver múltiples valores en \python, lo usual es devolver los valores \enquote{empaquetados} en una tupla:
 \end{frame}
-\begin{frame}[fragile]
+\begin{frame}[allowframebreaks,fragile]
 \frametitle{Regresando varios valores en una función}
 \begin{lstlisting}[style=codigopython]
-from math import atan_2_, sqrt
+from math import atanA_2_B, sqrt
 
 def ModuloArgumento(x, y):
-    norma = sqrt(x**2 + y**2)
-    argumento = atan_2_(y, x)
+    norma = sqrt(xA_**_B2 + yA_**_B2)
+    argumento = atanA_2_B(y, x)
     return (norma, argumento)
-    
+
+
 n, a = ModuloArgumento(3.0, 4.0)
-print(" El modulo es: ", n)
-print(" El argumento es: ", a)
+print("El modulo es: ", n)
+print("El argumento es: ", a)
 \end{lstlisting}
 \end{frame}
 \subsection{Número variable de argumentos}
@@ -207,15 +210,14 @@ Es posible pasar una lista o tupla, pero \python{} ofrece una mejor solución:
 \begin{frame}[fragile, allowframebreaks]
 \frametitle{Número variable de argumentos}
 \begin{lstlisting}[style=codigopython]
-from math import atan, atan_2_
+from math import atan, atanA_2_B
 
-def atanVariable(*args ):
-
-# args es una tupla de argumentos
+#args es una tupla de argumentos
+def atanVariable(*args):
     if len(args) == 1:
         return atan(args[0])
     else :
-        return atan_2_(args[0], args[1])
+        return atanA_2_B(args[0], args[1])
 
 
 print (atanVariable(0.2)) # 0.19739
@@ -226,7 +228,7 @@ print (atanVariable(-2.0,-10.0)) # -2.94419
 \subsection{Funciones lambda}
 \begin{frame}
 \frametitle{Funciones lambda}
-\python{} admite una interesante sintaxis que permite definir funciones mínimas, de una línea, sobre la marcha. 
+\python{} admite una interesante sintaxis que permite definir funciones mínimas, de una línea sobre la marcha. 
 \\
 \bigskip
 Se trata de las denominadas funciones \azulfuerte{lambda}, que pueden utilizarse en cualquier lugar donde se necesite una función.
@@ -234,6 +236,7 @@ Se trata de las denominadas funciones \azulfuerte{lambda}, que pueden utilizarse
 \begin{frame}[fragile, allowframebreaks]
 \frametitle{Funciones lambda}
 \begin{lstlisting}[style=codigopython]
+
 #primera forma de una funcion lambda
 
 numero = float(input("Introduce un numero real"))
@@ -302,14 +305,14 @@ El archivo \texttt{fibonacci.py} debe de estar en la misma ruta que el archivo q
 \begin{frame}[fragile]
 \frametitle{Llamada a un módulo de usuario}
 \begin{lstlisting}[style=codigopython]
-from fibonacci import fib, fib_2_
+from fibonacci import fib, fibA_2_B
 
 print('Llamada a fib(n) del modulo de usuario\n')
 fib(2000)
 
-print('\nLlamada a fib_2_(n) del modulo de usuario\n')
-fibo_100_ = fib_2_(100)
-print(fibo_100_)
+print('\nLlamada a fibA_2_B(n) del modulo de usuario\n')
+fiboA_100_B = fibA_2_B(100)
+print(fiboA_100_B)
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
@@ -504,9 +507,9 @@ plt.show()
 \begin{frame}[fragile]
 \frametitle{Gráfica que se obtiene en el Ejercicio 2}
 \begin{figure}
-	\centering
+    \centering
 	\includegraphics[scale=0.35]{Imagenes/plotEjercicio2.eps}
-	\caption{Gráfica obtenida con el segundo código.}
+ 	\caption{Gráfica obtenida con el segundo código.}
 \end{figure}
 \end{frame}
 \begin{frame}[fragile]
@@ -522,13 +525,13 @@ Es importante señalar que para generar una gráfica, tanto la variable $x$ como
 % \end{frame}
 % \begin{frame}[fragile]
 % \frametitle{Elementos incorporados}
-% % \texttt{
-% % plt.plot(\tikzmark{a1}[1,2,3,4],\tikzmark{a2}[1,4,9,16],\tikzmark{a3}'ro')
-% % \\
-% % \bigskip
-% % \vspace{1.5cm}
-% % plt.plot(\tikzmark{b1}x,\tikzmark{b2}y, \tikzmark{b3}'tipolinea-marca')
-% % }
+% \texttt{
+% plt.plot(\tikzmark{a1}[1,2,3,4],\tikzmark{a2}[1,4,9,16],\tikzmark{a3}'ro')
+% \\
+% \bigskip
+% \vspace{1.5cm}
+% plt.plot(\tikzmark{b1}x,\tikzmark{b2}y, \tikzmark{b3}'tipolinea-marca')
+% }
 % \begin{tikzpicture}[remember picture,overlay]
 %     \path[draw=blue,thick,->] ([xshift=2mm, yshift=3mm]b1) -- ([xshift=1cm, yshift=-2mm]a1);
 %     \path[draw=blue,thick,->] ([xshift=2mm, yshift=3mm]b2) -- ([xshift=1cm, yshift=-2mm]a2);
@@ -536,36 +539,36 @@ Es importante señalar que para generar una gráfica, tanto la variable $x$ como
 
 % \end{tikzpicture}
 % \end{frame}
+% % \begin{frame}[fragile]
+% % \frametitle{Elementos incorporados}
+% % \texttt{
+% % plt.axis(\tikzmark{a1}[0, 6, \tikzmark{a2}0, 20])
+% % \\
+% % \bigskip
+% % \vspace{1.5cm}
+% % plt.axis(\tikzmark{b1}x1, x2, \tikzmark{b2}y1, y2)
+% % }
+% % \begin{tikzpicture}[remember picture,overlay]
+% %     \path[draw=blue,thick,->] ([xshift=2mm, yshift=3mm]b1) -- ([xshift=5mm, yshift=-2mm]a1);
+% %     \path[draw=blue,thick,->] ([xshift=2mm, yshift=3mm]b2) -- ([xshift=2mm, yshift=-2mm]a2);
+% % \end{tikzpicture}
+% % \end{frame}
+% % \begin{frame}
+% % \frametitle{Ejercicio 2}
+% % \begin{figure}
+% % 	\centering
+% % 	\includegraphics[scale=0.35]{Imagenes/plotEjercicio2.eps}
+% % 	\caption{Gráfica obtenida con dos listas de números. Nótese que los puntos no están unidos entre sí.}
+% % \end{figure}
+% % \end{frame}
 % \begin{frame}[fragile]
-% \frametitle{Elementos incorporados}
-% \texttt{
-% plt.axis(\tikzmark{a1}[0, 6, \tikzmark{a2}0, 20])
+% \frametitle{Sobre la segunda gráfica: cadena de formato}
+% Por cada par de argumentos $(x, y )$, existe un tercer argumento opcional, que es la cadena de formato que indica el color y tipo de línea.
 % \\
 % \bigskip
-% \vspace{1.5cm}
-% plt.axis(\tikzmark{b1}x1, x2, \tikzmark{b2}y1, y2)
-% }
-% \begin{tikzpicture}[remember picture,overlay]
-%     \path[draw=blue,thick,->] ([xshift=2mm, yshift=3mm]b1) -- ([xshift=5mm, yshift=-2mm]a1);
-%     \path[draw=blue,thick,->] ([xshift=2mm, yshift=3mm]b2) -- ([xshift=2mm, yshift=-2mm]a2);
-% \end{tikzpicture}
-% \end{frame}
-% \begin{frame}
-% \frametitle{Ejercicio 2}
-% \begin{figure}
-% 	\centering
-% 	\includegraphics[scale=0.35]{Imagenes/plotEjercicio2.eps}
-% 	\caption{Gráfica obtenida con dos listas de números. Nótese que los puntos no están unidos entre sí.}
-% \end{figure}
-% \end{frame}
-\begin{frame}[fragile]
-\frametitle{Sobre la segunda gráfica: cadena de formato}
-Por cada par de argumentos $(x, y )$, existe un tercer argumento opcional, que es la cadena de formato que indica el color y tipo de línea.
-\\
-\bigskip
-Las letras y los símbolos de la cadena de formato concatenan una cadena de color con una cadena que define el estilo de línea.
+% Las letras y los símbolos de la cadena de formato concatenan una cadena de color con una cadena que define el estilo de línea.
 
-\end{frame}
+% \end{frame}
 \begin{frame}[fragile]
 \frametitle{Sobre la segunda gráfica: cadena de formato}
 La cadena de formato por defecto es \verb|'b-'|, que corresponde al color azul (\verb|b = blue|). Es por ello que en la gráfica 1, los puntos quedaron unidos con la línea azul.
@@ -661,9 +664,9 @@ plt.show()
 \begin{frame}[fragile]
 \begin{figure}
 	\centering
- 	\includegraphics[scale=0.5]{Imagenes/plotEjercicio3.eps}
- 	\caption{Gráfica con tres curvas.}
- \end{figure}
+  	\includegraphics[scale=0.5]{Imagenes/plotEjercicio3.eps}
+  	\caption{Gráfica con tres curvas.}
+\end{figure}
 \end{frame}
 \subsection{Trabajando con subplots}
 \begin{frame}
@@ -682,15 +685,15 @@ import matplotlib.pyplot as plt
 def f(t):
     return np.exp(-t) * np.cos(2*np.pi*t)
 
-t_1_ = np.arange(0.0, 5.0, 0.1)
-t_2_ = np.arange(0.0, 5.0, 0.02)
+tA_1_B = np.arange(0.0, 5.0, 0.1)
+tA_2_B = np.arange(0.0, 5.0, 0.02)
 
 plt.figure(1)
 plt.subplot(211)
-plt.plot(t_1_, f(t1), 'bo', t_2_, f(t_2_), 'k')
+plt.plot(tA_1_B, f(tA_1_B), 'bo', tA_2_B, f(tA_2_B), 'k')
 
 plt.subplot(212)
-plt.plot(t_2_, np.cos(2*np.pi*t2), 'r--')
+plt.plot(tA_2_B, np.cos(2*np.pi*tA_2_B), 'r--')
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
@@ -723,77 +726,87 @@ Por tanto \funcionazul{subplot(211)} es idéntica a la \funcionazul{subplot(2,1,
 import matplotlib.pyplot as plt
 import numpy as np
 
-x1 = np.linspace(0,18, 200)
-x2 = np.linspace(0, 5, 100)
+xA_1_B = np.linspace(0, 18, 200)
+xA_2_B = np.linspace(0, 5, 100)
 
 plt.figure(1)                
 plt.subplots_adjust(hspace=0.5)
 
 plt.subplot(211)        
 plt.plot([1, 2, 3])
-plt.title('Ventana 1 - Subplot 1')
+plt.title('Ventana A_1_B - Subplot A_1_B')
 
 plt.subplot(212)         
-plt.plot(x1, np.cos(x1))
-plt.title('Ventana 1 - Subplot 2')
+plt.plot(xA_1_B, np.cos(xA_1_B))
+plt.title('Ventana A_1_B - Subplot A_2_B')
 
 plt.figure(2)                
-plt.plot(x2, np.exp(x2))           
-plt.title('Ventana 2')
+plt.plot(xA_2_B, np.exp(xA_2_B))           
+plt.title('Ventana A_2_B')
 
 plt.show()
 \end{lstlisting}
 \end{frame}
-% \begin{frame}[fragile]
-% \begin{figure}
-% 	\centering
-% 	\includegraphics[scale=0.5]{Imagenes/plotEjercicio5_1.eps}<1>
-% 	\includegraphics[scale=0.5]{Imagenes/plotEjercicio5_2.eps}<2>
-% \end{figure}
-% \end{frame}
-% \subsection{Recursos para \texttt{matplotlib}}
-% \begin{frame}
-% \frametitle{Más recursos para graficar con \python}
-% Lo que hemos visto es una revisión muy básica y general de cómo generar una gráfica con \python.
-% \end{frame}
-% \begin{frame}
-% \frametitle{Más recursos para graficar con \python}
-% Hay una enorme cantidad de información sobre \funcionazul{matplotlib}, que encontrarás en la página oficial de la librería, así como bastante documentación, ejemplos y elementos para extender completamente esta herramienta.
-% \end{frame}
-% \begin{frame}
-% Se les proporcionará una guía breve de graficación, con la intención de que revisen casos prácticos aplicados a la física. Para cada gráfica que usemos más adelante en el curso, tendrán oportunidad de agregar más elementos que ustedes consideren.
-% \end{frame}
-% \begin{frame}
-% \frametitle{Ejemplos de tipos de gráficas}
-% \begin{figure}
-% 	\centering
-% 	\only<1>{
-% 	\includegraphics[scale=0.5]{Imagenes/sphx_glr_histogram_features_001.png}
-% 	\caption{Histograma}
-% 	}
-% 	\only<2>{
-% 	\includegraphics[scale=0.5]{Imagenes/sphx_glr_path_patch_001.png}
-% 	\caption{Contorno}
-% 	}
-% 	\only<3>{
-% 	\includegraphics[scale=0.5]{Imagenes/sphx_glr_pie_features_001.png}
-% 	\caption{Pastel}
-% 	}
-% 	\only<4>{
-% 	\includegraphics[scale=0.5]{Imagenes/sphx_glr_scatter_demo2_001.png}
-% 	\caption{Dispersión}
-% 	}
-% 	\only<5>{
-% 	\includegraphics[scale=0.5]{Imagenes/sphx_glr_surface3d_001.png}
-% 	\caption{Superficie 3D}
-% 	}
-% 	\only<6>{
-% 	\includegraphics[scale=0.4]{Imagenes/sphx_glr_plot_streamplot_001.png}
-% 	\caption{Campos vectoriales}
-% 	}
-% \end{figure}
-% \end{frame}
-% \section{Ejercicios de Mecánica}
+\begin{frame}[fragile]
+\frametitle{Primera ventana con dos subplots}
+\begin{figure}
+	\centering
+    \includegraphics[scale=0.6]{Imagenes/plotEjercicio5_1.eps}
+\end{figure}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Segunda ventana con una gráfica}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.6]{Imagenes/plotEjercicio5_2.eps}
+\end{figure}
+\end{frame}
+\subsection{Recursos para \texttt{matplotlib}}
+\begin{frame}
+\frametitle{Más recursos para graficar con \python}
+Lo que hemos visto es una revisión muy básica y general de cómo generar una gráfica con \python.
+\end{frame}
+\begin{frame}
+\frametitle{Más recursos para graficar con \python}
+Hay una enorme cantidad de información sobre \funcionazul{matplotlib}, que encontrarás en la página oficial de la librería, así como bastante documentación, ejemplos y elementos para extender completamente esta herramienta.
+\end{frame}
+\begin{frame}
+Se les proporcionará una guía breve de graficación, con la intención de que revisen casos prácticos aplicados a la física.
+\\
+\bigskip
+Para cada gráfica que usemos más adelante en el curso, tendrán oportunidad de agregar más elementos que ustedes consideren.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplos de tipos de gráficas}
+\begin{figure}
+	\centering
+	\only<1>{
+	\includegraphics[scale=0.5]{Imagenes/sphx_glr_histogram_features_001.png}
+	\caption{Histograma}
+	}
+	\only<2>{
+	\includegraphics[scale=0.5]{Imagenes/sphx_glr_path_patch_001.png}
+	\caption{Contorno}
+	}
+	\only<3>{
+	\includegraphics[scale=0.5]{Imagenes/sphx_glr_pie_features_001.png}
+	\caption{Pastel}
+	}
+	\only<4>{
+	\includegraphics[scale=0.5]{Imagenes/sphx_glr_scatter_demo2_001.png}
+	\caption{Dispersión}
+	}
+	\only<5>{
+	\includegraphics[scale=0.5]{Imagenes/sphx_glr_surface3d_001.png}
+	\caption{Superficie 3D}
+	}
+	\only<6>{
+	\includegraphics[scale=0.25]{Imagenes/sphx_glr_plot_streamplot_001.png}
+	\caption{Campos vectoriales}
+	}
+\end{figure}
+\end{frame}
+\section{Ejercicio de Mecánica}
 % \frame{\tableofcontents[currentsection, hideothersubsections]}
 % \subsection{El oscilador armónico}
 % \begin{frame}
@@ -925,310 +938,321 @@ plt.show()
 % 	\includegraphics[scale=0.5]{Imagenes/EjerMecanica01.eps} 
 % \end{figure}
 % \end{frame}
-% \subsection{Efecto de la resistencia del aire}
-% \begin{frame}
-% \frametitle{Ejecicio 2: Efecto de la resistencia del aire}
-% La bicicleta es una forma muy eficiente de transporte, este es un hecho bien conocido por cualquier persona que monta una. 
-% \\
-% \bigskip
-% Nuestro objetivo en este ejercicio es comprender los factores que determinan la velocidad máxima de una bicicleta y estimar la velocidad de un caso real.
-% \end{frame}
-% \begin{frame}
-% \frametitle{Ejecicio 2: Efecto de la resistencia del aire}
-% Comenzaremos haciendo caso omiso de la fricción; tendremos que añadirlo al final, por supuesto, pero debemos primero entender cómo lidiar con el caso más simple y sin fricción.
-% \end{frame}
-% \begin{frame}
-% \frametitle{Ecuación de movimiento}
-% La ecuación de movimiento corresponde a la segunda ley de Newton, que escribimos de la forma
-% \begin{equation}\label{EqNewton2}
-% \dfrac{dv}{dt} = \dfrac{F}{m}
-% \end{equation}
-% \end{frame}
-% \begin{frame}
-% \frametitle{Ecuación de movimiento}
-% \begin{equation*}
-% \dfrac{dv}{dt} = \dfrac{F}{m}
-% \end{equation*}
-% donde
-% \setbeamercolor{item projected}{bg=green!70!black,fg=white}
-% \setbeamertemplate{enumerate items}[circle]
-% \begin{enumerate}[<+->]
-% \item $v$ es la velocidad.
-% \item $m$ es la masa de la combinación de la bicicleta-conductor.
-% \item $t$ es el tiempo.
-% \item $F$ es la fuerza en la bicicleta que viene del esfuerzo del conductor (supondremos que la bicicleta se mueve sobre un terreno plano)
-% \end{enumerate}
-% \end{frame}
-% \begin{frame}
-% \frametitle{Definir la fuerza}
-% Tratar correctamente a $F$ se complica por la mecánica de la bicicleta, ya que la fuerza ejercida por el ciclista se transmite a las ruedas por medio del plato, engranajes, cadena, etc.
-% \\
-% \medskip
-% Esto hace que sea muy difícil derivar una expresión exacta para $F$.
-% \end{frame}
-% \begin{frame}
-% \frametitle{Definir la fuerza}
-% Sin embargo, hay otra manera de abordar este problema que evita la necesidad de conocer la fuerza.
-% \\
-% \medskip
-% Este enfoque alternativo implica la formulación del problema en términos de la potencia generada por el ciclista.
-% \end{frame}
-% \begin{frame}
-% \frametitle{Comparando la potencia}
-% Estudios fisiológicos en ciclistas de carreras han demostrado que éstos atletas son capaces de producir una potencia de salida de aproximadamente $400$ watts durante largos períodos de tiempo ($\sim 1$ h)
-% \end{frame}
-% \begin{frame}
-% \frametitle{Usando la potencia generada}
-% Usando las ideas de trabajo-energía podemos reescribir (\ref{EqNewton2}) como
-% \begin{equation}\label{EqPotencia}
-% \dfrac{dE}{dt} = P
-% \end{equation}
-% donde $E$ es la energía total, $P$ es la potencia de salida del ciclista. 
-% \end{frame}
-% \begin{frame}
-% \frametitle{Expresando la energía}
-% Para un trayecto plano la energía es totalmente cinética, es decir,
-% \[ E = \frac{1}{2} m v^{2} \]
-% y además
-% \[ \frac{dE}{dt} = mv (\frac{dv}{dt}) \]
-% \pause
-% usando esto en (\ref{EqPotencia}), resulta
-% \begin{equation}\label{EqPotenciavel}
-% \dfrac{dv}{dt} = \dfrac{P}{mv}
-% \end{equation}
-% \end{frame}
-% \begin{frame}
-% \frametitle{Expresando la energía}
-% Si $P$ es una constante, la ecuación (\ref{EqPotenciavel}), se puede resolver de manera analítica, rearreglando términos:
-% \begin{equation}\label{EqIntegral}
-% \int_{v_{0}}^{v} v' dv' = \int_{0}^{t} \dfrac{P}{m} dt'
-% \end{equation}
-% donde $v_{0}$ es la velocidad de la bicicleta en $t=0$. 
-% \end{frame}
-% \begin{frame}
-% \frametitle{Expresando la energía}
-% Integrando ambos lados de la ecuación y resolviendo para $v$, tenemos
-% \begin{equation}\label{Eqvres}
-% v = \sqrt{v_{0}^{2} + 2 \: P \: \dfrac{t}{m}}
-% \end{equation}
-% \end{frame}
-% \begin{frame}
-% \frametitle{Pasando al código}
-% Como ya tenemos un conjunto de elementos necesarios para resolver el ejercicio, ahora nos enfocamos a traducir en el lenguaje de \python, lo necesario para la solución.
-% \\
-% \bigskip
-% Recuerda que debemos de almacenar los valores nuevos de velocidad, como se calcula un valor nuevo por cada unidad de tiempo, entonces ya tenemos un par de variables para graficar.
-% \end{frame}
-% \begin{frame}[allowframebreaks, fragile]
-% \frametitle{Considera lo siguiente}
-% \begin{lstlisting}
-% import matplotlib.pyplot as plt
-% from math import sqrt
+\subsection{Un problema de mecánica}
+\begin{frame}
+\frametitle{Ejecicio: movimiento en bicicleta}
+La bicicleta es un medio muy eficiente de transporte, este es un hecho bien conocido por cualquier persona que monta una. 
+\\
+\bigskip
+Nuestro objetivo en este ejercicio es comprender los factores que determinan la velocidad máxima de una bicicleta y estimar la velocidad de un caso real.
+\end{frame}
+\begin{frame}
+\frametitle{Ejecicio: Caso sin fricción}
+Comenzaremos haciendo caso omiso de la fricción; tendremos que añadirlo al final, por supuesto, pero debemos primero entender cómo lidiar con el caso más simple y sin fricción.
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación de movimiento}
+La ecuación de movimiento corresponde a la segunda ley de Newton, que escribimos de la forma
+\begin{align}
+\dfrac{dv}{dt} = \dfrac{F}{m}
+\label{EqNewton2}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Ecuación de movimiento}
+\begin{equation*}
+\dv{v}{t} = \dfrac{F}{m}
+\end{equation*}
+donde
+\setbeamercolor{item projected}{bg=green!70!black,fg=white}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\fontsize{13}{13}\selectfont
+\item $v$ es la velocidad.
+\item $m$ es la masa de la combinación de la bicicleta-conductor.
+\item $t$ es el tiempo.
+\item $F$ es la fuerza en la bicicleta que viene del esfuerzo del conductor (supondremos que la bicicleta se mueve sobre un terreno plano)
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Definiendo la fuerza}
+Tratar debidamente a la fuerza $F$, se complica por la mecánica de la bicicleta: ya que la fuerza ejercida por el ciclista se transmite a las ruedas por medio del plato, engranajes, cadena, etc.
+\\
+\medskip
+Esto hace que sea muy difícil derivar una expresión exacta para $F$.
+\end{frame}
+\begin{frame}
+\frametitle{Definición alterna de la fuerza}
+Sin embargo, hay otra manera de abordar este problema que evita la necesidad de conocer la fuerza.
+\\
+\medskip
+Este enfoque alternativo implica la formulación del problema en términos de la potencia generada por el ciclista.
+\end{frame}
+\begin{frame}
+\frametitle{Comparando la potencia}
+Estudios fisiológicos en ciclistas de carreras han demostrado que éstos atletas son capaces de producir una potencia de salida de aproximadamente $400$ watts durante largos períodos de tiempo ($\sim 1$ h)
+\end{frame}
+\begin{frame}
+\frametitle{Usando la potencia generada}
+Usando las ideas de trabajo-energía podemos reescribir (\ref{EqNewton2}) como
+\begin{align}
+\dv{E}{t} = P
+\label{EqPotencia}
+\end{align}
+donde $E$ es la energía total, $P$ es la potencia de salida del ciclista. 
+\end{frame}
+\begin{frame}
+\frametitle{Expresando la velocidad}
+Para un trayecto plano la energía es totalmente cinética, es decir,
+\begin{align*}
+E = \frac{1}{2} m v^{2}
+\end{align*}
+y además
+\begin{align*}
+\dv{E}{t} = mv  \left( \dv{v}{t} \right)
+\end{align*}
+\pause
+usando esto en la ec. (\ref{EqPotencia}), resulta
+\begin{align}
+\dv{v}{t} = \dfrac{P}{mv}
+\label{EqPotenciavel}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Expresando la velocidad}
+Si $P$ es una constante, la ecuación (\ref{EqPotenciavel}), se puede resolver de manera analítica, rearreglando términos:
+\begin{align}
+\int_{v_{0}}^{v} v^{\prime} \dd{v^{\prime}} = \int_{0}^{t} \dfrac{P}{m} \dd{t^{\prime}}
+\label{EqIntegral}
+\end{align}
+donde $v_{0}$ es la velocidad de la bicicleta en $t=0$. 
+\end{frame}
+\begin{frame}
+\frametitle{Obteniendo la velocidad}
+Integrando ambos lados de la ecuación (\ref{EqIntegral} y resolviendo para $v$, tenemos que la velocidad del ciclista es:
+\begin{align}
+v = \sqrt{v_{0}^{2} + 2 \: P \: \dfrac{t}{m}}
+\label{Eqvres}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Pasando al código}
+Como ya tenemos un conjunto de elementos necesarios para resolver el ejercicio, ahora nos enfocamos a traducir en el lenguaje de \python, lo necesario para la solución.
+\\
+\bigskip
+Recuerda que debemos de almacenar los valores nuevos de velocidad, como se calcula un valor nuevo por cada unidad de tiempo, entonces ya tenemos un par de variables para graficar.
+\end{frame}
+\begin{frame}[allowframebreaks, fragile]
+\frametitle{El caso sin fricción}
+\begin{lstlisting}[style=codigopython]
+import matplotlib.pyplot as plt
+from math import sqrt
 
-% t = []
-% v = []
+t = []
+v = []
+dt, potencia, masa, tmax = 1, 400, 70, 400
+nmax = tmax/dt
 
-% dt = 1
+t.append(0)
+v.append(4)
 
-% potencia = 400
-% masa = 70
-% tmax = 200
-% nmax = tmax/dt
-
-
-% t.append(0)
-% v.append(4)
-% \end{lstlisting}
-% \end{frame}
-% \begin{frame}[fragile]
-% \frametitle{Calculando nuevos valores}
-% \begin{lstlisting}
-% for i in range(int(tmax/dt)):
-%     ti = t[i-_1_] + dt
-%     vi = sqrt(v[i]**2 + (2 * potencia * dt)/masa)
+#calculando nuevos valores
+for i in range(int(nmax)):
+    ti = t[i] + dt
+    vi = sqrt(v[i]**2 + (2*potencia*dt)/masa)
     
+    t.append(ti)
+    v.append(vi)
+
+#Rutina de graficacion
+plt.plot(v, "r-")
+plt.xlabel("tiempo [s]")
+plt.ylabel("velocidad m/s")
+plt.title("Velocidad del ciclista")
+plt.show()
+\end{lstlisting}
+\end{frame}
+\begin{frame}
+\frametitle{Resultado de la velocidad sin fricción}
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.6]{Imagenes/EjerBicicleta01.eps}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Interpretación de los resultados}
+\textbf{¿Es congruente la solución numérica con la física?}
+\\
+\bigskip
+\pause
+La solución de la ecuación de movimiento (\ref{EqPotenciavel}) es correcta, pero nuestro trabajo no concluye aquí:
+\pause
+\begin{alertblock}{La física no checa}
+La solución predice que la velocidad del ciclista se incrementará sin límite para tiempos muy largos.
+\end{alertblock}
+\end{frame}
+\begin{frame}
+\frametitle{Ajuste en el modelo inicial}
+Vamos a corregir este resultado: cuando se generaliza el modelo se debe de incluir el efecto de la resistencia del aire.
+\\
+\bigskip
+\pause
+El nuevo término que vamos a añadir a la ecuación de movimiento nos obliga a desarrollar una solución numérica, así que con eso en mente se considera un tratamiento numérico de la ec. (\ref{EqPotenciavel})
+\end{frame}
+\begin{frame}
+\frametitle{Abordaje numérico}
+Comenzamos con la forma de diferencias finitas para la derivada de la velocidad
+\begin{align}
+\dv{v}{t} \simeq \dfrac{v_{i+1} - v_{i}}{\Delta t}
+\label{Eqderivada}
+\end{align}
+donde asumimos que $\Delta t$ es paso discreto pequeño, y $v_{i}$ es la velocidad al tiempo $t_{i} \equiv i \Delta t$.
+\end{frame}
+\begin{frame}
+\frametitle{Abordaje numérico}
+Por lo que de la ecuación (\ref{EqPotenciavel}), tenemos que la velocidad al paso $i+1$ es:
+\begin{align}
+v_{i+1} = v_{i} + \dfrac{P}{m \, v_{i}} \Delta t
+\label{Eqveli+1}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Calculando la velocidad}
+Dada la velocidad en un tiempo $i$ (es decir, $v_{i}$), podemos usar la ec. (\ref{Eqveli+1}), para calcular un valor \textit{aproximado} de la velocidad en el siguiente paso $v_{i+1}$.
+\end{frame}
+\begin{frame}
+\frametitle{Calculando la velocidad}
+Si conocemos la velocidad inicial $v_{0}$, podemos obtener $v_{1}$, $v_{2}$, y así sucecivamente.
+\\
+\bigskip
+Ahora hay que introducir en la ecuación, los parámetros de fricción debida al aire.
+\end{frame}
+\begin{frame}
+\frametitle{Considerando la fricción del aire}
+La fuerza debida a la fricción puede aproximarse de manera inicial como
+\begin{align}
+F_{a} \simeq - B_{1} \: v - B_{2} \: v^{2}
+\label{EqFfriccion}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Considerando la fricción del aire}
+\begin{align*}
+F_{a} \simeq - B_{1} \: v - B_{2} \: v^{2}
+\end{align*}
+Para velocidades muy bajas, el primer término es el que domina, y su coeficiente $B_{1}$ se puede calcular para objetos con formas sencillas.
+\end{frame}
+\begin{frame}
+\frametitle{Considerando la fricción del aire}
+\begin{align*}
+F_{a} \simeq - B_{1} \: v - B_{2} \: v^{2}
+\end{align*}
+Para una velocidad razonable $v^{2}$ el término domina sobre los demás, pero el coeficiente $B_{2}$ no puede calcularse exactamente en objetos sencillos como una pelota de beisbol, menos para una bicicleta.
+\end{frame}
+\begin{frame}
+\frametitle{Primera aproximación}
+Podemos aproximar el valor de $B_{2}$ como sigue:
+\\
+\medskip
+\pause
+Si un objeto se mueve a través de la atmósfera, entonces debe empujar al aire delante fuera del camino.
+\end{frame}
+\begin{frame}
+\frametitle{Primera aproximación}
+La masa de aire movido en el tiempo $\dd{t}$ es
+\begin{align*}
+m_{\tiny{aire}} \sim \rho \: A \: v \: \dd{t}
+\end{align*}
+donde $\rho$ es la densidad del aire y $A$ el área frontal del objeto. 
+\\
+\bigskip
+\pause
+A este aire se le da una velocidad de orden $v$, y por lo tanto, su energía cinética es
+\begin{align*}
+E_{\tiny{aire}} \sim m_{aire} \: v^{2} /2
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Primera aproximación}
+Este es también el trabajo realizado por la fuerza de arrastre (la fuerza sobre el objeto debido a la resistencia del aire) en el tiempo $\dd{t}$, por lo que
+\begin{align*}
+F_{a} \: v \: \dd{t} = E_{\tiny{aire}}
+\end{align*}
+\bigskip
+\pause
+Poniendo todo esto junto nos encontramos con:
+\begin{align*}
+F_{a} \simeq - C \: \rho \: A \: v^{2}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Coeficiente de arrastre}
+De la expresión
+\begin{align*}
+F_{a} \simeq - C \: \rho \: A \: v^{2}
+\end{align*}
+Tenemos que $C$ es el coeficiente de arrastre, podemos argumentar que tiene un valor de $0.5$ (¿cómo lo demostrarías?).
+\end{frame}
+\begin{frame}
+\frametitle{Coeficiente de arrastre}
+Recordemos que estamos haciendo una primera aproximación, si nos interesa contar con una expresión que determine la correcta relación de $F_{a}$ con $v$ y $A$, entonces tendremos que hacer mediciones en un túnel de viento, para utilizar el valor correcto de $C$.
+\end{frame}
+\begin{frame}
+\frametitle{Nueva expresión para la velocidad}
+Incluyendo este término en la expresión para la velocidad
+\begin{align}
+v_{i+1} = v_{i} + \dfrac{P}{m v_{i}} \Delta t - \dfrac{C \rho A v_{i}^{2}}{m} \Delta t
+\label{Eqvelifriccion}
+\end{align}
+Considera los siguientes valores:
+\setbeamercolor{item projected}{bg=green!70!black,fg=white}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Coeficiente de arrastre: $C = 0.5$
+\item Sección de área frontal: $0.33 \: \si{\square\meter}$
+\item Masa del sistema ciclista-bicicleta: $70 \: \si{\kilogram}$
+\item Velocidad inicial: $4 \: \si{\meter\per\second}$
+\item Incremento en el tiempo: $\Delta \: t = 0.1 \: \si{\second}$
+\end{enumerate}
+\end{frame}
+\begin{frame}[allowframebreaks, fragile]
+\frametitle{Agregando código}
+Agrega lo siguiente en tu código, te recomendamos guardar con otro nombre tu archivo.
+\begin{lstlisting}[style=codigopython]
+vA_2_B = []
+
+A, C = 0.33, 0.5
+
+#dentro del ciclo for
+vc = vA_2_B[i-A_1_B] + potencia*dt / (masa* vA_2_B[i-A_1_B]) - (C*A*vA_2_B[i-A_1_B] ** 2) * dt/masa
     
-%     t.append(ti)
-%     v.append(vi)
-% \end{lstlisting}
-% \end{frame}
-% \begin{frame}[fragile]
-% \frametitle{Rutina de graficación}
-% \begin{lstlisting}
-% plt.plot(v, "r-")
-% plt.xlabel("tiempo [s]")
-% plt.ylabel("velocidad m/s")
-% plt.title("Velocidad del ciclista")
-% plt.show()
-% \end{lstlisting}
-% \end{frame}
-% \begin{frame}
-% \frametitle{Resultado de la velocidad sin fricción}
-% \begin{figure}
-% 	\centering
-% 	\includegraphics[scale=0.5]{EjerBicicleta01.eps}
-% \end{figure}
-% \end{frame}
-% \begin{frame}
-% \frametitle{Interpretación}
-% \textbf{¿Es congruente la solución numérica con la física?}
-% \\
-% \bigskip
-% \pause
-% La solución de la ecuación de movimiento (\ref{EqPotenciavel}) es correcta, pero nuestro trabajo no concluye aquí:
-% \pause
-% \begin{alertblock}{La física no checa}
-% La solución predice que la velocidad del ciclista se incrementará sin límite para tiempos muy largos.
-% \end{alertblock}
-% \end{frame}
-% \begin{frame}
-% \frametitle{Ajuste en el modelo inicial}
-% Vamos a corregir este resultado: cuando se generaliza el modelo se debe de incluir el efecto de la resistencia del aire.
-% \\
-% \bigskip
-% El nuevo término que vamos a añadir a la ecuación de movimiento nos obliga a desarrollar una solución numérica, así que con eso en mente se considera un tratamiento numérico de (\ref{EqPotenciavel})
-% \end{frame}
-% \begin{frame}
-% \frametitle{Abordaje numérico}
-% Comenzamos con la forma de diferencias finitas para la derivada de la velocidad
-% \begin{equation}\label{Eqderivada}
-% \dfrac{dv}{dt} \simeq \dfrac{v_{i+1}-v_{i}}{\Delta t}
-% \end{equation}
-% donde asumimos que $\Delta t$ es paso discreto pequeño, y $v_{i}$ es la velocidad al tiempo $t_{i} \equiv i \Delta t$.
-% \end{frame}
-% \begin{frame}
-% \frametitle{Abordaje numérico}
-% Por lo que de la ecuación (\ref{EqPotenciavel})
-% \begin{equation}\label{Eqveli+1}
-% v_{i+1} = v_{i} + \dfrac{P}{m v_{i}} \Delta t
-% \end{equation}
-% \end{frame}
-% \begin{frame}
-% \frametitle{Calculando la velocidad}
-% Dada la velocidad en un tiempo $i$ (es decir, $v_{i}$), podemos usar (\ref{Eqveli+1}) para calcular un valor \textit{aproximado} de la velocidad en el siguiente paso $v_{i+1}$.
-% \end{frame}
-% \begin{frame}
-% \frametitle{Calculando la velocidad}
-% Si conocemos la velocidad inicial $v_{0}$, podemos obtener $v_{1}$, $v_{2}$, y así sucecivamente.
-% \\
-% \bigskip
-% Ahora hay que introducir en la ecuación, los parámetros de fricción debida al aire.
-% \end{frame}
-% \begin{frame}
-% \frametitle{Considerando la fricción del aire}
-% La fuerza debida a la fricción puede aproximarse de manera inicial como
-% \begin{equation}\label{EqFfriccion}
-% F_{a} \simeq - B_{1} \: v - B_{2} \: v^{2}
-% \end{equation}
-% \end{frame}
-% \begin{frame}
-% \frametitle{Considerando la fricción del aire}
-% \begin{equation*}
-% F_{a} \simeq - B_{1} \: v - B_{2} \: v^{2}
-% \end{equation*}
-% Para velocidades muy bajas, el primer término es el que domina, y su coeficiente $B_{1}$ se puede calcular para objetos con formas sencillas.
-% \end{frame}
-% \begin{frame}
-% \frametitle{Considerando la fricción del aire}
-% \begin{equation*}
-% F_{a} \simeq - B_{1} \: v - B_{2} \: v^{2}
-% \end{equation*}
-% Para una velocidad razonable $v^{2}$ el término domina sobre los demás, pero el coeficiente $B_{2}$ no puede calcularse exactamente en objetos sencillos como una pelota de beisbol, menos para una bicicleta.
-% \end{frame}
-% \begin{frame}
-% \frametitle{Primera aproximación}
-% Podemos aproximar el valor de $B_{2}$ como sigue:
-% \\
-% \medskip
-% Si un objeto se mueve a través de la atmósfera, entonces debe empujar al aire delante fuera del camino.
-% \end{frame}
-% \begin{frame}
-% \frametitle{Primera aproximación}
-% La masa de aire movido en el tiempo $dt$ es
-% \[m_{aire} \sim \rho \: A \: v \: dt \]
-% donde $\rho$ es la densidad del aire y $A$ el área frontal del objeto. 
-% \\
-% \bigskip
-% \pause
-% A este aire se le da una velocidad de orden $v$, y por lo tanto, su energía cinética es
-% \[E_{aire} \sim m_{aire} \: v^{2} /2 \]
-% \end{frame}
-% \begin{frame}
-% \frametitle{Primera aproximación}
-% Este es también el trabajo realizado por la fuerza de arrastre (la fuerza sobre el objeto debido a la resistencia del aire) en el tiempo $dt$, por lo $F_{a} \: v \: dt = E_{aire}$.
-% \\
-% \bigskip
-% Poniendo todo esto junto nos encontramos con:
-% \[ F_{a} \simeq - C \: \rho \: A \: v^{2} \]
-% \end{frame}
-% \begin{frame}
-% \frametitle{Coeficiente de arrastre}
-% De la expresión
-% \[ F_{a} \simeq - C \: \rho \: A \: v^{2} \]
-% Tenemos que $C$ es el coeficiente de arrastre, podemos argumentar que tiene un valor de $0.5$ (¿cómo lo demostrarías?).
-% \end{frame}
-% \begin{frame}
-% \frametitle{Coeficiente de arrastre}
-% Recordemos que estamos haciendo una primera aproximación, si nos interesa contar con una expresión que determine la correcta relación de $F_{a}$ con $v$ y $A$, entonces tendremos que hacer mediciones en un túnel de viento, para utilizar el valor correcto de $C$.
-% \end{frame}
-% \begin{frame}
-% \frametitle{Nueva expresión para la velocidad}
-% Incluyendo este término en la expresión para la velocidad
-% \begin{equation}\label{Eqvelifriccion}
-% v_{i+1} = v_{i} + \dfrac{P}{m v_{i}} \Delta t - \dfrac{C \rho A v_{i}^{2}}{m} \Delta t
-% \end{equation}
-% Considera los siguientes valores:
-% \setbeamercolor{item projected}{bg=green!70!black,fg=white}
-% \setbeamertemplate{enumerate items}[circle]
-% \begin{enumerate}[<+->]
-% \item Coeficiente de arrastre: $C = 0.5$
-% \item Sección de área frontal: $0.33 \: \si{\square\meter}$
-% \item Masa del sistema ciclista-bicicleta: $70 \: \si{\kilogram}$
-% \item Velocidad inicial: $4 \: \si{\meter\per\second}$
-% \item Incremento en el tiempo: $\Delta \: t = 0.1 \: \si{\second}$
-% \end{enumerate}
-% \end{frame}
-% \begin{frame}[fragile]
-% \frametitle{Agregando código}
-% Agrega lo siguiente en tu código, te recomendamos guardar con otro nombre tu archivo.
-% \begin{lstlisting}
-% v_2_ = []
+vA_2_B.append(vc)
 
-% masa = 70
+#en la graficacion cambia
+plt.plot(v, "r-", label="Sin friccion")
 
-% A = 0.33
+#agrega lo siguiente
+plt.plot(vA_2_B, "b-", label="Velocidad con friccion")
+plt.legend(loc="upper left")
 
-% C = 0.5
-% \end{lstlisting}
-% \end{frame}
-% \begin{frame}[fragile]
-% \frametitle{Agregando código}
-% \begin{lstlisting}
-% vc = v_2_[i-_1_] + potencia * dt / (masa * v_2_[i-_1_]) - (C * A * v_2_[i-_1_] ** 2) * dt/masa
-    
-% v_2_.append(vc)
-% \end{lstlisting}
-% \end{frame}
-% \begin{frame}[fragile]
-% \frametitle{Agregando código}
-% \begin{lstlisting}
-% plt.plot(v, "r-", label="Velocidad sin friccion")
-% plt.plot(v_2_, "b-", label="Velocidad con friccion")
-% plt.legend(loc="upper left")
-% \end{lstlisting}
-% \end{frame}
-% \begin{frame}
-% \frametitle{Comparando velocidades}
-% \begin{figure}
-% 	\centering
-% 	\includegraphics[scale=0.5]{EjerBicicleta02.eps}
-% \end{figure}
-% \end{frame}
-% \begin{frame}
-% \frametitle{Conclusión}
-% Con este ejercicio encontramos que no necesariamente una solución que funcione desde el punto de vista informático, tendrá consistencia con la física.
-% \\
-% \bigskip
-% Será nuestra tarea verificar que esa congruencia se mantenga en nuestros algoritmos y soluciones.
-% \end{frame}
+plt.title("Comparacion de la velocidad del ciclista")
+plt.axis([0, 210, 0, 50])
+
+plt.show()
+\end{lstlisting}
+\end{frame}
+\begin{frame}
+\frametitle{Comparando velocidades}
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.6]{Imagenes/EjerBicicleta02.eps}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Conclusión}
+Con este ejercicio encontramos que no necesariamente una solución que funcione desde el punto de vista informático, tendrá consistencia con la física.
+\\
+\bigskip
+Será nuestra tarea verificar que esa congruencia se mantenga en nuestros algoritmos y soluciones.
+\end{frame}
 \end{document}

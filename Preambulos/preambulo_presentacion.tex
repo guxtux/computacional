@@ -12,6 +12,7 @@
 \usepackage{etoolbox}
 \usepackage{amsmath}
 \usepackage{amsthm}
+\usepackage{physics}
 \usepackage{multicol}
 \usepackage{bookmark}
 \usepackage{listings}
@@ -175,5 +176,6 @@ literate={0}{{\textcolor{red}{0}}}{1}%
             {\ }{{ }}{1}% handle the space
         ,%
         %mathescape=true
-        escapeinside={__}
+        %escapeinside={*@}
+        escapeinside={A_}{_B}
 }
