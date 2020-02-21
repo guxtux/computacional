@@ -82,6 +82,8 @@ def fib(n):
     while b < n:
         print (b)
         a, b = b, a + b
+    
+    return b
 
 fib(2000)
 \end{lstlisting}
@@ -89,7 +91,7 @@ fib(2000)
 \begin{frame}[fragile]
 \frametitle{Segunda propuesta de código}
 \begin{lstlisting}[style=codigopython]
-def fib_2_(n):
+def fibA_2_B(n):
     resultado = []
     a, b = 0, 1
     while a < n:
@@ -144,7 +146,7 @@ Para evitar este tipo de errores, hay una manera de llamar a una función pasand
 \frametitle{Ejemplo de paso de argumentos con nombre}
 \begin{lstlisting}[style=codigopython]
 def Prueba (a, b, c):
-    print("a = {}, b = {}, c = {}".format(a, b, c)
+    print("a = {}, b = {}, c = {}".format(a, b, c))
 
 
 
@@ -694,6 +696,8 @@ plt.plot(tA_1_B, f(tA_1_B), 'bo', tA_2_B, f(tA_2_B), 'k')
 
 plt.subplot(212)
 plt.plot(tA_2_B, np.cos(2*np.pi*tA_2_B), 'r--')
+
+plt.show()
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
@@ -940,14 +944,14 @@ Para cada gráfica que usemos más adelante en el curso, tendrán oportunidad de
 % \end{frame}
 \subsection{Un problema de mecánica}
 \begin{frame}
-\frametitle{Ejecicio: movimiento en bicicleta}
+\frametitle{Ejercicio: movimiento en bicicleta}
 La bicicleta es un medio muy eficiente de transporte, este es un hecho bien conocido por cualquier persona que monta una. 
 \\
 \bigskip
 Nuestro objetivo en este ejercicio es comprender los factores que determinan la velocidad máxima de una bicicleta y estimar la velocidad de un caso real.
 \end{frame}
 \begin{frame}
-\frametitle{Ejecicio: Caso sin fricción}
+\frametitle{Ejercicio: Caso sin fricción}
 Comenzaremos haciendo caso omiso de la fricción; tendremos que añadirlo al final, por supuesto, pero debemos primero entender cómo lidiar con el caso más simple y sin fricción.
 \end{frame}
 \begin{frame}
