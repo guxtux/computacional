@@ -1,4 +1,4 @@
-\documentclass[tikz]{standalone}
+\documentclass[margin=5mm, tikz]{standalone}
 \usepackage[utf8x]{inputenc}
 \usepackage{tikz}
 \begin{document}
@@ -7,12 +7,12 @@
 
 
 \draw [fill=yellow, thin] (0,3.5) circle (2);
-\draw (0,3.5) node {Física};
-\draw [fill=blue, thin] (-2.4,-2.4) circle (2);
-\draw [align = center] (-2.4,-2.4) node {Ciencias \\ de la Computación};
+\draw [align=center] (0,3.5) node {Física \\ Fenómeno};
+\draw [fill=blue!40, thin] (-2.4,-2.4) circle (2);
+\draw [align = center] (-2.4,-2.4) node {Ciencias Comp. \\ Hard/Soft};
 
 \draw [fill=orange, thin] (2.4,-2.4) circle (2);
-\draw (2.4,-2.4) node {Matemáticas};
+\draw [align=center] (2.4,-2.4) node {Matemáticas \\ Método};
 
 \draw [fill=gray!10, thin] (0,0) circle (2.5);
 \draw [align = center] (0,0) node {Física \\ Computacional};
