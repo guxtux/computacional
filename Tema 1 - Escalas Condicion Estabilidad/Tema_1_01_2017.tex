@@ -1,7 +1,8 @@
-\input{../Preambulos/pre_documento}
-\input{../Preambulos/pre_plantilla_Warsaw_default}
-\input{../Preambulos/pre_codigo}
-\input{../Preambulos/pre_define_footers_Warsaw_default}
+\input{../Preambulos/preambulo_presentacion}
+% \input{../Preambulos/pre_documento}
+% \input{../Preambulos/pre_plantilla_Warsaw_default}
+% \input{../Preambulos/pre_codigo}
+% \input{../Preambulos/pre_define_footers_Warsaw_default}
 \title{\large{Tema 1 - Escalas, condición y estabilidad}}
 \subtitle{Curso de Física Computacional}
 \author[]{M. en C. Gustavo Contreras Mayén}
@@ -28,6 +29,14 @@ Al concluir el Tema 1, el alumno:
 \section{Física Computacional}
 \subsection{¿Qué es? ¿Para qué?}
 \begin{frame}
+\frametitle{La física antes de la era computacional}
+Antes del desarrollo y \enquote{boom} computacional, la física presentaba dos grandes áreas:
+\begin{figure}
+	\centering
+	\includestandalone{Figuras/figura_02}
+	\end{figure}
+\end{frame}
+\begin{frame}
 \frametitle{¿Qué es la física computacional?}
 La física computacional es una nueva manera de hacer investigación en física, próxima al
 experimento y a la teoría.
@@ -35,8 +44,36 @@ experimento y a la teoría.
 \medskip
 En el laboratorio se realizan mediciones en sistemas físicos reales (restringida a la factibilidad de recursos técnicos), y que luego los físicos teóricos explican esas mediciones mediante las teorías.
 \end{frame}
+\begin{frame}[fragile]
+\frametitle{El proceso de trabajo}
+\begin{figure}
+	\centering
+	\hspace*{-1cm}
+	\includegraphics[scale=0.7]{Imagenes/figura_03.eps}
+\end{figure}
+\end{frame}
+\begin{frame}[fragile]
+\begin{figure}
+	\centering
+	\includestandalone{Figuras/figura_01}
+\end{figure}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{La física computacional}
+Con la incorporación de una herramienta tan poderosa como es la computación, la física como ciencia, cuenta ahora con una extensión en su estudio.
+\\
+\bigskip
+\pause
+De manera general se entiende que la física computacional tiene lo siguiente:
+\end{frame}
+\begin{frame}[fragile]
+\begin{figure}
+	\centering
+	\includegraphics{Imagenes/figura_04.eps}
+\end{figure}
+\end{frame}
 \begin{frame}
-\frametitle{Areas de investigación en la física}
+\frametitle{Áreas de investigación en la física}
 \begin{itemize}[<+->]
 	\item Problemas que no tienen solución analítica.
 	\item Validar aproximaciones y hacer efectivas las teorías propuestas.
@@ -67,23 +104,41 @@ En el laboratorio se realizan mediciones en sistemas físicos reales (restringid
 \end{itemize}
 \end{multicols}
 \end{frame}
-\begin{frame}[fragile]
-\begin{figure}
-\centering
-\includestandalone{Figuras/figura_01}
-\end{figure}
-\end{frame}
 \begin{frame}
 \frametitle{Alcance del curso}
 El curso está diseñado para ofrecer una introducción a los métodos numéricos aplicados a la física.
 \\
 \medskip
-Se da un punto de referencia para continuar profundizando de manera particular en temas específicos. 
+Se dará un punto de referencia para continuar profundizando de manera particular en temas específicos. 
 \end{frame}
 \begin{frame}
 \frametitle{Alcance del curso}
 El desarrollo de las habilidades de programación, están en función del tiempo dedicado al trabajo fuera de la clase, pero consideramos que se abren un panorama diferente para abordar ya sea un servicio social, tesis o proyecto de trabajo para un posgrado.
 \end{frame}
+<<<<<<< HEAD
+% % \begin{frame}[fragile]
+% % \frametitle{Ejemplos avanzados de programación con \python}
+% % \begin{itemize}
+% % 	\item Animación básica \href{run:correscript.sh}{Click}
+% % %	\item Péndulo doble.
+% % %	\item Conjunto de Mandelbrot.
+% % %	\item Gas.
+% % %	\item Estrellas
+% % \end{itemize}
+% % \end{frame}
+% % \begin{frame}[fragile]
+% % \frametitle{Animación generada con un script de \python}
+% % \begin{center}
+% % \movie[width=5.8cm,height=4.25cm, autostart, loop]{Ejemplo}{animacion_basica.mp4}
+% % \end{center}
+% % \end{frame}
+% % \begin{frame}[fragile]
+% % \frametitle{Animación péndulo doble}
+% % \begin{center}
+% % \movie[width=5.25cm,height=4cm, autostart, loop]{Péndulo}{double_pendulum.mp4}
+% % \end{center}
+% % \end{frame}
+=======
 % \begin{frame}[fragile]
 % \frametitle{Ejemplos avanzados de programación con \python}
 % \begin{itemize}
@@ -107,6 +162,7 @@ El desarrollo de las habilidades de programación, están en función del tiempo
 % \end{center}
 % \end{frame}
 
+>>>>>>> master
 \section{Conceptos principales}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Métodos numéricos}
@@ -115,11 +171,16 @@ El desarrollo de las habilidades de programación, están en función del tiempo
 Se puede representar como una cadena de algoritmos $A_{i}$ con $(i = 1, 2, 3, \ldots , N)$ en la entrada y salida.
 \begin{figure}
 \centering
-\includegraphics[scale=1]{dibujometodonum.eps} 
+\includegraphics[scale=0.7]{dibujometodonum.eps} 
 \end{figure}
 \end{frame}
 \begin{frame}
+\frametitle{La solución que se obtiene}
 La solución obtenida por un método numérico es \textcolor{blue}{aproximada}, es decir, hay cierta diferencia entre la solución exacta y la solución numérica.
+\\
+\bigskip
+\pause
+Hay que considerar que en ocasiones, no tendremos conocimiento de antemano de la solución \enquote{exacta}.
 \end{frame}
 \begin{frame}
 \frametitle{Principales causas de la diferencia}
@@ -130,10 +191,20 @@ La solución obtenida por un método numérico es \textcolor{blue}{aproximada}, 
 \item Errores de redondeo en las operaciones aritméticas.
 \end{itemize}
 \end{frame}
-\subsection{Modelos y métodos numéricos}
-%\section{\texorpdfstring{this is a very long title I \\ want to}{want to break manually}}
+\begin{frame}[fragile]
+\frametitle{Nuestra tarea al momento de resolver}
+Si tenemos identificadas las posibles fuentes de error, nuestra tarea será minimizar los errores al momento de proponer una solución numérica.
+\\
+\bigskip
+\pause
+Veremos la importancia de medir la magnitud de un error.
+\end{frame}
+% \subsection{Modelos y métodos numéricos}
+% %\section{\texorpdfstring{this is a very long title I \\ want to}{want to break manually}}
 \begin{frame}
 \frametitle{Conceptos en métodos numéricos}
+Ahora presentaremos los principales conceptos relacionados en métodos numéricos aplicados:
+\pause
 \begin{itemize}[<+->]
 \item Aproximación.
 \item Estabilidad.
@@ -221,12 +292,11 @@ Los polinomios son analíticos en todas partes.
 \frametitle{Serie para una función análitica}
 Si $f$ es analítica alrededor de $x = a$, se puede representar $f(x$) de manera exacta en la
 vecindad de $x = a$ por medio de una serie de Taylor, dada por:
-\fontsize{14}{14}\selectfont
-\[ \begin{split} 
-f(x) = f(a) + h \: f^{\prime}(a) + \dfrac{h^{2}}{2} \: f^{\prime \prime}(a) + \dfrac{h^{3}}{6} \: f^{\prime \prime \prime}(a) + \ldots \\
-+ \ldots + \dfrac{h^{m}}{m!} \: f^{m}(a) + \ldots
-\end{split}
-\]
+%\fontsize{14}{14}\selectfont
+\begin{align*}
+f(x) = f(a) + h \: f^{\prime}(a) &+ \dfrac{h^{2}}{2} \: f^{\prime \prime}(a) + \dfrac{h^{3}}{6} \: f^{\prime \prime \prime}(a) + \ldots \\
+&+ \ldots + \dfrac{h^{m}}{m!} \: f^{m}(a) + \ldots
+\end{align*}
 \end{frame}
 \begin{frame}
 \frametitle{Unicidad de la serie}
@@ -238,15 +308,17 @@ El desarrollo de Taylor de una función alrededor de $x = 0$ recibe el nombre de
 \begin{frame}
 \frametitle{Truncamiento necesario}
 En aplicaciones prácticas, se debe de truncar la serie de Taylor después cierto orden, ya que es imposible incluir un número infinito de términos. Si la serie se trunca después del término $N$, se expresa por:
-\[ \begin{split} f(x) &= f(a) + hf'(a) + \dfrac{h^{2}}{2} f''(a) + \dfrac{h^{3}}{6} f'''(a) + \ldots \\
+\begin{align*}
+f(x) &= f(a) + h \, f^{\prime}(a) + \dfrac{h^{2}}{2} f^{\prime \prime}(a) + \dfrac{h^{3}}{6} \,f^{\prime \prime \prime}(a) + \ldots \\
 &= + \ldots + \dfrac{h^{N}}{N!} f^{N}(a) + O(h^{N+1}) 
-\end{split} \]
+\end{align*}
 \end{frame}
 \begin{frame}
 \frametitle{Truncamiento necesario}
-\[ \begin{split} f(x) &= f(a) + hf'(a) + \dfrac{h^{2}}{2} f''(a) + \dfrac{h^{3}}{6} f'''(a) + \ldots \\
+\begin{align*}
+f(x) &= f(a) + h \, f^{\prime}(a) + \dfrac{h^{2}}{2} f^{\prime \prime}(a) + \dfrac{h^{3}}{6} \,f^{\prime \prime \prime}(a) + \ldots \\
 &= + \ldots + \dfrac{h^{N}}{N!} f^{N}(a) + O(h^{N+1}) 
-\end{split} \]
+\end{align*}
 Donde $h=x-a$ y $O(h^{N+1})$ representa el error por el truncamiento de los términos de orden $N+1$
 \end{frame}
 \begin{frame}
@@ -259,43 +331,49 @@ Dado que $\xi$ no puede calcularse con exactitud, se aproxima el término del er
 \begin{frame}
 \frametitle{Error por el truncamiento}
 Si $N=1$ la serie de Taylor truncada es:
-\[f(x) \simeq f(a) + f'(a) h \hspace{1cm} h=x-a\]
+\begin{align*}
+f(x) \simeq f(a) + f^{\prime} (a) h \hspace{1cm} h=x-a
+\end{align*}
 incluyendo el efecto del error, tenemos que
-\[f(x) \simeq f(a) + f'(a) h + O(h^{2}) \]
+\begin{align*}
+f(x) \simeq f(a) + f^{\prime}(a) h + O(h^{2})
+\end{align*}
 donde
-\[O(h^{2}) \simeq f''(a+ \xi h) \dfrac{h^{2}}{2} \hspace{1cm} 0 \leq \xi \leq 1\]
+\begin{align*}
+O(h^{2}) \simeq f^{\prime \prime}(a + \xi \, h) \dfrac{h^{2}}{2} \hspace{1cm} 0 \leq \xi \leq 1
+\end{align*}
 \end{frame}
 % \begin{frame}
 % \frametitle{Redondeo con \python.}
 % \renewcommand*{\arraystretch}{2.5}
 % \begin{center}
-% %\captionof{table}{Funciones matemáticas intrínsecas}.
-% \begin{longtable}{| l | l |}
+% \captionof{table}{Funciones matemáticas intrínsecas}.
+% \begin{table}{| l | l |}
 % \hline
 % Función & Resultado \\ \hline
 % \endhead
-% \texttt{ceil (x)} & \TitleParbox{Redondea al valor entero mayor más cercano a $x$.} \\ \hline
-% \texttt{floor (x)} & \TitleParbox{Redondea al valor entero menor más cercano a $x$.} \\ \hline
-% \texttt{round (x [, n])} &  \TitleParbox{Devuelve el valor de $x$ redondeado a $n$ dígitos desde el punto decimal.} \\ \hline
-% \end{longtable}
+% \texttt{ceil (x)} & Redondea al valor entero mayor más cercano a $x$ \\ \hline
+% \texttt{floor (x)} & Redondea al valor entero menor más cercano a $x$ \\ \hline
+% \texttt{round (x [, n])} &  Devuelve el valor de $x$ redondeado a $n$ dígitos desde el punto decimal. \\ \hline
+% \end{table}
 % \end{center}
 % \end{frame}
-% \begin{frame}[fragile]
-% \frametitle{Ejemplo con el código}
-% \begin{lstlisting}[columns=fullflexible]
-% from math import ceil, floor, pi
+\begin{frame}[allowframebreaks, fragile]
+\frametitle{Ejemplo con código}
+\begin{lstlisting}[style=codigopython]
+from math import ceil, floor, pi
 
-% a = 10.4563
+a = 10.4563
 
-% print('El valor de ceil(', a ,') es: ', ceil(a))
+print('El valor de ceil(', a ,') es: ', ceil(a))
 
-% print('El valor de floor(', a ,') es: ', floor(a))
+print('El valor de floor(', a ,') es: ', floor(a))
 
 % print('El valor de round(', a ,') es: ', round(a,3))
 
-% print('El valor de round(', pi ,',3) es: ', round(pi,3))
-% \end{lstlisting}
-% \end{frame}
+print('El valor de round(', pi ,',3) es: ', round(pi,3))
+\end{lstlisting}
+\end{frame}
 \section{Los números en las computadoras}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Base decimal}
@@ -386,7 +464,7 @@ Empecemos dividiendo a la mitad la unidad.
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Calculemos el epsilón con \python}
-\begin{lstlisting}[caption=Código para el épsilon, basicstyle=\linespread{1.2}\ttfamily\small, columns=fullflexible]
+\begin{lstlisting}[caption=Código para el épsilon, style=codigopython]
 t = 1.0;
 while 1+t != 1:
   eps = t
@@ -394,34 +472,34 @@ while 1+t != 1:
 print ('el epsilon de la maquina es: ', eps)
 \end{lstlisting}
 \end{frame}
-% \begin{frame}
-% \frametitle{Error de truncamiento}
-% Se originan al emplear al número finito de términos para calcular un valor que requiere un número infinito de términos.
-% \\
-% \bigskip
-% Por ejemplo, una expresión que permite determinar de forma exacta el valor del número de Euler (base de los logaritmos naturales) a través de una serie de MacLaurin es:
-% \[ e^{x} = \sum \dfrac{x_{i}}{i!}\]
-% \end{frame}
-% \begin{frame}
-% Sin embargo, una aproximación a dicho valor, puede obtenerse a través de su expresión finita:
-% \[ e^{x} \simeq \sum_{i=0}^{k} \dfrac{x_{i}}{i!} \hspace{1cm} k<\infty \]
-% Es claro que esta expresión finita es manejable computacionalmente hablando, al contrario que la fórmula expresada en su forma infinita.
-% \end{frame}
-% \begin{frame}
-% \frametitle{Error por redondeo}
-% Se origina por el hecho de que una computadora sólo puede representar un número finito de
-% términos. Para expresar una cantidad con un desarrollo decimal infinito, se tiene que prescindir de la mayoría de ellos.
-% \\
-% \bigskip
-% Por ejemplo, el número $\pi = 3.14159265 \ldots$, tiene un desarrollo decimal infinito no periódico. Por lo tanto, para fines de cálculo, sólo se toman algunos de sus dígitos.
-% \end{frame}
-% \begin{frame}
-% \frametitle{Estrategias}
-% \begin{itemize}[<+->]
-% \item \textcolor{blue}{Redondeo}. Prescinde de cierto número de cifras significativas y realiza un ajuste, sobre la última cifra no descartada: $\pi = 3.1416$
-% \item \textcolor{red}{Corte o poda}: Prescinde de cierto número de cifras significativas sin realizar un ajuste sobre la última cifra no descartada: $\pi = 3.1415$
-% \end{itemize}
-% \end{frame}
+% % \begin{frame}
+% % \frametitle{Error de truncamiento}
+% % Se originan al emplear al número finito de términos para calcular un valor que requiere un número infinito de términos.
+% % \\
+% % \bigskip
+% % Por ejemplo, una expresión que permite determinar de forma exacta el valor del número de Euler (base de los logaritmos naturales) a través de una serie de MacLaurin es:
+% % \[ e^{x} = \sum \dfrac{x_{i}}{i!}\]
+% % \end{frame}
+% % \begin{frame}
+% % Sin embargo, una aproximación a dicho valor, puede obtenerse a través de su expresión finita:
+% % \[ e^{x} \simeq \sum_{i=0}^{k} \dfrac{x_{i}}{i!} \hspace{1cm} k<\infty \]
+% % Es claro que esta expresión finita es manejable computacionalmente hablando, al contrario que la fórmula expresada en su forma infinita.
+% % \end{frame}
+% % \begin{frame}
+% % \frametitle{Error por redondeo}
+% % Se origina por el hecho de que una computadora sólo puede representar un número finito de
+% % términos. Para expresar una cantidad con un desarrollo decimal infinito, se tiene que prescindir de la mayoría de ellos.
+% % \\
+% % \bigskip
+% % Por ejemplo, el número $\pi = 3.14159265 \ldots$, tiene un desarrollo decimal infinito no periódico. Por lo tanto, para fines de cálculo, sólo se toman algunos de sus dígitos.
+% % \end{frame}
+% % \begin{frame}
+% % \frametitle{Estrategias}
+% % \begin{itemize}[<+->]
+% % \item \textcolor{blue}{Redondeo}. Prescinde de cierto número de cifras significativas y realiza un ajuste, sobre la última cifra no descartada: $\pi = 3.1416$
+% % \item \textcolor{red}{Corte o poda}: Prescinde de cierto número de cifras significativas sin realizar un ajuste sobre la última cifra no descartada: $\pi = 3.1415$
+% % \end{itemize}
+% % \end{frame}
 \section{Tipos de errores}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Errores en programación}
@@ -503,10 +581,10 @@ cambios de $x$, se define como:
 \begin{frame}
 \frametitle{Definición de condición}
 Del teorema del valor medio en cálculo, podemos expresar
-\[ \begin{split} f(x_{T}) - f(x_{A}) & \approx f'(x_{t})(x_{T} - x_{A}) \rightarrow E_{rel}(f(x)) \approx \\ 
- & \approx \dfrac{f'(x_{T})}{f(x_{T})} (x_{T} - x_{A}) \end{split} \]
+\[ \begin{split} f(x_{T}) - f(x_{A}) & \approx f^{\prime}(x_{t})(x_{T} - x_{A}) \rightarrow E_{rel}(f(x)) \approx \\ 
+ & \approx \dfrac{f^{\prime}(x_{T})}{f(x_{T})} (x_{T} - x_{A}) \end{split} \]
 luego
-\[ C \approx \left | x_{T} \dfrac{f'(x_{T})}{f(x_{T})} \right | \]
+\[ C \approx \left | x_{T} \dfrac{f^{\prime}(x_{T})}{f(x_{T})} \right | \]
 \end{frame}
 \begin{frame}
 \frametitle{Definición de condición}
@@ -514,11 +592,11 @@ Se utilizará ésta definición como definición de condición para funciones $f
 \\
 \bigskip
 Entonces los números de condición serán
-\[ C = \left | x \dfrac{f'(x)}{f(x)} \right | \]
+\[ C = \left | x \dfrac{f^{\prime}(x)}{f(x)} \right | \]
 \end{frame}
 \begin{frame}
 \frametitle{Definición de condición}
-\[ C = \left | x \dfrac{f'(x)}{f(x)} \right | \]
+\[ C = \left | x \dfrac{f^{\prime}(x)}{f(x)} \right | \]
 \setbeamercolor{item projected}{bg=red!70!black,fg=white}
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}[<+->]
@@ -686,8 +764,8 @@ El polinomio $P(x)$ evaluado con el método de Horner:
 \\
 \medskip
 \begin{center}
-\begin{tabular}{S[table-format=1.2] | S[table-format=4.5] }
-%x & P(x) \\
+\begin{tabular}{S | c }
+x & P(x) \\
 \hline -1.5 & 0.78125 \\
 \hline -0.65 & -4.50683 \\
 \hline 0.1 & 2.35149 \\
@@ -715,14 +793,6 @@ Ya contamos con las herramientas necesarias para extender la respuesta al proble
 \end{enumerate}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Resultado gráfico más completo}
-En la gráfica se muestra un conjunto de datos que se evalúan y posteriormente con la función (en línea continua) se compara, podemos ver que los resultados son prácticamente los mismos.
-\begin{figure}
-	\centering
-	\includegraphics[scale=0.35]{MetodoHorner.eps} 
-\end{figure}
-\end{frame}
-\begin{frame}[fragile]
 \frametitle{Estructuramos el código en \python.}
 Definimos mediante dos listas:
 \setbeamercolor{item projected}{bg=red!70!black,fg=white}
@@ -735,41 +805,39 @@ Definimos mediante dos listas:
 \begin{frame}[fragile]
 \frametitle{Función de Horner.}
 \fontsize{14}{14}\selectfont
-\begin{lstlisting}[caption=Código para la función de Horner, basicstyle=\linespread{1.2}\ttfamily\small, columns=fullflexible]
+\begin{lstlisting}[caption=Código para la función de Horner, style=codigopython]
 # Metodo de Horner
 
 def P_Horner(x):
     P_Hor=0
-    for n in range(len(a)-1,-1,-1):     
-        P_Hor=a[n]+P_Hor*x
+    for n in range(len(a)-1, -1, -1):     
+        P_Hor=a[n] + P_Hor * x
     return P_Hor
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Función que evalúa directamente $P(x)$.}
 \fontsize{14}{14}\selectfont
-\begin{lstlisting}[caption=Evaluación directa de la función, basicstyle=\linespread{1.2}\ttfamily\small, columns=fullflexible]
+\begin{lstlisting}[caption=Evaluación directa de la función, style=codigopython]
 # Evaluacion directa
 
 def P_Directo(x):
-    return 2 + 4 * x - 5 * x**2 + 2 * x**3 -6 * x**4 + 8 * x**5 + 10 * x**6
+    return 2 + 4*x - 5 * x**2 + 2 * x**3 -6 * x**4 + 8 * x**5 + 10 * x**6
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Calculamos el error relativo.}
-\fontsize{14}{14}\selectfont
-\begin{lstlisting}[caption=Evaluación del error relativo, basicstyle=\linespread{1.2}\ttfamily\small, columns=fullflexible]
+\begin{lstlisting}[caption=Evaluación del error relativo, style=codigopython]
 # Calculo de error relativo
 
-def Err_Rel(p,p_): return (p-p_)/p*100
-    
+def Err_Rel(pdirecto, pHorner): return (pdirecto - pHorner)/pdirecto * 100
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Uso de valores conocidos}
-\begin{lstlisting}[caption=Valores conocidos, basicstyle=\linespread{1.2}\ttfamily\small, columns=fullflexible]
+\frametitle{Uso de valores para evaluar}
+\begin{lstlisting}[caption=Valores para evaluar, style=codigopython]
 # Valores de x0 para evaluar P(x0)
-x0 = [-1.5, -0.65, 0.1, 1.4, 2.87]
+xA_0_B = [-1.5, -0.65, 0.1, 1.4, 2.87]
 
 # Coeficientes a de P(x)
 a = [2,4, -5, 2, -6, 8, 10]
@@ -778,56 +846,89 @@ a = [2,4, -5, 2, -6, 8, 10]
 \begin{frame}[fragile]
 \frametitle{Mostramos el error relativo de los puntos a evaluar.}
 \fontsize{14}{14}\selectfont
-\begin{lstlisting}[caption=Error relativo calculado, basicstyle=\linespread{1.2}\ttfamily\small, columns=fullflexible]
+\begin{lstlisting}[caption=Error relativo calculado, style=codigopython]
 # Evaluacion de valores de P(x0)
 
-for i in range(len(x0)):                 
-    print ("P(%.2f) =" %x0[i],P_Horner(x0[i]), "; Error rel. =", Err_Rel(P_Directo(x0[i]),P_Horner(x0[i])))
+for i in range(len(xA_0_B)):
+	error_rel = Err_Rel(P_Directo(xA_0_B[i]),P_Horner(xA_0_B[i]))
+    print ("P({0:.2f}) = {1:.5f} , Error relativo = {2:}".format(xA_0_B[i],P_Horner(xA_0_B[i]), error_rel)) 
 \end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Completando el código}
+Con el código que se ha presentado, podemos obtener en la terminal los valores obtenidos al usar el método de Horner, el valor con la evaluación directa y el error relativo.
+\\
+\bigskip
+\pause
+Te pedimos que incorpores una rutina de graficación para mostrar los puntos de la lista $x0$ y el polinomio $P(x)$.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Mostrando los resultados}
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.55]{Imagenes/MetodoHorner_01.eps}
+\end{figure}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Extendiendo la evaluación de puntos}
+El siguiente paso será incluir un mayor número de puntos a evaluar con el método de Horner.
+\\
+\bigskip
+\pause
+Para no incluir una lista con $50$ puntos distribuidos en el intervalo $(-2, 3)$, usaremos la función $\mbox{linspace}(-2, 3, 50)$ para crear ese conjunto.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Resultado gráfico más completo}
+En la gráfica se muestra el conjunto de datos que se evalúan con el método de Horner (puntos rojos), así como la función evaluada directamente (en línea continua) se compara, podemos ver que los resultados son prácticamente los mismos.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Resultado gráfico más completo}
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.5]{Imagenes/MetodoHorner.eps} 
+\end{figure}
 \end{frame}
 \begin{frame}[allowframebreaks, fragile]
 \frametitle{Los resultados en una gráfica.}
-\fontsize{14}{14}\selectfont
-\begin{lstlisting}[caption=Elaboración de la gráfica, basicstyle=\linespread{1.2}\ttfamily\small, columns=fullflexible]
+\begin{lstlisting}[caption=Elaboración de la gráfica, style=codigopython]
 import matplotlib.pyplot as plt
 import numpy as np
 
-x = np.linspace(-2., 3.)
+x = np.linspace(-2., 3., 50)
 
-plt.plot(x,P_Horner(x),'ro', label='Metodo de Horner')
+plt.plot(x, P_Horner(x),'ro', label='Metodo de Horner')
 
-plt.plot(x,P_Directo(x), label='Evaluacion Polinomio')
+plt.plot(x, P_Directo(x), label='Evaluacion Polinomio')
 
 plt.title('Comparacion grafica')
 plt.legend(loc='upper left')
-
 plt.grid(True)
 plt.show()
 \end{lstlisting}
 \end{frame}
-\begin{frame}\frametitle{Función para generar secuencia de reales}
-Ya hemos mencionado que la librería \funcionazul{numpy} extiende el conjunto de funciones matemáticas que se tienen dentro de la otra librería \funcionazul{math}.
-\\
-\bigskip
-Veamos la sintaxis de la función \funcionazul{linspace} que aparece en la rutina de graficación.
-\end{frame}
-\begin{frame}
-\frametitle{La función \texttt{linspace}}
-Sintaxis mínima:
-\\
-\medskip
-\texttt{linspace(inicio, fin, num=50)}
-\\
-\medskip
-Donde:
-\begin{itemize}
-\item \texttt{inicio}: es el valor a partir del cual queremos generar la secuncia de puntos.
-\item \texttt{fin}: es el valor en donde se detiene la secuencia de puntos.
-\item \texttt{num}: es el número de puntos que se genera en el intervalo, por defecto se generan 50 puntos.
-\end{itemize}
-\end{frame}
-\begin{frame}
-\frametitle{La secuncia que se genera}
-Lo que obtenemos con \funcionazul{linspace}, es una secuencia de puntos distribuidos uniformemente en el intervalo \texttt{[inicio, fin]}.
-\end{frame}
+% \begin{frame}\frametitle{Función para generar secuencia de reales}
+% Ya hemos mencionado que la librería \funcionazul{numpy} extiende el conjunto de funciones matemáticas que se tienen dentro de la otra librería \funcionazul{math}.
+% \\
+% \bigskip
+% Veamos la sintaxis de la función \funcionazul{linspace} que aparece en la rutina de graficación.
+% \end{frame}
+% \begin{frame}
+% \frametitle{La función \texttt{linspace}}
+% Sintaxis mínima:
+% \\
+% \medskip
+% \texttt{linspace(inicio, fin, num=50)}
+% \\
+% \medskip
+% Donde:
+% \begin{itemize}
+% \item \texttt{inicio}: es el valor a partir del cual queremos generar la secuncia de puntos.
+% \item \texttt{fin}: es el valor en donde se detiene la secuencia de puntos.
+% \item \texttt{num}: es el número de puntos que se genera en el intervalo, por defecto se generan 50 puntos.
+% \end{itemize}
+% \end{frame}
+% \begin{frame}
+% \frametitle{La secuncia que se genera}
+% Lo que obtenemos con \funcionazul{linspace}, es una secuencia de puntos distribuidos uniformemente en el intervalo \texttt{[inicio, fin]}.
+% \end{frame}
 \end{document}
