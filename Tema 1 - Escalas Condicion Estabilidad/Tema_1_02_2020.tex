@@ -21,11 +21,11 @@ La aritmética que se realiza en una computadora es distinta a la aritmética qu
 \\
 \bigskip
 \pause
-Uno pensaría que siempre serían verdaderas las operaciones
+Uno pensaría que siempre serían verdaderas las siguientes operaciones:
 \begin{itemize}
 \item $2 + 2 = 4$
 \item $4 * 4 = 16$
-\item $(\sqrt{3})^{2}) = 3$
+\item $(\sqrt{3})^{2} = 3$
 \end{itemize}
 Sin embargo, la tercera  operación no siempre se da.
 \end{frame}
@@ -35,7 +35,7 @@ En nuestro mundo matemático se permiten y se manejan  números expresados con u
 \\
 \bigskip
 \pause
-Sin embargo, en el mundo computacional, cada número representable tiene sólo un número finito de cifras. Esto significa que sólo los números enteros y algunos números racionales sepueden presentar con exactitud. 
+Sin embargo, en el mundo computacional, cada número representable tiene sólo un número finito de cifras. Esto significa que sólo los números enteros y algunos números racionales se pueden presentar con exactitud. 
 \end{frame}
 \begin{frame}
 \frametitle{Introducción}
@@ -169,7 +169,7 @@ x = \sigma \cdot (1.a_{1} \, a_{2} \, \ldots \, a_{22} \, a_{23}) \cdot 2^{e}
 \end{align*}
 En binario
 \begin{align*}
--(1111110)_{2} \leq 2 \leq (1111111)_{2}
+-(1111110)_{2} \leq e \leq (1111111)_{2}
 \end{align*}
 \end{frame}
 \begin{frame}
@@ -256,7 +256,7 @@ x = \sigma \cdot (1.a_{1} \, a_{2} \, \ldots \, a_{51} \, a_{52}) \cdot 2^{e}
 \end{frame}
 \begin{frame}
 \frametitle{Posición de los bits}
-La precisión doble utiliza $8$ bytes ($32$ bits) y los números se almacenan de la siguiente forma:
+La precisión doble utiliza $8$ bytes ($64$ bits) y los números se almacenan de la siguiente forma:
 \begin{figure}
     \centering
     \includegraphics[scale=1.2]{Imagenes/precision_doble.eps}
@@ -447,6 +447,14 @@ x^{2} + 3 \: x + 1 = 0
 \end{enumerate}
 \end{frame}
 \begin{frame}
+\frametitle{Recomendaciones}
+Antes de iniciar con el paso de código en \python, considera que debes de revisar el valor del discriminante de la ecuación cuadrática, para que tenga sentido la solución: no queremos casos donde haya raíces de valores negativos.
+\end{frame}
+\begin{frame}
+\frametitle{Recomendaciones}
+Determina la manera en la que vas a considerar los coeficientes de la ecuación cuadrática: si vas a incluir valor por valor directamente por la terminal, o si los incorporas en el código.
+\end{frame}
+\begin{frame}
 \frametitle{Segundo código}
 \setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
 \setbeamertemplate{enumerate items}[circle]
@@ -468,57 +476,86 @@ x^{2} + 3 \: x + 1 = 0
 \item Cómo mejorarías el programa para obtener la mayor precisión en tu respuesta?
 \end{enumerate}
 \end{frame}
-\subsection{Ejercicio 2}
 \begin{frame}
-\frametitle{Ejercicio 2: Sumando valores}
-Del ejercicio anterior, hemos visto que la cancelación en la sustracción de los términos se presentan cuando se suma una serie con signos alternantes.
+\frametitle{Manejando los valores de error obtenidos}
+Como ya contamos con la información para generar una gráfica, tendrás que disponer tanto de los valores de $n$ para $10^{-n}$ como variable independiente, como de los valores del error relativo, que será la variable dependiente.
+\end{frame}
+\begin{frame}
+\frametitle{Manejando los valores de error obtenidos}
+Como parte del trabajo que debes de desarrollar para la solución, revisa la mejor manera para usar los conjuntos de datos necesarios para graficar.
 \\
 \bigskip
-\pause
-Para una expresión veremos tres maneras distintas de hacer una suma y vamos a comparar los resultados.
+De tal manera que al incluir el código para graficar y deberías de obtener lo siguiente:
 \end{frame}
 \begin{frame}
-\frametitle{Ejercicio 2: Primera suma $S^{(1)}_{N}$}
-Considera como la primera suma la expresión:
-\begin{equation}
-S^{(1)}_{N}= \sum^{2 \: N}_{n=1} (-1)^{n} \dfrac{n}{n + 1}
-\label{eq:ecuacion_02_10}
-\end{equation}
+\frametitle{Gráfica obtenida}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.5]{Imagenes/Ejercicio_Eq_Cuadratica_01.eps}
+\end{figure}
 \end{frame}
 \begin{frame}
-\frametitle{Ejercicio 2: Segunda suma $S^{(2)}_{N}$}
-Si sumamos de manera separada los valores impares y los pares de $x$, tendremos dos sumas:
-\begin{equation}
-S^{(2)}_{N}= - \sum^{N}_{n = 1} \dfrac{2 \: n-1}{2 \: n} + \sum^{N}_{n = 1} \dfrac{2 \: n}{2 \: n + 1}
-\label{eq:ecuacion_02_11}
-\end{equation}
-En esta expresión, todos los términos son positivos con sólo una sustracción al final del cálculo.
+\frametitle{Mejorando la gráfica}
+En la gráfica anterior no es posible tener un contraste para discutir sobre el error relativo conforme el valor de $n$ aumenta, si hacemos un cambio en el eje $y$, dejándolo como un eje logarítmico con \texttt{plt.semilogy()}, tendremos:
 \end{frame}
 \begin{frame}
-\frametitle{Ejercicio 2: Tercera suma $S^{(2)}_{N}$}
-Podemos eliminar la diferencia mediante una combinación entre las dos sumas anteriores, quedando de la siguiente manera
-\begin{equation}
-S^{(3)}_{N}=  \sum^{N}_{n = 1} \dfrac{1}{2 \: n \: (2 \: n + 1)}
-\label{eq:ecuacion_02_12}
-\end{equation}
-\end{frame}
-\begin{frame}
-\frametitle{Revisando las tres sumas}
-Sabemos que aunque el valor de las tres sumas $S^{(1)}_{N}$, $S^{(2)}_{N}$, $S^{(3)}_{N}$, es el mismo, el resultado númerico puede ser diferente.
-\setbeamertemplate{enumerate items}[circle]
-\begin{enumerate}[<+->]
-\item Escribe un programa que calcule $S^{(1)}_{N}$, $S^{(2)}_{N}$, $S^{(3)}_{N}$.
-\seti
-\end{enumerate}
-\end{frame}
-\begin{frame}
-\frametitle{Revisando las tres sumas}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
-\begin{enumerate}[<+->]
-\conti
-\item Supongamos que $S^{(3)}_{N}$ es el valor exacto de la suma. Grafica el error relativo contra el número de términos en la suma (tip: usa una escala log-log). Comienza con $N = 1$ hasta $N = 1000000$. Describe la gráfica.
-\item Identifica en tu gráfica una región en donde la tendencia es casi lineal, ¿qué representa ésta sección con respecto al error?
-\end{enumerate}
-\end{frame}
+\frametitle{Mejorando la gráfica}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.5]{Imagenes/Ejercicio_Eq_Cuadratica_02.eps}
+\end{figure}
+\end{frame}   
+% \subsection{Ejercicio 2}
+% \begin{frame}
+% \frametitle{Ejercicio 2: Sumando valores}
+% Del ejercicio anterior, hemos visto que la cancelación en la sustracción de los términos se presentan cuando se suma una serie con signos alternantes.
+% \\
+% \bigskip
+% \pause
+% Para una expresión veremos tres maneras distintas de hacer una suma y vamos a comparar los resultados.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Ejercicio 2: Primera suma $S^{(1)}_{N}$}
+% Considera como la primera suma la expresión:
+% \begin{equation}
+% S^{(1)}_{N}= \sum^{2 \: N}_{n=1} (-1)^{n} \dfrac{n}{n + 1}
+% \label{eq:ecuacion_02_10}
+% \end{equation}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Ejercicio 2: Segunda suma $S^{(2)}_{N}$}
+% Si sumamos de manera separada los valores impares y los pares de $x$, tendremos dos sumas:
+% \begin{equation}
+% S^{(2)}_{N}= - \sum^{N}_{n = 1} \dfrac{2 \: n-1}{2 \: n} + \sum^{N}_{n = 1} \dfrac{2 \: n}{2 \: n + 1}
+% \label{eq:ecuacion_02_11}
+% \end{equation}
+% En esta expresión, todos los términos son positivos con sólo una sustracción al final del cálculo.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Ejercicio 2: Tercera suma $S^{(2)}_{N}$}
+% Podemos eliminar la diferencia mediante una combinación entre las dos sumas anteriores, quedando de la siguiente manera
+% \begin{equation}
+% S^{(3)}_{N}=  \sum^{N}_{n = 1} \dfrac{1}{2 \: n \: (2 \: n + 1)}
+% \label{eq:ecuacion_02_12}
+% \end{equation}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Revisando las tres sumas}
+% Sabemos que aunque el valor de las tres sumas $S^{(1)}_{N}$, $S^{(2)}_{N}$, $S^{(3)}_{N}$, es el mismo, el resultado númerico puede ser diferente.
+% \setbeamertemplate{enumerate items}[circle]
+% \begin{enumerate}[<+->]
+% \item Escribe un programa que calcule $S^{(1)}_{N}$, $S^{(2)}_{N}$, $S^{(3)}_{N}$.
+% \seti
+% \end{enumerate}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Revisando las tres sumas}
+% \setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+% \setbeamertemplate{enumerate items}[circle]
+% \begin{enumerate}[<+->]
+% \conti
+% \item Supongamos que $S^{(3)}_{N}$ es el valor exacto de la suma. Grafica el error relativo contra el número de términos en la suma (tip: usa una escala log-log). Comienza con $N = 1$ hasta $N = 1000000$. Describe la gráfica.
+% \item Identifica en tu gráfica una región en donde la tendencia es casi lineal, ¿qué representa ésta sección con respecto al error?
+% \end{enumerate}
+% \end{frame}
 \end{document}
