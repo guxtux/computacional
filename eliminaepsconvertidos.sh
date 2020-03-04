@@ -1,1 +1,2 @@
-find -type f -name '*eps-converted*' -delete
+#!/bin/bash
+find . -type f -name '*eps-converted*' -delete

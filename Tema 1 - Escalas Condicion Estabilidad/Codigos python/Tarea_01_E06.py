@@ -9,19 +9,17 @@ Created on Tue Mar  3 16:17:25 2020
 import math
 
 def error_relativo(exacto, aproximado):
-    return math.fabs(math.sin(exacto)- aproximado)/math.sin(exacto)*100
+    return math.fabs(math.exp(exacto)- aproximado)/math.exp(exacto)*100
 
 x = float(input('Teclea el valor a evaluar: '))
 
-j=0
-n = 10
+n = 50
 suma = x
 term =  x
 
 print('x \t exacta \t   suma \t  error')
 for i in range(2, n):
-    j += 1
-    term = (-term *x*x)/((2*i-1)*(2*i-2))
+    term = (term * x)/(i * (i - 1))
     suma  = suma + term
-    print('{0:} \t {1:} \t {2:1.10f} \t {3:1.10f} \t {4:1.5e}'.format(j, x, math.sin(x), suma, error_relativo(x, suma)))
+    print('{0:} \t {1:} \t {2:} \t {3:1.11e}'.format(x, math.exp(x), suma+1, error_relativo(x, suma+1)))
     

@@ -68,7 +68,7 @@ Una mejor aproximación es utilizar una multiplicación para relacionar el sigui
 \begin{align}
 \fontsize{12}{12}\selectfont
 \begin{aligned}
-&\dfrac{(-1)^{n-1} \, x^{2 n - 1}}{(2 n - 1)!} = \dfrac{x^{2}}{(2 n - 1)(2 n - 2)} \, \dfrac{(1-)^{n-2} \, x^{2 n - 3}}{(2 n - 3!)} \\[0.5em]
+&\dfrac{(-1)^{n-1} \, x^{2 n - 1}}{(2 n - 1)!} = \dfrac{x^{2}}{(2 n - 1)(2 n - 2)} \, \dfrac{(-1)^{n-2} \, x^{2 n - 3}}{(2 n - 3!)} \\[0.5em]
 &\Rightarrow n-\mbox{término} = \dfrac{- x^{2}}{(2 n - 1)(2 n - 2)} \times (n-1)-\mbox{término}
 \end{aligned}
 \label{eq:termino_suma}
@@ -76,24 +76,64 @@ Una mejor aproximación es utilizar una multiplicación para relacionar el sigui
 \end{frame}
 \begin{frame}
 \frametitle{Observación importante}
-Si bien queremos garantizar una precisión definitiva para la función $\sin x$, eso no es tan fácil de hacer.
+Si bien queremos garantizar una \emph{precisión} definitiva para la función $\sin x$, eso no es tan fácil de hacer.
 \\
 \bigskip
 \pause
 Lo que es fácil de hacer es \emph{suponer que el error en la suma es aproximadamente el último término sumado}, esto supone que no hay error de redondeo.
 \end{frame}
+\section{Exactitud y precisión.}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Definiciones}
+\begin{frame}[fragile]
+\frametitle{Diferencia entre exactitud y precisión}
+Veremos que no es lo mismo la exactitud y la precisión al momento de realizar alguna medición.
+\\
+\bigskip
+Los términos en inglés \textit{accuracy} (exactitud) y \textit{precision} (precisión), suelen traducirse en un mismo: \emph{exactitud}, pero no es así.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Definiciones}
+La \textoazul{exactitud} nos da el grado de concordancia entre el valor medido y el verdadero.
+\\
+\bigskip
+\pause
+La \textoazul{precisión} está relacionada con la reproductibilidad de las medidas. Indica el grado de concordancia de varias medidas individuales.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejemplo}
+Una balanza puede ser muy precisa, si al hacer varias medidas da siempre el mismo resultado.
+\\
+\bigskip
+Pero es inexacta, si ese resultado no concuerda con la realidad.
+\end{frame}
+\subsection{Comparación gráfica}
+\begin{frame}[fragile]
+\frametitle{Comparación entre precisión y exactitud}
+\begin{figure}
+    \centering
+    \includegraphics<1>{Imagenes/exactitud_precision_01.eps}
+    \includegraphics<2>{Imagenes/exactitud_precision_02.eps}
+    \includegraphics<3>{Imagenes/exactitud_precision_03.eps}
+    \includegraphics<4>{Imagenes/exactitud_precision_04.eps}
+    \caption{\only<1>{Medición exacta y precisa.}\only<2>{Medición precisa pero no exacta}\only<3>{Medición no precisa y no exacta}\only<4>{Medición no precisa y exacta}}
+\end{figure}
+\end{frame}
+\section{Tolerancia}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Valor de tolerancia}
 \begin{frame}
 \frametitle{Valor de tolerancia}
 Para obtener un error absoluto de $1$ parte en $10^{8}$, debemos de detener el cálculo cuando se cumpla la condición:
 \begin{align}
-\abs{\dfrac{n-\mbox{término}}{\mbox{suma}}} < 10^{-8}
+\abs{\dfrac{n_{\text{término}}}{\mbox{suma}}} < 10^{-8}
 \label{eq:tolerancia}
 \end{align}
 \end{frame}
 \begin{frame}
 \frametitle{Valor de tolerancia}
 \begin{align*}
-\abs{\dfrac{n-\mbox{término}}{\mbox{suma}}} < 10^{-8}
+\abs{\dfrac{n_{\text{término}}}{\mbox{suma}}} < 10^{-8}
 \end{align*}
 donde el \enquote{término} es el último en la serie (\ref{suma_seno_algoritmo}) y la \enquote{suma} es la suma acumulada para todos los términos.
 \end{frame}
@@ -104,6 +144,7 @@ En general, podemos determinar cualquier nivel de tolerancia.
 \bigskip
 Aunque si está demasiado cerca o es más pequeño que el épsilon de la máquina, es posible que el cálculo no se pueda alcanzar.
 \end{frame}
+\subsection*{Pseudocódigo}
 \begin{frame}[fragile]
 \frametitle{Pseudocódigo}
 Proponemos el siguiente pseudocódigo con el que intentaremos resolver el problema:
@@ -117,7 +158,9 @@ mientras abs(term/suma) > tolerancia
     suma = suma + term
 \end{lstlisting}
 \end{frame}
-\subsection*{Implementación}
+\section{Implementación}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Primera parte}
 \begin{frame}[fragile]
 \frametitle{Implementación}
 \setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
@@ -125,9 +168,10 @@ mientras abs(term/suma) > tolerancia
 \begin{enumerate}[<+->]
 \item Escribe un programa en \python{} para los calcule los siguientes valores de $x$:
 \begin{align*}
-x &= -2 \, \pi, -1.5 \, \pi, - \pi, -0.5 \, \pi, -0.25 \, \pi, \\
-& 0.25 \, \pi , 0.5 \, \pi, \, \pi, 1.5 \, \pi, 2 \, \pi
+x &= -2, -1.5, - 1, -0.5, -0.25, \\
+& 0.25 , 0.5, 1, 1.5, 2
 \end{align*}
+En un primer archivo de código, se debe de introducir el valor en la terminal para calcular la aproximación y visualizarla en la terminal.
 \seti
 \end{enumerate}
 \end{frame}
@@ -139,12 +183,14 @@ x &= -2 \, \pi, -1.5 \, \pi, - \pi, -0.5 \, \pi, -0.25 \, \pi, \\
 \conti   
 \item Presenta los resultados en una tabla de la siguiente forma:
 \begin{table}
+\fontsize{12}{12}\selectfont
 \centering
-\begin{tabular}{c | c | c}
-$x$ & suma & $\dfrac{\abs{\sin(x) - \mbox{suma}}}{\sin x}$ 
+\begin{tabular}{| c | c | c | c |}
+$x$ & $\sin (x) $ & suma & $\dfrac{\abs{\sin(x) - \mbox{suma}}}{\sin x}$ \\ \hline
+ & & & \\ \hline
 \end{tabular}
 \end{table}
-donde imax es el número de iteraciones realizadas, y $\sin (x)$ es el valor obtenido de la función seno incluida en el paquete \textoazul{math}.
+donde $\sin (x)$ es el valor obtenido de la función seno incluida en el paquete \textoazul{math}, el valor de \emph{suma} corresponde al valor acumulado.
 \seti
 \end{enumerate}
 \end{frame}
@@ -152,24 +198,16 @@ donde imax es el número de iteraciones realizadas, y $\sin (x)$ es el valor obt
 \frametitle{Tabla de resultados}
 \begin{table}
 \centering
-\begin{tabular}{c | c | c}
-$x$ & suma & $\dfrac{\abs{\sin(x) - \mbox{suma}}}{\sin x}$ \\ \hline
-$-2 \, \pi$ & & \\ \hline
-$-1.5 \, \pi$ & & \\ \hline
-\vdots & & \\ \hline
-$1.5 \, \pi$ & & \\ \hline
-$2 \, \pi$ & & \\ \hline
+\begin{tabular}{| c | c | c | c |}
+\hline
+$x$ & $\sin (x)$ & suma & $\dfrac{\abs{\sin(x) - \mbox{suma}}}{\sin x}$ \\ \hline
+$-2$ & & & \\ \hline
+$-1.5$ & & & \\ \hline
+\vdots & & & \\ \hline
+$1.5$ & & & \\ \hline
+$2$ & & & \\ \hline
 \end{tabular}
 \end{table}
-\end{frame}
-\begin{frame}[fragile]
-\frametitle{Implementación}
-\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-\setbeamertemplate{enumerate items}[circle]
-\begin{enumerate}[<+->]
-\conti   
-\item Modifica el código tal que sume la serie de \enquote{buena forma} (sin factoriales), para calcular la suma de \enquote{mala forma} (con factoriales explícitos).
-\end{enumerate}
 \end{frame}
 \begin{frame}[allowframebreaks, fragile]
 \frametitle{Evaluando valores individuales}
@@ -192,8 +230,19 @@ for i in range(2, n):
     print('{0:} \t {1:1.10f} \t {2:1.10f} \t {3:1.5e}'.format(x, math.sin(x), suma, error_relativo(x, suma)))
 \end{lstlisting}
 \end{frame}
+\begin{frame}
+\frametitle{Nota importante}
+En el pseudocódigo se mostró el criterio en el cual se va a detener la suma de términos, pero no estamos incluyendo el valor de la tolerancia: $10^{-8}$, ¿por qué?
+\end{frame}
+\begin{frame}
+\frametitle{Nota importante}
+Tenemos una complicación debida a que la suma requiere el valor de $N$ para realizar las cuentas, pero aún así, no contamos con un estimado para ese valor.
+\\
+\bigskip
+Proponemos usar el valor de $N = 10$ y revisar cómo se comporta el algortimo.
+\end{frame}
 \begin{frame}[fragile]
-\frametitle{Resultado para el valor}
+\frametitle{Resultados para la evaluación}
 \begin{table}
 \fontsize{12}{12}\selectfont
 \begin{tabular}{c c c c}
@@ -210,11 +259,42 @@ $-2.0$ & $-0.9092974268$ & $-0.9092974268$  $-4.69511e-10$ \\ \hline
 \end{table}
 \end{frame}
 \begin{frame}
+\frametitle{¿Qué pasa con el error relativo?}
+De acuerdo con la cuarta columna de la tabla anterior, que corresponde al error relativo: ¿qué ocurre con éste?
+\\
+\bigskip
+\pause
+Vemos que con $N=10$ se alcanza el criterio pedido para la tolerancia de $10^{-8}$, si aumentamos el valor de $N$ veremos que luego de cierta iteración, el valor del error ya no se modifica tanto.
+\end{frame}
+\subsection{Segunda parte}
+\begin{frame}
 \frametitle{Mejora para calcular más valores}
-Introducir los valores uno por uno resulta una tarea tediosa, por lo que habrá que mejorar el código para que en un sólo paso, se devuelvan los valores pedidos y completar la tabla.
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\conti
+\item Introducir los valores uno por uno resulta una tarea tediosa, por lo que habrá que mejorar el código para que en un sólo paso, se devuelvan los valores pedidos y completar la tabla.
 \\
 \bigskip
 \textcolor{red}{¿Cómo le hacemos?}
+\end{enumerate}
+\end{frame}
+\begin{frame}[allowframebreaks, fragile]
+\frametitle{Código para la mejora}
+\begin{lstlisting}[style=codigopython]
+x = [-2, -1.5, -1, -0.5, 0.5, 1, 1.5, 2]
+
+n = 10
+
+print('x \t exacta \t   suma \t  error')
+for j in x:
+    suma = j
+    term =  j
+    for i in range(2, n):
+        term = (-term *j*j)/((2*i-1)*(2*i-2))
+        suma  = suma + term
+    print('{0:} \t {1:1.10f} \t {2:1.10f} \t {3:1.5e}'.format(j, math.sin(j), suma, error_relativo(j, suma)))
+\end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Tabla con resultados}
@@ -233,21 +313,49 @@ $2$ & $0.9092974268$ &  $0.9092974268$ &  $4.69511e-10$ \\ \hline
 \end{tabular}
 \end{table}
 \end{frame}
-\begin{frame}[allowframebreaks, fragile]
-\frametitle{Código para la mejora}
-\begin{lstlisting}[style=codigopython]
-x = [-2, -1.5, -1, -0.5, 0.5, 1, 1.5, 2]
-
-n = 10
-
-print('x \t exacta \t   suma \t  error')
-for j in x:
-    suma = j
-    term =  j
-    for i in range(2, n):
-        term = (-term *j*j)/((2*i-1)*(2*i-2))
-        suma  = suma + term
-    print('{0:} \t {1:1.10f} \t {2:1.10f} \t {3:1.5e}'.format(j, math.sin(j), suma, error_relativo(j, suma)))
-\end{lstlisting}
+\subsection{Tercera parte}
+\begin{frame}[fragile]
+\frametitle{Tercera parte}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\conti   
+\item Modifica el código tal que sume la serie de \enquote{buena forma} (sin factoriales), para calcular la suma de \enquote{mala forma} (con factoriales explícitos). Considera el valor de \textoazul{math.sin(x)} como el valor exacto, calcula el error relativo para la buena forma: $e_{\text{rel}}1$ y para la mala forma: $e_{\text{rel}}2$.
+\\
+\bigskip
+Este ejercicio queda a cuenta para entregar por Edmodo.
+\end{enumerate}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Tabla de resultados}
+\fontsize{12}{12}\selectfont
+\begin{table}
+\begin{tabular}{| c | c | c | c | c | c |}
+\hline
+$x$ & $\sin (x)$ & \pbox{4cm}{buena \\ forma - 1} & \pbox{4cm}{mala \\ forma - 2} & $e_{\text{rel}}1$ & $e_{\text{rel}}2$\\ \hline
+$-2$ & & & & & \\ \hline
+$-1.5$ & & & & & \\ \hline
+\vdots & & & & & \\ \hline
+$1.5$ & & & & & \\ \hline
+$2$ & & & & & \\ \hline
+\end{tabular}
+\end{table}
+Discute los resultados.
+\end{frame}
+\subsection{Cuarta parte}
+\begin{frame}[fragile]
+\frametitle{Incluyendo una gráfica}
+Ahora que ya tenemos una implementación para evaluar valores y aproximar la solución con un algoritmo, vamos a utilizar ese código para crear una gráfica.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Consideraciones}
+Elabora una gráfica que evalúe un conjunto de $50$ puntos en el intervalo $[-2 \, \pi, 2 \, \pi]$, traza la gráfica de la función $\sin (x)$ en color azul, mientras que los puntos obtenidos, deberán de presentarse con cruces de color rojo: \verb|'+'|
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Gráfica de comparación de resultados}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.6]{Imagenes/Aproximacion_Seno.eps}
+\end{figure}
 \end{frame}
 \end{document}
