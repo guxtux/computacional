@@ -1,0 +1,253 @@
+\input{../Preambulos/preambulo_presentacion}
+\title{\large{Tema 1 - Escalas, condición y estabilidad}}
+\subtitle{Curso de Física Computacional}
+\author[]{M. en C. Gustavo Contreras Mayén}
+\date{\today}
+\institute{Facultad de Ciencias - UNAM}
+\titlegraphic{\includegraphics[width=2cm]{Imagenes/escudo-facultad-ciencias}\hspace*{4.75cm}~%
+   \includegraphics[width=2cm]{Imagenes/escudo-unam}
+}
+\begin{document}
+\maketitle
+\section*{Contenido}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+\section{Sumando series}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{La serie para $\sin x$}
+\begin{frame}
+\frametitle{Sumando una serie conocida}
+Un problema numérico clásico es la suma de una serie infinita que evalúa una función.
+\\
+\bigskip
+\pause
+Consideremos la serie infinita para la función $\sin x$:
+\begin{align*}
+\sin x =  x - \dfrac{x^{3}}{3!} + \dfrac{x^{5}}{5!} - \dfrac{x^{7}}{7!} + \ldots
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Nuestra tarea}
+Nuestra tarea será utilizar esta serie para calcular valores de $\sin x$ para $x < 2 \pi$ y $x > 2 \pi$, con un error absoluto en cada caso, que sea menor que $1$ parte en $10^{8}$.
+\end{frame}
+\begin{frame}
+\frametitle{Primera propuesta}
+Si bien una serie infinita es \emph{exacta} en un sentido matemático, no es en si, un buen algoritmo porque debemos dejar de sumar en algún momento.
+\\
+\bigskip
+\pause
+Un algoritmo podría ser la suma finita:
+\begin{align}
+\sin x \simeq \sum_{n = 1}^{N} \dfrac{(-1)^{n-1} \, x^{2 n - 1}}{(2 n - 1)!}
+\label{suma_seno_algoritmo}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Pregunta necesaria}
+Debemos de plantearnos la siguiente pregunta: \textbf{¿En qué momento debemos de detener la suma?}
+\\
+\bigskip
+NO deberíamos de considerar: \emph{\enquote{Cuando la solución corresponda con una tabla o con el valor de una función de la librería matemática}.} 
+\end{frame}
+\begin{frame}
+\frametitle{El método numérico}
+No olvidemos que el algoritmo (\ref{suma_seno_algoritmo}) nos pide que debemos de calcular $(-1)^{n-1} \, x^{2 n - 1}$ para luego dividir entre $(2 n - 1)!$
+\\
+\bigskip
+\pause
+No es una buena idea para calcular los valores:
+\begin{itemize}[<+->]
+\item Tanto $(-1)^{n-1} \, x^{2 n - 1}$ como $(2 n - 1)!$ pueden ser valores muy grandes y generar \emph{overflows}, mientras que el cociente no.
+\item Las potencias y factoriales consumen demasiado tiempo de cómputo.
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Segunda propuesta}
+Una mejor aproximación es utilizar una multiplicación para relacionar el siguiente término de la serie, a partir del anterior:
+\begin{align}
+\fontsize{12}{12}\selectfont
+\begin{aligned}
+&\dfrac{(-1)^{n-1} \, x^{2 n - 1}}{(2 n - 1)!} = \dfrac{x^{2}}{(2 n - 1)(2 n - 2)} \, \dfrac{(1-)^{n-2} \, x^{2 n - 3}}{(2 n - 3!)} \\[0.5em]
+&\Rightarrow n-\mbox{término} = \dfrac{- x^{2}}{(2 n - 1)(2 n - 2)} \times (n-1)-\mbox{término}
+\end{aligned}
+\label{eq:termino_suma}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Observación importante}
+Si bien queremos garantizar una precisión definitiva para la función $\sin x$, eso no es tan fácil de hacer.
+\\
+\bigskip
+\pause
+Lo que es fácil de hacer es \emph{suponer que el error en la suma es aproximadamente el último término sumado}, esto supone que no hay error de redondeo.
+\end{frame}
+\begin{frame}
+\frametitle{Valor de tolerancia}
+Para obtener un error absoluto de $1$ parte en $10^{8}$, debemos de detener el cálculo cuando se cumpla la condición:
+\begin{align}
+\abs{\dfrac{n-\mbox{término}}{\mbox{suma}}} < 10^{-8}
+\label{eq:tolerancia}
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Valor de tolerancia}
+\begin{align*}
+\abs{\dfrac{n-\mbox{término}}{\mbox{suma}}} < 10^{-8}
+\end{align*}
+donde el \enquote{término} es el último en la serie (\ref{suma_seno_algoritmo}) y la \enquote{suma} es la suma acumulada para todos los términos.
+\end{frame}
+\begin{frame}
+\frametitle{Sobre la tolerancia}
+En general, podemos determinar cualquier nivel de tolerancia.
+\\
+\bigskip
+Aunque si está demasiado cerca o es más pequeño que el épsilon de la máquina, es posible que el cálculo no se pueda alcanzar.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Pseudocódigo}
+Proponemos el siguiente pseudocódigo con el que intentaremos resolver el problema:
+\begin{lstlisting}
+term = x
+suma = x
+tolerancia = 10e+-08
+
+mientras abs(term/suma) > tolerancia
+    term = -term * x * x /((2 * n - 1)(2* n - 2))
+    suma = suma + term
+\end{lstlisting}
+\end{frame}
+\subsection*{Implementación}
+\begin{frame}[fragile]
+\frametitle{Implementación}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Escribe un programa en \python{} para los calcule los siguientes valores de $x$:
+\begin{align*}
+x &= -2 \, \pi, -1.5 \, \pi, - \pi, -0.5 \, \pi, -0.25 \, \pi, \\
+& 0.25 \, \pi , 0.5 \, \pi, \, \pi, 1.5 \, \pi, 2 \, \pi
+\end{align*}
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Implementación}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\conti   
+\item Presenta los resultados en una tabla de la siguiente forma:
+\begin{table}
+\centering
+\begin{tabular}{c | c | c}
+$x$ & suma & $\dfrac{\abs{\sin(x) - \mbox{suma}}}{\sin x}$ 
+\end{tabular}
+\end{table}
+donde imax es el número de iteraciones realizadas, y $\sin (x)$ es el valor obtenido de la función seno incluida en el paquete \textoazul{math}.
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Tabla de resultados}
+\begin{table}
+\centering
+\begin{tabular}{c | c | c}
+$x$ & suma & $\dfrac{\abs{\sin(x) - \mbox{suma}}}{\sin x}$ \\ \hline
+$-2 \, \pi$ & & \\ \hline
+$-1.5 \, \pi$ & & \\ \hline
+\vdots & & \\ \hline
+$1.5 \, \pi$ & & \\ \hline
+$2 \, \pi$ & & \\ \hline
+\end{tabular}
+\end{table}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Implementación}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\conti   
+\item Modifica el código tal que sume la serie de \enquote{buena forma} (sin factoriales), para calcular la suma de \enquote{mala forma} (con factoriales explícitos).
+\end{enumerate}
+\end{frame}
+\begin{frame}[allowframebreaks, fragile]
+\frametitle{Evaluando valores individuales}
+\begin{lstlisting}[style=codigopython]
+import math
+
+def error_relativo(exacto, aproximado):
+    return math.fabs(math.sin(exacto)- aproximado)/math.sin(exacto)*100
+
+x = float(input('Teclea el valor a evaluar: '))
+
+n = 10
+suma = x
+term =  x
+
+print('x \t exacta \t   suma \t  error')
+for i in range(2, n):
+    term = (-term *x*x)/((2*i-1)*(2*i-2))
+    suma  = suma + term
+    print('{0:} \t {1:1.10f} \t {2:1.10f} \t {3:1.5e}'.format(x, math.sin(x), suma, error_relativo(x, suma)))
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Resultado para el valor}
+\begin{table}
+\fontsize{12}{12}\selectfont
+\begin{tabular}{c c c c}
+x & exacta & suma & error \\ \hline
+$-2.0$ & $-0.9092974268$ & $-0.6666666667$  $-2.66833e+01$ \\ \hline
+$-2.0$ & $-0.9092974268$ & $-0.9333333333$  $-2.64335e+00$ \\ \hline
+$-2.0$ & $-0.9092974268$ & $-0.9079365079$  $-1.49667e-01$ \\ \hline
+$-2.0$ & $-0.9092974268$ & $-0.9093474427$  $-5.50049e-03$ \\ \hline
+$-2.0$ & $-0.9092974268$ & $-0.9092961360$  $-1.41963e-04$ \\ \hline
+$-2.0$ & $-0.9092974268$ & $-0.9092974515$  $-2.71572e-06$ \\ \hline
+$-2.0$ & $-0.9092974268$ & $-0.9092974265$  $-4.00566e-08$ \\ \hline
+$-2.0$ & $-0.9092974268$ & $-0.9092974268$  $-4.69511e-10$ \\ \hline
+\end{tabular}
+\end{table}
+\end{frame}
+\begin{frame}
+\frametitle{Mejora para calcular más valores}
+Introducir los valores uno por uno resulta una tarea tediosa, por lo que habrá que mejorar el código para que en un sólo paso, se devuelvan los valores pedidos y completar la tabla.
+\\
+\bigskip
+\textcolor{red}{¿Cómo le hacemos?}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Tabla con resultados}
+\begin{table}
+\fontsize{12}{12}\selectfont
+\begin{tabular}{c c c c}
+x & exacta & suma & error \\ \hline
+$-2$  & $-0.9092974268$ &  $-0.9092974268$ &  $-4.69511e-10$ \\ \hline
+$-1.5$ & $-0.9974949866$ &  $-0.9974949866$ &  $-1.82534e-12$ \\ \hline
+$-1$ & $-0.8414709848$ &  $-0.8414709848$ &  $-0.00000e+00$ \\ \hline
+$-0.5$ & $-0.4794255386$ &  $-0.4794255386$ &  $-0.00000e+00$ \\ \hline
+$0.5$ & $0.4794255386 $ &  $0.4794255386$ &  $0.00000e+00$ \\ \hline
+$1$ & $0.8414709848$ &  $0.8414709848$ &  $0.00000e+00$ \\ \hline
+$1.5$ & $0.9974949866$ &  $0.9974949866$ &  $1.82534e-12$ \\ \hline
+$2$ & $0.9092974268$ &  $0.9092974268$ &  $4.69511e-10$ \\ \hline
+\end{tabular}
+\end{table}
+\end{frame}
+\begin{frame}[allowframebreaks, fragile]
+\frametitle{Código para la mejora}
+\begin{lstlisting}[style=codigopython]
+x = [-2, -1.5, -1, -0.5, 0.5, 1, 1.5, 2]
+
+n = 10
+
+print('x \t exacta \t   suma \t  error')
+for j in x:
+    suma = j
+    term =  j
+    for i in range(2, n):
+        term = (-term *j*j)/((2*i-1)*(2*i-2))
+        suma  = suma + term
+    print('{0:} \t {1:1.10f} \t {2:1.10f} \t {3:1.5e}'.format(j, math.sin(j), suma, error_relativo(j, suma)))
+\end{lstlisting}
+\end{frame}
+\end{document}
