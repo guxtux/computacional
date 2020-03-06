@@ -17,4 +17,4 @@ for i in arange(1,200):
     line.set_ydata(sin(x+i/10.0))  # update the data
     draw()                         # redraw the canvas
     #pause(0.01)    
-print 'FPS:' , 200/(time.time()-tstart)
+print ('FPS:' , 200/(time.time()-tstart))

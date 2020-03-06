@@ -23,11 +23,11 @@ e1=1-(V**2)/k
 angulo=[]
 erre=[]
 
-print "La excentricidad calculada fue:",e1,"y la real:",e
+print ("La excentricidad calculada fue:",e1,"y la real:",e)
 w=0.0
 while w<4*pi:
     r=r0/(1+e*cos(w)) 
-    print "(w,r)=(",w,"rad,",r,"km)"
+    print ("(w,r)=(",w,"rad,",r,"km)")
     angulo.append(w)
     erre.append(r)    
     g.write('%f %f\n'%(w,r))
@@ -35,7 +35,7 @@ while w<4*pi:
 g.close()
 P=2*pi*((a**3)/k)**0.5
 P=P/(3600*24*365)
-print "El periodo del cometa halley es de:",P,"años"
+print ("El periodo del cometa halley es de:",P,"años")
 
 plt.polar(angulo,erre)
 plt.show()
