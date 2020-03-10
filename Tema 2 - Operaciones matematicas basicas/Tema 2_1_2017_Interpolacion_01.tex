@@ -1,9 +1,9 @@
 \input{../Preambulos/pre_documento}
 \input{../Preambulos/pre_plantilla_Warsaw_spruce}
 \input{../Preambulos/pre_codigo}
-\input{../Preambulos/pre_define_footers_Warsaw_spruce}
-\title{\large{Tema 2 - Operaciones matemáticas básicas}}
-\subtitle{Técnicas de Interpolación}
+\input{../Preambulos/pre_define_footers}
+\title{Técnicas de Interpolación}
+\subtitle{Tema 2 - Operaciones matemáticas básicas}
 \author{M. en C. Gustavo Contreras Mayén}
 \date{\today}
 \institute{Facultad de Ciencias - UNAM}
@@ -16,28 +16,6 @@
 \spanishdecimal{.}
 \section*{Contenido}
 \frame{\tableofcontents[currentsection, hideallsubsections]}
-\section{Tema 2}
-\subsection{Objetivo}
-\begin{frame}
-\frametitle{Objetivo General del Tema 2}
-Al concluir el Tema 2 del curso, el alumno empleará las técnicas más comunes de operaciones matemáticas necesarias para la solución de problemas numéricos aplicados en la física.
-\end{frame}
-\begin{frame}
-\frametitle{Objetivo General del Tema 2}
-Este tema es una base importante de todo el curso, ya que se establecen las tareas de:
-\setbeamercolor{item projected}{bg=green!70!black,fg=white}
-\setbeamertemplate{enumerate items}[circle]
-\begin{enumerate}[<+->]
-\item Interpolación.
-\item Diferenciación.
-\item Integración numérica.
-\item Cálculo de raíces.
-\end{enumerate}
-\end{frame}
-\begin{frame}
-\frametitle{Objetivo General del Tema 2}
-De tal manera que en los temas posteriores, se emplearán éstas técnicas, y en algunos casos, se extenderán de manera específica.
-\end{frame}
 \section{Introducción}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Definición de interpolación}
@@ -52,8 +30,9 @@ Una parte importante en el trabajo del físico es la interpretación de datos ex
 \begin{frame}
 \frametitle{Interpolación}
 Normalmente cuando hacemos mediciones, tenemos un conjunto discreto de puntos que representan nuestro experimento.
-\\
-\bigskip
+\end{frame}
+\begin{frame}
+\frametitle{Interpolación}
 Para facilitar el trabajo, suponemos que el experimento puede representarse por un par de valores: una \textit{variable independiente $x$} la cual podemos controlar y una cantidad $y$, que se mide en el punto $x$.
 \end{frame}
 \begin{frame}
@@ -149,13 +128,13 @@ Lo que podríamos hacer es usar técnicas de \textcolor{blue}{interpolación} pa
 \pause
 Si lo que queremos, es el caso contrario, conocer la actividad luego de ocho meses posteriores a la última medición, lo que deberíamos de hacer es \textcolor{red}{extrapolar} a ese punto a partir de las mediciones previas.
 \end{frame}
-\subsection{Objetivo de la interpolación.}
+\subsection{Objetivo de la interpolación}
 \begin{frame}
-\frametitle{Objetivo de la interpolación.}
+\frametitle{Objetivo de la interpolación}
 La idea central de la interpolación es seleccionar una función $g(x)$ tal que $g(x_{i}) = f_{i}$ para cada dato $i$, es una buena aproximación para cualquier otro dato $x$ entre el conjunto original de datos.
 \end{frame}
 \begin{frame}
-\frametitle{Objetivo de la interpolación.}
+\frametitle{Objetivo de la interpolación}
 Pero ¿cómo podemos considerar una buena aproximación al conjunto de datos, si no tenemos la función original?
 \\
 \bigskip

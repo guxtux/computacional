@@ -17,23 +17,23 @@
 \maketitle
 \fontsize{14}{14}\selectfont
 \spanishdecimal{.}
-\begin{frame}{Contenido}
-\tableofcontents[pausesections]
-\end{frame}
+\section*{Contenido}
+\frame{\tableofcontents[currentsection, hideallsubsections]}
 \section{Tema 2}
 \subsection{Objetivo}
 \begin{frame}
 \frametitle{Objetivo General del Tema 2}
 Al concluir el Tema 2 del curso, el alumno empleará las técnicas más comunes de operaciones matemáticas necesarias para la solución de problemas numéricos aplicados en la física.
 \end{frame}
+\subsection{Contenido}
 \begin{frame}
-\frametitle{Objetivo General del Tema 2}
-Este tema es una base importante de todo el curso, ya que se establecen las tareas de:
+\frametitle{Contenido a revisar}
+Este tema es una base importante de todo el curso, ya que se establecen las operaciones de:
 \setbeamercolor{item projected}{bg=green!70!black,fg=white}
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}[<+->]
-\item Cálculo de raíces.
 \item Interpolación.
+\item Cálculo de raíces.
 \item Diferenciación.
 \item Integración numérica.
 \end{enumerate}
@@ -42,7 +42,47 @@ Este tema es una base importante de todo el curso, ya que se establecen las tare
 \frametitle{Objetivo General del Tema 2}
 De tal manera que en los temas posteriores, se emplearán éstas técnicas, y en algunos casos, se extenderán de manera específica.
 \end{frame}
-\section{Motivación}
+\subsection*{Interpolación}
+\begin{frame}[fragile]
+\frametitle{Interpolación}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.8]{Imagenes/MapaMental_Tema2_02.eps}
+\end{figure}
+\end{frame}
+\subsection*{Cálculo de raíces}
+\begin{frame}[fragile]
+\frametitle{Cálculo de raíces}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.7]{Imagenes/MapaMental_Tema2_01.eps}
+\end{figure}
+\end{frame}
+\subsection*{Diferenciación}
+\begin{frame}[fragile]
+\frametitle{Diferenciación}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.6]{Imagenes/MapaMental_Tema2_03.eps}
+\end{figure}
+\end{frame}
+\subsection*{Integración}
+\begin{frame}[fragile]
+\frametitle{Integración}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.6]{Imagenes/MapaMental_Tema2_04.eps}
+\end{figure}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Integración}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.6]{Imagenes/MapaMental_Tema2_05.eps}
+\end{figure}
+\end{frame}
+\section{Ejemplo de la mecánica}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Dispersión clásica}
 \begin{frame}
 \frametitle{Un problema conocido}
@@ -75,14 +115,14 @@ simétrico.
 El momento angular total y la energía del sistema se conservan durante la dispersión.
 \end{frame}
 \begin{frame}
-\frametitle{Un sistema de dos partículas}
+\frametitle{El Lagrangiano}
 El lagrangiano para un sistema de dos cuerpos en general, se puede escribir como:
 \begin{align*}
 \mathcal{L} = \dfrac{m_{1}}{2} v_{1}^{2} + \dfrac{m_{2}}{2} v_{2}^{2} - V(\mathbf{r}_{1}, \mathbf{r}_2)
 \end{align*}
 \end{frame}
 \begin{frame}
-\frametitle{Un sistema de dos partículas}
+\frametitle{El Lagrangiano}
 \begin{align*}
 \mathcal{L} = \dfrac{m_{1}}{2} v_{1}^{2} + \dfrac{m_{2}}{2} v_{2}^{2} - V(\mathbf{r}_{1}, \mathbf{r}_2)
 \end{align*}
@@ -93,7 +133,7 @@ m_{i}, \quad \mathbf{r}_{i}, \quad v_{i} = \abs{\dv{\mathbf{r}_{i}}{t}}
 con $i = 1, 2$ son respectivamente, la masa, el vector de posición y la velocidad de la $i$-ésima partícula.
 \end{frame}
 \begin{frame}
-\frametitle{Un sistema de dos partículas}
+\frametitle{El Lagrangiano}
 \begin{align*}
 \mathcal{L} = \dfrac{m_{1}}{2} v_{1}^{2} + \dfrac{m_{2}}{2} v_{2}^{2} - V(\mathbf{r}_{1}, \mathbf{r}_2)
 \end{align*}
@@ -112,14 +152,14 @@ Podemos realizar una transformación de coordenadas de $\mathbf{r}_{1}$ y $\math
 \end{align}
 \end{frame}
 \begin{frame}
-\frametitle{Transformación de coordenadas}
+\frametitle{El Lagrangiano}
 Por lo que podemos expresar el lagrangiano del sistema en términos de las nuevas coordenadas y sus velocidades correspondientes como
 \begin{align}
 \mathcal{L} = \dfrac{M}{2} \, v_{c}^{2} + \dfrac{m}{2} \, v^{2} - V(r)
 \end{align}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Transformación de coordenadas}
+\frametitle{El Lagrangiano}
 \begin{align}
 \mathcal{L} = \dfrac{M}{2} \, v_{c}^{2} + \dfrac{m}{2} \, v^{2} - V(r)
 \end{align}
@@ -271,7 +311,7 @@ La variable $r$ es la coordenada radial, $\phi$ es el ángulo polar, $v_{0}$ es 
 \frametitle{Razón de cambio}
 Combinando las ecuaciones (\ref{eq:momento}) y (\ref{eq:energia}), con
 \begin{align}
-\dv{\theta}{r} = \dv{\phi}{t} \, \dv{t}{r}
+\dv{\phi}{r} = \dv{\phi}{t} \, \dv{t}{r}
 \end{align}
 \pause
 se obtiene
@@ -292,9 +332,9 @@ Los signos $\pm$ corresponden a las dos partes simétricas de la trayectoria.
 \end{frame}
 \begin{frame}
 \frametitle{Ángulo de deflexión}
-\begin{align*}
-\dv{\phi}{r} = \pm \dfrac{b}{r^{2} \sqrt{1 - \dfrac{b^{2}}{r^{2}} - \dfrac{V(r)}{E}}}
-\end{align*}
+% \begin{align*}
+% \dv{\phi}{r} = \pm \dfrac{b}{r^{2} \sqrt{1 - \dfrac{b^{2}}{r^{2}} - \dfrac{V(r)}{E}}}
+% \end{align*}
 La ecuación anterior puede ser utilizada para calcular el ángulo de deflexión $\theta$ a través de
 \begin{align}
 \theta = \pi - 2 \, \Delta \phi
@@ -356,12 +396,10 @@ Los valores de $\kappa$ y $a$ son parámetros positivos que reflejan respectivam
 \setbeamercolor{item projected}{bg=green!70!black,fg=white}
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}[<+->]
-\item Requerimos de las condiciones iniciales: un valor de energía $E$, y un conjunto de parámetros de impacto $b$.
-\item La distancia mínima al centro $r_{m}$ que está dada por la ecuación:
+\item Necesitaríamos obtener el valor de $r_{m}$ de la ec. (\ref{eq:raiz_rm}), que es la raíza mínima al centro,  mediante el método de la secante, para un valor de energía $E$, y un parámetro de impacto $b$.
 \begin{align*}
 1  - \dfrac{b^{2}}{r_{m}^{2}} - \dfrac{V(r_{m})}{E} = 0
 \end{align*}
-donde hay que encontrar el valor de la raíz.
 \seti
 \end{enumerate}
 \end{frame}
@@ -378,6 +416,7 @@ donde hay que encontrar el valor de la raíz.
 & \qquad - \left. \int_{r_{m}}^{\infty} \dfrac{dr}{r^{2} \: \sqrt{1 - b^{2}/r^{2} - V(r)/E}} \right]
 \end{aligned}
 \end{align*}
+para integrar tendríamos que utilizar la regla de Simpson.
 \seti
 \end{enumerate}
 \end{frame}
@@ -387,12 +426,18 @@ donde hay que encontrar el valor de la raíz.
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}
 \conti
-\item Para un valor $b$ dado, se obtiene un valor de $\theta$. Por lo que ahora habrá que evaluar la expresión:
+\item Para un valor $b$ dado, se obtiene un valor de $\theta$. Usando un método de diferencias centrales, se puede obtener la siguiente expresión:
 \begin{align*}
 \dv{b}{\theta}
 \end{align*}
-mediante una estrategia que nos devuelva el valor de la derivada.
 \end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Juntando los resultados}
+Una vez obtenidos los resultados anteriores, tendremos los elementos para expresar la sección diferencial de área:
+\begin{align*}
+\sigma(\theta) = \dfrac{b}{\sin \theta} \; \abs{\dv{b}{\theta}}
+\end{align*}
 \end{frame}
 \begin{frame}
 \frametitle{Gráfica obtenida}
