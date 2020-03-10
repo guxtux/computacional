@@ -17,6 +17,7 @@
 \usepackage{amsthm}
 \usepackage{multicol}
 \usepackage{graphicx}
+\usepackage{physics}
 \usepackage{tabulary}
 \usepackage{booktabs}
 \usepackage[outdir=./]{epstopdf}
@@ -68,6 +69,11 @@
 \newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
 \newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
 \newcommand{\tikzmark}[1]{\tikz[remember picture] \node[coordinate] (#1) {#1};}
+
+\usepackage{scalerel}[2016-12-29]
+\def\stretchint#1{\vcenter{\hbox{\stretchto[440]{\displaystyle\int}{#1}}}}
+\def\scaleint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\int}{#1}}}}
+\def\bs{\mkern-12mu}
 
 \newtheorem{teo}{}[section]
 \usepackage{blkarray}
