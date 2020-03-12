@@ -9,26 +9,55 @@
 \maketitle
 \fontsize{14}{14}\selectfont
 \spanishdecimal{.}
-\begin{frame}{Contenido}
-\tableofcontents[pausesections]
-\end{frame}
+\section*{Contenido}
+\frame{\tableofcontents[currentsection, hideallsubsections]}
 \section{Funciones de interpolación con \texttt{python}.}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Paquete \texttt{scipy}}
 \begin{frame}
-Encontramos en \python\ una serie de funciones que permiten realizar la interpolación de un conjunto de datos, estimando la mejor aproximación, pero no debemos de confiarnos en dar por hecho que con ello, el error obtenido por la aproximación es el menor.
+\frametitle{Paquete para interpolación}
+Encontramos en \python\ una serie de funciones que permiten realizar la interpolación de un conjunto de datos, estimando la mejor aproximación.
 \\
 \bigskip
-La librería que debemos de utilizar es \funcionazul{scipy.interpolate}
+No debemos de confiarnos en dar por hecho que con ello, el error obtenido por la aproximación es el menor.
+\end{frame}
+\begin{frame}
+\frametitle{Paquete \texttt{scipy}}
+El paquete que debemos de utilizar el \funcionazul{scipy}.
+\\
+\bigskip
+Que a su vez contiene varias librerías de funciones para cómputo científico.
+\end{frame}
+\begin{frame}
+\frametitle{Algunas librerías de \texttt{scipy}}
+\begin{table}
+\fontsize{12}{12}\selectfont
+\centering
+\begin{tabular}{l l}
+Propósito & Librería \\ \hline
+Funciones especiales & \texttt{scipy.special} \\ \hline
+Integración &\texttt{scipy.integrate} \\ \hline
+Optimización & \texttt{scipy.optimize} \\ \hline
+\textcolor{red}{Interpolación} & \texttt{scipy.interpolate} \\ \hline
+Transformadas de Fourier & \texttt{scipy.fft} \\ \hline
+Procesamiento de señales & \texttt{scipy.signal} \\ \hline 
+Álgebra lineal & \texttt{scipy.linalg} \\ \hline
+\end{tabular}
+\end{table}
 \end{frame}
 \subsection{La función \texttt{interp1d (x, y)}}
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{La función \texttt{interp1d (x, y)}}
-Dentro de \funcionazul{scipy.interpolate} contamos con la función \funcionazul{interp1d} que requiere de dos argumentos - los valores de $x$ e $y$ que se utilizarán para la interpolación. 
+Dentro de \funcionazul{scipy.interpolate} contamos con la función \funcionazul{interp1d} que requiere de al menos dos argumentos: los valores de $x$ e $y$ que se utilizarán para la interpolación.
 \\
 \bigskip
-Se puede proporcionar un tipo de argumento opcional que especifica el tipo de procedimiento de interpolación.
+\verb|interp1d(x, y, [kind='linear'])|
+\\
+\bigskip
+Donde: \texttt{kind=} especifica el tipo de procedimiento de interpolación.
 \end{frame}
 \begin{frame}
-\frametitle{Opciones para el tipo de interpolación.}
+\frametitle{Tipos de interpolación}
 Las opciones disponibles son:
 \setbeamercolor{item projected}{bg=red!70!black,fg=white}
 \setbeamertemplate{enumerate items}[circle]
@@ -36,45 +65,76 @@ Las opciones disponibles son:
 \item \texttt{linear}: interpola a lo largo de una línea recta entre puntos de datos vecinos.
 \item \texttt{nearest}: proyecta al punto de datos más cercano.
 \item \texttt{zero}: proyecta al punto de datos anterior.
-\item \texttt{slinear}: usa un ``spline'' lineal.
-\item \texttt{cuadratic}: usa un ``spline'' cuadrático.
-\item \texttt{cubic}: usa un ``spline'' cúbico.
+\item \texttt{slinear}: usa un \emph{spline} lineal.
+\item \texttt{cuadratic}: usa un \emph{spline} cuadrático.
+\item \texttt{cubic}: usa un \emph{spline} cúbico.
 \end{enumerate}
 \end{frame}
+\begin{frame}
+\frametitle{Sobre los splines}
+Más adelante hablaremos sobre los \emph{splines}, que resultarán de gran ayuda no sólo para una interpolación, sino para tareas tan comunes como el trazo de líneas en programas de diseño por computadora.
+\end{frame}
 \begin{frame}[fragile]
-El valor predeterminado de \texttt{interp1d} es una interpolación lineal. También se puede proporcionar un número entero, en cuyo caso la función utilizará un polinomio de ese orden para interpolar entre puntos. Por ejemplo:
+\frametitle{Valor por defecto}
+El valor predeterminado de \texttt{interp1d} es una \textcolor{blue}{interpolación lineal}.
+\\
+\bigskip
+También se puede proporcionar un número entero, en cuyo caso la función utilizará un polinomio de ese orden para interpolar entre puntos.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Polinomio de orden $n$}
+Por ejemplo:
 \begin{verbatim}
 F = interp1d (x, y, kind = 10)
 \end{verbatim}
-Utilizará un polinomio de orden 10 para interpolar entre puntos.
+Utilizará un polinomio de orden 10 para interpolar entre los puntos $x$ e $y$.
+\end{frame}
+\begin{frame}
+\frametitle{Comparando los tipos de interpolación}
+Veamos con un ejemplo sencillo las diferencias entre los tipos de interpolación lineal y cúbica que se tienen para la función \funcionazul{interp1d}:
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Ejemplo}
-Con el siguiente código generamos un conjunto de 20 datos distribuidos entre $0$ y $10 * \pi$
-\begin{lstlisting}[basicstyle=\ttfamily\normalsize, columns=fullflexible]
+Con el siguiente código generamos un conjunto de 20 datos distribuidos entre $0$ y $10 * \pi$, para luego presentarlos en una gráfica:
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejemplo}
+\begin{lstlisting}[caption=Generando los puntos, style= FormattedNumber, basicstyle=\linespread{0.9}\ttfamily\small, columns=fullflexible]
+import numpy as np
+from scipy.interpolate import interp_1_d
+import matplotlib.pyplot as plt
+
 x = np.linspace(0, 10 * np.pi, 20)
 y = np.cos(x)
 
-#para graficar
+# graficamos los puntos
 
-plt.plot(x,y, 'bo', label='Datos')
+plt.plot(x, y, 'bo', label='Datos')
+plt.legend(loc=1)
+plt.show()
 \end{lstlisting}
 \end{frame}
 \begin{frame}
-\frametitle{Resultado en la gráfica}
+\frametitle{Mostrando la gráfica}
 \begin{figure}
 %\centering
-\hspace*{-0.2cm}\includegraphics[scale=0.35]{interpolacion_01.eps}
+\hspace*{-0.2cm}\includegraphics[scale=0.3]{interpolacion_01.eps}
 \end{figure}
 \end{frame}
-\begin{frame}[allowframebreaks,fragile]
+\begin{frame}
+\frametitle{Interpolación lineal y cuadrática}
+Ocuparemos la interpolación lineal y cúbica de la función \funcionazul{inter1d}, para comparar gráficamente el resultado, por lo que se utilizará en dos ocasiones la función \funcionazul{interp1d}.
+\\
+\bigskip
+La parte correspondiente a la graficación se incluye en el código anterior, para no repetir las funciones \texttt{legend(loc=1)} y \texttt{show()}.
+\end{frame}
+\begin{frame}[allowframebreaks, fragile]
 \frametitle{Se interpolan los datos}
-\begin{lstlisting}[basicstyle=\ttfamily\normalsize, columns=fullflexible]
-# Se interpolan los datos
+\begin{lstlisting}[caption=Definiendo el tipo de interpolación, style= FormattedNumber, basicstyle=\linespread{0.9}\ttfamily\small, columns=fullflexible]
 
-fl = interp1d(x, y, kind='linear')
+fl = interp_1_d(x, y, kind='linear')
 
-fq = interp1d(x, y, kind='quadratic')
+fq = interp_1_d(x, y, kind='quadratic')
 
 # x.min and x.max se usan para asegurar que no
 # nos salimos del intervalo de interpolacion
@@ -88,16 +148,6 @@ yintq = fq(xint)
 #para graficar
 
 plt.plot(xint, yintl, label='Lineal')
-plt.plot(xint, yintq, label='Cubica')
-\end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]
-\frametitle{Se grafican los datos}
-\begin{lstlisting}[basicstyle=\ttfamily\normalsize, columns=fullflexible]
-#para graficar
-
-plt.plot(xint, yintl, label='Lineal')
-
 plt.plot(xint, yintq, label='Cubica')
 \end{lstlisting}
 \end{frame}
@@ -116,31 +166,84 @@ plt.plot(xint, yintq, label='Cubica')
 \end{figure}
 \end{frame}
 \begin{frame}
-\frametitle{Veamos otro ejemplo.}
-Utilizaremos la función \texttt{sinc(x)} que está contenida dentro de la librería \texttt{numpy}.
+\frametitle{Veamos otro ejemplo}
+Utilizaremos la función \funcionazul{sinc(x)} que está contenida dentro del paquete \funcionazul{numpy}.
 \\
 \bigskip
-La función \texttt{sinc (x)}, también llamada ``función de muestreo'', es una función que se encuentra comúnmente de las teorías de procesamiento de señales y de las transformadas de Fourier.
+\pause
+La función \funcionazul{sinc (x)}, también llamada \enquote{función de muestreo}, es una función que se encuentra comúnmente de las teorías de procesamiento de señales y de las transformadas de Fourier.
 \end{frame}
 \begin{frame}
-El nombre completo de la función es ``seno cardinal'', pero es comúnmente referido por su abreviatura, ``sinc''. Se define como
-\[ sinc(x) = \begin{cases}
-1 & \mbox{para } x = 0 \\
-\dfrac{\sin x}{x} & \mbox{para cualquier otro valor} \end{cases}\]
+\frametitle{Función seno cardinal}
+El nombre completo de la función es \enquote{seno cardinal}, pero es comúnmente referido por su abreviatura: \enquote{sinc}.
+\\
+\bigskip
+Se define como
+\begin{align*}
+sinc(x) = \begin{cases}
+1 & \mbox{para } x = 0 \\[0.5em]
+\dfrac{\sin x}{x} & \mbox{para cualquier otro valor} \end{cases}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Otra función de \texttt{numpy}}
+Para generar un conjunto de valores aleatorios, ocuparemos del paquete \funcionazul{numpy}, la librería \funcionazul{random} y de ésta, la función \funcionazul{random}.
+\\
+\bigskip
+\pause
+Que nos va a devolver un conjunto de valores de punto flotante en el intervalo $[0, 1]$.
 \end{frame}
 \begin{frame}[fragile]
-\begin{lstlisting}[basicstyle=\ttfamily\normalsize, columns=fullflexible]
+\frametitle{la función \texttt{random}}
+La sintaxis para la función \funcionazul{random} es la siguiente:
+\\
+\bigskip
+\verb|numpy.random.random(valor)|
+\\
+\bigskip
+donde \texttt{valor} es el tamaño de la muestra de datos aleatorios, en caso de que no se indique, se devuelve un sólo valor.
+\end{frame}
+\begin{frame}
+\frametitle{Los datos iniciales}
+La idea en este ejercicio es \enquote{contaminar} (modificar) la función \funcionazul{sinc(x)} y estudiar la interpolación lineal y cúbica con \python.
+\\
+\bigskip
+Si sumamos los datos aleatorios a la función \funcionazul{sinc(x)}, tendremos una gráfica muy parecida a la esperada.
+\end{frame}
+\begin{frame}
+\frametitle{Dos interpolaciones}
+El conjunto de datos $x2$ nos servirá para interpolar con la función \funcionazul{interp1d}.
+\\
+\bigskip
+Los arreglos $y$ y $y2$ almacenan los datos de las interpolaciones lineal y cúbica, respectivamente.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Código para resolver el ejercicio}
+\begin{lstlisting}[caption=Código para el análisis, style= FormattedNumber, basicstyle=\linespread{0.9}\ttfamily\small, columns=fullflexible]
+import numpy as np
+from scipy.interpolate import interp_1_d
+
 x = np.linspace(-18, 18, 36)
 ruido = 0.1 * np.random.random(len(x))
 senal = np.sinc(x) + ruido
 
-interpretada = interpolate.interp1d(x, senal)
-x2 = np.linspace(-18, 18, 180)
-y = interpretada(x2)
+x_2_ = np.linspace(-18, 18, 180)
 
-cubica = interpolate.interp1d(x, senal, kind="cubic")
-y2 = cubica(x2)
+interlineal = interp_1_d(x, senal)
+y = interlineal(x_2_)
+
+intercubica = interp_1_d(x, senal, kind="cubic")
+y_2_ = intercubica(x_2_)
 \end{lstlisting}
+\end{frame}
+\begin{frame}
+\frametitle{Agregar rutina de graficación}
+Deberás de incluir una rutina de graficación para mostrar tres gráficas:
+\begin{itemize}
+\item La función \funcionazul{sinc(x)}
+\item La interpolación lineal.
+\item La interpolación cúbica.
+\end{itemize}
 \end{frame}
 \begin{frame}
 \frametitle{Interpolación con la señal de muestreo}
@@ -150,31 +253,49 @@ y2 = cubica(x2)
 \end{figure}
 \end{frame}
 \begin{frame}
-\frametitle{Más sobre la interpolación.}
-Es posible reconocer algunas características generales de la interpolación obtenida en las figuras:
+\frametitle{Más sobre la interpolación}
+Es posible reconocer algunas características generales de la interpolación obtenida en las gráficas:
 \setbeamercolor{item projected}{bg=red!70!black,fg=white}
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}[<+->]
 \item Las funciones de interpolación son continuas.
 \item Las funciones de interpolación pasan siempre por los puntos de datos.
-\item Una función cuadrática puede dar un ajuste más malo que la interpolación lineal.
+\item Una función cúbica puede dar un ajuste más malo que la interpolación lineal.
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Más sobre la interpolación}
+\setbeamercolor{item projected}{bg=red!70!black,fg=white}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\conti
 \item Aumentar el orden del polinomio no siempre conduce a un mejor ajuste.
 \item Las funciones de interpolación pueden oscilar drásticamente entre los puntos de datos.
 \item El ajuste empeora hacia los extremos del conjunto de datos.
 \end{enumerate}
 \end{frame}
 \begin{frame}
-\frametitle{Entonces, ¿qué debo hacer al interpolar mis propios datos?}
-El ``spline cúbico'' es el caballo de batalla en este terreno. Como se puede ver en la figura, proporciona una curva suave que parece ajustarse bien a los datos.
+\frametitle{Entonces ¿qué hacemos?}
+El \emph{spline cúbico} es el caballo de batalla en este terreno. 
+\\
+\bigskip
+Como se puede ver en la siguiente figura, proporciona una curva suave que parece ajustarse bien a los datos.
+\end{frame}
+\begin{frame}
+\frametitle{Entonces ¿qué hacemos?}
+Interpolación son spline cúbico:
 \begin{figure}
 \centering
-\includegraphics[scale=0.4]{interpolacion_03b.eps}
+\includegraphics[scale=0.5]{interpolacion_03b.eps}
 \end{figure}
 \end{frame}
 \begin{frame}
-La suavidad se extiende más allá de lo que se ve en la gráfica: un ``spline cúbico'' tiene derivadas primera y segunda continuas.
-\\
-\bigskip
+\frametitle{Ventaja del spline cúbico}
+La suavidad se extiende más allá de lo que se ve en la gráfica: un \emph{spline cúbico} tiene derivadas primera y segunda continuas.
+\end{frame}
+\begin{frame}
+\frametitle{Uso de la ventaja del spline cúbico}
 Esta es una propiedad útil en la física, donde las derivadas primera y segunda son bastante comunes en los análisis teóricos (leyes de Newton, ecuaciones de Maxwell, ecuación de Schröedinger, etc.)
 \\
 \medskip
@@ -182,20 +303,27 @@ Esta es una propiedad útil en la física, donde las derivadas primera y segunda
 \textcolor{blue}{Una interpolación de spline cúbico es una buena opción en la mayoría de los casos}.
 \end{frame}
 \begin{frame}
-\frametitle{Precaución con las funciones de interpolación}
+\frametitle{Cuidado con la interpolación}
 Precaución: la interpolación y la extrapolación no es lo mismo.
 \\
 \bigskip
-Una buena función de interpolación puede ser una aproximación muy mala fuera del conjunto de puntos de datos utilizados. Por esta razón, las funciones generadas por \texttt{interp1d (x, y)} ni siquiera devolverán un número cuando proporcione un valor de la variable independiente fuera del rango del conjunto de datos: se obtiene un \texttt{ValueError} en su lugar.
+Una buena función de interpolación puede ser una aproximación muy mala fuera del conjunto de puntos de datos utilizados. 
+\end{frame}
+\begin{frame}
+\frametitle{Cuidado con la interpolación}
+Por esta razón, las funciones generadas por \funcionazul{interp1d (x, y)} ni siquiera devolverán un número cuando proporcione un valor de la variable independiente fuera del rango del conjunto de datos: se obtiene un \texttt{ValueError} en su lugar.
 \end{frame}
 \section{Fenómeno de Runge}
 \begin{frame}
 \frametitle{Fenónemo de Runge}
 Hasta el momento hemos revisado un par de estrategias para calcular un polinomio que pase por un conjunto de datos $(x_{i}, y_{i})$, pero hay que considerar un efecto importante al respecto: no siempre el mejor polinomio será aquel el de mayor grado $n$.
-\\
-\medskip
+\end{frame}
+\begin{frame}
+\frametitle{Fenónemo de Runge}
 Veamos el siguiente ejemplo: sea la función:
-\[ f(x) = \dfrac{1}{1 + 25 x^{2}}\]
+\begin{align*}
+f(x) = \dfrac{1}{1 + 25 x^{2}}
+\end{align*}
 \end{frame}
 \begin{frame}
 \frametitle{Gráfica de la función $f(x)$}
@@ -203,6 +331,10 @@ Veamos el siguiente ejemplo: sea la función:
 	\centering
 	\includegraphics[scale=0.5]{Imagenes/Funcion_Runge_01.eps} 
 \end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Elección de puntos}
+Como en los ejercicios anteriores, elegimos un conjunto de puntos que nos servirán para interpolar, en este caso, mostraremos las gráficas resultantes (sería buena idea de que hicieran todo el ejercicio por su cuenta)
 \end{frame}
 \begin{frame}
 \frametitle{Elección de puntos para interpolar}
@@ -213,7 +345,7 @@ Veamos el siguiente ejemplo: sea la función:
 \end{frame}
 \begin{frame}
 \frametitle{Interpolación con Lagrange}
-Interpolando los puntos con Lagrange.
+Interpolando los puntos con el método de Lagrange.
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.5]{Imagenes/Funcion_Runge_2017_02.eps} 
@@ -221,19 +353,47 @@ Interpolando los puntos con Lagrange.
 \end{frame}
 \begin{frame}
 \frametitle{¿Qué hacemos al respecto?}
-Como hemos visto en la gráfica anterior, la función que resulta del proceso de interpolación ``oscila'' a través de los puntos que deseamos interpolar; aquí el caso es que si aumentamos el grado del polinomio, los resultados serán aún más indeseables.
+Como hemos visto en la gráfica anterior, la función que resulta del proceso de interpolación \enquote{oscila} a través de los puntos que deseamos interpolar.
 \\
-\medskip
+\bigskip
+\pause
+Si aumentamos el grado del polinomio, los resultados serán aún más indeseables.
+\end{frame}
+\begin{frame}
+\frametitle{¿Qué hacemos al respecto?}
 La pregunta obligada es: ¿qué podemos hacer para mejorar la interpolación?
+\\
+\bigskip
+\pause
+La respuesta a la pregunta es: usemos \emph{splines}.
 \end{frame}
 \subsection{Uso de splines}
 \begin{frame}
 \frametitle{¿Qué es un spline?}
-En términos nada riguroso, se puede decir que un spline es una función definida por una familia de polinomios ``sociables'', donde el término sociable se usa para indicar que los polinomios que constituyen una función spline, están estrechamente vinculados.
-\\
-\medskip
+En términos nada riguroso, se puede decir que un \emph{spline} es una función definida por una familia de polinomios \emph{sociables}, donde el término sociable se usa para indicar que los polinomios que constituyen una función spline, están estrechamente vinculados.
+\end{frame}
+\begin{frame}
+\frametitle{¿Qué es un spline?}
 El nombre de \emph{spline}, viene del inglés ya que es un instrumento que utilizaban los ingenieros navales para dibujar curvas suaves, forzadas a pasar por un conjunto de puntos prefijados.
 \end{frame}
+\begin{frame}
+\frametitle{Un spline}
+\begin{figure}
+	\centering
+	\includegraphics{Imagenes/spline_01.png}
+	\caption{Uso de un spline para trazar curvas.}
+	\label{fig:figura_spline_01}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Un spline moderno}
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.5]{Imagenes/spline_02.jpg}
+	\caption{Un spline moderno para trazo de curvas.}
+	\label{fig:figura_spline_02}
+\end{figure}
+	\end{frame}
 \begin{frame}
 \frametitle{Las tres B's de los splines}
 El uso de las funciones splines tiene mucha aceptación y popularidad se deben a tres razones básicas:
@@ -241,60 +401,115 @@ El uso de las funciones splines tiene mucha aceptación y popularidad se deben a
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}[<+->]
 \item \textbf{Buenos:} Se  pueden usar en la solución de una gran variedad de problemas.
-\item \textbf{Baratos:} Ya que su cálculo es muy sencillo y económico.
 \item \textbf{Bonitos:} La teoría matemática en que se basan es muy simple y a la vez elegante.
+\item \textbf{Baratos:} Ya que su cálculo es muy sencillo y económico.
 \end{enumerate}
 \end{frame}
 \begin{frame}
-\frametitle{Manejando splines con \python}
-Usaremos la librería \texttt{scipy} que contiene varias funciones con las que ahorramos tiempo para manejar splines y ajustar funciones sociables a un conjunto de datos.
-\\
-\medskip
+\frametitle{Teoría de los splines}
 No está de más que revises la teoría al respecto, en la mayoría de los libros de análisis numérico, podrás encontrar la construcción matemática y formal de los splines.
 \end{frame}
 \begin{frame}
-\frametitle{Funciones para los splines}
-Necesitaremos de dos pasos para el uso de splines con \python, de la libería: \texttt{scipy.interpolate}, las cuales son:
-\begin{enumerate}
+\frametitle{Funciones de \python{} para los splines}
+Necesitaremos ocupar nuevamente el paquete \funcionazul{scipy} y la librería \funcionazul{interpolate}, de donde utilizaremos dos funciones para los splines:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item La función \funcionazul{splrep}.
+\item La función \funcionazul{splev}.
+\end{enumerate}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Funciones de \python{} para los splines}
+De donde:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
 \item \textbf{splrep}: Calcula el spline básico (B-spline) para una curva 1-D.
 \\
 \medskip
-Dados un conjunto de puntos $(x[i],y[i])$ determina una aproximación con un spline suave de grado $k$ en el intervalo $xb \leq x \leq xe$.
-\item \textbf{splev}: Evalúa un B-spline o sus derivadas. Dados los nodos y coeficientes de un B-spline, calcula el valor del polinomio suave y sus derivadas.
+\verb|splrep(x, y)|
+\\
+\bigskip
+Dados un conjunto de puntos $(x[i], \, y[i])$ determina una aproximación con un spline suave de grado $k$ en el intervalo $xb \leq x \leq xe$.
+\seti
 \end{enumerate}
 \end{frame}
+\begin{frame}[fragile]
+\frametitle{Lo que devuelve \texttt{splrep}}
+Esta función devuelve lo siguiente:
+\\
+\bigskip
+\verb|tck|
+\\
+\bigskip
+Una tupla \texttt{(t, c, k)} que contiene:
+\begin{itemize}
+\item Un arreglo $t$ con los nodos.
+\item Un arreglo $c$ con los coeficientes del B-spline.
+\item Un valor $k$ que determina el grado del spline.
+\end{itemize}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Funciones de \python{} para los splines}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\conti
+\item \textbf{splev}: Evalúa un B-spline o sus derivadas. 
+\\
+\bigskip
+\verb|splev(x, tck)|
+\\
+\bigskip
+Dados los nodos y coeficientes de un B-spline que devuelve \funcionazul{splrep}, entonces calcula el valor del polinomio suave y sus derivadas.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Lo que devuelve \texttt{splev}}
+La función \funcionazul{splev} devuelve un arreglo de valores que representan el spline evaluado en los puntos $x$.
+\end{frame}
+\begin{frame}
+\frametitle{Implementando el código}
+Ocuparemos la función inicial \emph{Runge} en el intervalo $[-1, \, 1]$
+\\
+\bigskip
+\pause
+Haremos dos ajustes con splines, uno para $n = 8$ puntos y otro para $n = 16$ puntos.
+\end{frame}
+\begin{frame}
+\frametitle{Implementando el código}
+La función \funcionazul{trazador(n)} va a generar el conjunto de datos $x_{i}, y_{i}$ que servirán como parámetros para la función \funcionazul{splrep}, recuperamos la tupla \funcionazul{tck} en cada caso.
+\end{frame}
 \begin{frame}[allowframebreaks, fragile]
-\frametitle{Código}
-\begin{lstlisting}[basicstyle=\ttfamily\normalsize, columns=fullflexible]
+\frametitle{Código para el ejercicio}
+\begin{lstlisting}[caption=Código para el ejercicio, style= FormattedNumber, basicstyle=\linespread{0.9}\ttfamily\small, columns=fullflexible]
+from numpy import linspace
+from scipy.interpolate import splrep, splev
 import matplotlib.pyplot as plt
-import scipy.interpolate as si
-from numpy import *
 
 x = linspace(-1, 1, 100)
 y = 1./(1 + 25 * x**2)
 
-def trazador_cub(n):
+def trazadorcub(n):
     xi = linspace(-1, 1, n)
     yi = 1./(1 + 25 * xi**2)
-    tck = si.splrep(xi, yi)
+    tck = splrep(xi, yi)
     return tck
-\end{lstlisting}
-\end{frame}
-\begin{frame}[allowframebreaks, fragile]
-\frametitle{Código}
-\begin{lstlisting}[basicstyle=\ttfamily\normalsize, columns=fullflexible]
-tck = trazador_cub(8)
-ys8 = si.splev(x, tck)
 
-tck = trazador_cub(12)
-ys12 = si.splev(x, tck)
+tck = trazadorcub(8)
+ys_8_ = splev(x, tck)
 
-plt.plot(x, y)
-plt.plot(x, ys8,'+g-', label='n=8')
-plt.plot(x, ys12,'+r-',label ='n=12')
+tck = trazadorcub(12)
+ys_12_ = splev(x, tck)
+
+plt.plot(x, y, label='f(x)')
+plt.plot(x, ys_8_,'+g-', label='n=8')
+plt.plot(x, ys_12_,'+r-',label ='n=12')
 plt.legend(loc='best')
 plt.title('Interpolacion con splines cubicos')
 plt.ylim(-0.2, 1.2)
+plt.axhline(y=0, ls='dashed', lw=0.7, color='k')
 plt.show()
 \end{lstlisting}
 \end{frame}
@@ -304,6 +519,50 @@ plt.show()
 	\centering
 	\includegraphics[scale=0.5]{Imagenes/Funcion_Runge_2017_03.eps} 
 \end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Conclusiones}
+El uso de splines responde la pregunta que nos planteamos: garantizamos un mejor ajuste a la interpolación de un conjunto de datos.
+\end{frame}
+\begin{frame}
+\frametitle{Uso de los splines}	
+Los splines se han vuelto una herramienta cotidiana dentro de los programas de diseño gráfico.
+\\
+\bigskip
+Una curva suave que aproxime un par de puntos o varios puntos, es lo que obtenemos cuando usamos los splines.
+\end{frame}
+\begin{frame}
+\frametitle{Uso de los splines}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.1]{Imagenes/spline_03.png}
+	\caption{Trazo de una curva en un programa de diseño.}
+	\label{fig:figura_spline_03}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Uso de los splines}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.5]{Imagenes/spline_04.png}
+	\caption{Trazo más elaborado ocupando splines.}
+	\label{fig:figura_spline_04}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Referencias de consulta}
+Pueden revisar los siguientes textos para ampliar el estudio sobre los splines:
+\begin{thebibliography}{10}
+\bibitem{Barrera96}
+\alert{P. Barrera, V. Hernández y C. Durán}
+\newblock  {El ABC de los splines}
+\newblock {\em Aportaciones Matemáticas. Textos Nivel Elemental 9. Sociedad Matemática Mexicana. 1996}.
+
+\bibitem{Paluszny2005}
+\alert{M. Paluszny, H Prautzch y W. Boehm}
+\newblock {Métodos de Bézier y B-splines}
+\newblock {\em Springer Verlarg, Heidelberg, 2005}.
+\end{thebibliography}
 \end{frame}
 % \section{Cálculo de raíces}
 % \begin{frame}
