@@ -1,9 +1,12 @@
 %\RequirePackage[l2tabu, orthodox]{nag}
+\RequirePackage{currfile}
 \documentclass[12pt]{beamer}
 \graphicspath{{Imagenes/}{../Imagenes/}}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
-\usepackage[autostyle,spanish=mexican]{csquotes}
+\usepackage{standalone}
+\usepackage{color}
+\usepackage[binary-units=true]{siunitx}
 \usepackage{hyperref}
 \hypersetup{
   colorlinks=true,
@@ -13,36 +16,40 @@
   urlcolor=cyan,           % color of external links
   linkbordercolor={0 0 1}
 }
+\usepackage{xcolor, soul}
+\usepackage{etoolbox}
 \usepackage{amsmath}
 \usepackage{amsthm}
+\usepackage{physics}
 \usepackage{multicol}
 \usepackage{graphicx}
-\usepackage{physics}
+\usepackage{bookmark}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{mindmap}
+\usetikzlibrary{arrows, patterns, shapes, decorations.markings, decorations.pathmorphing}
+\usetikzlibrary{matrix,positioning}
+\tikzstyle{every picture}+=[remember picture,baseline]
+\usepackage[autostyle,spanish=mexican]{csquotes}
+\usepackage{pifont}
+\usepackage[font=footnotesize,textfont=it]{caption}
 \usepackage{tabulary}
 \usepackage{booktabs}
 \usepackage[outdir=./]{epstopdf}
 %\usepackage{epstopdf}
 \usepackage{media9}
 \usepackage{multimedia}
-\usepackage[binary-units=true]{siunitx}
-\usepackage{standalone}
-\usepackage{longtable}
 \usepackage{bigints}
-\usepackage[font=footnotesize,textfont=it]{caption}
 %\usepackage{enumitem}
-\usepackage{tikz}
-\usetikzlibrary{mindmap}
 \usepackage[siunitx]{circuitikz}
-\usetikzlibrary{arrows, patterns, shapes, decorations.markings, decorations.pathmorphing}
-\usetikzlibrary{matrix,positioning}
-\tikzstyle{every picture}+=[remember picture,baseline]
-\usepackage{color}
+\usepackage[os=win]{menukeys}
+\usepackage{pifont}
+\usepackage{pbox}
 \usepackage{alltt}
 \usepackage{verbatim}
 \usepackage{colortbl}
 \usepackage{fancyvrb}
-\usepackage[os=win]{menukeys}
-\usepackage{pifont}
 \usepackage[sfdefault]{roboto}  %% Option 'sfdefault' only if the base font of the document is to be sans serif
 %\usepackage[T1]{fontenc}
 \setcounter{secnumdepth}{3}
@@ -92,7 +99,6 @@
 
 \definecolor{myblue}{rgb}{.8, .8, 1}
 
-\usepackage{amsmath}
 \usepackage{empheq}
 
 \newlength\mytemplen

@@ -1,12 +1,15 @@
-\usepackage{xcolor}
-\usepackage{caption}
-\captionsetup{font=scriptsize,labelfont=scriptsize}
+\usepackage[spanish]{babel}
+\usepackage{color}
 \usepackage{listings}
 \lstset{
 basicstyle=\ttfamily,
-columns=flexible,
+columns=fullflexible,
 breaklines=true
 }
+\usepackage{pbox}
+\usepackage{caption}
+\captionsetup{font=scriptsize,labelfont=scriptsize}
+
 
 \definecolor{ao}{rgb}{0.0, 0.5, 0.0}
 \definecolor{bisque}{rgb}{1.0, 0.89, 0.77}
@@ -24,6 +27,10 @@ breaklines=true
 \definecolor{Comments}{rgb}{0,0,255}
 \definecolor{Numbers}{rgb}{255,128,0}
 
+
+\newcommand*{\TitleParbox}[1]{\parbox[c]{1.75cm}{\raggedright #1}}%
+
+\DeclareCaptionFont{white}{\color{white}}
 \DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{0.99\textwidth}{#1#2#3}}}
 \captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
 \renewcommand{\lstlistingname}{Código}
