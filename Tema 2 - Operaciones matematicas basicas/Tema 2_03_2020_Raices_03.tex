@@ -1,0 +1,52 @@
+\input{../Preambulos/preambulo_presentacion}
+\title{Cálculo de raíces en sistemas de ecuaciones- 2}
+\subtitle{Tema 2 - Operaciones matemáticas básicas}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{\today}
+\institute{Facultad de Ciencias - UNAM}
+\titlegraphic{\includegraphics[width=1.75cm]{Imagenes/escudo-facultad-ciencias}\hspace*{4.75cm}~%
+   \includegraphics[width=1.75cm]{Imagenes/escudo-unam}
+}
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+\section*{Contenido}
+\frame{\tableofcontents[currentsection, hideallsubsections]}
+\section{Método de Newton-Raphson generalizado}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Sistemas de ecuaciones lineales}
+%Referencia: Beu 6.48 Newtons' method for systems of no-linear equations
+\begin{frame}
+\frametitle{Método de N-R generalizado}
+El método de Newton-Raphson se puede generalizar para sistemas de ecuaciones no lineales.
+\\
+\bigskip
+Las condiciones de convergencia para el algoritmo multidimensional son considerablemente más exigentes que para el caso unidimensional.
+\end{frame}
+\begin{frame}
+\frametitle{Método de N-R generalizado}
+El método multidimensional es generalmente muy sensible a la aproximación inicial, siendo eficiente sólo si uno comienza lo suficientemente cerca de la solución exacta.
+\\
+\bigskip
+Además, bien puede divergir rápidamente en lugar de aproximaciones iniciales inadecuadas, debido a la convergencia global bastante pobre.
+\end{frame}
+\begin{frame}
+\frametitle{Método de N-R generalizado}
+Consideremos el sistema de ecuaciones no lineales:
+\begin{align}
+f_{i} (x_{1}, x_{2}, \ldots, x_{n}) = 0 \hspace{1cm} i = 1, 2, \ldots, n
+\label{eq:ecuacion_6_43}
+\end{align}
+con respecto a las incógnitas: $x_{1}, x_{2}, \ldots$
+\end{frame}
+\begin{frame}
+\frametitle{En notación matricial}
+El sistema en notación matricial toma la forma:
+\begin{align}
+\mathbf{f(x)} = \mathbf{0}
+\label{eq:ecuacion_6_44}
+\end{align}
+donde $\mathbf{x}$ es el vector de incógnitas, cuyas componentes son $x_{i}$, y las componentes de $\mathbf{f}$ son las funciones $f_{i}(x_{1}, x_{2}, \ldots, x_{n})$.
+\end{frame}
+\end{document}

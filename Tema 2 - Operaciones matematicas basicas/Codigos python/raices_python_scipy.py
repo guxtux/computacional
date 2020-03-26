@@ -5,7 +5,7 @@ Created on Thu Mar  9 16:07:38 2017
 @author: Master Chief
 """
 
-import scipy as sp
+from scipy.optimize import bisect
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as font_manager
@@ -27,17 +27,17 @@ def p(x):
     y = x**3 - 10 * x**2 + 5
     return y
 
-x = np.linspace(-1,1.5,100)
+x = np.linspace(-5,11,100)
 
-raiz=sp.optimize.bisect(p, -1, 0)
+raiz = bisect(p, -1, 0)
 print(raiz)
 
 plt.plot(raiz,0,'bo', label='raíz estimada')
 plt.plot(x,p(x), label='$x^{3} - 10 * x^{2} + 5$')
 plt.axhline(y=0, lw=0.7, ls='dashed')
 plt.axvline(x=0, lw=0.7, ls='dashed')
-plt.axis([-1,1.5,-7.5,6])
-plt.title('Se desea calcular las raíces de esta función',**font)
+plt.axis([-2, 10.5, -150, 50])
+plt.title('Gráfica de la función')
 plt.legend(loc=1)
 plt.show()
 #print(raices)
