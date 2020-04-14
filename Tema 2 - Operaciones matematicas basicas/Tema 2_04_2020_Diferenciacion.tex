@@ -895,7 +895,8 @@ en donde $g_{i,j} \equiv g(x_{i}, y_{i})$
 \frametitle{Expresión de la derivada mixta}
 Cancelando los términos de orden superior:
 \begin{align*}
-\pdv{y} \, \pdv{x} g(x, y)\eval_{i ,j} \approx \dfrac{1}{2 \, h_{x}} \dfrac{{g_{i+1, j+1} - g_{i+1, j-1} - g_{i-1, j+1} + g_{i-1, j-1}}{2 \, h_{y}}
+\pdv{y} \, &\pdv{x} g(x, y)\eval_{i ,j} \approx \dfrac{1}{2 \, h_{x}} \, \dfrac{1}{2 \, h_{y}} \times \\[1em]  
+&\times g_{i+1, j+1} - g_{i+1, j-1} - g_{i-1, j+1} + g_{i-1, j-1}
 \end{align*}
 Esta aproximación simple se mejora fácilmente con la ayuda de los métodos desarrollados anteriormente.
 \end{frame}
@@ -918,20 +919,20 @@ La función de interés, digamos $g(x, y)$, se reemplaza dentro de cada elemento
 \bigskip
 Sin embargo, este método es bastante complejo y va más allá del alcance de este curso, pero posiblemente lo requieras más adelante en alguna asignatura en particular.
 \end{frame}
-% \begin{frame}
-% \frametitle{Ejercicio a cuenta}
-% Considera la función
-% \begin{align*}
-% f(x, y) = \cos (x) \, \exp(-y^{2})
-% \end{align*}
-% \setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
-% \setbeamertemplate{enumerate items}[circle]
-% \begin{enumerate}[<+->]
-% \item Calcula numéricamente su gradiente $\grad{f(x, y)}$ y compara con el resultado analítico.
-% \item Demuestra que numéricamente el gradiente es independiente del rotacional, es decir que 
-% \begin{align*}
-% \curl{\grad{f(x, y)}} = 0 \hspace{1.5cm} \forall \, x , y   
-% \end{align*}
-% \end{enumerate}
-% \end{frame}
+\begin{frame}
+\frametitle{Ejercicio a cuenta}
+Considera la función
+\begin{align*}
+f(x, y) = \cos (x) \, \exp(-y^{2})
+\end{align*}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Calcula numéricamente su gradiente $\grad{f(x, y)}$ y compara con el resultado analítico.
+\item Demuestra que numéricamente el gradiente es independiente del rotacional, es decir que 
+\begin{align*}
+\curl{\grad{f(x, y)}} = 0 \hspace{1.5cm} \forall \, x , y   
+\end{align*}
+\end{enumerate}
+\end{frame}
 \end{document}

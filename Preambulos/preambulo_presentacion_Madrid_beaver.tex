@@ -69,56 +69,58 @@
 %Sección para el tema de beamer, con el theme, usercolortheme y sección de footers
 \mode<presentation>
 {
-  \usetheme{Warsaw}
+  \usetheme{Madrid}
   \setbeamertemplate{headline}{}
   %\useoutertheme{infolines}
   \useoutertheme{default}
-  \usecolortheme{spruce}
+  \usecolortheme{beaver}
   \setbeamercovered{invisible}
-  % or whatever (possibly just delete it)
+  
+
   \setbeamertemplate{section in toc}[sections numbered]
   \setbeamertemplate{subsection in toc}[subsections numbered]
   \setbeamertemplate{subsection in toc}{\leavevmode\leftskip=3.2em\rlap{\hskip-2em\inserttocsectionnumber.\inserttocsubsectionnumber}\inserttocsubsection\par}
   \setbeamercolor{section in toc}{fg=blue}
   \setbeamercolor{subsection in toc}{fg=blue}
+  \setbeamerfont{subsection in toc}{size=\small}
   \setbeamercolor{frametitle}{fg=blue}
 
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{caption}[numbered]
+
+  %\beamertemplatenavigationsymbolsempty
+
+  \makeatletter
+  \setbeamercolor{section in foot}{bg=green!30!cyan, fg=black!90!orange}
+  \setbeamercolor{subsection in foot}{bg=red!30!cyan, fg=red}
+  %\setbeamercolor{date in foot}{bg=orange!30!cyan, fg=red}
   \setbeamertemplate{footline}
-  \beamertemplatenavigationsymbolsempty
-
   {
-  \leavevmode%
-  \hbox{%
-  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
-    \usebeamerfont{author in head/foot}\textcolor{white}{\insertsection}
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
-    \usebeamerfont{title in head/foot}\textcolor{blue}{\insertsubsection}
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
-    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
-    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
-  \end{beamercolorbox}}%
-  \vskip0pt%
-  }
+    \leavevmode%
+    \hbox{%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{section in foot}%
+      \usebeamerfont{section in foot} \insertsection
+    \end{beamercolorbox}}%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in foot}%
+      \usebeamerfont{subsection in foot}  \insertsubsection
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+      \usebeamerfont{date in head/foot} \insertshortdate{} \hspace*{2em}
+      \insertframenumber{} / \inserttotalframenumber \hspace*{2ex} 
+    \end{beamercolorbox}}%
+    \vskip0pt%
+
+  \makeatother
+
+  \makeatletter
+  \patchcmd{\beamer@sectionintoc}
+    {\vfill}
+    {\vskip\itemsep}
+    {}
+    {}
+  \makeatother
+  
 }
-
-
-\makeatletter
-\patchcmd{\beamer@sectionintoc}
-  {\vfill}
-  {\vskip\itemsep}
-  {}
-  {}
-\makeatother
-
-% \makeatletter
-% \patchcmd{\hyper@link@}
-%   {{\Hy@tempb}{#4}}
-%   {{\Hy@tempb}{\ul{#4}}}
-%   {}{}
-% \makeatother
-
 
 % Sección para el código
 
