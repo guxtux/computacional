@@ -5,7 +5,7 @@
 #    Simpson 1/3
 #    Simpson 3/8
 
-from math import *
+from math import cos, pi, sqrt
 
 def rectangulos(f,x0,xf,n):
    # Se obtiene la integral numerica de la funcion f, desde el valor 
@@ -79,11 +79,12 @@ def Romberg(f,x0,xf,Eps=1.0e-6):
          j += 1
          R[k-1] += [R[k][j-1]+1./(4**j-1)*(R[k][j-1]-R[k-1][j-1])]
       if abs(R[0][j]-R[1][j-1]) < Eps:
-         return R[0][j]
+         return R[0][j], n
 
 def f(x): return 2.0*(x**2)*cos(x**2)
 
-I = Romberg(f,0,sqrt(pi))
-print 'Integral = ', I
-#print ' nPanels = ',n
-raw_input('\nPress return to exit')
+I, n = Romberg(f,0,sqrt(pi))
+print ('El valor de la integral es = {0:1.12f}'.format(I))
+print ('El número de paneles es = {0:}'.format(n))
+
+input('\nPresiona Enter para salir')

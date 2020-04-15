@@ -221,7 +221,7 @@ A_{1} = \dfrac{1}{h} \, \int_{a}^{b} (x - a) \dd{x} = \dfrac{1}{2h} \, (b - a)^{
 \frametitle{Regla del trapecio}
 Sustituyendo entonces obtenemos el valor de la integral de $f(x)$ en $[a, b]$:
 \begin{align*}
-I = \left[ f(a) + f(b) \right] \, \dfrac{h}{2}
+I = \bigg[ f(a) + f(b) \bigg] \, \dfrac{h}{2}
 \end{align*}
 \end{frame}
 \begin{frame}
@@ -276,15 +276,15 @@ La función $f(x)$ se integrará con una aproximación lineal en cada panel.
 \pause
 De la regla del trapecio, sabemos que para el i-ésimo panel:
 \begin{align*}
-I_{i} = [ f(x_{i}) + f(x_{i+1}) ] \, \dfrac{h}{2}
+I_{i} = \bigg[ f(x_{i}) + f(x_{i+1}) \bigg] \, \dfrac{h}{2}
 \end{align*}
 \end{frame}
 \begin{frame}
 \frametitle{Regla extendida del trapecio}
 El área total queda representada por la integral:
 \begin{align*}
-I \simeq \sum_{i=0}^{n-1} [f(x_{0}) &+ 2 \, f(x_{1}) + 2 \, f(x_{2}) + \ldots + \\ 
-&+ 2 \, f(x_{n-1}) + f(x_{n})] \dfrac{h}{2}
+I \simeq \sum_{i=0}^{n-1} \bigg[f(x_{0}) &+ 2 \, f(x_{1}) + 2 \, f(x_{2}) + \ldots + \\ 
+&+ 2 \, f(x_{n-1}) + f(x_{n}) \bigg] \dfrac{h}{2}
 \end{align*}
 que es la regla del extendida del trapecio.
 \end{frame}
@@ -478,16 +478,16 @@ $128$ & $11.728868236$ & $2.28702562e-03$
 \end{tabular}
 \end{center}
 \end{frame}
-\section{Librería Scipy}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
-\subsection{¿Qué es scipy?}
-\begin{frame}
-\frametitle{Librería Scipy}
-\funcionazul{SciPy} (Scientific Python) es una librería matemática con funciones que extienden la librería \funcionazul{numpy} para \python.
-\\
-\bigskip
-Se le proporciona al usuario un poder significativo mediante el uso de comandos de alto nivel y clases, para la manipulación y visualización de datos.
-\end{frame}
+% \section{Librería Scipy}
+% \frame{\tableofcontents[currentsection, hideothersubsections]}
+% \subsection{¿Qué es scipy?}
+% \begin{frame}
+% \frametitle{Librería Scipy}
+% \funcionazul{SciPy} (Scientific Python) es una librería matemática con funciones que extienden la librería \funcionazul{numpy} para \python.
+% \\
+% \bigskip
+% Se le proporciona al usuario un poder significativo mediante el uso de comandos de alto nivel y clases, para la manipulación y visualización de datos.
+% \end{frame}
 % \subsection{Organización de Scipy}
 % \begin{frame}
 % \frametitle{Organización de Scipy}
@@ -756,5 +756,379 @@ La integral vale = -0.6666666667
 Para n = 6
 La integral vale = -0.6666666667
 \end{verbatim}
+\end{frame}
+\section{Métodos adaptativos de integración}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection*{Limitaciones de los métodos vistos}
+\begin{frame}
+\frametitle{Limitaciones de los métodos vistos}
+Las implementaciones para el método del trapecio y la regla de Simpson presentadas anteriormente tienen un interés práctico pero limitado como tal: ya que, además de requerir el número de puntos de integración, no proporcionan una estimación de error para la integral.
+\end{frame}
+\begin{frame}
+\frametitle{Nueva propuesta}
+Una estrategia sencilla con una precisión de integración automática y control de avance en el dominio (malla) llamaría al \enquote{integrador} para los puntos obtenidos por sucesivas reducciones a la mitad y continuaría mientras la diferencia relativa entre aproximaciones consecutivas exceda una tolerancia admisible $\varepsilon$.
+\end{frame}
+\begin{frame}
+\frametitle{Nueva propuesta}
+Sin embargo, un inconveniente obvio sería la evaluación redundante del integrando en los nodos comunes de las mallas sucesivas.
+\\
+\bigskip
+El cálculo de la integral con una precisión requerida por el \emph{método de reducción a la mitad} puede optimizarse significativamente al establecer una relación recursiva entre las aproximaciones consecutivas.
+\end{frame}
+\subsection{Método recursivo del trapecio}
+\begin{frame}
+\frametitle{Método recursivo del trapecio}
+De acuerdo con la siguiente figura, se muestra las mallas de integración para las primeras cuatro etapas del proceso de reducción a la mitad.
+\end{frame}
+\begin{frame}
+\frametitle{Método recursivo del trapecio}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.8]{Imagenes/integracion_08_recursiva.eps}
+    % \caption{}
+    % \label{}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Regla recursiva del trapecio}
+La evaluación del integrando es necesaria únicamente en los nuevos puntos de integración (indicados por círculos) que dividen los subintervalos anteriores.
+\\
+\bigskip
+Los valores de la función ya empleados se reutilizan implícitamente aplicando la relación de recurrencia entre dos aproximaciones consecutivas de la integral.
+\end{frame}
+\begin{frame}
+\frametitle{Regla recursiva del trapecio}
+Las primeras tres aproximaciones producidas por la regla trapezoidal son:
+\begin{align*}
+T_{0} &= h_{0} \, \left[ \dfrac{f(a)}{2} + \dfrac{f(b)}{2} \right], \hspace{0.5cm} h_{0} = b - a \\[0.5em]
+\visible<2->{T_{1} &= h_{1} \, \left[ \dfrac{f(a)}{2} +  f(a + h_{1}) + \dfrac{f(b)}{2} \right], \hspace{0.5cm} h_{1} = \dfrac{h_{0}}{2}}\\[0.5em]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Regla recursiva del trapecio}
+La tercera aproximación es:
+\begin{align*}
+T_{2} = h_{2} \, &\left[ \dfrac{f(a)}{2} +  f(a + h_{2}) + f(a + 2 \, h_{2}) + \right. \\  
+&\left. + f(a + 3 \, h_{2}) + \dfrac{f(b)}{2} \right], \hspace{0.5cm} h_{2} = \dfrac{h_{1}}{2}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Regla de recurrencia}
+La secuencia anterior se puede expresar en término de un proceso iterativo:
+\begin{align*}
+T_{0} &= \dfrac{h_{0}}{2} \, \left[ f(a) + f(b) \right], \hspace{0.5cm} h_{0} = b - a, \hspace{0.5cm} n_{0} = 1 \\[1em]
+\visible<2->{T_{k} &= \dfrac{1}{2} \, \left[ T_{k-1} + h_{k-1} \, \sum_{i=1}^{n_{k-1}} f \left(a + \left( i - \dfrac{1}{2} \right) \, h_{k-1} \right) \right] \\[0.5em]
+&h_{k} = \dfrac{h_{k-1}}{2}, \hspace{0.5cm} n_{k} = 2 \, n_{k-1}, \hspace{0.5cm} k = 1, 2, \ldots}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Regla de recurrencia}
+donde $h_{k} = (b - a) / n_{k}$ es el espaciado de la malla después de la mitad del paso $k$, con $n_{k} = 2^{k}$ representando el número correspondiente de subintervalos o, equivalentemente, el número de nuevos puntos de integración relevantes para la próxima aproximación de la integral.
+\end{frame}
+\begin{frame}
+\frametitle{Regla de recurrencia}
+El proceso recursivo para $T_{0}$ y $T_{k}$ continua hasta que dos aproximaciones consecutivas de la integral se hacen indistinguibles para una precisión dada, es decir, la diferencia relativa
+\begin{align*}
+\dfrac{\abs{T_{k} - T_{k-1}}}{\abs{T_{k}}}
+\end{align*}
+considerado como el estimado del error relativo, éste es menor a una tolerancia establecida $\varepsilon$.
+\end{frame}
+\begin{frame}
+\frametitle{Regla de recurrencia}
+Para prevenir una singularidad en el cociente, cuando $T_{k} = 0$, el criterio de convergencia puede formularse convenientemente como
+\begin{align*}
+\abs{T_{k} - T_{k-1}} \leq \varepsilon \, \abs{T_{k}}
+\end{align*}
+\end{frame}
+\subsection*{Código para el método adaptativo}
+\begin{frame}
+\frametitle{Código para el método adaptativo}
+Se presenta un código que implementa el algoritmo adaptativo descrito basado en el método del trapecio.
+\end{frame}
+\begin{frame}
+\frametitle{Código para el método adaptativo}
+Para asegurarse que durante el proceso recursivo, el número de subintervalos $n$, elevado a la potencia de $2$, no exceda el valor máximo representable para un tipo de dato \emph{long} ($2^{31}$), el número máximo de iteraciones está limitado por \funcionazul{kmax} a un valor de 30.
+\end{frame}
+\begin{frame}
+\frametitle{Código para el método adaptativo}
+Sin embargo, si, debido a la débil convergencia, las iteraciones de \funcionazul{kmax} se agotan sin que la integración haya alcanzado la precisión solicitada \funcionazul{eps}, el ciclo de reducción a la mitad se deja con el contador \funcionazul{k} incrementado a \funcionazul{kmax + 1} y se muestra un mensaje de error.
+\end{frame}
+\begin{frame}[allowframebreaks, fragile]
+\frametitle{Código para el método adaptativo}
+\begin{lstlisting}[caption=Código para la función trapecios, style=FormattedNumber, basicstyle=\linespread{1.1}\ttfamily=\small, columns=fullflexible]
+from math import fabs
+
+def IAdaptTrapecio(Func, a, b, eps = 1e-6):
+    kmax = 30
+    h = b - a
+    n = 1
+    t_0_ = 0.5*h*(Func(a) + Func(b))
+
+    for k in range(1, kmax+1):
+        sumf = 0e0
+        for i in range(1, n+1): sumf += Func(a + (i - 0.5)*h)
+        t = 0.5*(t_0_ + h*sumf)
+        if (k > 1):
+            if (fabs(t-t_0_) <= eps*fabs(t)): break
+            if (fabs(t) <= eps and fabs(t) <= fabs(t-t_0_)): break
+        h *= 0.5; n *= 2
+        t_0_ = t
+
+    if (k >= kmax): print("Se excedio el numero de iteraciones en el metodo adaptativo !")
+
+    return t
+\end{lstlisting}
+\end{frame}
+\section{Integración de Romberg}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Definición de la integración de Romberg}
+\begin{frame}
+\frametitle{Integración de Romberg}
+La integración de Romberg combina la regla del trapecio con la extrapolación de Richardson. 
+\\
+\bigskip
+Usemos la siguiente notación:
+\begin{align*}
+R_{i, 1} = I_{i}
+\end{align*}
+donde $I_{i}$ representa el valor aproximado de $\int_{a}^{b} \: f(x) \dd{x}$ calculado con el método recursivo del trapecio, usando $2^{i - 1}$ bloques.
+\end{frame}
+\begin{frame}
+\frametitle{Integración de Romberg}
+Recordemos que el error en esta aproximación es $E = c_{1} \: h^{2} + c_{2} \: h^{4} + \ldots$ donde
+\begin{align*}
+h = \dfrac{b - a}{2^{i - 1}}
+\end{align*}
+es el ancho del bloque.
+\end{frame}
+\subsection*{Inicio de la integración}
+\begin{frame}
+\frametitle{Inicio de la integración}
+La integración de Romberg inicia con el cálculo de $R_{1, 1} = I_{1}$ (un bloque) y $R_{2, 1} = I_{2}$ (dos bloques) a partir de la regla del trapecio.
+\end{frame}
+\begin{frame}
+\frametitle{Cancelación término dominante}
+El término dominante $c_{1} \: h^{2}$ es entonces eliminado por la extrapolación de Richardson.
+\\
+\bigskip
+Usando $p = 2$ (el exponente en el término dominante) e indicando el resultado por $R_{2, 2}$, tenemos que:
+\begin{align*}
+R_{2, 2} = \dfrac{2^{2} \: R_{2, 1} - R_{1, 1}}{2^{2} - 1} = \dfrac{4}{3} \: R_{2, 1} - \dfrac{1}{3} \: R_{1, 1}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Notación para los cálculos}
+Es conveniente guardar los resultados en un arreglo con la siguiente forma:
+\begin{align*}
+\begin{bmatrix}
+R_{1, 1} & \\
+R_{2, 1} & R_{2, 2}
+\end{bmatrix}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Aumentando los bloques}
+El siguiente paso es calcular $R_{3, 1} = I_{3}$ (cuatro bloques) y repetir la extrapolación de Richardson con $R_{2, 1}$ y $R_{3, 1}$, guardando los resultados como $R_{3, 2}$:
+\begin{align*}
+R_{3, 2} = \dfrac{4}{3} \: R_{3,1} - \dfrac{1}{3} \: R_{2,1}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Elementos obtenidos}
+Los elementos del arreglo $R$ calculados hasta el momento son:
+\begin{align*}
+\begin{bmatrix}
+R_{1, 1} & \\
+R_{2, 1} & R_{2, 2} \\
+R_{3, 1} & R_{3, 2}
+\end{bmatrix}
+\end{align*}
+Los elementos de la segunda columna tienen un error del orden $c_{2} \: h^{4}$, el cual puede ser eliminado con la extrapolación de Richardson.
+\end{frame}
+\begin{frame}
+\frametitle{Usando un valor para \texttt{p}}
+Usando $p = 4$, obtenemos:
+\begin{align*}
+R_{3, 3} = \dfrac{2^{4} \: R_{3, 2}-R_{2, 2}}{2^{4} - 1} = \dfrac{16}{15} \: R_{3, 2} - \dfrac{1}{15} \: R_{2, 2}
+\end{align*}
+El resultado tiene ahora un error del orden $\order{h^{6}}$.
+\end{frame}
+\begin{frame}
+\frametitle{Usando un valor para \texttt{p}}
+El arreglo se ha expandido ahora como
+\begin{align*}
+\begin{bmatrix}
+R_{1, 1} &  & \\
+R_{2, 1} & R_{2, 2} & \\
+R_{3, 1} & R_{3, 2} & R_{3, 3}
+\end{bmatrix}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Resultados de otro cálculo}
+Luego de otra ronda de cálculos, se tiene
+\begin{align*}
+\begin{bmatrix}
+R_{1, 1} &  & & \\
+R_{2, 1} & R_{2, 2} & & \\
+R_{3, 1} & R_{3, 2} & R_{3, 3} & \\
+R_{4, 1} & R_{4, 2} & R_{4, 3} & R_{4, 4}
+\end{bmatrix}
+\end{align*}
+donde el error en $R_{4, 4}$ es del orden de $\order{h^{8}}$.
+\\
+\bigskip
+\pause
+\textoazul{Nótese que la estimación con mayor precisión es siempre el último término de la diagonal}.
+\end{frame}
+\begin{frame}
+\frametitle{Punto de paro}
+Este proceso continua hasta que la diferencia entre dos términos sucesivos de la diagonal son lo suficientemente pequeños.
+\end{frame}
+\subsection*{Fórmula general}
+\begin{frame}
+\frametitle{Fórmula general}
+La fórmula general para la extrapolación es:
+\begin{align*}
+R_{i, j} = \dfrac{4^{j - 1} \: R_{i, j - 1} - R_{i - 1, j - 1} }{4^{j - 1} - 1} \hspace{1cm} i > 1, \hspace{0.3cm} j = 2, 3, \ldots, i
+\end{align*}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{El proceso de integración}
+Esquemáticamente lo que tenemos es:
+\begin{figure}
+  \centering
+  \includestandalone{Figuras/integracion_07}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Multiplicadores}
+Donde los multiplicadores $\alpha$ y $\beta$ dependen de $j$ de la siguiente manera:
+\fontsize{12}{12}\selectfont
+\begin{center}
+\begin{tabular}{c | c | c | c | c | c}
+\hline
+j & $2$ & $3$ & $4$ & $5$ & $6$ \\ \hline
+$\alpha$ & $-1/3$ & $-1/15$ & $-1/63$ & $-1/255$ & $-1/1023$ \\ \hline
+$\beta$ & $4/3$ & $16/15$ & $64/63$ & $256/255$ & $1024/1023$ \\ \hline
+\end{tabular}
+\end{center}
+\end{frame}
+\begin{frame}
+\frametitle{Manejo triangular}
+El arreglo triangular es conveniente para manipularlo computacionalmente hablando.
+\\
+\bigskip
+La aplicación del algoritmo de Romberg puede llevarse dentro de una matriz de una dimensión.
+\end{frame}
+\begin{frame}
+\frametitle{Aprovechando las expresiones}
+Luego de la primera extrapolación, $R_{1,1}$ ya no se ocupa de nuevo, por lo que podemos re-emplazarla con $R_{2,2}$, por tanto, tenemos en el arreglo
+\begin{align*}
+\begin{bmatrix}
+R^{\prime}_{1} = R_{2, 2} \\
+R^{\prime}_{2} = R_{2, 1}
+\end{bmatrix}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Aprovechando las expresiones}
+En la segunda extrapolación, $R_{3, 2} $ sobre-escribe a $R_{2, 1}$ y $R_{3, 3}$ re-emplaza a $R_{2, 2}$, entonces el arreglo queda
+\begin{align*}
+\begin{bmatrix}
+R^{\prime}_{1} = R_{3, 3} \\
+R^{\prime}_{2} = R_{3, 2} \\
+R^{\prime}_{3} = R_{3, 1}
+\end{bmatrix}
+\end{align*} 
+\pause
+Y así podemos continuar. $R^{\prime}_{1}$ contiene siempre el mejor resultado.
+\end{frame}
+\subsection*{Expresión general para la extrapolación}
+\begin{frame}
+\frametitle{Expresión general para la extrapolación}
+La fórmula de extrapolación para el k-ésima vuelta, es:
+\begin{align*}
+R^{\prime}_{j} = \dfrac{4^{k - j} \: R^{\prime}_{j + 1} - R^{\prime}_{j}}{4^{k - j} - 1}, \hspace{0.8cm} j = k - 1, k - 2, \ldots, 1
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo}
+Usando la integración de Romberg, evalúa
+\[ \int_{0}^{\pi} \: f(x) \dd{x}\]
+donde $f(x) = \sin(x)$
+\end{frame}
+\begin{frame}
+\frametitle{Primera parte: Regla del trapecio recursiva}
+\begin{align*}
+R_{1, 1} &= I(\pi) = \frac{\pi}{2} \bigg[ f(0) + f(\pi) \bigg] = 0 \\[0.5em]
+\visible<2->{R_{2, 1} &= I \left(\frac{\pi}{2}\right) = \frac{1}{2} \: I(\pi) +  \frac{\pi}{2} \: f \left(\frac{\pi}{2} \right) = 1.5708} \\[0.5em]
+\visible<3->{R_{3, 1} &= I \left(\frac{\pi}{4} \right) = \frac{1}{2} \: I \left(\frac{\pi}{2} \right) + \frac{\pi}{4} \left[ f \left(\frac{\pi}{4} \right) + f \left(\frac{3 \: \pi}{4} \right) \right] = \\[0.5em]
+&= 1.8961}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Primera parte: Regla del trapecio recursiva}
+\begin{align*}
+R_{4, 1} &= I \left( \frac{\pi}{8} \right) = \frac{1}{2} \: I \left( \frac{\pi}{4} \right) + \frac{\pi}{8} \left[ f \left( \frac{\pi}{8} \right) + f \left( \frac{3 \: \pi}{8} \right) + \right. \\[0.5em]
+& \left. + f \left( \frac{5 \: \pi}{8} \right) + f \left( \frac{7 \: \pi}{8} \right) \right] = \\[0.5em]
+&= 1.9742
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Segunda parte: Extrapolación de Richardson}
+Usando las fórmulas de extrapolación, construimos la siguiente tabla:
+\fontsize{12}{12}\selectfont
+\begin{align*}
+\begin{bmatrix}
+R_{1, 1} &         &         & \\
+R_{2, 1} & R_{2, 2} &         & \\
+R_{3, 1} & R_{3, 2} & R_{3, 3} & \\
+R_{4, 1} & R_{4, 2} & R_{4, 3} & R_{4, 4} 
+\end{bmatrix}
+=
+\begin{bmatrix}
+0      &        &        & \\
+1.5708 & 2.0944 &        & \\
+1.8961 & 2.0046 & 1.9986 & \\
+1.9742 & 2.0003 & 2.0000 & 2.0000
+\end{bmatrix}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Segunda parte: Extrapolación de Richardson}
+De acuerdo al procedimiento, vemos que converge, por tanto
+\begin{align*}
+\int_{0}^{\pi} \: \sin(x) \dd{x} = R_{4, 4} = 2.0000
+\end{align*}
+que es el resultado exacto.
+\end{frame}
+\subsection{Código para el método de Romberg}
+\begin{frame}
+\frametitle{Propuesta de código}
+El algoritmo para la integración de Romberg se implementa en la función \funcionazul{romberg}.
+\\
+\bigskip
+Devuelve la integral $I$ y el número de paneles utilizados $n$. La extrapolación de Richardson la lleva a cabo la subfunción \funcionazul{richardson}.
+\end{frame}
+\begin{frame}[allowbreakframes, fragile]
+\frametitle{Código para el método de Romberg}
+\begin{lstlisting}[caption=Código para la función trapecios, style=FormattedNumber, basicstyle=\linespread{1.1}\ttfamily=\small, columns=fullflexible]
+def Romberg(f, x_0_, xf, eps=1.0e-6):
+n = 1
+i = 1
+R = [[trapecios(f, x_0_, xf, n)]]
+while True:
+    n *= 2
+    i += 1
+    R += [[trapecios(f,x0,xf,n)]]
+    j = 0
+    for k in range(i-1,0,-1):
+        j += 1
+        R[k-1] += [R[k][j-1]+1./(4**j-1)*(R[k][j-1]-R[k-1][j-1])]
+    if abs(R[0][j]-R[1][j-1]) < Eps:
+        return R[0][j], n
+ 
+\end{lstlisting}
 \end{frame}
 \end{document}
