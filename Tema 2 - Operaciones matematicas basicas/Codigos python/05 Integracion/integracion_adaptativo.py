@@ -7,7 +7,7 @@ Created on Tue Apr 14 19:24:46 2020
 
 from math import fabs
 
-def IAdaptTrapecio(Func, a, b, eps = 1e-6):
+def qAdaptTrapecio(Func, a, b, eps = 1e-6):
    kmax = 30
 
    h = b - a

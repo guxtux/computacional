@@ -16,7 +16,7 @@
 \fontsize{14}{14}\selectfont
 \spanishdecimal{.}
 \section*{Contenido}
-\frame{\tableofcontents[currentsection, hideallsubsections]}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
 \section{Integración numérica}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
 \subsection{Problema inicial}
@@ -414,23 +414,19 @@ El siguiente código implementa la regla extendida del trapecio, en donde se req
 \setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}[<+->]
-\item La función $f(x)$ que se desea integrar.
+\item La función $Func$ que se desea integrar.
 \item El intervalo de integración $[a, b]$
 \item El número de paneles $n$ en la regla extendida del trapecio.
 \end{enumerate}
 \end{frame}
 \begin{frame}[allowframebreaks, fragile]
-\begin{lstlisting}[caption=Código para la función trapecios, style=FormattedNumber, basicstyle=\linespread{1.1}\ttfamily=\small, columns=fullflexible]
-def trapecios(f, a, b, n):
-   h = (b - a)/float(n)
-   x = a
-   suma = 0
-   
-   for i in range(1, n):
-      x = x + h
-      suma = suma + funcion(x)
-   
-   return (h/2.) * (funcion(a) + funcion(b) + 2 * suma)
+\begin{lstlisting}[caption=Código para el método del trapecio, style=FormattedNumber, basicstyle=\linespread{1.1}\ttfamily=\small, columns=fullflexible]
+def qTrapecio(Func, a, b, n):
+    h = (b-a)/(n-1)
+    s = 0.5*(Func(a) + Func(b))
+    for i in range(1, n-1): s += Func(a+i*h)
+
+    return h*s
 
 def funcion(x):
    return pi * (1 + (x/2)**2)**2
@@ -450,7 +446,7 @@ print("i \t Integral \t Error")
 print("--"*20)
 for i in range(1, 8):
     n = 2**i
-    integral = trapecios(funcion(i), 0, 2, n)
+    integral = qTrapecio(funcion, 0, 2, i)
     print ('{0:3d} \t {1:2.9f} \t  {3:1.8e}'.format(n, integral, \
                     (error_relativo(integral))))
 \end{lstlisting}
@@ -468,15 +464,19 @@ Hacerlo con un incremento en la potencia, nos permite entonces, manejar cualquie
 \begin{center}
 \begin{tabular}{r | l | l} 
 $i$ & Integral & Error \\ \hline
-$2$ & $12.762720155$ & $8.81708094e-00$ \\ \hline
-$4$ & $11.989593838$ & $2.22527700e-00$ \\ \hline
-$8$ & $11.794011288$ & $5.57707550e-01$ \\ \hline
-$16$ & $11.744971839$ & $1.39589033e-01$ \\ \hline
-$32$ & $11.732702989$ & $3.49827695e-02$ \\ \hline
-$64$ & $11.729635215$ & $8.82641387e-03$ \\ \hline
-$128$ & $11.728868236$ & $2.28702562e-03$
+$2$ & $15.707963268$ & $3.39287150e+01$ \\ \hline
+$4$ & $12.191448034$ & $3.94631955e+00$ \\ \hline
+$8$ & $11.814010858$ & $7.28227220e-01$ \\ \hline
+$16$ & $11.747225282$ & $1.58802258e-01$ \\ \hline
+$32 $ & $11.732971129$ & $3.72689780e-02$ \\ \hline
+$64 $ & $11.729667937$ & $9.10540753e-03$ \\ \hline
+$128$ & $11.728872278$ & $2.32148857e-03$
 \end{tabular}
 \end{center}
+\end{frame}
+\begin{frame}
+\frametitle{Sobre los resultados}
+Vemos que el valor de la integral para $n=2, 4$, se tiene un error relativo bastante alto, pero mejora la aproximación cuando se incrementa el número de paneles.
 \end{frame}
 % \section{Librería Scipy}
 % \frame{\tableofcontents[currentsection, hideothersubsections]}
@@ -682,9 +682,9 @@ I = I_{\text{impar}} + I_{\text{par}}
 \frametitle{Cálculo de la integral}
 \begin{align*}
 I &= I_{\text{impar}} + I_{\text{par}} = \\
-\visible<3->{&= \bigg[f(0) + 3 \, f(0.5) + 3 \, f(1.0) + f(1.5) \bigg] \, \dfrac{3(0.5)}{8}} + \\
-\visible<4->{&+ \bigg[ f(1.5) + 4 \, f(2.0) + f(2.5) \bigg] \, \dfrac{0.5}{3}} = \\
-\visible<5->{&= 2.8381 + 1.2655} = \\
+\visible<3->{&= \bigg[f(0) + 3 \, f(0.5) + 3 \, f(1.0) + f(1.5) \bigg] \, \dfrac{3(0.5)}{8} +} \\
+\visible<4->{&+ \bigg[ f(1.5) + 4 \, f(2.0) + f(2.5) \bigg] \, \dfrac{0.5}{3} =} \\
+\visible<5->{&= 2.8381 + 1.2655 =} \\
 \visible<6->{&= 4.1036}
 \end{align*}  
 \end{frame}
@@ -709,7 +709,7 @@ Explica tus resultados.
 \end{frame}
 \begin{frame}
 \frametitle{Código para la solución}
-Presentamos una propuesta para resolver el ejercicio, la función \funcionazul{Simpson13}, requiere de los argumentos
+Presentamos una propuesta para resolver el ejercicio, la función \funcionazul{qSimpson}, que integra la función \funcionazul{Func} en el intervalo $[a, b]$ usando la regla de Simpson con $n$ (impares) puntos de integración, requiere de los argumentos
 \setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
 \setbeamertemplate{enumerate items}[circle]
 \begin{enumerate}[<+->]
@@ -719,29 +719,23 @@ Presentamos una propuesta para resolver el ejercicio, la función \funcionazul{S
 \end{enumerate}
 \end{frame}
 \begin{frame}[allowframebreaks, fragile]
-\begin{lstlisting}[caption=Propuesta de código, style=FormattedNumber, basicstyle=\linespread{1.1}\ttfamily=\small, columns=fullflexible]
-def Simpson_13_(f, x_0_, xf, n):
-    n = n - n%2 # truncar al numero par mas cercano
-     
-    if n <= 0:
-        n = 1
-   
-    h = (xf - x_0_)/n
-    x = x_0_
-   
-    suma = 0
-   
-    for j in range(int(n/2)):
-        suma += f(x) + 4. * f(x + h) + f(x + 2 * h)
-        x += 2 * h
-    return (h/3.) * suma
+\begin{lstlisting}[caption=Código para el método de Simpson, style=FormattedNumber, basicstyle=\linespread{1.1}\ttfamily=\small, columns=fullflexible]
+def qSimpson(Func, a, b, n):
+    if (n % 2 == 0): n += 1
+ 
+    h = (b-a)/(n-1)
+    s_1_ = s_2_ = 0e0
+    for i in range(2, n-2, 2): s_1_ += Func(a + i*h)
+    for i in range(1, n-1, 2): s_2_ += Func(a + i*h)
+ 
+    return (h/3)*(Func(a) + 4*s_2_ + 2*s_1_ + Func(b))
 
 def f(x):
     return cos(2 * acos(x))
 
 for i in range(1, 4):
     print ('Para n = {0:}'.format(i*2))
-    print ('La integral vale {0:1.10f}'.format(Simpson_13_(f, -1., 1., i * 2)))
+    print ('La integral vale {0:1.10f}'.format(qSimpson(f, -1., 1., i*2)))
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
@@ -756,6 +750,20 @@ La integral vale = -0.6666666667
 Para n = 6
 La integral vale = -0.6666666667
 \end{verbatim}
+\end{frame}
+\begin{frame}
+\frametitle{Sobre el código}
+Hagamos algunos comentarios sobre el código anterior: Si el número recibido de puntos de integración $n$ es par, se corrige automáticamente al siguiente valor impar más alto, de modo que la fórmula de Simpson se puede aplicar a un número entero de tripletes de nodos, con las sumas de índice impar y de índice par calculado por separado.
+\end{frame}
+\begin{frame}
+\frametitle{Sobre el código}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item En la línea $2$ del código, se incrementa el valor de $n$, en caso de que sea par.
+\item En la línea $6$, se tiene la suma en caso de que el índice sea impar.
+\item En la línea $7$, se tiene la suma en caso de que el índice sea par.
+\end{enumerate}
 \end{frame}
 \section{Métodos adaptativos de integración}
 \frame{\tableofcontents[currentsection, hideothersubsections]}
@@ -775,9 +783,9 @@ Sin embargo, un inconveniente obvio sería la evaluación redundante del integra
 \bigskip
 El cálculo de la integral con una precisión requerida por el \emph{método de reducción a la mitad} puede optimizarse significativamente al establecer una relación recursiva entre las aproximaciones consecutivas.
 \end{frame}
-\subsection{Método recursivo del trapecio}
+\subsection{Método adaptativo del trapecio}
 \begin{frame}
-\frametitle{Método recursivo del trapecio}
+\frametitle{Método adaptativo del trapecio}
 De acuerdo con la siguiente figura, se muestra las mallas de integración para las primeras cuatro etapas del proceso de reducción a la mitad.
 \end{frame}
 \begin{frame}
@@ -855,10 +863,10 @@ Sin embargo, si, debido a la débil convergencia, las iteraciones de \funcionazu
 \end{frame}
 \begin{frame}[allowframebreaks, fragile]
 \frametitle{Código para el método adaptativo}
-\begin{lstlisting}[caption=Código para la función trapecios, style=FormattedNumber, basicstyle=\linespread{1.1}\ttfamily=\small, columns=fullflexible]
+\begin{lstlisting}[caption=Código para el método adaptativo del trapecio, style=FormattedNumber, basicstyle=\linespread{1.1}\ttfamily=\small, columns=fullflexible]
 from math import fabs
 
-def IAdaptTrapecio(Func, a, b, eps = 1e-6):
+def qAdaptTrapecio(Func, a, b, eps = 1e-6):
     kmax = 30
     h = b - a
     n = 1
@@ -879,256 +887,649 @@ def IAdaptTrapecio(Func, a, b, eps = 1e-6):
     return t
 \end{lstlisting}
 \end{frame}
-\section{Integración de Romberg}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
-\subsection{Definición de la integración de Romberg}
+\subsection{Método adaptativo de Simpson}
 \begin{frame}
-\frametitle{Integración de Romberg}
-La integración de Romberg combina la regla del trapecio con la extrapolación de Richardson. 
-\\
-\bigskip
-Usemos la siguiente notación:
-\begin{align*}
-R_{i, 1} = I_{i}
-\end{align*}
-donde $I_{i}$ representa el valor aproximado de $\int_{a}^{b} \: f(x) \dd{x}$ calculado con el método recursivo del trapecio, usando $2^{i - 1}$ bloques.
+\frametitle{Método adaptativo de Simpson}
+Sobre la base de la regla de Simpson, se puede idear un algoritmo adaptativo similar al del trapecio, aunque no independiente.
 \end{frame}
 \begin{frame}
-\frametitle{Integración de Romberg}
-Recordemos que el error en esta aproximación es $E = c_{1} \: h^{2} + c_{2} \: h^{4} + \ldots$ donde
-\begin{align*}
-h = \dfrac{b - a}{2^{i - 1}}
-\end{align*}
-es el ancho del bloque.
-\end{frame}
-\subsection*{Inicio de la integración}
-\begin{frame}
-\frametitle{Inicio de la integración}
-La integración de Romberg inicia con el cálculo de $R_{1, 1} = I_{1}$ (un bloque) y $R_{2, 1} = I_{2}$ (dos bloques) a partir de la regla del trapecio.
+\frametitle{Método adaptativo de Simpson}
+De hecho, mientras que para la regla trapezoidal, se puede establecer una relación de recurrencia autoconsistente entre aproximaciones consecutivas obtenidas dividiendo el espaciado de malla (separación entre los puntos), para la regla de Simpson, no existe una relación algorítmica tan simple.
 \end{frame}
 \begin{frame}
-\frametitle{Cancelación término dominante}
-El término dominante $c_{1} \: h^{2}$ es entonces eliminado por la extrapolación de Richardson.
-\\
-\bigskip
-Usando $p = 2$ (el exponente en el término dominante) e indicando el resultado por $R_{2, 2}$, tenemos que:
+\frametitle{Método adaptativo de Simpson}
+En cambio, a partir de las primeras tres aproximaciones de la regla trapezoidal, las aproximaciones consecutivas a la fórmula de Simpson se pueden expresar en términos de la primera:
 \begin{align*}
-R_{2, 2} = \dfrac{2^{2} \: R_{2, 1} - R_{1, 1}}{2^{2} - 1} = \dfrac{4}{3} \: R_{2, 1} - \dfrac{1}{3} \: R_{1, 1}
+S_{1} &= \dfrac{h_{1}}{3} \bigg[ f(a) + 4 \, f(a + h_{1}) + f(b) \bigg] = \\
+&= \dfrac{4 \, T_{1} - T_{0}}{3}
 \end{align*}
 \end{frame}
 \begin{frame}
-\frametitle{Notación para los cálculos}
-Es conveniente guardar los resultados en un arreglo con la siguiente forma:
+\frametitle{Método adaptativo de Simpson}
+Para la segunda aproximación:
 \begin{align*}
-\begin{bmatrix}
-R_{1, 1} & \\
-R_{2, 1} & R_{2, 2}
-\end{bmatrix}
+S_{2} &= \dfrac{h_{2}}{3} \bigg[ f(a) + 4 \, f(a + h_{2}) + 2 \, f(a + 2 \, h_{2}) + \\
+&+ 4 \, f(a + 3 \, h_{2}) + f(b) \bigg] = \\
+&= \dfrac{4 \, T_{2} - T_{1}}{3}
 \end{align*}
 \end{frame}
 \begin{frame}
-\frametitle{Aumentando los bloques}
-El siguiente paso es calcular $R_{3, 1} = I_{3}$ (cuatro bloques) y repetir la extrapolación de Richardson con $R_{2, 1}$ y $R_{3, 1}$, guardando los resultados como $R_{3, 2}$:
+\frametitle{Regla generalizada}
+Al generalizar, se obtiene la relación
 \begin{align*}
-R_{3, 2} = \dfrac{4}{3} \: R_{3,1} - \dfrac{1}{3} \: R_{2,1}
-\end{align*}
-\end{frame}
-\begin{frame}
-\frametitle{Elementos obtenidos}
-Los elementos del arreglo $R$ calculados hasta el momento son:
-\begin{align*}
-\begin{bmatrix}
-R_{1, 1} & \\
-R_{2, 1} & R_{2, 2} \\
-R_{3, 1} & R_{3, 2}
-\end{bmatrix}
-\end{align*}
-Los elementos de la segunda columna tienen un error del orden $c_{2} \: h^{4}$, el cual puede ser eliminado con la extrapolación de Richardson.
-\end{frame}
-\begin{frame}
-\frametitle{Usando un valor para \texttt{p}}
-Usando $p = 4$, obtenemos:
-\begin{align*}
-R_{3, 3} = \dfrac{2^{4} \: R_{3, 2}-R_{2, 2}}{2^{4} - 1} = \dfrac{16}{15} \: R_{3, 2} - \dfrac{1}{15} \: R_{2, 2}
-\end{align*}
-El resultado tiene ahora un error del orden $\order{h^{6}}$.
-\end{frame}
-\begin{frame}
-\frametitle{Usando un valor para \texttt{p}}
-El arreglo se ha expandido ahora como
-\begin{align*}
-\begin{bmatrix}
-R_{1, 1} &  & \\
-R_{2, 1} & R_{2, 2} & \\
-R_{3, 1} & R_{3, 2} & R_{3, 3}
-\end{bmatrix}
-\end{align*}
-\end{frame}
-\begin{frame}
-\frametitle{Resultados de otro cálculo}
-Luego de otra ronda de cálculos, se tiene
-\begin{align*}
-\begin{bmatrix}
-R_{1, 1} &  & & \\
-R_{2, 1} & R_{2, 2} & & \\
-R_{3, 1} & R_{3, 2} & R_{3, 3} & \\
-R_{4, 1} & R_{4, 2} & R_{4, 3} & R_{4, 4}
-\end{bmatrix}
-\end{align*}
-donde el error en $R_{4, 4}$ es del orden de $\order{h^{8}}$.
-\\
-\bigskip
-\pause
-\textoazul{Nótese que la estimación con mayor precisión es siempre el último término de la diagonal}.
-\end{frame}
-\begin{frame}
-\frametitle{Punto de paro}
-Este proceso continua hasta que la diferencia entre dos términos sucesivos de la diagonal son lo suficientemente pequeños.
-\end{frame}
-\subsection*{Fórmula general}
-\begin{frame}
-\frametitle{Fórmula general}
-La fórmula general para la extrapolación es:
-\begin{align*}
-R_{i, j} = \dfrac{4^{j - 1} \: R_{i, j - 1} - R_{i - 1, j - 1} }{4^{j - 1} - 1} \hspace{1cm} i > 1, \hspace{0.3cm} j = 2, 3, \ldots, i
+S_{k} = \dfrac{4 \, T_{k} - T_{k-1}}{3}
 \end{align*}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{El proceso de integración}
-Esquemáticamente lo que tenemos es:
-\begin{figure}
-  \centering
-  \includestandalone{Figuras/integracion_07}
-\end{figure}
+\frametitle{Regla generalizada}
+Por lo tanto, se deduce que el algoritmo recursivo con control automático de pasos basado en la regla de Simpson puede describirse en términos de aproximaciones trapezoidales:
 \end{frame}
-\begin{frame}
-\frametitle{Multiplicadores}
-Donde los multiplicadores $\alpha$ y $\beta$ dependen de $j$ de la siguiente manera:
+\begin{frame}[fragile]
+\frametitle{Regla generalizada}
 \fontsize{12}{12}\selectfont
-\begin{center}
-\begin{tabular}{c | c | c | c | c | c}
-\hline
-j & $2$ & $3$ & $4$ & $5$ & $6$ \\ \hline
-$\alpha$ & $-1/3$ & $-1/15$ & $-1/63$ & $-1/255$ & $-1/1023$ \\ \hline
-$\beta$ & $4/3$ & $16/15$ & $64/63$ & $256/255$ & $1024/1023$ \\ \hline
-\end{tabular}
-\end{center}
+\begin{align*}
+T_{0} &= \dfrac{h_{0}}{2} \, \left[ f(a) + f(b) \right], \hspace{0.5cm} h_{0} = b - a, \hspace{0.5cm} n_{0} = 1 \\[1em]
+\visible<2->{T_{k} &= \dfrac{1}{2} \, \left[ T_{k-1} + h_{k-1} \, \sum_{i=1}^{n_{k-1}} f \left(a + \left( i - \dfrac{1}{2} \right) \, h_{k-1} \right) \right] \hspace{0.5cm} k = 1, 2, \ldots } \\[0.5em]
+\visible<3->{S_{k} &= \dfrac{4 \, T_{k} - T_{k-1}}{3}, \hspace{0.5cm} h_{k} = \dfrac{h_{k-1}}{2}, \hspace{0.5cm} n_{k} = 2 \, n_{k-1}}
+\end{align*}
 \end{frame}
 \begin{frame}
-\frametitle{Manejo triangular}
-El arreglo triangular es conveniente para manipularlo computacionalmente hablando.
+\frametitle{Criterio de convergencia}
+El criterio de convergencia, implica que la diferencia relativa entre dos aproximaciones consecutivas de la fórmula de Simpson puede escribirse convenientemente como
+\begin{align*}
+\abs{S_{k} - S_{k-1}} \leq \varepsilon \, \abs{S_{k}}
+\end{align*}
+\end{frame}
+\subsection*{Código para el método adaptativo}
+\begin{frame}
+\frametitle{Código para el método adaptativo}
+Los argumentos, variables y constantes de la función \funcionazul{qAdaptSimpson}, que se presenta a continuación, mantienen la importancia que se les asignó en la función \funcionazul{qAdaptTrapecio}.
+\end{frame}
+\begin{frame}
+\frametitle{Código para el método adaptativo}
+A pesar de la conexión intrínseca con la regla trapezoidal, la tasa de convergencia del proceso se mejora debido a la aproximación superior proporcionada por la regla de Simpson ($\order{h^{4}}$) en comparación con $\order{h^{2}}$, que requiere, en general, significativamente menos iteraciones a la mitad para l misma precisión.
+\end{frame}
+\begin{frame}[allowframebreaks, fragile]
+\frametitle{Código para el método adaptativo}
+\begin{lstlisting}[caption=Código para el método adaptativo de Simpson, style=FormattedNumber, basicstyle=\linespread{1.1}\ttfamily=\small, columns=fullflexible]
+from math import fabs
+
+def qAdaptSimpson(Func, a, b, eps = 1e-6):
+    kmax = 30
+
+    h = b-a; n = 1
+    s_0_ = t_0_ = 0.5*h*(Func(a) + Func(b))
+
+    for k in range(1, kmax+1):
+        sumf = 0e0
+        for i in range(1, n+1): sumf += Func(a + (i-0.5)*h)
+        t = 0.5*(t_0_ + h*sumf)
+        s = (4*t - t_0_)/3
+        if (k > 1):
+            if (fabs(s - s_0_) <= eps*fabs(s)): break
+            if (fabs(s) <= eps and fabs(s) <= fabs(s-s_0_)): break
+        h *= 0.5; n *= 2
+        s_0_ = s; t_0_ = t
+
+    if (k >= kmax): print('Se excedieron el numero de iteraciones del metodo adaptativo de Simpson!')
+
+    return s
+\end{lstlisting}
+\end{frame}
+\section{Integración de Romberg}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Definición de la integración de Romberg}
+\begin{frame}
+\frametitle{El método de integración de Romberg}
+El método de Romberg puede considerarse como una generalización de las fórmulas de Newton-Cotes de orden superior del algoritmo adaptativo basado en la fórmula de Simpson que se desarrolló en la sección anterior.
+\end{frame}
+\begin{frame}
+\frametitle{El método de integración de Romberg}
+La reducción a la mitad del paso de integración está acompañada en el método de Romberg por el aumento recursivo adicional del orden del integrador elemental y esto produce una tasa de convergencia sin igual por cualquier otro esquema de cuadratura basado en las fórmulas de Newton-Cotes.
+\end{frame}
+\subsection*{Construcción del método}
+\begin{frame}
+\frametitle{Construcción del método}
+En la sección anterior, establecimos la relación simple
+\begin{align*}
+S_{k} = \dfrac{4 \, T_{k} - T_{k-1}}{3}
+\end{align*}
+entre las aproximaciones $T_{k}$ de la regla trapezoidal para mallas de integración sucesivamente reducidas a la mitad y las aproximaciones correspondientes $S_{k}$ dadas por la fórmula de Simpson.
+\end{frame}
+\begin{frame}
+\frametitle{Construcción del método}
+Con el fin de generalizar este resultado a fórmulas de Newton-Cotes de orden superior, renombramos las aproximaciones trapezoidales como $R_{k,0}$:
+\end{frame}
+\begin{frame}
+\frametitle{Construcción del método}
+\begin{align*}
+R_{0,0} &= h_{0} \left[ \dfrac{f(a)}{2} + \dfrac{f(b)}{2} \right], \hspace{0.5cm} h_{0} = b - a \\[0.5em]
+\visible<2->{R_{1,0} &= h_{1} \left[ \dfrac{f(a)}{2} + f(a + h_{1}) + \dfrac{f(b)}{2} \right], \hspace{0.5cm} h_{1} = \dfrac{h_{0}}{2} \\[0.5em] }
+\visible<3->{R_{2, 0} &= h_{2} \left[ \dfrac{f(a)}{2} + f(a + h_{2}) + f(a + 2 \, h_{2}) + \right. \\[0.5em]
+&\left. + f(a + 3 \, h_{2}) + \dfrac{f(b)}{2} \right], \hspace{0.5cm} h_{2} = \dfrac{h_{1}}{2} }
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Construcción del método}
+El número de subintervalos para una aproximación dada $R_{k,0}$ y el espaciado de la malla correspondiente en la iteración $k$ están dados, respectivamente, por
+\begin{align*}
+n_{k} = 2^{k}, \hspace{1cm} h_{k} = \dfrac{(b-a)}{n_{k}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Relación recursiva}
+La relación recursiva que permite la evaluación óptima de $R_{k, 0}$, al reutilizar implícitamente los valores del integrando previamente calculados (evitando evaluaciones redundantes), es:
+\end{frame}
+\begin{frame}
+\frametitle{Relación de recurrencia}
+\begin{align*}
+R_{k,0} &= \dfrac{1}{2} \left[ R_{k-1, 0} + h_{k-1} \sum_{i=1}^{n_{k-1}} f  \left(a + \left( i - \dfrac{1}{2} \right) \, h_{k-1} \right) \right], \\[0.5em]
+&k = 1, 2,\ldots, k_{\max}
+\end{align*}
+que es la misma expresión para el método adaptativo del trapecio.
+\end{frame}
+\begin{frame}
+\frametitle{Primeras aproximaciones}
+Las dos primeras aproximaciones que se obtienen de la fórmula anterior son:
+\begin{align*}
+R_{1, 1} = \dfrac{h_{1}}{3} \bigg[ f(a) + 4 \, f(a + h_{1}) + f(b) \bigg] = \dfrac{4 \, R_{1, 0} - R_{0, 0}}{3}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Primeras aproximaciones}
+La siguiente aproximación es:
+\begin{align*}
+R_{2, 1} &= \dfrac{h_{2}}{3} \bigg[ f(a) + 4 \, f(a + h_{2}) + 2 \, f(a + 2 \, h_{2}) + \\[0.5em]
+&+ 4 \, f(a + 3\, h_{2}) +  f(b) \bigg] = \\[0.5em]
+&= \dfrac{4 \, R_{2, 0} - R_{1, 0}}{3}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Relación general}
+Entonces la relación general entre las aproximaciones basadas en la fórmula de Simpson y la regla del trapecio son de la forma:
+\begin{align*}
+R_{k, 1} &= \dfrac{4 \, R_{k, 0} - R_{k-1, 0}}{3} = \dfrac{4 \, R_{k, 0} - R_{k-1, 0}}{4 -1} \\[0.5em]
+&k = 1, 2, \ldots, k_{\max}
+\end{align*}
+\end{frame}
+\subsection*{Mejora en el esquema}
+\begin{frame}
+\frametitle{Mejora en el esquema}
+Siguiendo con la idea de aumentar recursivamente el orden de la fórmula básica de Newton-Cotes, se espera que la primera aproximación del siguiente esquema de cuadratura se base en los nodos resultantes dividiendo los subintervalos característicos de la primera aproximación de la fórmula de Simpson, $R_{1,1}$ o de manera equivalente, en los nodos de la segunda aproximación, $R_{2,1}$.
+\end{frame}
+\begin{frame}
+\frametitle{Mejora en el esquema}
+Este requisito se cumple intrínsecamente mediante \emph{la fórmula de Boole de cinco puntos}, que esencialmente se aproxima al integrando por el polinomio de interpolación de Lagrange de cuarto orden:
+\end{frame}
+\subsection*{Fórmula de Boole}
+\begin{frame}
+\frametitle{Fórmula de Boole}
+La fórmula de Boole es
+\begin{align*}
+\int_{x_{1}}^{x_{5}} f(x) \dd{x} &= \dfrac{2 \, h}{45} \bigg[ 7 \, f_{1} + 32 \, f_{2} + 12 \, f_{3} + \\[0.5em]
+&+ 32 \, f_{4} + 7 \, f_{5} \bigg] - \dfrac{8 \, h^{7} \, f^{6} (\xi)}{945}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Aproximación con la fórmula de Boole}
+La primera aproximación basada en la fórmula de Boole, se puede expresar en términos del paso de integración $h_{2}$, que corresponde a dos consecutivas iteraciones en donde se divide a la mitad el intervalo completo $[a, b]$
+\end{frame}
+\begin{frame}
+\frametitle{Aproximación con la fórmula de Boole}
+La aproximación queda como
+\begin{align*}
+R_{2, 2} &= \dfrac{2 \, h}{45} \bigg[ 7 \, f{a} + 32 \, f(a + h_{2}) + 12 \, f(a + 2 \, h_{2}) + \\[0.5em]
+&+ 32 \, f(a + 3 \, h_{2}) + 7 \, f(b) \bigg] 
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Aproximación con la fórmula de Boole}
+Además, puede estar relacionado con las dos primeras aproximaciones proporcionadas por la fórmula de Simpson:
+\begin{align*}
+R_{2, 2} = \dfrac{16 \, R_{2, 1} - R_{1, 1}}{15} = \dfrac{4^{2} \, R_{2, 1}- R_{1, 1}}{4^{2} - 1}
+\end{align*}
+\end{frame}
+\subsection*{Consecuencias del esquema}
+\begin{frame}
+\frametitle{Consecuencias del esquema}
+Se puede anticipar fácilmente que el aumento del orden del esquema de cuadratura básica implica duplicar el número de subintervalos característicos de $2^{k}$ ($2$ para la fórmula de Simpson) a $2^{k + 1}$ ($4$ para la fórmula de Boole) e, inherentemente, duplicar el orden de Polinomio de interpolación de Lagrange por el cual se aproxima el integrando.
+\end{frame}
+\begin{frame}
+\frametitle{Consecuencias del esquema}
+En consecuencia, a excepción de la aproximación inicial $R_{0, 0}$, todas las aproximaciones superiores se basan en mallas de integración con números impares de nodos ($2^{k} + 1$).
+\end{frame}
+\subsection*{Relación de recurrencia}
+\begin{frame}
+\frametitle{Relación de recurrencia}
+Se puede demostrar en general, aunque no sin cierta dificultad, que la relación de recurrencia entre la aproximación $R_{k, j}$ (resultante de la aplicación de la fórmula de Newton-Cotes de subintervalos de orden $2^{j}$ a $2^{k}$) y las aproximaciones $R_{k, j-1}$ y $R_{k-1, j-1}$ basado en la cuadratura inferior del orden $2^{j-1}$ es:
+\end{frame}
+\begin{frame}
+\frametitle{Relación de recurrencia}
+Relación de recurrencia para $R_{k, j}$:
+\begin{align*}
+R_{k, j} &= \dfrac{4^{j} \, R_{k, j-1} - R_{k-1, j-1}}{4^{j}-1} \\[0.5em]
+&j = 1, 2, \ldots, k, \hspace{0.5cm} k = 1, 2, \ldots,  k_{\max}
+\end{align*}
+\end{frame}
+\subsection*{Máxima aproximación}
+\begin{frame}
+\frametitle{Máximo de intervalos}
+Para un número dado de subintervalos $(2^{k})$, el orden de las fórmulas de Newton-Cotes aplicables $(2^{j})$ obviamente no puede exceder el número de subintervalos y, por tanto, $j \leq k$.
+\end{frame}
+\subsection*{Aproximación más baja}
+\begin{frame}
+\frametitle{Aproximación más baja}
+Por el contrario, la aproximación más baja del esquema de orden $2^{j}$ debe ser $R_{j, j}$.
 \\
 \bigskip
-La aplicación del algoritmo de Romberg puede llevarse dentro de una matriz de una dimensión.
+Por lo tanto, es natural organizar todas las aproximaciones $R_{k, j}$ de la integral en un arreglo triangular con "predecesores" y "descendientes":
+\end{frame}
+\subsection*{Arreglo triangular}
+\begin{frame}
+\frametitle{Arreglo triangular}
+\begin{table}
+\centering
+\begin{tabular}{c | c c c c c}
+$n_{k}$ & Trapecio & Simpson & Boole & &  \\ \hline
+$1$ & $R_{0, 0}$ & & & & \\
+$2$ & $R_{1, 0}$ & $R_{1, 1}$ & & & \\
+$2^{2}$ & $R_{2, 0}$ & $R_{2, 1}$ & $R_{2, 2}$& & \\
+$\vdots$ & $\vdots$ & $\vdots$ &  & $\ddots$ & \\
+$2^{k_{\max}}$ & $R_{k_{\max}, 0}$ & $R_{k_{\max}, 1}$ & \ldots & \ldots & $R_{k_{\max}, k_{\max}}$     
+\end{tabular}
+\end{table}
 \end{frame}
 \begin{frame}
-\frametitle{Aprovechando las expresiones}
-Luego de la primera extrapolación, $R_{1,1}$ ya no se ocupa de nuevo, por lo que podemos re-emplazarla con $R_{2,2}$, por tanto, tenemos en el arreglo
+\frametitle{Arreglo triangular}
+La columna $j$ contiene las aproximaciones basadas en la fórmula de Newton-Cotes de orden $2^{j}$ para números sucesivamente duplicados de subintervalos (tamaños de subintervalos reducidos a la mitad).
+\end{frame}
+\subsection*{El mejor valor de la integral}
+\begin{frame}
+\frametitle{El mejor valor de la integral}
+La evaluación óptima de la integral se puede lograr completando el arreglo triangular anterior de forma recursiva de arriba hacia abajo, determinando para cada fila $k$ las aproximaciones basadas en todas las fórmulas de Newton-Cotes aplicables en la malla respectiva de $2^{k}$ puntos de integración (comenzando con la regla trapezoidal y terminando con el esquema de orden $2^{k}$).
+\end{frame}
+\begin{frame}
+\frametitle{El mejor valor de la integral}
+Específicamente, los elementos de la matriz se evalúan en el orden $R_{0, 0}, (R_{1, 0}, R_{1, 1}), (R_{2, 0}, R_{2, 1}, R_{2, 2})$.
+\\
+\bigskip
+Dentro de un número dado de iteraciones de reducción a la mitad, $k_{\max}$, que, sin embargo, no necesita ser arreglado de antemano, la mejor aproximación de la integral la proporciona el descendiente diagonal en el última fila completada: $R_{k_{\max}, k_{\max}}$.
+\end{frame}
+\begin{frame}
+\frametitle{El mejor valor de la integral}
+La esencia del método de Romberg consiste, por lo tanto, en completar recursivamente el conjunto de aproximaciones $R_{k, j}$ de la integral, que se presenta de la forma:
+\end{frame}
+\begin{frame}
+\frametitle{El mejor valor de la integral}
+\begin{align}
+R_{0, 0} &= \dfrac{h_{0}}{2} \bigg[ f(a) +  f(b) \bigg] \hspace{0.5cm} h_{0} = b - a, \hspace{0.5cm} n_{0} = 1 \label{eq:ecuacion_10_47} \\[0.5em]
+R_{k, 0} &= \dfrac{1}{2} \left[ R_{k-1, 0} + h_{k-1} \sum_{i=1}^{n_{k-1}} f \left( a + \left( i - \dfrac{1}{2} \right) \, h_{k-1} \right) \right] \label{eq:ecuacion_10_48} \\[0.5em]
+R_{k, j} &= \dfrac{4^{j} \, r_{k, j-1} - R_{k-1, j-1}}{4^j - 1} \hspace{0.5cm} j = 1, 2, \ldots, k \label{eq:ecuacion_10_49} \\[0.5em]
+&h_{k} = \dfrac{h_{k-1}}{2} \hspace{0.5cm} n_{k} = 2 \, n_{k-1}, \hspace{0.5cm} k = 1, 2, \ldots, k_{\max} \nonumber
+\end{align}
+\end{frame}
+\begin{frame}
+\frametitle{Manejo del arreglo triangular}
+El elemento inicial $R_{k, 0}$ de cada nueva fila $k$ se calcula de acuerdo con la ec. (\ref{eq:ecuacion_10_48}) dividiendo a la mitad la malla de integración y utilizando su predecesor \enquote{trapezoidal} $R_{k-1, 0}$.
+\end{frame}
+\begin{frame}
+\frametitle{Manejo del arreglo triangular}
+Continuando a lo largo de una fila con un nuevo $R_{k, j}$ se lleva a cabo de acuerdo con la ec. (\ref{eq:ecuacion_10_47}) utilizando las estimaciones $R_{k, j-1}$ y $R_{k-1, j-1}$ dadas por la fórmula anterior de Newton-Cotes.
+\end{frame}
+\subsection*{Tolerancia de ejecución}
+\begin{frame}
+\frametitle{Tolerancia de ejecución}
+El proceso iterativo debe continuarse hasta que la diferencia relativa entre dos aproximaciones diagonales consecutivas sea menor que una tolerancia predefinida $\varepsilon$:
 \begin{align*}
-\begin{bmatrix}
-R^{\prime}_{1} = R_{2, 2} \\
-R^{\prime}_{2} = R_{2, 1}
-\end{bmatrix}
+\abs{R_{k, k} - R_{k-1, k-1}} \leq \varepsilon \, \abs{R_{k, k}}
 \end{align*}
 \end{frame}
 \begin{frame}
-\frametitle{Aprovechando las expresiones}
-En la segunda extrapolación, $R_{3, 2} $ sobre-escribe a $R_{2, 1}$ y $R_{3, 3}$ re-emplaza a $R_{2, 2}$, entonces el arreglo queda
-\begin{align*}
-\begin{bmatrix}
-R^{\prime}_{1} = R_{3, 3} \\
-R^{\prime}_{2} = R_{3, 2} \\
-R^{\prime}_{3} = R_{3, 1}
-\end{bmatrix}
-\end{align*} 
-\pause
-Y así podemos continuar. $R^{\prime}_{1}$ contiene siempre el mejor resultado.
-\end{frame}
-\subsection*{Expresión general para la extrapolación}
-\begin{frame}
-\frametitle{Expresión general para la extrapolación}
-La fórmula de extrapolación para el k-ésima vuelta, es:
-\begin{align*}
-R^{\prime}_{j} = \dfrac{4^{k - j} \: R^{\prime}_{j + 1} - R^{\prime}_{j}}{4^{k - j} - 1}, \hspace{0.8cm} j = k - 1, k - 2, \ldots, 1
-\end{align*}
+\frametitle{Comentario sobre el esquema}
+Una estrategia alternativa sería llenar el arreglo triangular anterior, en forma de columna de izquierda a derecha.
+\\
+\bigskip
+Sin embargo, esto requeriría fijar el número máximo de iteraciones de reducción a la mitad $k_{\max}$ por adelantado y evaluar todas las aproximaciones en cada columna hasta que se cumpla la convergencia para una estimación diagonal $R_{k, k}$
 \end{frame}
 \begin{frame}
-\frametitle{Ejemplo}
-Usando la integración de Romberg, evalúa
-\[ \int_{0}^{\pi} \: f(x) \dd{x}\]
-donde $f(x) = \sin(x)$
-\end{frame}
-\begin{frame}
-\frametitle{Primera parte: Regla del trapecio recursiva}
-\begin{align*}
-R_{1, 1} &= I(\pi) = \frac{\pi}{2} \bigg[ f(0) + f(\pi) \bigg] = 0 \\[0.5em]
-\visible<2->{R_{2, 1} &= I \left(\frac{\pi}{2}\right) = \frac{1}{2} \: I(\pi) +  \frac{\pi}{2} \: f \left(\frac{\pi}{2} \right) = 1.5708} \\[0.5em]
-\visible<3->{R_{3, 1} &= I \left(\frac{\pi}{4} \right) = \frac{1}{2} \: I \left(\frac{\pi}{2} \right) + \frac{\pi}{4} \left[ f \left(\frac{\pi}{4} \right) + f \left(\frac{3 \: \pi}{4} \right) \right] = \\[0.5em]
-&= 1.8961}
-\end{align*}
-\end{frame}
-\begin{frame}
-\frametitle{Primera parte: Regla del trapecio recursiva}
-\begin{align*}
-R_{4, 1} &= I \left( \frac{\pi}{8} \right) = \frac{1}{2} \: I \left( \frac{\pi}{4} \right) + \frac{\pi}{8} \left[ f \left( \frac{\pi}{8} \right) + f \left( \frac{3 \: \pi}{8} \right) + \right. \\[0.5em]
-& \left. + f \left( \frac{5 \: \pi}{8} \right) + f \left( \frac{7 \: \pi}{8} \right) \right] = \\[0.5em]
-&= 1.9742
-\end{align*}
-\end{frame}
-\begin{frame}
-\frametitle{Segunda parte: Extrapolación de Richardson}
-Usando las fórmulas de extrapolación, construimos la siguiente tabla:
-\fontsize{12}{12}\selectfont
-\begin{align*}
-\begin{bmatrix}
-R_{1, 1} &         &         & \\
-R_{2, 1} & R_{2, 2} &         & \\
-R_{3, 1} & R_{3, 2} & R_{3, 3} & \\
-R_{4, 1} & R_{4, 2} & R_{4, 3} & R_{4, 4} 
-\end{bmatrix}
-=
-\begin{bmatrix}
-0      &        &        & \\
-1.5708 & 2.0944 &        & \\
-1.8961 & 2.0046 & 1.9986 & \\
-1.9742 & 2.0003 & 2.0000 & 2.0000
-\end{bmatrix}
-\end{align*}
-\end{frame}
-\begin{frame}
-\frametitle{Segunda parte: Extrapolación de Richardson}
-De acuerdo al procedimiento, vemos que converge, por tanto
-\begin{align*}
-\int_{0}^{\pi} \: \sin(x) \dd{x} = R_{4, 4} = 2.0000
-\end{align*}
-que es el resultado exacto.
+\frametitle{Comentario sobre el esquema}
+En este punto, si $k < k_{\max}$, las estimaciones ya calculadas ubicadas debajo de la fila $k$ serían innecesarias, haciendo que el algoritmo sea ineficiente.
 \end{frame}
 \subsection{Código para el método de Romberg}
 \begin{frame}
-\frametitle{Propuesta de código}
-El algoritmo para la integración de Romberg se implementa en la función \funcionazul{romberg}.
+\frametitle{Código para el método de Romberg}
+Se presenta un código para el método de Romberg en la función \funcionazul{qRomberg}, que tiene los mismos parámetros que las funciones \funcionazul{qAdaptTrapz} y \funcionazul{qAdaptSimpson}.
+\end{frame}
+\begin{frame}
+\frametitle{Código para el método de Romberg}
+En lugar del arreglo triangular de aproximaciones $R_{k, j}$, la implementación usa sólo dos arreglos unidimensionales para las dos filas consecutivas más recientes, \funcionazul{r1} y \funcionazul{r2}, que se desplazan al final de cada iteración de subintervalo de reducción a la mitad.
+\end{frame}
+\begin{frame}
+\frametitle{Código para el método de Romberg}
+Al igual que en el caso de las funciones \funcionazul{qAdaptTrapz} y \funcionazul{qAdaptSimpson}, el número de iteraciones a la mitad está limitado a $30$, lo que corresponde a un máximo de $230$ puntos de integración (la mayor potencia de 2 representable por una variable de tipo largo).
+\end{frame}
+\begin{frame}
+\frametitle{Código para el método de Romberg}
+Cada iteración a la mitad del espacio de integración comienza con la evaluación de la integral basada en la fórmula trapezoidal.
 \\
 \bigskip
-Devuelve la integral $I$ y el número de paneles utilizados $n$. La extrapolación de Richardson la lleva a cabo la subfunción \funcionazul{richardson}.
+El orden de la cuadratura básica se eleva de forma recursiva y se verifica la convergencia del proceso.
 \end{frame}
-\begin{frame}[allowbreakframes, fragile]
+\begin{frame}
 \frametitle{Código para el método de Romberg}
-\begin{lstlisting}[caption=Código para la función trapecios, style=FormattedNumber, basicstyle=\linespread{1.1}\ttfamily=\small, columns=fullflexible]
-def Romberg(f, x_0_, xf, eps=1.0e-6):
-n = 1
-i = 1
-R = [[trapecios(f, x_0_, xf, n)]]
-while True:
-    n *= 2
-    i += 1
-    R += [[trapecios(f,x0,xf,n)]]
-    j = 0
-    for k in range(i-1,0,-1):
-        j += 1
-        R[k-1] += [R[k][j-1]+1./(4**j-1)*(R[k][j-1]-R[k-1][j-1])]
-    if abs(R[0][j]-R[1][j-1]) < Eps:
-        return R[0][j], n
- 
+Si no se logra la precisión \funcionazul{eps} solicitada después de recorrer todas las fórmulas de Newton Cotes aplicables para el número actual de puntos de malla, el siguiente paso de reducción a la mitad se prepara duplicando el número de subintervalos (reduciendo a la mitad el espacio de malla).
+\end{frame}
+\begin{frame}
+\frametitle{Código para el método de Romberg}
+Si no se logra la convergencia dentro de las iteraciones de reducción a la mitad permitidas por \funcionazul{kmax}, se emite un mensaje de advertencia.
+\end{frame}
+\begin{frame}[allowframebreaks, fragile]
+\frametitle{Código en \texttt{pyhton}}
+\begin{lstlisting}[caption=Código para el método de Romberg, style=FormattedNumber, basicstyle=\linespread{1.1}\ttfamily=\small, columns=fullflexible]
+from math import fabs
+
+def qRomberg(Func, a, b, eps = 1e-6):
+
+    kmax = 30
+    r_1_ = [0]*(kmax + 1)
+    r_2_ = [0]*(kmax + 1)
+
+    h = b - a; n = 1
+
+    r_1_[0] = 0.5*h*(Func(a) + Func(b))
+    
+    for k in range(1, kmax+1):
+        sumf = 0e0
+        for i in range(1, n+1): sumf += Func(a+(i-0.5)*h)
+        r_2_[0] = 0.5*(r_1_[0] + h*sumf)
+        f = 1e0
+        for j in range(1, k+1):
+            f *= 4
+            r_2_[j] = (f*r_2_[j-1] - r_1_[j-1])/(f-1)
+
+        if (k > 1):
+            if (fabs(r_2_[k] - r_1_[k-1]) <= eps*fabs(r_2_[k])): break
+            if (fabs(r_2_[k]) <= eps and fabs(r_2_[k]) <= fabs(r_2_[k] - r_1_[k-1])): break
+        h *= 0.5; n *= 2
+        for j in range(0, k+1): r_1_[j] = r_2_[j]
+
+    if (k >= kmax):
+        print("Metodo de Romberg: Se excedieron las iteraciones!")
+        k -= 1
+
+    return r_2_[k]
 \end{lstlisting}
 \end{frame}
+\begin{frame}
+\frametitle{Ejercicio}
+Para revisar la eficiencia de los métodos adapativos de integración, considera la siguiente integral:
+\begin{align*}
+\int_{0}^{1} x^{3} \, \exp(-x) \dd{x} &=  6 - 16 \, \exp(-1) \\
+&=  0.11392894125692\ldots
+\end{align*}
+\pause
+Calcula el valor de la integral usando los métodos adaptativos del Trapecio, de Simpson y de Romberg, con una precisión de $\varepsilon = \num{d-14}$.
+\end{frame}
+\begin{frame}
+\frametitle{Completa la tabla}
+Como ejercicio a cuenta, completa la siguiente tabla (nota: tendrás que hacer un pequeño ajuste en tu código para incluir la información requerida)
+\begin{table}
+\centering
+\begin{tabular}{l c c c}
+Método & Integral & Error & No. iteraciones \\\hline
+Adapt. Trapecio & & & \\\hline
+Adapt. Simpson & & & \\\hline
+Romberg & & & \\\hline
+\end{tabular}
+\end{table}
+\end{frame}
+% \begin{frame}
+% \frametitle{Integración de Romberg}
+% La integración de Romberg combina la regla del trapecio con la extrapolación de Richardson. 
+% \\
+% \bigskip
+% Usemos la siguiente notación:
+% \begin{align*}
+% R_{i, 1} = I_{i}
+% \end{align*}
+% donde $I_{i}$ representa el valor aproximado de $\int_{a}^{b} \: f(x) \dd{x}$ calculado con el método recursivo del trapecio, usando $2^{i - 1}$ bloques.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Integración de Romberg}
+% Recordemos que el error en esta aproximación es $E = c_{1} \: h^{2} + c_{2} \: h^{4} + \ldots$ donde
+% \begin{align*}
+% h = \dfrac{b - a}{2^{i - 1}}
+% \end{align*}
+% es el ancho del bloque.
+% \end{frame}
+% \subsection*{Inicio de la integración}
+% \begin{frame}
+% \frametitle{Inicio de la integración}
+% La integración de Romberg inicia con el cálculo de $R_{1, 1} = I_{1}$ (un bloque) y $R_{2, 1} = I_{2}$ (dos bloques) a partir de la regla del trapecio.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Cancelación término dominante}
+% El término dominante $c_{1} \: h^{2}$ es entonces eliminado por la extrapolación de Richardson.
+% \\
+% \bigskip
+% Usando $p = 2$ (el exponente en el término dominante) e indicando el resultado por $R_{2, 2}$, tenemos que:
+% \begin{align*}
+% R_{2, 2} = \dfrac{2^{2} \: R_{2, 1} - R_{1, 1}}{2^{2} - 1} = \dfrac{4}{3} \: R_{2, 1} - \dfrac{1}{3} \: R_{1, 1}
+% \end{align*}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Notación para los cálculos}
+% Es conveniente guardar los resultados en un arreglo con la siguiente forma:
+% \begin{align*}
+% \begin{bmatrix}
+% R_{1, 1} & \\
+% R_{2, 1} & R_{2, 2}
+% \end{bmatrix}
+% \end{align*}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Aumentando los bloques}
+% El siguiente paso es calcular $R_{3, 1} = I_{3}$ (cuatro bloques) y repetir la extrapolación de Richardson con $R_{2, 1}$ y $R_{3, 1}$, guardando los resultados como $R_{3, 2}$:
+% \begin{align*}
+% R_{3, 2} = \dfrac{4}{3} \: R_{3,1} - \dfrac{1}{3} \: R_{2,1}
+% \end{align*}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Elementos obtenidos}
+% Los elementos del arreglo $R$ calculados hasta el momento son:
+% \begin{align*}
+% \begin{bmatrix}
+% R_{1, 1} & \\
+% R_{2, 1} & R_{2, 2} \\
+% R_{3, 1} & R_{3, 2}
+% \end{bmatrix}
+% \end{align*}
+% Los elementos de la segunda columna tienen un error del orden $c_{2} \: h^{4}$, el cual puede ser eliminado con la extrapolación de Richardson.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Usando un valor para \texttt{p}}
+% Usando $p = 4$, obtenemos:
+% \begin{align*}
+% R_{3, 3} = \dfrac{2^{4} \: R_{3, 2}-R_{2, 2}}{2^{4} - 1} = \dfrac{16}{15} \: R_{3, 2} - \dfrac{1}{15} \: R_{2, 2}
+% \end{align*}
+% El resultado tiene ahora un error del orden $\order{h^{6}}$.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Usando un valor para \texttt{p}}
+% El arreglo se ha expandido ahora como
+% \begin{align*}
+% \begin{bmatrix}
+% R_{1, 1} &  & \\
+% R_{2, 1} & R_{2, 2} & \\
+% R_{3, 1} & R_{3, 2} & R_{3, 3}
+% \end{bmatrix}
+% \end{align*}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Resultados de otro cálculo}
+% Luego de otra ronda de cálculos, se tiene
+% \begin{align*}
+% \begin{bmatrix}
+% R_{1, 1} &  & & \\
+% R_{2, 1} & R_{2, 2} & & \\
+% R_{3, 1} & R_{3, 2} & R_{3, 3} & \\
+% R_{4, 1} & R_{4, 2} & R_{4, 3} & R_{4, 4}
+% \end{bmatrix}
+% \end{align*}
+% donde el error en $R_{4, 4}$ es del orden de $\order{h^{8}}$.
+% \\
+% \bigskip
+% \pause
+% \textoazul{Nótese que la estimación con mayor precisión es siempre el último término de la diagonal}.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Punto de paro}
+% Este proceso continua hasta que la diferencia entre dos términos sucesivos de la diagonal son lo suficientemente pequeños.
+% \end{frame}
+% \subsection*{Fórmula general}
+% \begin{frame}
+% \frametitle{Fórmula general}
+% La fórmula general para la extrapolación es:
+% \begin{align*}
+% R_{i, j} = \dfrac{4^{j - 1} \: R_{i, j - 1} - R_{i - 1, j - 1} }{4^{j - 1} - 1} \hspace{1cm} i > 1, \hspace{0.3cm} j = 2, 3, \ldots, i
+% \end{align*}
+% \end{frame}
+% \begin{frame}[fragile]
+% \frametitle{El proceso de integración}
+% Esquemáticamente lo que tenemos es:
+% \begin{figure}
+%   \centering
+%   \includestandalone{Figuras/integracion_07}
+% \end{figure}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Multiplicadores}
+% Donde los multiplicadores $\alpha$ y $\beta$ dependen de $j$ de la siguiente manera:
+% \fontsize{12}{12}\selectfont
+% \begin{center}
+% \begin{tabular}{c | c | c | c | c | c}
+% \hline
+% j & $2$ & $3$ & $4$ & $5$ & $6$ \\ \hline
+% $\alpha$ & $-1/3$ & $-1/15$ & $-1/63$ & $-1/255$ & $-1/1023$ \\ \hline
+% $\beta$ & $4/3$ & $16/15$ & $64/63$ & $256/255$ & $1024/1023$ \\ \hline
+% \end{tabular}
+% \end{center}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Manejo triangular}
+% El arreglo triangular es conveniente para manipularlo computacionalmente hablando.
+% \\
+% \bigskip
+% La aplicación del algoritmo de Romberg puede llevarse dentro de una matriz de una dimensión.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Aprovechando las expresiones}
+% Luego de la primera extrapolación, $R_{1,1}$ ya no se ocupa de nuevo, por lo que podemos re-emplazarla con $R_{2,2}$, por tanto, tenemos en el arreglo
+% \begin{align*}
+% \begin{bmatrix}
+% R^{\prime}_{1} = R_{2, 2} \\
+% R^{\prime}_{2} = R_{2, 1}
+% \end{bmatrix}
+% \end{align*}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Aprovechando las expresiones}
+% En la segunda extrapolación, $R_{3, 2} $ sobre-escribe a $R_{2, 1}$ y $R_{3, 3}$ re-emplaza a $R_{2, 2}$, entonces el arreglo queda
+% \begin{align*}
+% \begin{bmatrix}
+% R^{\prime}_{1} = R_{3, 3} \\
+% R^{\prime}_{2} = R_{3, 2} \\
+% R^{\prime}_{3} = R_{3, 1}
+% \end{bmatrix}
+% \end{align*} 
+% \pause
+% Y así podemos continuar. $R^{\prime}_{1}$ contiene siempre el mejor resultado.
+% \end{frame}
+% \subsection*{Expresión general para la extrapolación}
+% \begin{frame}
+% \frametitle{Expresión general para la extrapolación}
+% La fórmula de extrapolación para el k-ésima vuelta, es:
+% \begin{align*}
+% R^{\prime}_{j} = \dfrac{4^{k - j} \: R^{\prime}_{j + 1} - R^{\prime}_{j}}{4^{k - j} - 1}, \hspace{0.8cm} j = k - 1, k - 2, \ldots, 1
+% \end{align*}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Ejemplo}
+% Usando la integración de Romberg, evalúa
+% \[ \int_{0}^{\pi} \: f(x) \dd{x}\]
+% donde $f(x) = \sin(x)$
+% \end{frame}
+% \begin{frame}
+% \frametitle{Primera parte: Regla del trapecio recursiva}
+% \begin{align*}
+% R_{1, 1} &= I(\pi) = \frac{\pi}{2} \bigg[ f(0) + f(\pi) \bigg] = 0 \\[0.5em]
+% \visible<2->{R_{2, 1} &= I \left(\frac{\pi}{2}\right) = \frac{1}{2} \: I(\pi) +  \frac{\pi}{2} \: f \left(\frac{\pi}{2} \right) = 1.5708} \\[0.5em]
+% \visible<3->{R_{3, 1} &= I \left(\frac{\pi}{4} \right) = \frac{1}{2} \: I \left(\frac{\pi}{2} \right) + \frac{\pi}{4} \left[ f \left(\frac{\pi}{4} \right) + f \left(\frac{3 \: \pi}{4} \right) \right] = \\[0.5em]
+% &= 1.8961}
+% \end{align*}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Primera parte: Regla del trapecio recursiva}
+% \begin{align*}
+% R_{4, 1} &= I \left( \frac{\pi}{8} \right) = \frac{1}{2} \: I \left( \frac{\pi}{4} \right) + \frac{\pi}{8} \left[ f \left( \frac{\pi}{8} \right) + f \left( \frac{3 \: \pi}{8} \right) + \right. \\[0.5em]
+% & \left. + f \left( \frac{5 \: \pi}{8} \right) + f \left( \frac{7 \: \pi}{8} \right) \right] = \\[0.5em]
+% &= 1.9742
+% \end{align*}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Segunda parte: Extrapolación de Richardson}
+% Usando las fórmulas de extrapolación, construimos la siguiente tabla:
+% \fontsize{12}{12}\selectfont
+% \begin{align*}
+% \begin{bmatrix}
+% R_{1, 1} &         &         & \\
+% R_{2, 1} & R_{2, 2} &         & \\
+% R_{3, 1} & R_{3, 2} & R_{3, 3} & \\
+% R_{4, 1} & R_{4, 2} & R_{4, 3} & R_{4, 4} 
+% \end{bmatrix}
+% =
+% \begin{bmatrix}
+% 0      &        &        & \\
+% 1.5708 & 2.0944 &        & \\
+% 1.8961 & 2.0046 & 1.9986 & \\
+% 1.9742 & 2.0003 & 2.0000 & 2.0000
+% \end{bmatrix}
+% \end{align*}
+% \end{frame}
+% \begin{frame}
+% \frametitle{Segunda parte: Extrapolación de Richardson}
+% De acuerdo al procedimiento, vemos que converge, por tanto
+% \begin{align*}
+% \int_{0}^{\pi} \: \sin(x) \dd{x} = R_{4, 4} = 2.0000
+% \end{align*}
+% que es el resultado exacto.
+% \end{frame}
+% \subsection{Código para el método de Romberg}
+% \begin{frame}
+% \frametitle{Propuesta de código}
+% El algoritmo para la integración de Romberg se implementa en la función \funcionazul{romberg}.
+% \\
+% \bigskip
+% Devuelve la integral $I$ y el número de paneles utilizados $n$. La extrapolación de Richardson la lleva a cabo la subfunción \funcionazul{richardson}.
+% \end{frame}
+% \begin{frame}[allowframebreaks, fragile]
+% \frametitle{Código para el método de Romberg}
+% \begin{lstlisting}[caption=Código para la función trapecios, style=FormattedNumber, basicstyle=\linespread{1.1}\ttfamily=\small, columns=fullflexible]
+% def Romberg(f, x_0_, xf, eps=1.0e-6):
+% n = 1
+% i = 1
+% R = [[trapecios(f, x_0_, xf, n)]]
+% while True:
+%     n *= 2
+%     i += 1
+%     R += [[trapecios(f,x0,xf,n)]]
+%     j = 0
+%     for k in range(i-1,0,-1):
+%         j += 1
+%         R[k-1] += [R[k][j-1]+1./(4**j-1)*(R[k][j-1]-R[k-1][j-1])]
+%     if abs(R[0][j]-R[1][j-1]) < Eps:
+%         return R[0][j], n
+ 
+% \end{lstlisting}
+% \end{frame}
 \end{document}
