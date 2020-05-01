@@ -279,6 +279,10 @@ Platica*/
 Parcial*/
 PresentacionReveal/
 
+#Para pyhton
+*.pyc 
+*.pyo 
+
 
 .DS_Store
 # End of https://www.gitignore.io/api/tex
