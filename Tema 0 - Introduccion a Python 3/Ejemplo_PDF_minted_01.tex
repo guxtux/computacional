@@ -1,0 +1,24 @@
+\documentclass{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{minted}
+
+\begin{document}
+	\begin{enumerate}
+	\item Lo siguiente es una muestra del entorno \emph{minted}.
+	\begin{minted}{Python}
+		if x == "amanece":
+			print("¡Hola mundo!")
+		else:
+			print("¡Adiós mundo!")
+	\end{minted}
+	
+	\item Lo siguiente es una muestra del comando \emph{mint} \mint{Python}|print("¡Hola mundo!")| Que, como se ve, no se muestra en la misma línea.
+
+	\item Lo siguiente muestra el comando \emph{mintinline} \mintinline{Python}{print("¡Hola mundo!")}. En este caso sí que aparece en el mismo párrafo.
+	
+	\item Lo siguiente es una muestra de la inserción de un fichero
+	
+	\end{enumerate}
+	
+\end{document}

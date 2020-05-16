@@ -19,7 +19,8 @@
 \usepackage{listings}
 \usepackage{graphicx}
 \usepackage{tikz}
-\usetikzlibrary{patterns, matrix, backgrounds, decorations,shapes, arrows.meta}
+\usepackage[siunitx, RPvoltages]{circuitikz}
+\usetikzlibrary{arrows, patterns, matrix, backgrounds, decorations, shapes, decorations.markings, decorations.pathmorphing}
 \usepackage[autostyle,spanish=mexican]{csquotes}
 \usepackage[os=win]{menukeys}
 \usepackage{pifont}
@@ -49,6 +50,7 @@
 \newcommand{\azulfuerte}[1]{\textcolor{blue}{\textbf{#1}}}
 \newcommand{\funcionazul}[1]{\textcolor{blue}{\textbf{\texttt{#1}}}}
 \newcommand{\ptilde}[1]{\ensuremath{{#1}^{\prime}}}
+\newcommand{\ptildosargs}[2]{\ensuremath{{#1}^{\prime \, ({#2})}}}
 \newcommand{\stilde}[1]{\ensuremath{{#1}^{\prime \prime}}}
 \newcommand{\ttilde}[1]{\ensuremath{{#1}^{\prime \prime \prime}}}
 \newcommand{\ntilde}[2]{\ensuremath{{#1}^{(#2)}}}
