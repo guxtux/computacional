@@ -1,0 +1,35 @@
+\documentclass[tikz, margin=0.5cm]{standalone}
+\usepackage[utf8x]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{xcolor}
+\begin{document}
+\begin{tikzpicture}[font=\small]
+    \draw (0, 0) -- (13, 0);
+    \draw (0, 0) -- (0, 5);
+    \node at (7, -0.8) {tiempo [s]};
+    \node [rotate=90] at (-0.8, 2) {altura [m]};
+
+    \foreach \x in {1, 2, 3,..., 13}
+        \draw (\x, 0.1) -- (\x, -0.1);
+    
+    \foreach \y in {1, 2, 3, 4}
+        \draw (-0.1, \y) -- (0.1, \y);
+    
+    \foreach \y/\valor in {1/50, 2/100, 3/150, 4/200}
+        \node [scale=0.75] at (-0.35, \y) {\valor};
+    
+    \foreach \x/\valor in {2/2, 4/4, 6/6, 8/8, 10/10, 12/12}
+        \node [scale=0.75] at (\x, -0.35) {\valor};
+
+    \draw [fill] (10, 0) circle (0.05);
+
+    \draw (0, 0) .. controls (2,2) and (3, 2) .. (10, -1); 
+    \draw (0, 0) .. controls (3,4) and (6, 3) .. (10, 2);
+    \draw (0, 0) .. controls (3,4) and (5, 3) .. (10, 0); 
+
+    \node [fill=white, text=black, circle, draw=black, minimum size=0.15cm, inner sep=1pt] at (5, 1) {$1$};
+    \node [fill=white, text=black, circle, draw=black, minimum size=0.15cm, inner sep=1pt] at (6.5, 2.8) {$2$};
+    \node [fill=white, text=black, circle, draw=black, minimum size=0.15cm, inner sep=1pt] at (7, 1.7) {$3$};
+\end{tikzpicture}
+\end{document}
