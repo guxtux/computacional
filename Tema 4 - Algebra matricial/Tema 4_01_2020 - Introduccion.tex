@@ -1,0 +1,1358 @@
+\input{../Preambulos/pre_documento}
+\input{../Preambulos/pre_plantilla_Warsaw_crane}
+\input{../Preambulos/pre_codigo}
+\input{../Preambulos/pre_define_footers_Warsaw_crane}	
+\setbeamercolor{block title example}{use=structure, fg=white}
+\normalfont
+\usepackage{ccfonts}% http://ctan.org/pkg/{ccfonts}
+\usepackage[T1]{fontenc}% http://ctan.or/pkg/fontenc
+\renewcommand{\rmdefault}{cmr}% cmr = Computer Modern Roman
+\linespread{1.3}
+\title{Operaciones con arreglos y matrices en \texttt{pyhton}}
+\subtitle{Curso de Física Computacional}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{}
+\institute{Facultad de Ciencias - UNAM}
+\titlegraphic{\includegraphics[width=1.75cm]{Imagenes/escudo-facultad-ciencias}\hspace*{4.75cm}~%
+   \includegraphics[width=1.75cm]{Imagenes/escudo-unam}
+}
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+\section*{Contenido}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
+\section{Introducción}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Definición de un arreglo}
+\begin{frame}
+\frametitle{Repaso express sobre arreglos}
+Las estructuras de datos que hemos visto (listas, tuplas, diccionarios) hasta ahora permiten manipular datos de manera muy flexible.
+\\
+\bigskip
+Ya sea combinándolas y/o anidándolas, es posible organizar información de manera estructurada para representar sistemas del mundo real.
+\end{frame}
+\begin{frame}
+\frametitle{Uso de los arreglos en física}  
+En física para resolver problemas, más importante que la organización de los datos, es la capacidad de hacer muchas operaciones a la vez sobre grandes conjuntos de datos numéricos de manera eficiente.
+\end{frame}
+\begin{frame}
+\frametitle{Uso de los arreglos en física}
+Algunos ejemplos de problemas que requieren manipular grandes secuencias de números son: la predicción del clima, simulación, graficación de modelos, la construcción de edificios, y el análisis de indicadores financieros entre muchos otros.
+\end{frame}
+\begin{frame}
+\frametitle{El arreglo en \python}
+La estructura de datos que sirve para almacenar estas grandes secuencias de números (generalmente de tipo \emph{float}) es el \textbf{arreglo}.
+\\
+\bigskip
+Los arreglos tienen algunas similitudes con las listas:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Los elementos tienen un orden y se pueden acceder mediante su posición.
+\item Los elementos se pueden recorrer usando un ciclo \texttt{for}.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{El arreglo en \python}
+Sin embargo, también tienen algunas restricciones:
+\setbeamercolor{item projected}{bg=red!70!white,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Todos los elementos del arreglo deben tener el mismo tipo.
+\item En general, el tamaño del arreglo es fijo (no van creciendo dinámicamente como las listas).
+\item Se ocupan principalmente para almacenar datos numéricos.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{El arreglo en \python}
+Los arreglos son los equivalentes en programación a las matrices y vectores en matemáticas.
+\\
+\bigskip
+Precisamente, una gran motivación para usar arreglos es que hay mucha teoría detrás de ellos que puede ser usada en el diseño de algoritmos para resolver problemas verdaderamente interesantes.
+\end{frame}
+\section{Usando \texttt{numpy.array}}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Creando arreglos}
+\begin{frame}[fragile]
+\frametitle{Crear un arreglo}
+El paquete y la función que provee las estructuras de datos y las funciones para trabajar con arreglos es \textcolor{blue}{numpy.array}
+\begin{verbatim}
+from numpy import array
+\end{verbatim}
+El tipo de datos de los arreglos se llama \textcolor{blue}{array}.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Uso de \texttt{np.array}}
+Para crear un arreglo nuevo, se puede usar la función \textcolor{blue}{np.array} pasándole como parámetro la lista de valores que deseamos agregar al arreglo:
+\begin{lstlisting}[caption=Ejemplo de un arreglo, basicstyle=\linespread{1.1}\ttfamily=\small, columns=fullflexible]
+import numpy as np
+
+x = np.array([6, 1, 3, 9, 8])
+
+print(x)
+\end{lstlisting}
+\end{frame}
+\subsection{Atributos del arreglo}
+\begin{frame}
+\frametitle{Atributos del objeto \texttt{np.array}}
+Al ser un objeto de \python, el arreglo tiene una serie de atributos con los que podemos apoyarnos cuando se requiera conocer cierta información del mismo.
+\\
+\bigskip
+Para revisar una lista completa de los atributos, podemos hacerlo con la instrucción \funcionazul{help(np.ndarray)}
+\end{frame}
+\begin{frame}
+\frametitle{Atributos del objeto \texttt{np.array}}
+\fontsize{12}{12}\selectfont
+\begin{table}
+\begin{tabular}{l p{7cm}}
+\textbf{Atributo} & \textbf{Descripción} \\ \hline
+\texttt{Shape} & Es una tupla que contiene el número de elementos (la longitud) para cada dimensión (eje) del arreglo. \\ \hline
+\texttt{Size} & El número del total de elementos en el arreglo. \\ \hline
+\texttt{Ndim} & El número de dimensiones (ejes). \\ \hline
+\texttt{nbytes} & El número de bytes utilizados para almacenar los datos. \\ \hline
+\texttt{dtype} & El tipo de dato de los elementos del arreglo.
+\end{tabular}
+\end{table}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Uso de \texttt{np.array}}
+Todos los elementos del arreglo \emph{tienen exactamente el mismo tipo}. Para crear un arreglo con números de tipo flotante, basta con que uno de los valores lo sea:
+\pause
+\begin{lstlisting}[caption=Ejemplo de cambio de tipo de dato en un arreglo, basicstyle=\linespread{1.1}\ttfamily=\small, columns=fullflexible]
+y = np.array([6.0, 1, 3, 9, 8])
+
+print(y)
+\end{lstlisting}
+\pause
+\verb|array([ 6.,  1.,  3.,  9.,  8.])| 
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Modificar el tipo de dato del arreglo}
+Otra opción es convertir el arreglo a otro tipo usando el método \textcolor{blue}{astype}:
+\begin{lstlisting}[caption=Ejemplo de cambio de tipo de dato en un arreglo, basicstyle=\linespread{1.1}\ttfamily=\small, columns=fullflexible]
+w = np.array([2, 6, 1, 12, 9])
+z = np.array([7, 0, 9, 2])
+
+w.astype(float)
+z.astype(complex)
+\end{lstlisting}
+\fontsize{12}{12}\selectfont
+\pause
+\verb|array([ 2.,  6,  1.,  12.,  9.])| \\
+\pause
+\verb|array([ 7.+0.j,  0.+0.j,  9.+0.j,  2.+0.j])|
+\end{frame}
+\begin{frame}
+\frametitle{Arreglos predefinidos}
+Vamos a encontrar situaciones en donde será necesario ocupar arreglos, pero podemos aprovechar que existe una base para manejar los arreglos en \python{} a partir de arreglos \enquote{predefinidos}.
+\\
+\bigskip
+A continuación enlistamos algunos de esos arreglos:
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Arreglos predefinidos}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item \funcionazul{np.zeros(n)} crea un arreglo de $n$ elementos, a cada uno se le asigna el valor de $0$ (cero).
+\item \funcionazul{np.ones(n)} crea un arreglo de $n$ elementos, a cada uno se le asigna el valor de $1$ (uno).
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Arreglos predefinidos}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\conti
+\item \funcionazul{np.arange(a, b, c)} crea un arreglo de forma similar a la función \funcionazul{range}, con las diferencias que $a$, $b$ y $c$ pueden ser reales, y que el resultado es un arreglo y no una lista.
+\item \funcionazul{np.linspace(a, b, n)} crea un arreglo de $n$ valores equiespaciados entre $a$ y $b$, el valor por defecto de $n=50$, pero se puede modificar.
+\end{enumerate}
+\end{frame}
+\begin{frame}[fragile]
+\begin{lstlisting}[caption=Ejemplos de arreglos predefinidos, basicstyle=\linespread{1.1}\ttfamily=\small, columns=fullflexible]
+a = np.zeros(6)
+b = np.ones(5)
+c = np.arange(3.0, 9.0)
+d = np.linspace(1, 2, 5)
+
+print(a)
+print(b)
+print(c)
+print(d)
+\end{lstlisting}
+\end{frame}
+\begin{frame}
+\frametitle{Dimensiones del arreglo}
+Debemos de hacer énfasis en señalar que hasta el momento, se han presentado arreglos unidimensionales.
+\\
+\bigskip
+Más adelante veremos que es posible crear, manejar y utilizar arreglos con dos o tres dimensiones.
+\end{frame}
+\section{Operación con arreglos}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Operaciones aritméticas}
+\begin{frame}
+\frametitle{Operaciones con arreglos}
+Las limitaciones que tienen los arreglos respecto de las listas son compensadas por la cantidad de operaciones convenientes que permiten realizar sobre ellos.
+\\
+\bigskip
+En los siguientes ejemplos recomendamos ejecutarlos desde \textoazul{Jupyter Qt console}, ya que nos interesa revisar el resultado que se obtiene, sin necesidad de ejecutar un archivo de código.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Operaciones con arreglos}    
+\textbf{Punto importante:} Las operaciones aritméticas entre arreglos \emph{se aplican elemento a elemento}:
+\begin{tcolorbox}[colback=aquamarine!30!white, colbacktitle=kellygreen, coltitle=white, fonttitle=\small, title=Definimos los arreglos]
+\fontsize{10}{10}\selectfont
+\textcolor{ao}{\texttt{In[1]: }} \texttt{a = np.array([55, 21, 19, 11,  9])} \\
+\bigskip
+\pause
+\textcolor{ao}{\texttt{In[2]: }} \texttt{b = np.array([12, -9,  0, 22, -9])}
+\end{tcolorbox}
+\pause
+Veamos entonces algunas operaciones entre estos arreglos:
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Operaciones con arreglos}
+% \setbeamercolor{block title example}{bg=blue!50, fg=white}
+% \setbeamercolor{block body example}{bg=red!35!white}
+\begin{tcolorbox}[colback=aquamarine!30!white, colbacktitle=kellygreen, coltitle=white, fonttitle=\small, title=Suma de dos arreglos]
+\fontsize{10}{10}\selectfont
+\textcolor{ao}{\texttt{In[3]: }} \texttt{a + b} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[3]: }} \texttt{array([67, 12, 19, 33,  0])}
+\end{tcolorbox}
+Recuerda que la operación se realiza directamente: elemento con elemento de cada arreglo. En caso de que ejectues el programa con un archivo *.py, en la terminal se visualiza solo el arreglo, no se presenta la palabra \textoazul{array}.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Operaciones con arreglos}
+\begin{tcolorbox}[colback=aquamarine!30!white, colbacktitle=kellygreen, coltitle=white, fonttitle=\small, title=Multiplicamos por $0.1$ al arreglo $a$]
+\fontsize{10}{10}\selectfont
+\textcolor{ao}{\texttt{In[4]: }} \texttt{0.1 * a} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[4]: }} \texttt{array([ 5.5,  2.1,  1.9,  1.1,  0.9]}
+\end{tcolorbox}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Operaciones con arreglos}
+\begin{tcolorbox}[colback=aquamarine!30!white, colbacktitle=kellygreen, coltitle=white, fonttitle=\small, title=Restamos $9.0$ al arreglo $a$]
+\fontsize{10}{10}\selectfont
+\textcolor{ao}{\texttt{In[5]: }} \texttt{a - 9.0} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[5]: }} \texttt{array([ 46.,  12.,  10.,   2.,   0.])}
+\end{tcolorbox}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Consideración sobre las operaciones}
+Nótese que si quisiéramos hacer estas operaciones usando listas, necesitaríamos usar un ciclo \funcionazul{for} para hacer las operaciones elemento a elemento.
+\\
+\bigskip
+Con los arreglos se simplifica bastante las operaciones entre los elementos.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Operaciones relacionales}
+Las operaciones relacionales también se aplican elemento a elemento, y devuelven un arreglo de valores booleanos:
+\begin{tcolorbox}[colback=aquamarine!30!white, colbacktitle=kellygreen, coltitle=white, fonttitle=\small, title=Ocuparemos tres arreglos]
+\fontsize{10}{10}\selectfont
+\textcolor{ao}{\texttt{In[6]: }} \texttt{a = np.array([5.1, 2.4, 3.8, 3.9])} \\
+\pause
+\textcolor{ao}{\texttt{In[7]: }} \texttt{b = np.array([4.2, 8.7, 3.9, 0.3])} \\
+\pause
+\textcolor{ao}{\texttt{In[8]: }} \texttt{c = np.array([5, 2, 4, 4]) +} \\
+\hspace*{1.3cm} \texttt{np.array([1, 4, -2, -1])/10.0}
+\end{tcolorbox}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Operaciones relacionales}
+\begin{tcolorbox}[colback=aquamarine!30!white, colbacktitle=kellygreen, coltitle=white, fonttitle=\small, title=Dos operaciones relacionales]
+\fontsize{10}{10}\selectfont
+\textcolor{ao}{\texttt{In[9]: }} \texttt{a < b} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[9]: }} \texttt{array([False,  True,  True, False]} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[10]: }} \texttt{a == c} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[10]: }} \texttt{array([ True,  True,  True,  True]}
+\end{tcolorbox}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Comparación con un solo resultado}
+En una operación relacional es posible reducir el arreglo de booleanos a un único valor, con el uso de las funciones \funcionazul{any} y \funcionazul{all.any}.
+\\
+\bigskip
+La función \funcionazul{any} devuelve \funcionazul{True} si \emph{al menos uno de los elementos es verdadero}, mientras que \funcionazul{all} devuelve \funcionazul{True} sólo si \emph{todos los elementos son verdaderos}:
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Comparación con un solo resultado}
+\begin{tcolorbox}[colback=aquamarine!30!white, colbacktitle=kellygreen, coltitle=white, fonttitle=\small, title=Comparación con un solo resultado]
+\fontsize{10}{10}\selectfont
+\textcolor{ao}{\texttt{In[11]: }} \texttt{any(a < b)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[11]: }} \texttt{True} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[12]: }} \texttt{any(a == b)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[12]: }} \texttt{False} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[13]: }} \texttt{all(a == c)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[13]: }} \texttt{True}
+\end{tcolorbox}
+\end{frame}
+\section{Funciones con arreglos}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Operando funciones y arreglos}
+\begin{frame}[fragile]
+\frametitle{Funciones sobre arreglos}
+El paquete \funcionazul{numpy} provee muchas funciones matemáticas (recordemos que extiende al paquete \funcionazul{math}) que también operan elemento a elemento.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Funciones sobre arreglos}
+\begin{tcolorbox}[colback=aquamarine!30!white, colbacktitle=kellygreen, coltitle=white, fonttitle=\small, title=Definiendo un arreglo con linspace]
+\fontsize{10}{10}\selectfont
+\textcolor{ao}{\texttt{In[11]: }} \texttt{x = np.linspace(0, np.pi/2, 9)} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[12]: }} \texttt{x}
+\\
+\bigskip
+\pause
+\textcolor{red}{\texttt{Out[12]: }} \\
+\verb|array([ 0.        ,  0.19634954,  0.39269908,| \\
+\verb|        0.58904862,  0.78539816,  0.9817477 ,| \\
+\verb|        1.17809725,  1.37444679,  1.57079633])|
+\end{tcolorbox}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Evaluando con una función}
+Cuando usamos una función y queremos evaluar los elementos de ésta, con el arreglo tendremos esta tarea en un solo paso:
+\begin{tcolorbox}[colback=aquamarine!30!white, colbacktitle=kellygreen, coltitle=white, fonttitle=\small, title=Evaluando una función con un arreglo]
+\fontsize{10}{10}\selectfont
+\textcolor{ao}{\texttt{In[13]: }} \texttt{np.sin(x)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[13]: }} \\
+\verb|array([ 0.        ,  0.19509032,  0.38268343,| \\
+\verb|        0.55557023,  0.70710678,  0.83146961,| \\
+\verb|        0.92387953,  0.98078528,  1.        ])|
+\end{tcolorbox}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ventaja de los arreglos}
+Se hace evidente otra de las ventajas de los arreglos: al mostrarlos en la terminal, los valores aparecen perfectamente alineados. Con las listas, esto no ocurre:
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ventaja de los arreglos}
+\begin{tcolorbox}[colback=aquamarine!30!white, colbacktitle=kellygreen, coltitle=white, fonttitle=\small, title=Lista de valores evaluados en la función]
+\fontsize{10}{10}\selectfont
+\textcolor{ao}{\texttt{In[14]: }} \texttt{list(sin(x))} \\
+\pause
+\textcolor{red}{\texttt{Out[14]: }}
+\begin{verbatim}
+[0.0,
+0.19509032201612825,
+0.38268343236508978,
+0.55557023301960218,
+0.70710678118654746,
+0.83146961230254524,
+0.92387953251128674,
+0.98078528040323043,
+1.0]
+\end{verbatim}
+\end{tcolorbox}
+\end{frame}
+\subsection{Valores aleatorios}
+\begin{frame}[fragile]
+\frametitle{Arreglos aleatorios}
+El paquete \funcionazul{numpy} contiene a su vez otros módulos que proveen funcionalidad adicional a los arreglos y funciones básicos.
+\\
+\bigskip
+El módulo \funcionazul{numpy.random} provee funciones para generar números aleatorios (es decir, generados al azar), de las cuales la función más usada es \funcionazul{random}, que entrega un arreglo de números al azar distribuidos uniformemente entre $0$ y $1$:
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Arreglos aleatorios}
+\begin{tcolorbox}[colback=aquamarine!30!white, colbacktitle=kellygreen, coltitle=white, fonttitle=\small, title=Generando números aleatorios]
+\fontsize{10}{10}\selectfont
+\textcolor{ao}{\texttt{In[15]: }} \texttt{from numpy.random import random} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[16]: }} \texttt{random(3)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[16]: }} \texttt{array([ 0.53077263,  0.22039319,} \\
+\hspace*{1.3cm} \texttt{0.81268786])} \\
+\pause
+\textcolor{ao}{\texttt{In[17]: }} \texttt{random(3)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[17]: }} \texttt{array([ 0.07405763,  0.04083838,} \\
+\hspace*{1.3cm} \texttt{0.72962968])}
+\end{tcolorbox}
+\end{frame}
+\subsection{Funciones de utilidad}
+\begin{frame}[fragile]
+\frametitle{Algunos funciones convenientes}
+Los arreglos proveen algunas funciones útiles que conviene conocer.
+\\
+\bigskip
+Las funciones \funcionazul{min} y \funcionazul{max}, entregan respectivamente el mínimo y el máximo de los elementos del arreglo.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Algunos funciones convenientes}
+Considera que al usar arreglos todos los elementos son del mismo tipo de dato, podemos usar las funciones mencionadas con listas, pero debemos de garantizar que los datos son del mismo tipo.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Algunos funciones convenientes}
+\fontsize{10}{10}\selectfont
+\begin{exampleblock}{Uso de las funciones min y max}
+\textcolor{ao}{\texttt{In[18]: }} \texttt{d = np.array([4.1, 2.7, 8.4, np.pi, -2.5, 3, 5.2])} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[19]: }} \texttt{a.min()} \\ 
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[19]: }} \texttt{-2.5} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[20]: }} \texttt{a.max()} \\ 
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[20]: }} \texttt{8.4000000000000004}
+\end{exampleblock}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Funciones que devuelven índices}
+Las funciones \funcionazul{argmin} y \funcionazul{argmax} entregan respectivamente el índice en donde se ubica el elemento que es el mínimo del arreglo, así como el índice del elemento que es el máximo del arreglo:
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Funciones que devuelven índices}
+\fontsize{10}{10}\selectfont
+\begin{exampleblock}{Las funciones argmin y argmax}
+\textcolor{ao}{\texttt{In[21]: }} \texttt{a.argmin()} \\ 
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[21]: }} \texttt{4} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[22]: }} \texttt{a.argmax()} \\ 
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[22]: }} \texttt{2}
+\end{exampleblock}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Funciones que operan sobre el arreglo}
+Las funciones \funcionazul{sum} y \funcionazul{prod} devuelven respectivamente la suma y el producto de los elementos del arreglo:
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Funciones que operan sobre el arreglo}
+\fontsize{10}{10}\selectfont
+\begin{exampleblock}{Las funciones sum y prod}
+\textcolor{ao}{\texttt{In[23]: }} \texttt{a.sum()} \\ 
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[23]: }} \texttt{24.041592653589795} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[24]: }} \texttt{a.prod()} \\ 
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[24]: }} \texttt{-11393.086289208301}
+\end{exampleblock}
+\end{frame}
+\section{Productos entre arreglos}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{La función \texttt{dot}}
+\begin{frame}
+\frametitle{Productos entre arreglos}
+Recordemos que computacionalmente un arreglo es un sinónimo de un vector en una dimensión.
+\\
+\bigskip
+Mientras que un arreglo en dos dimensiones sería el equivalente a una matriz.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Producto vector-vector}
+El producto entre dos vectores se obtiene usando la función \funcionazul{numpy.dot}:
+\fontsize{12}{12}\selectfont
+\begin{exampleblock}{Definimos dos arreglos}
+\textcolor{ao}{\texttt{In[25]: }} \texttt{a =np. array([-2.8 , -0.88,  2.76,  1.3 ,  4.43])} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[26]: }} \texttt{b = np.array([ 0.25, -1.58,  1.32, -0.34, -4.22])} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[27]: }} \texttt{np.dot(a, b)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[27]: }} \texttt{-14.803}
+\end{exampleblock}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejemplo con el producto escalar}
+Recordemos la definición de producto escalar
+\begin{align*}
+\va{a} \cdot \va{b} = \abs{a} \, \abs{b} \, \cos(\va{a}, \va{b})
+\end{align*}
+Vemos que de la definición el producto escalar se usa para calcular el coseno del ángulo entre dos vectores.
+\\
+\bigskip
+\pause
+El producto escalar se obtiene
+\begin{align*}
+\va{a} \cdot \va{b} = a_{1} \, b_{1} + a_{2} \, b_{2} + a_{3} \, b_{3}
+\end{align*}
+\end{frame}
+\begin{frame}  
+\frametitle{Ejemplo con el producto escalar}
+\fontsize{12}{12}\selectfont
+\begin{exampleblock}{Cálculo del ángulo entre dos vectores}
+\textcolor{ao}{\texttt{In[28]: }} \texttt{x = np.array([1, 2, 3])} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[29]: }} \texttt{y = np.array([-7, 8, 9])} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[30]: }} \texttt{producto = np.dot(x,y)} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[31]: }} \texttt{x\_modulo = np.sqrt((x*x).sum())} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[32]: }} \texttt{y\_modulo = np.sqrt((y*y).sum())}
+\end{exampleblock}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejemplo con el producto escalar}
+\fontsize{12}{12}\selectfont
+\begin{exampleblock}{Cálculo del ángulo entre dos vectores}
+\textcolor{ao}{\texttt{In[33]: }} \texttt{cos\_angulo = producto / x\_modulo / y\_modulo} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[34]: }} \texttt{angulo = np.arccos(cos\_angulo)} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[35]: }} \texttt{angulo} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[35]: }} \texttt{0.808233789010825} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[36]: }} \texttt{angulo*360/2/np.pi} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[36]: }} \texttt{46.308384970187326}
+\end{exampleblock}
+\end{frame}
+\subsection{Producto interno}
+\begin{frame}
+\frametitle{La función \texttt{np.inner}}
+Aunque la función \funcionazul{dot} realiza el producto elemento con elemento de los arreglos, podemos utilizar propiamente la función \funcionazul{np.inner}, que evalúa el producto interno entre dos vectores.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{La función \texttt{np.inner}}
+\fontsize{12}{2}\selectfont
+\begin{exampleblock}{Producto interno entre dos vectores}
+\textcolor{ao}{\texttt{In[37]: }} \texttt{a = np.array([1,2,3])} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[38]: }} \texttt{b = np.array([0,1,0])} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[39]: }} \texttt{np.inner(a, b)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[39]: }} \texttt{2}
+\end{exampleblock}
+\end{frame}
+\begin{frame}
+\frametitle{Diferencia entre \texttt{dot} y \texttt{inner}}
+Si estamos manejando arreglos en una dimensión, las funciones \funcionazul{dot} y \funcionazul{inner} son las mismas.
+\\
+\bigskip
+Lo interesante es que con la función \funcionazul{dot} se puede operar \emph{tensores}, claro en arreglos n-dimensionales.
+\end{frame}
+\subsection{Producto externo}
+\begin{frame}
+\frametitle{El producto externo}
+El producto externo (producto cruz) es una operación binaria entre dos vectores en el espacio 3D.
+\\
+\bigskip
+El resultado es un vector perpendicular a los dos vectores que se multiplican, además es normal al plano que contiene a aquéllos.
+\end{frame}
+\begin{frame}
+\frametitle{El producto externo}
+El producto cruz de los vectores $\va{a}$ y $\va{b}$ se define por
+\begin{align*}
+\va{a} \cp \va{b} = \abs{a} \, \abs{b} \sin(\va{a}, \va{b}) \abs{\va{n}}
+\end{align*}
+donde $\va{n}$ es el vector unitario perpendicular al plano que contiene a los vectores $\va{a}$ y $\va{b}$, en la dirección dada por la regla de la mano derecha.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejemplo con el producto externo}
+\fontsize{12}{12}\selectfont
+\begin{exampleblock}{Producto escalar de los vectores $x$ e $y$}
+\textcolor{ao}{\texttt{In[40]: }} \texttt{x = np.array([0., 0., 1.])} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[41]: }} \texttt{y = np.array([0., 1., 0.])} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[42]: }} \texttt{np.cross(x, y)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[42]: }} \texttt{array([-1.,  0.,  0.])} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[43]: }} \texttt{np.cross(y, x)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[43]: }} \texttt{array([1., 0., 0.])}
+\end{exampleblock}
+\end{frame}
+\subsection{Producto matriz-vector}
+\begin{frame}[fragile]
+\frametitle{Producto matriz-vector}
+El producto matriz-vector es el \emph{vector de los productos internos}. El producto matriz-vector puede ser visto simplemente como varios productos internos calculados de una sola vez.
+\\
+\bigskip
+Esta operación también es obtenida usando la función \funcionazul{np.dot} entre las filas de la matriz y el vector:
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Producto matriz-vector}
+\fontsize{12}{12}\selectfont
+\begin{exampleblock}{Producto de la matriz $a$ por el vector $x$}
+\textcolor{ao}{\texttt{In[44]: }} \texttt{a = np.array([[-0.6,  4.8, -1.2],} \\
+\hspace{4cm} \texttt{[-2. , -3.6, -2.1],} \\
+\hspace{4cm} \texttt{[ 1.7,  4.9,  0. ]])} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[45]: }} \texttt{ x = np.array([-0.6, -2. ,  1.7])} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[46]: }} \texttt{ np.dot(a, x)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[46]: }} \texttt{array([-11.28,  4.83, -10.82])}
+\end{exampleblock}
+\end{frame}
+\subsection{Producto matriz-matriz}
+\begin{frame}[fragile]
+\frametitle{Producto matriz-matriz}
+El producto matriz-matriz es la matriz de los productos internos entre las filas de la primera matriz (de $m \times n$) y las columnas de la segunda (de $n \times p$).
+\\
+\bigskip
+El resultado es un arreglo de tamaño $m \times p$.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Producto matriz-matriz}
+\fontsize{12}{12}\selectfont   
+\begin{exampleblock}{Producto de dos matrices}
+\textcolor{ao}{\texttt{In[47]: }} \texttt{a = np.array([[ 2,  8],} \\
+\hspace{4cm} \texttt{[-3,  7],} \\
+\hspace{4cm} \texttt{[-8, -5]])} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[48]: }} \texttt{b = np.array([[-3, -5, -6, -3],} \\
+\hspace{4cm} \texttt{[-9, -2,  3, -3]])} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[49]: }} \texttt{np.dot(a, b)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[49]: }} \texttt{array([[-78, -26,  12, -30],} \\
+\hspace{4cm} \texttt{[-54,   1,  39, -12],} \\
+\hspace{4cm} \texttt{[ 69,  50,  33,  39]])}
+\end{exampleblock}
+\end{frame}
+\begin{frame}
+\frametitle{Producto matriz-matriz}
+La multiplicación de matrices puede ser vista como varios productos matriz-vector (usando como vectores todas las filas de la segunda matriz), calculados de una sola vez.
+\end{frame}
+\begin{frame}
+\frametitle{Resumen de operaciones}
+En resumen, al usar la función \funcionazul{np.dot}, la estructura del resultado depende de cuáles son los parámetros que se utilizan:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item \funcionazul{np.dot}(vector, vector) $\rightarrow$ número.
+\item \funcionazul{np.dot}(matriz, vector) $\rightarrow$ vector.
+\item \funcionazul{np.dot}(matriz, matriz) $\rightarrow$ matriz.
+\end{enumerate}
+\end{frame}
+\section{Matrices como arreglos}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Arreglos predefinidos}
+\begin{frame}
+\frametitle{Matrices como arreglos}
+Las matrices o arreglos en 2D son importantes en el cómputo científico, \funcionazul{numpy} proporciona funciones que generan matrices predefinidas:
+\pause
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item La función \funcionazul{np.identity}
+\item La función \funcionazul{np.eye}
+\item La función \funcionazul{np.diag}
+\end{enumerate}
+\end{frame}
+\subsection{La función \texttt{identity}}
+\begin{frame}[fragile]
+\frametitle{La función \texttt{identity}}
+La función \funcionazul{np.identity(n)} genera una matriz cuadrada de $n \cp n$, los elementos de la diagonal son $1$ y los demás son $0$:
+\fontsize{12}{12}\selectfont
+\begin{exampleblock}{Creando una matriz de $4 \cp 4$}
+\textcolor{ao}{\texttt{In[50]: }} \texttt{np.identity(4)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[50]: }} \\
+\texttt{array([[1., 0., 0., 0.],} \\
+\texttt{[0., 1., 0., 0.],} \\
+\texttt{[0., 0., 1., 0.],} \\
+\texttt{[0., 0., 0., 1.]])}
+\end{exampleblock}
+\end{frame}
+\subsection{La función \texttt{eye}}
+\begin{frame}[fragile]
+\frametitle{La función \texttt{eye}}
+La función \funcionazul{np.eye(n,k)} genera matrices cuadradas de $n \cp n$ con elementos en la diagonal que valen $1$, permitiendo un desplazamiento (\emph{offset}) sobre la diagonal: $k$.
+\\
+\bigskip
+El valor por defecto del desplazamiento es $k=0$.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{La función \texttt{eye}}
+\fontsize{12}{12}\selectfont
+\begin{exampleblock}{Desplazamiento positivo}
+\textcolor{ao}{\texttt{In[51]: }} \texttt{np.eye(3, k=1)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[51]: }} \\
+\texttt{array([[0., 1., 0.],} \\
+\texttt{[0., 0., 1.],} \\
+\texttt{[0., 0., 0.]])} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[52]: }} \texttt{np.eye(3, k=-1)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[52]: }} \\
+\texttt{array([[0., 0., 0.],} \\
+\texttt{[1., 0., 0.],} \\
+\texttt{[0., 1., 0.]])}
+\end{exampleblock}
+\end{frame}
+\subsection{La función \texttt{diag}}
+\begin{frame}[fragile]
+\frametitle{La función \texttt{np.diag}}
+Para crear una matriz con un arreglo unidimensional arbitrario en la diagonal, podemos utilizar la función \funcionazul{np.diag}, que cuenta con un argumento opcional $k$ de desplazamiento sobre la diagonal.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{La función \texttt{np.diag}}
+\fontsize{12}{12}\selectfont
+\begin{exampleblock}{Creando una matriz con elementos arbitrarios en la diagonal}
+\textcolor{ao}{\texttt{In[53]: }} \texttt{np.diag(np.arange(0, 20, 5))} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[53]: }} \\
+\texttt{array([[ 0,  0,  0,  0],} \\
+\texttt{[ 0,  5,  0,  0],} \\
+\texttt{[ 0,  0, 10,  0],} \\
+\texttt{[ 0,  0,  0, 15]])}
+\end{exampleblock}
+\end{frame}
+\section{El módulo \texttt{np.linalg}}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Contenido de \texttt{np.linalg}}
+\begin{frame}
+\frametitle{El módulo \texttt{np.linalg}}
+Será necesario apoyarnos en la módulo \funcionazul{np.linalg} para el manejo y operación tanto de arreglos como de matrices.
+\\
+\bigskip
+Se recomienda que revises la documentación oficial de \python, para consultar las otras funciones que no manejaremos explícitamente en las presentaciones.
+\end{frame}
+\begin{frame}
+\frametitle{Contenido de \texttt{np.linalg}}
+Productos de matrices y vectores
+\\
+\bigskip
+Funciones: \funcionazul{dot}, \funcionazul{vdot}, \funcionazul{inner}, \funcionazul{outer}, \funcionazul{tensordot}, etc.
+\end{frame}
+\begin{frame}
+\frametitle{Contenido de \texttt{np.linalg}}
+Descomposiciones
+\\
+\bigskip
+Funciones: \funcionazul{cholesky}, \funcionazul{qr}, \funcionazul{svd}
+\end{frame}
+\begin{frame}
+\frametitle{Contenido de \texttt{np.linalg}}
+Valores propios
+\\
+\bigskip
+Funciones: \funcionazul{eig}, \funcionazul{eigh} (matriz Hermitiana o real), \funcionazul{eigs}, etc.
+\end{frame}
+\begin{frame}
+\frametitle{Contenido de \texttt{np.linalg}}
+Normas y otros valores
+\\
+\bigskip
+Funciones: \funcionazul{norm}, \funcionazul{cond}, \funcionazul{det}, \funcionazul{matriz\_rank}, \funcionazul{trace}, etc.
+\end{frame}
+\begin{frame}
+\frametitle{Contenido de \texttt{np.linalg}}
+Solución de sistemas e inversión de matrices
+\\
+\bigskip
+Funciones:  \funcionazul{solve}, \funcionazul{inv}, \funcionazul{tensorsolve}, \funcionazul{inv}, etc.   
+\end{frame}
+\section{Propiedades de las matrices}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{El Determinante}
+\begin{frame}[fragile]
+\frametitle{El determinante}
+El determinante de una matriz se calcula mediante la función \funcionazul{np.linalg.det}:
+\fontsize{12}{12}\selectfont
+\begin{exampleblock}{Obteniendo el valor del determinante de una matriz}
+\textcolor{ao}{\texttt{In[54]: }} \texttt{import numpy.linalg as nla} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[55]: }} \texttt{a = np.array([[ 3, -5, 8], [-1, 2, 3], [-5, -6, 2]])} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[56]: }} \texttt{nla.det(a)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[56]: }} \texttt{259.0000000000001}
+\end{exampleblock}
+\end{frame}
+\subsection{La Traza}
+\begin{frame}[fragile]
+\frametitle{La traza de una matriz}
+La traza de un arreglo o de una matriz se calcula con la función \funcionazul{np.trace}:
+\fontsize{12}{12}\selectfont
+\begin{exampleblock}{La traza de una matriz}
+\textcolor{ao}{\texttt{In[57]: }} \texttt{np.trace(a)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[57]: }} \texttt{7} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[58]: }} \texttt{np.trace(a, 1)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[58]: }} \texttt{-2}
+\end{exampleblock}
+En el segundo ejemplo, se hizo un desplazamiento unitario por arriba de la diagonal principal.
+\end{frame}
+\subsection{La Matriz Inversa}
+\begin{frame}[fragile]
+\frametitle{La matriz inversa}
+La matriz inversa se calcula con la función \funcionazul{linalg.inv}:
+\fontsize{12}{12}\selectfont
+\begin{exampleblock}{La matriz inversa}
+\textcolor{ao}{\texttt{In[59]: }} \texttt{nla.inv(a)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[59]: }} \\
+\texttt{array([[ 0.08494208, -0.14671815, -0.11969112],} \\
+\texttt{[-0.05019305,  0.17760618, -0.06563707],} \\
+\texttt{[ 0.06177606,  0.16602317,  0.003861  ]])}
+\end{exampleblock}
+\end{frame}
+\subsection{La Matriz Transpuesta}
+\begin{frame}[plain, fragile]
+\frametitle{La matriz transpuesta}
+\fontsize{12}{12}\selectfont
+La matriz transpuesta se obtiene con la función \funcionazul{matriz.T} o \funcionazul{matriz.transpose()}:
+\begin{exampleblock}{La matriz transpuesta}
+\textcolor{ao}{\texttt{In[60]: }} \texttt{a.T} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[60]: }} \\
+\texttt{array([[ 3, -1, -5],} \\
+\texttt{[-5,  2, -6],} \\
+\texttt{[ 8,  3,  2]])} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[61]: }} \texttt{a.transpose()} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[61]: }} \\
+\texttt{array([[ 3, -1, -5],} \\
+\texttt{[-5,  2, -6],} \\
+\texttt{[ 8,  3,  2]])}
+\end{exampleblock}
+\end{frame}
+\section{Solución de sistemas algebraicos}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Sistemas algebraicos con \python}
+\begin{frame}[plain, fragile]
+\frametitle{Solución de sistemas algebraicos}
+Un sistema de ecuaciones algebraico se puede expresar en términos de un arreglo matricial
+\begin{align*}
+\begin{aligned}
+a_{1} \: x + b_{1} \: y + c_{1} \: z = d_{1} \\
+a_{2} \: x + b_{2} \: y + c_{2} \: z = d_{2} \\
+a_{3} \: x + b_{3} \: y + c_{3} \: z = d_{3} 
+\end{aligned}
+\Longrightarrow
+\begin{pmatrix}
+a_{1} & b_{1} & c_{1} \\ 
+a_{2} & b_{2} & c_{2} \\
+a_{3} & b_{3} & c_{3} 
+\end{pmatrix}
+\begin{pmatrix}
+x \\
+y \\
+z
+\end{pmatrix} = 
+\begin{pmatrix}
+d_{1} \\
+d_{2} \\
+d_{3}
+\end{pmatrix}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución con herramientas}
+Existen métodos y funciones con \python{} para resolver sistemas de ecuaciones algebraicas.
+\\
+\bigskip
+Tomemos en cuenta que:
+\setbeamercolor{item projected}{bg=red!70!black,fg=white}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item La solución de sistemas matriciales es computacionalmente una tarea intensa.
+\item Veremos algunos métodos para resolver estas ecuaciones.
+\item Estos métodos están contenidos en el módulo \azulfuerte{\texttt{np.linalg}}.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo}
+Revisemos algunos métodos usando el siguiente sistema:
+\begin{align*}
+4 \: x - 5 \: y + 8 \: z &= 4 \\
+2 \: x - 8 \: y + 7 \: z &= 0 \\
+-5 \: x - 8 \: y &= 4
+\end{align*}
+\end{frame}
+\subsection{La función np.linalg.solve}
+\begin{frame}
+\frametitle{La función np.linalg.solve}
+Esta función utiliza la matriz de coeficientes y el vector del lado derecho de la igualdad como argumentos, devuelve un vector con la solución:
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{La función np.linalg.solve}
+\fontsize{12}{12}\selectfont
+\begin{exampleblock}{Resolviendo un sistema de ecuaciones}
+\textcolor{ao}{\texttt{In[62]: }} \texttt{a = np.array([[4, -5, 8], [2, -8, 7], [-5, 8, 0]])} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[63]: }} \texttt{b = np.array([4, 0, -5])} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[64]: }} \texttt{x = nla.solve(a, b)} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[65]: }} \texttt{x} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[65]: }} \texttt{array([ 1.53112033,  0.33195021, -0.05809129])}
+\end{exampleblock}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Comprobando la solución}
+Para revisar que el vector $x$ es solución del sistema de ecuaciones, realizamos la siguiente instrucción.
+\begin{exampleblock}{Comprobando la solución obtenida}
+\textcolor{ao}{\texttt{In[66]: }} \texttt{np.allclose(np.dot(a, x), b)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[66]: }} \texttt{True}
+\end{exampleblock}
+\end{frame}
+\begin{frame}[plain, fragile]
+\frametitle{Consideración importante}
+La matriz de coeficientes debe de ser \emph{no singular}, es decir, el determinante de esa matriz debe de ser distinto de cero:
+\fontsize{12}{12}\selectfont
+\begin{exampleblock}{Segundo ejemplo con una matriz singular}
+\textcolor{ao}{\texttt{In[67]: }} \texttt{a2 = np.array([[4, -5, 8], [8, -10, 16], [-5, 8, 0]])} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[68]: }} \texttt{b2 = array([4, 8, -5])} \\
+\medskip
+\pause  
+\textcolor{ao}{\texttt{In[69]: }} \texttt{nla.det(a2)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[69]: }} \texttt{0.0} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[70]: }} \texttt{x2 = nla.solve(a2, b2)} \\
+\end{exampleblock}
+\pause
+Se produce un error
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Mensaje de error}
+\fontsize{12}{12}\selectfont
+\begin{exampleblock}{Mensaje de error}
+\texttt{
+   ...linalg.py in \_raise\_linalgerror\_singular(err, flag)\\
+   95 \\
+   96 def \_raise\_linalgerror\_singular(err, flag):\\
+---> 97     raise LinAlgError("Singular matrix") \\
+   98 \\
+   99 def \_raise\_linalgerror\_nonposdef(err, flag):\\
+LinAlgError: Singular matrix}
+\end{exampleblock}
+\end{frame}
+\begin{frame}
+\frametitle{Sistemas algebraicos grandes}
+Los sistemas algebraicos con un número muy grande de ecuaciones, implican una carga computacional elevada para resolverlo.
+\\
+\bigskip
+Existen varios métodos especializados para resolver eficientemente esos grandes sistemas de ecuaciones.
+\end{frame}
+\begin{frame}
+\frametitle{¿Qué es un número grande?}
+La pregunta que nos planteamos es: ¿en qué momento se considera que ya tenemos un número grande para un sistema de ecuaciones?
+\\
+\bigskip
+\pause
+Vamos a considerar un \emph{sistema de ecuaciones grande}, cuando el tamaño de la matriz sea mayor o igual a $50 \cp 50$.
+\end{frame}
+\subsection{Ejercicios a cuenta}
+\begin{frame}
+\frametitle{Ejercicios a cuenta}
+\textbf{1)} Utilizando las funciones que se revisaron en esta presentación: Identifica cuáles de las siguientes matrices son singulares:
+\\
+\bigskip
+\fontsize{12}{12}\selectfont
+$\mathbf{A_{1}} =
+\begin{pmatrix}
+1 & 2 & 3 \\
+2 & 3 & 4 \\
+3 & 4 & 5
+\end{pmatrix}$
+\hspace{1.25cm}
+$\mathbf{A_{2}} =
+\begin{pmatrix}
+2.11 & -0.80 & 1.72 \\
+-1.84 & 3.03 & 1.29 \\
+-1.57 & 5.25 & 4.30
+\end{pmatrix}$
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicios a cuenta}
+\fontsize{12}{12}\selectfont
+\begin{multicols}{2}
+$\mathbf{A_{3}} =
+\begin{pmatrix}
+2 & -1 & 0 \\
+-1 & 2 & -1 \\
+0 & -1 & 2
+\end{pmatrix}$
+\hspace{1.5cm}
+$ \mathbf{A_{4}} =
+\begin{pmatrix}
+4 & 3 & -1 \\
+7 & -2 & 3 \\
+5 & -18 & 13
+\end{pmatrix} $ 
+\end{multicols}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicios a cuenta}
+\textbf{2)} Considera una matriz $M$ de $4 \cp 3$:
+\begin{align*}
+M = 
+\begin{bmatrix}
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+7 & 8 & 9 \\
+10 & 11 & 12
+\end{bmatrix}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicios a cuenta}
+Construye esta matriz con \python, usando la función array. Claramente tendrás que ingeniártelas para ello, no esperamos una solución trivial (escribirla a mano), deberás de usar una estrategia  con las funciones vistas en la presentación para obtenerla.
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicios a cuenta}
+\textbf{3) } Resuelve los siguientes sistemas de ecuaciones, debiendo revisar la respectiva propiedad de no singularidad y demostrar que la solución obtenida es consistente con $A \, x =  b$.
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item \begin{align*}
+2 \, x_{1} + x_{2} - 3 \, x_{3} &= -1 \\
+-x_{1} + 3 \, x_{2} + 2 \, x_{3} &= 12 \\
+3 \, x_{1} + x_{2} - 3 \, x_{3} = 0
+\end{align*}
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicios a cuenta}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\conti
+\item \begin{align*}
+0.1 \, x_{1} - 0.6 \, x_{2} + x_{3} &= 0 \\
+-2 \, x_{1} + 8 \, x_{2} + 0.3 \, x_{3} &= 1 \\
+x_{1} + 6 \, x_{2} + 4 \, x_{3} = 2
+\end{align*}
+\\
+\bigskip
+\item \begin{align*}
+4 \, x + y - z &= 9 \\
+3 \, x + 2 \, y - 6 \, z &= -2 \\
+x - 5 \, y + 3 \, z = 0
+\end{align*}
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicios a cuenta}
+\textbf{4) } Calcula $C \equiv A + B$, $D \equiv A - B$, $E \equiv A \, B$, donde
+\begin{align*}
+A = \begin{bmatrix}
+1 & 2 & 3 \\
+0 & 1 & 4 \\
+3 & 0 & 2
+\end{bmatrix}
+\hspace{1.5cm}
+B = \begin{bmatrix}
+4 & 1 & 2 \\
+3 & 2 & 1 \\
+0 & 1 & 2
+\end{bmatrix}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicios a cuenta}
+\textbf{5) } La matriz $A$ es la \emph{matriz de Hilbert} de $5 \cp 5$ dada por
+\begin{align*}
+A = [a_{i, j}] \hspace{1.5cm} \text{donde} \hspace{1cm} a_{i, j} = \dfrac{1}{i + j -1}
+\end{align*}
+Construye con un código la matriz y calcula:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}
+\item $A^{-1}$
+\item $A^{-1} \, A$
+\item $(A^{-1})^{1} \, A^{-1}$
+\end{enumerate} 
+\end{frame}
+% \begin{frame}
+% \frametitle{Solución de sistemas lineales}
+% \fontsize{12}{12}\selectfont
+% Un problema recurrente en Ciencias consiste en obtener cuál es el vector x cuando A y b son dados:
+% \[Ax=b\]
+% La ecuación matricial $Ax=b$ es una manera abreviada de expresar un sistema de ecuaciones lineales. Por ejemplo, la ecuación del diagrama es equivalente al siguiente sistema de tres ecuaciones que tiene las tres incógnitas $w$, $y$ y $z$:
+% \begin{eqnarray*}
+% 36w+51y+13z &=& 3 \\
+% 52w+34y+74z &=& 45 \\
+% 7y+1.1z &=& 33
+% \end{eqnarray*}
+% \end{frame}
+% \begin{frame}
+% Este sistema se representa matricialmente:
+% \[ \begin{bmatrix}
+% 36 & 51 & 13 \\
+% 52 & 34 & 74 \\
+%  & 7 &1.1
+% \end{bmatrix}
+% \begin{bmatrix}
+% w \\
+% y \\
+% z
+% \end{bmatrix} =
+% \begin{bmatrix}
+% 3 \\
+% 45 \\
+% 33
+% \end{bmatrix}
+% \]
+% \end{frame}
+% \begin{frame}[fragile]
+% La teoría detrás de la solución de problemas de este tipo, se puede consultar en cualquier texto de álgebra lineal. Sin embargo, como este tipo de problemas aparece a menudo en la práctica, aprenderemos cómo obtener rápidamente la solución usando Python.
+% \\
+% \bigskip
+% Dentro de los varios módulos incluidos en NumPy, está el módulo \texttt{numpy.linalg}, que provee algunas funciones que implementan algoritmos de álgebra lineal. Dentro de este módulo está la función \texttt{solve}, que entrega la solución $x$ de un sistema a partir de la matriz $A$ y el vector $b$:
+% \end{frame}
+% \begin{frame}[fragile]
+% \fontsize{12}{12}\selectfont
+% \begin{exampleblock}{}
+% \verb|>>> a = array([[ 36. ,  51. ,  13. ],| \\
+% \verb|...            [ 52. ,  34. ,  74. ],| \\
+% \verb|...            [  0. ,   7. ,   1.1]])| \\
+% \pause
+% \verb|>>> b = array([  3.,  45.,  33.])| \\
+% \pause
+% \verb|>>> x = solve(a, b)| \\
+% \pause
+% \verb|>>> x| \\
+% \pause
+% \verb|array([-7.10829222,  4.13213834,  3.70457422])|
+% \end{exampleblock}
+% Podemos ver que el vector $x$ en efecto satisface la ecuación $Ax = b$:
+% \begin{exampleblock}{}
+% \verb|>>> dot(a, x)| \\
+% \pause
+% \verb|array([  3.,  45.,  33.])| \\
+% \pause
+% \verb|>>> b| \\
+% \pause
+% \verb|array([  3.,  45.,  33.])|
+% \end{exampleblock}
+% \end{frame}
+% \begin{frame}[fragile]
+% Sin embargo, es importante tener en cuenta que los valores de tipo real casi nunca están representados de manera exacta en la solución numérica, y que el resultado de un algoritmo que involucra muchas operaciones puede sufrir de algunos errores de redondeo. Por esto mismo, puede ocurrir que aunque los resultados se vean iguales en la consola, los datos obtenidos son sólo aproximaciones y no exactamente los mismos valores:
+% \begin{exampleblock}{}
+% \verb|>>> (dot(a, x) == b).all()| \\
+% \pause
+% \verb|False|
+% \end{exampleblock}
+% \end{frame}
+\end{document}
+% \section{Otras funciones dentro de \texttt{numpy.linalg}}
+% \begin{frame}
+% \frametitle{Otras funciones dentro de \texttt{numpy.linalg}}
+% Para extender (y simplificar el trabajo para codificar) el manejo de arreglos en Python, se cuenta con otras funciones que se ocupan de manera continua.
+% \\
+% \bigskip
+% Como se ha mencionado anteriormente, es necesario repasar el álgebra lineal básica para tener en cuenta el proceso con el cual, Pyhon devuelve una respuesta.
+% \end{frame}
+% %\subsection{Función \texttt{Eye}}
+% \begin{frame}[fragile]
+% \frametitle{Función \texttt{Eye}}
+% La función \texttt{eye} genera una matriz $N \times	N$ diagonal con \verb|eye(N)|, pero admite otros parámetros que permiten hacer matrices no cuadradas, tener otro tipo de datos y hacer distinto de $0$ otra diagonal diferente.
+% \begin{exampleblock}{}
+% \verb|>>>eye(2)| \\
+% \pause
+% \verb|array([[ 1.,  0.],| \\
+% \verb|       [ 0.,  1.]])|
+% \end{exampleblock}
+% \end{frame}
+% \begin{frame}[fragile]
+% \begin{exampleblock}{}
+% \verb|>>> eye(2,3)| \\
+% \pause
+% \pause{\verb|array([[ 1.,  0.,  0.],| \\
+% \verb|       [ 0.,  1.,  0.]])|}
+% \end{exampleblock}
+% \begin{exampleblock}{}<2->
+% \verb|>>> eye(2,3,k=1)| \\
+% \pause{\verb|array([[ 0.,  1.,  0.],| \\
+% \verb|       [ 0.,  0.,  1.]])|}
+% \end{exampleblock}
+% \begin{exampleblock}{}<3->
+% \verb|>>> eye(2,3,k=1,dtype=complex)| \\
+% \pause{\verb|array([[ 0.+0.j,  1.+0.j,  0.+0.j],| \\
+% \verb|       [ 0.+0.j,  0.+0.j,  1.+0.j]])|}
+% \end{exampleblock}
+% \end{frame}
+% %\subsection{Función \texttt{reshape}}
+% \begin{frame}
+% \frametitle{Función \texttt{reshape}}
+% La función \texttt{reshape} permite cambiar las dimensiones de una matriz, siempre respetando el número total de elementos.
+% \\
+% \bigskip
+% No cambia el objeto original, pero devuelve otro objeto que apunta los mismos datos, de forma que si modificamos uno, el otro lo hará también.
+% \end{frame}
+% \begin{frame}[fragile]
+% \verb|>>> a = random.rand(4,4)| \\
+% \fontsize{10}{10}\selectfont
+% \pause
+% \verb|>>> a| \\
+% \verb|array([[ 0.51878337,  0.93337481,  0.84368137,  0.07324918],| \\
+% \verb|       [ 0.12929511,  0.92344357,  0.50366378,  0.59754141],| \\
+% \verb|       [ 0.67841199,  0.73959186,  0.45789404,  0.85003645],| \\
+% \verb|       [ 0.95552903,  0.81794353,  0.78810869,  0.05192744]])|
+% \end{frame}
+% \begin{frame}[fragile]
+% \verb|>>> b = reshape(a,(2,8))| \\
+% \fontsize{10}{10}\selectfont
+% \pause
+% \verb|>>> b| \\
+% \pause
+% \verb|array([[ 0.51878337,  0.93337481,  0.84368137,  0.07324918,  0.12929511,| \\
+% \verb|         0.92344357,  0.50366378,  0.59754141],| \\
+% \verb|       [ 0.67841199,  0.73959186,  0.45789404,  0.85003645,  0.95552903,| \\
+% \verb|         0.81794353,  0.78810869,  0.05192744]])|
+% \end{frame}
+% %\subsection{Traza y determinante}
+% \begin{frame}[fragile]
+% \frametitle{Traza y determinante}
+% La traza y el determinante de una matriz, se pueden obtener respectivamente, con la función \texttt{trace} y \texttt{det}:
+% \begin{exampleblock}{}
+% \verb|>>> linalg.det(eye(3))| \\
+% \pause{\verb|1.0|} \\
+% \pause{\verb|>>> trace(eye(3))|} \\
+% \pause{\verb|3.0|}
+% \end{exampleblock}
+% \end{frame}
+% %\subsection{Inversa de una matriz}
+% \begin{frame}[fragile]
+% \frametitle{Inversa de una matriz}
+% La inversa de una matriz se calcula con la función \texttt{inv}:
+% \begin{exampleblock}{}
+% \fontsize{12}{12}\selectfont
+% \verb|>>> a = random.rand(2,2)| \\
+% \pause{\verb|>>> a|} \\
+% \pause{\verb|array([[ 0.64569289,  0.72496086],| \\
+% \verb|       [ 0.98555394,  0.02864243]])| }\\
+% \pause{\verb|>>> linalg.inv(a)|} \\
+% \pause{\verb|array([[-0.04115328,  1.04161968],| \\
+% \verb|       [ 1.41603835, -0.92772791]])|} \\
+% \pause{\verb|>>> dot(a,linalg.inv(a))|} \\
+% \pause{\verb|array([[ 1.,  0.],| \\
+% \verb|       [ 0.,  1.]])|}
+% \end{exampleblock}
+% \end{frame}
+% %\subsection{Matriz transpuesta}
+% \begin{frame}[fragile]
+% \frametitle{Matriz transpuesta}
+% La transpuesta de una matriz se obtiene con \texttt{tranpose}, que puede usarse también como método. Otra manera es usar el atributo \texttt{.T}
+% \begin{exampleblock}{Como función}
+% \verb|>>> transpose(a)| \\
+% \pause{\verb|array([[ 0.64569289,  0.98555394],| \\
+% \verb|       [ 0.72496086,  0.02864243]])|}
+% \end{exampleblock}
+% \end{frame}
+% \begin{frame}[fragile]
+% \begin{exampleblock}{Como método}
+% \verb|>>> a.transpose()| \\
+% \pause{\verb|array([[ 0.64569289,  0.98555394],| \\
+% \verb|       [ 0.72496086,  0.02864243]])|}
+% \end{exampleblock}
+% \begin{exampleblock}{Con el atributo \texttt{.T}}<2->
+% \verb|>>> a.T| \\
+% \pause{\verb|array([[ 0.64569289,  0.98555394],| \\
+% \verb|       [ 0.72496086,  0.02864243]])|}
+% \end{exampleblock}
+% \end{frame}
+% %\subsection{Valores y vectores propios}
+% \begin{frame}[fragile]
+% \frametitle{Valores y vectores propios}
+% La función \texttt{eig} permite obtener los valores y vectores propios:
+% \begin{exampleblock}{}
+% \verb|>>> linalg.eig(a)| \\
+% \verb|(array([ 1.23698756, -0.56265224]),| \\
+% \verb| array([[ 0.77492825, -0.51447164],| \\
+% \verb|       [ 0.63204921,  0.85750739]]))|
+% \end{exampleblock}
+% \end{frame}
+%\end{document}
