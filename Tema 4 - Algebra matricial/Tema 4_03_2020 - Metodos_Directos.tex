@@ -1,0 +1,1706 @@
+\input{../Preambulos/pre_documento}
+\input{../Preambulos/pre_plantilla_Warsaw_crane}
+\input{../Preambulos/pre_codigo}
+\input{../Preambulos/pre_define_footers_Warsaw_crane}	
+\setbeamercolor{block title example}{use=structure, fg=white}
+\normalfont
+\usepackage{ccfonts}% http://ctan.org/pkg/{ccfonts}
+\usepackage[T1]{fontenc}% http://ctan.or/pkg/fontenc
+\renewcommand{\rmdefault}{cmr}% cmr = Computer Modern Roman
+\linespread{1.3}
+\title{Métodos directos para matrices}
+\subtitle{Curso de Física Computacional}
+\author{M. en C. Gustavo Contreras Mayén}
+\date{}
+\institute{Facultad de Ciencias - UNAM}
+\titlegraphic{\includegraphics[width=1.75cm]{Imagenes/escudo-facultad-ciencias}\hspace*{4.75cm}~%
+   \includegraphics[width=1.75cm]{Imagenes/escudo-unam}
+}
+\begin{document}
+\maketitle
+\fontsize{14}{14}\selectfont
+\spanishdecimal{.}
+\section*{Contenido}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideallsubsections]}
+\section{Método de Gauss}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Definición}
+\begin{frame}
+\frametitle{El método de Gauss}
+El \funcionazul{método de eliminación de Gauss} es el método más conocido para resolver sistemas de ecuaciones simultáneas.
+\\
+\bigskip
+Consiste en dos etapas:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Fase de eliminación.
+\item Fase de sustitución.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{El método de Gauss}
+La función de la fase de eliminación es transformar las ecuaciones a la forma $U \, x = c$.
+\\
+\bigskip
+Las ecuaciones obtenidas son resueltas por sustitución hacia atrás.
+\end{frame}
+\begin{frame}
+\frametitle{El método de Gauss}
+Con el fin de ilustrar el procedimiento, vamos a resolver el siguiente sistema:
+\begin{align}
+4 \, x_{1} - 2 \, x_{2} + x_{3} &= 11 \label{eq:ecuacion_a} \\
+-2 \, x_{1} + 4 \, x_{2} - 2 \, x_{3} &= -16 \label{eq:ecuacion_b} \\
+x_{1} - 2 \, x_{2} + 4 \, x_{3} &= 17 \label{eq:ecuacion_c}
+\end{align}
+\end{frame}
+\subsection{Fase de eliminación}
+\begin{frame}
+\frametitle{Fase de eliminación}
+La fase de eliminación \emph{utiliza solamente una de las operaciones elementales}: multiplicar una ecuación (por ejemplo, ecuación $j$) por una constante $\lambda$ y restarla de otra ecuación (ecuación $i$).
+\end{frame}
+\begin{frame}
+\frametitle{Fase de eliminación}
+La representación simbólica de esta operación es:
+\begin{align*}
+Eq.(i) \leftarrow Eq.(i) - \lambda \times Eq.(j) 
+\end{align*}
+La ecuación que se resta, a saber, la $Eq.(j)$, se llama \emph{ecuación pivote}.
+\end{frame}
+\begin{frame}
+\frametitle{Inicia la fase de eliminación}
+Comenzamos la eliminación eligiendo la ec. (\ref{eq:ecuacion_a}) como ecuación pivote y eligiendo los multiplicadores $\lambda$ a fin de eliminar $x_{1}$ en las ecs. (\ref{eq:ecuacion_b}) y (\ref{eq:ecuacion_c}):
+\end{frame}
+\begin{frame}
+\frametitle{Inicia la fase de eliminación}
+Las operaciones son entonces:
+\begin{align*}
+Eq.(\ref{eq:ecuacion_b}) \leftarrow& Eq.(\ref{eq:ecuacion_b}) - (-0.5) \times Eq.(\ref{eq:ecuacion_a}) \\
+Eq.(\ref{eq:ecuacion_c}) \leftarrow& Eq.(\ref{eq:ecuacion_c}) - 0.25 \times Eq.(\ref{eq:ecuacion_a})
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Inicia la fase de eliminación}
+Después de esta primera transformación, el sistema de ecuaciones queda:
+\begin{align}
+4 \ , x_{1} - 2 \, x_{2} + x_{3} &= 11 \label{eq:ecuacion_d} \\
+3 \, x_{2} - 1.5 \, x_{3} &= -10.5 \label{eq:ecuacion_e} \\
+-1.5 \, x_{2} + 3.75 \, x_{3} &= 14.25 \label{eq:ecuacion_f}
+\end{align}
+Esto completa el primer paso.
+\end{frame}
+\begin{frame}
+\frametitle{Continua la fase de eliminación}
+Ahora elegimos ec. (\ref{eq:ecuacion_e}) como ecuación pivote y eliminamos $x_{2}$ de la ec. (\ref{eq:ecuacion_f}):
+\begin{align*}
+Eq.(\ref{eq:ecuacion_f}) \leftarrow Eq.(\ref{eq:ecuacion_f}) - (-0.5) \times Eq.(\ref{eq:ecuacion_e})
+\end{align*}
+que nos devuelve:
+\end{frame}
+\begin{frame}
+\frametitle{Continua la fase de eliminación}
+Que nos devuelve:
+\begin{align}
+4 \, x_{1} - 2 \, x_{2} + x_{3} &= 11 \label{eq:ecuacion_g} \\
+3 \, x_{2} - 1.5 \, x_{3} &= -10.5 \label{eq:ecuacion_h} \\
+3 \, x_{3} &= 9 \label{eq:ecuacion_i}
+\end{align}
+Tenemos que \emph{la fase de eliminación está completa}.
+\end{frame}
+\begin{frame}
+\frametitle{Fase de eliminación completa}
+Las ecuaciones iniciales del sistema fueron reemplazadas por un conjunto de ecuaciones equivalentes que pueden resolverse fácilmente por sustitución hacia atrás.
+\end{frame}
+\begin{frame}
+\frametitle{Uso de la matriz aumentada}
+Como se ha señalado antes, la matriz de coeficientes aumentada es un instrumento más conveniente para realizar los cálculos.
+\\
+\bigskip
+\pause
+Así, las ecuaciones originales se escribirían matricialmente como
+\begin{align*}
+\begin{bmatrix}[ccc|c]
+4 & -2 & 1 & 11 \\
+-2 & 4 & -2 & -16 \\
+1 & -2 & 4 & 17
+\end{bmatrix}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Matrices equivalentes}
+Las ecuaciones equivalentes obtenidas por el primer paso de la eliminación de Gauss, quedarían como:
+\begin{align*}
+\begin{bmatrix}[ccc|c]
+4 & -2 & 1 & 11.00 \\
+0 & 3 & -1.5 & -10.50 \\
+0 & -1.5 & 3.75 & 14.25
+\end{bmatrix}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Matrices equivalentes}
+Las ecuaciones equivalentes para el segundo paso de la eliminación de Gauss, quedarían como:
+\begin{align*}
+\begin{bmatrix}[ccc|c]
+4 & -2 & 1 & 11.00 \\
+0 & 3 & -1.5 & -10.50 \\
+0 & 0 & 3 & 9.00    
+\end{bmatrix}
+\end{align*}
+\end{frame}
+\subsection{Fase de sustitución hacia atrás}
+\begin{frame}
+\frametitle{Fase de sustitución hacia atrás}
+Las incógnitas ahora se calculan por sustitución hacia atrás.
+\\
+\bigskip
+\pause
+Resolviendo las ecs. (\ref{eq:ecuacion_i}), (\ref{eq:ecuacion_h}) y (\ref{eq:ecuacion_g}) en ese orden, se obtiene la solución:
+\begin{align*}
+x_{3} &= 9/3 = 3 \\
+x_{2} &= (-10.5 + 1.5 \, x-{3})/3 = -2 \\
+x_{1} &= (11 + 2 \, x_{2} - x_{3})/4 = 1
+\end{align*}
+\end{frame}
+\subsection{Algoritmo para el método de Gauss}
+\begin{frame}
+\frametitle{Algoritmo general}
+El siguiente paso es considerar una matriz cuadrada de $n \cp n$ a la que la incorporamos el respectivo vector $\vb{b}$ de términos constantes:
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Caso general}
+\fontsize{10}{10}\selectfont
+\begin{align*}
+\begin{bmatrix}[ccccccccc|c]
+A_{11} & A_{12} & A_{13} & \ldots & A_{1k} & \ldots & A_{ij} & \ldots & A_{1n} & b_{1} \\
+0      & A_{22} & A_{23} & \ldots & A_{2k} & \ldots & A_{2j} & \ldots & A_{2n} & b_{2} \\
+0      & 0      & A_{33} & \ldots & A_{3k} & \ldots & A_{3j} & \ldots & A_{3n} & b_{3} \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+0      & 0      & 0      & A_{kk} & \ldots & \ldots & A_{kj} & \ldots & A_{kn} & b_{k} \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+0      & 0      & 0      & A_{ik} & \ldots & \ldots & A_{ij} & \ldots & A_{in} & b_{i} \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+0      & 0      & 0      & A_{nk} & \ldots & \ldots & A_{nj} & \ldots & A_{nn} & b_{n} \\
+\end{bmatrix}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Algoritmo general}
+El procedimiento para construir el algoritmo es esencialmente el mismo que vimos en el ejemplo de la matriz de $3 \cp 3$.
+\\
+\bigskip
+\pause
+Con la finalidad de avanzar en el tema, la función \azulfuerte{scipy.linalg.solve} nos resuelve un sistema del tipo $\mathbf{A} \, x =  \mathbf{b}$.
+\end{frame}
+\subsection{La función \texttt{sla.solve}}
+\begin{frame}
+\frametitle{Uso de la función \texttt{sla.solve}}
+La función \funcionazul{sla.solve} opera de manera similar que en el paquete \funcionazul{numpy,linalg}.
+\\
+\bigskip
+Con el fin de unificar el criterio de uso con \python, estaremos utilizando \funcionazul{scipy} para resolver los sistemas de ecuaciones. 
+\end{frame}
+\begin{frame}
+\frametitle{Parámetros de \texttt{sla.solve}}
+La función \funcionazul{sla.solve} resuelve un sistema de ecuaciones $a * x = b$ para la incógnita $x$ de una matriz cuadrada.
+\\
+\bigskip
+Los parámetros mínimos para la función \funcionazul{sla.solve} son:
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Parámetros de \texttt{sla.solve}}
+\verb|sla.solve(a, b, assume_a='gen')|
+\\
+\medskip
+donde
+\\
+\textbf{a} : Es un arreglo de $N \cp N$. Matriz cuadrada.
+\\
+\textbf{b} : Es un arreglo de $N$. Vector del lado derecho de la expresión.
+\\
+\textbf{asume\_a} : cadena, opcional. Si se sabe que la matriz es de un tipo en particular, se 
+sustituye por las siguientes opciones.
+\end{frame}
+\begin{frame}
+\frametitle{Opciones para el tipo de matriz}
+\begin{table}
+\begin{tabular}{l l}
+Tipo Matriz & Argumento \\ \hline
+matriz genérica & 'gen' \\
+simétrica & 'sym' \\
+hermitiana & 'her' \\
+definida positiva & 'pos'
+\end{tabular}
+\end{table}
+Si se omite el parámetro, el valor por defecto es 'gen'
+\end{frame}
+\begin{frame}
+\frametitle{Número de operaciones}
+El tiempo de ejecución de un algoritmo depende en gran medida del número de operaciones  (multiplicaciones y divisiones) realizadas.
+\\
+\bigskip
+Se puede demostrar que la \funcionazul{eliminación de Gauss} ocupa aproximadamente $n^{3}/3$ de tales operaciones ($n$ es el número de ecuaciones) en la fase de eliminación, y $n^{2}/2$ operaciones en sustitución inversa.
+\end{frame}
+\begin{frame}
+\frametitle{Número de operaciones}
+Estos números muestran que la mayor parte del tiempo de cálculo está en la fase de eliminación.
+\\
+\bigskip
+Además, el tiempo aumenta muy rápidamente con el número de ecuaciones, por lo que hay que tener cuidado con sistemas grandes.
+\end{frame}
+\section{Métodos de descomposición LU}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Definición}
+\begin{frame}
+\frametitle{Métodos de descomposición \textbf{LU}}
+Se puede demostrar que cualquier matriz cuadrada $\mathbf{A}$ se puede expresar como un producto de una matriz triangular inferior $\mathbf{L}$ y una matriz triangular superior $\mathbf{U}$:
+\begin{align*}
+\mathbf{A = L \: U}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Factorización \textbf{LU}}
+El proceso de calcular $\mathbf{L}$ y $\mathbf{U}$ para un determinada matriz $\mathbf{A}$, se conoce como \funcionazul{descomposición LU} o \funcionazul{factorización LU}.
+\end{frame}
+\begin{frame}
+\frametitle{Descomposición $LU$}
+La descomposición $\mathbf{LU}$ no es única (las combinaciones de $\mathbf{L}$ y $\mathbf{U}$ para una determinada matriz A son infinitas), salvo ciertas restricciones de $\mathbf{L}$ o $\mathbf{U}$. 
+\\
+\bigskip
+Estas limitaciones distinguen un tipo de descomposición de otro.
+\end{frame}
+\subsection{Métodos más utilizados}
+\begin{frame}
+\frametitle{Métodos $LU$ más utilizados}
+Los tres métodos de descomposición $LU$ más utilizados son:
+\begin{table}
+\begin{tabular}{l | l}
+    Nombre & Restricciones \\ \hline
+    Doolittle & $L_{ii} = 1, \hspace{0.3cm} i= 1,2,\ldots,n$ \\
+    Crout & $U_{ii} = 1, \hspace{0.3cm} i=1,2,\ldots,n$ \\
+    Choleski & $L = U^{T}$
+\end{tabular}
+\end{table}
+\end{frame}
+\begin{frame}
+\frametitle{Versatilidad de los métodos}
+Después de descomponer la matriz $\mathbf{A}$, se facilita resolver las ecuaciones $A \: x = b$. 
+\\
+\bigskip
+En primer lugar, volvemos a escribir las ecuaciones como $L \: U \: x = b$.
+\end{frame}
+\begin{frame}
+\frametitle{Versatilidad de los métodos}
+Al usar la notación $U \: x = y$, las ecuaciones quedan como
+\begin{align*}
+\mathbf{L \: y = b}
+\end{align*}
+que se puede resolver para $y$ por sustitución hacia delante. 
+\end{frame}
+\begin{frame}
+\frametitle{Versatilidad de los métodos}
+Entonces
+\begin{align*}
+\mathbf{U \: x = y}
+\end{align*}
+nos devolverá la solución $x$ con el proceso de sustitución hacia atrás.
+\end{frame}
+\begin{frame}
+\frametitle{Versatilidad de los métodos}
+La ventaja de la descomposición $LU$ sobre el método de eliminación de Gauss es que una vez descompuesta, podemos resolver $A \, x = b$ para muchos vectores constantes $b$.
+\end{frame}
+\begin{frame}
+\frametitle{Versatilidad de los métodos}
+El costo de cada solución adicional es relativamente pequeño, ya que el avance y las operaciones de sustitución están consumiendo mucho menos tiempo que el proceso de descomposición.
+\end{frame}
+\section{Descomposición de Doolittle}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Descripción del método}
+\begin{frame}
+\frametitle{Descomposición de Doolittle}
+El método de descomposición de Doolittle está estrechamente relacionado con el proceso de eliminación de Gauss.
+\\
+\bigskip
+Veamos el método con un ejemplo:
+\end{frame}
+\subsection{Fase de eliminación}
+\begin{frame}[fragile]
+\frametitle{Fase de eliminación}
+Considera una matriz $A$ de $3 \cp 3$ y suponganmos que existen las matrices triangulares:
+\begin{align*}
+\mathbf{L} =
+\begin{bmatrix}
+1 & 0 & 0 \\
+L_{21} & 1 & 0 \\
+L_{31} & L_{32} & 1
+\end{bmatrix}
+\hspace{1.5cm} U =
+\begin{bmatrix}
+U_{11} & U_{12} & U_{13} \\
+0 & U_{22} & U_{23} \\
+0 & 0 & U_{33}
+\end{bmatrix}
+\end{align*}
+tales que $\mathbf{A = L \, U}$.
+\end{frame}
+\begin{frame}
+\frametitle{Fase de eliminación}
+Después de realizar la multiplicación del lado derecho de $\mathbf{A = LU}$, tenemos que:
+\fontsize{12}{12}\selectfont
+\begin{align*}
+\mathbf{A} =
+\begin{array}{l l l}
+U_{11} & U_{12} & U_{13} \\
+U_{11}L_{21} & U_{12}L_{21} + U_{22} & U_{13}L_{21} + U_{23} \\
+U_{11}L_{31} & U_{12}L_{31} + U_{22}L_{32} & U_{13}L_{31} + U_{23}L_{32} + U_{33}
+\end{array}
+\end{align*}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Fase de eliminación}
+Apliquemos ahora la eliminación de Gauss a la ecuación anterior. 
+\\
+\bigskip
+El primer paso de la eliminación consiste en la elección de la primera fila como la fila pivote y la aplicación de las operaciones elementales:
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Fase de eliminación}
+\fontsize{12}{12}\selectfont
+\begin{align*}
+\begin{array}{l l l l}
+\text{renglón } 2 & \leftarrow & \text{renglón } 2 - L_{21} \times \text{renglón } 1 & (\text{elimina } A_{21}) \\
+\text{renglón } 3 & \leftarrow & \text{renglón } 3 - L_{31} \times \text{renglón } 1 & (\text{elimina } A_{31})
+\end{array}
+\end{align*}
+\fontsize{14}{14}\selectfont
+El resultado es
+\begin{align*}
+\mathbf{A}^{\prime} =
+\left[ \begin{array}{l l l}
+U_{11} & U_{12} & U_{13} \\
+0 & U_{22} & U_{23} \\
+0 & U_{22}L_{32} & U_{23}L_{32}+U_{33}
+\end{array} \right]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Fase de eliminación}
+El siguiente paso es tomar la segunda fila como pivote y utilizar la operación:
+\fontsize{12}{12}\selectfont
+\begin{align*}
+\begin{array}{l l l l}
+\text{renglón } 3 & \leftarrow & \text{renglón } 3 - L_{32} \times \text{renglón } 2 & (\text{elimina } A_{32})
+\end{array}
+\end{align*}
+\fontsize{14}{14}\selectfont
+dejando al final:
+\begin{align*}
+\mathbf{A}^{\prime \prime} = \left[
+\begin{array}{l l l}
+U_{11} & U_{12} & U_{13} \\
+0 & U_{22} & U_{23} \\
+0 & 0 & U_{33}
+\end{array} \right]
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Fase de eliminación}
+Del ejemplo vemos dos características importantes del proceso de descomposición de Doolittle:
+\setbeamercolor{item projected}{bg=red!70!black,fg=white}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item La matriz $\mathbf{U}$ es idéntica a la matriz triangular inferior que resulta del proceso de eliminación de Gauss.
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Fase de eliminación}
+\setbeamercolor{item projected}{bg=red!70!black,fg=white}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\conti
+\item Los elementos fuera de la diagonal de $\mathbf{L}$ son multiplicadores de la ecuación pivote que se utilizan durante la eliminación de Gauss, es decir, $L_{ij}$ es el multiplicador que elimina el elemento $A_{ij}$.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Fase de eliminación}
+Es una práctica habitual almacenar los multiplicadores en la parte triangular inferior de la matriz de coeficientes, reemplazando los coeficientes ya que se eliminaron ($L_{ij}$ sustituye a $A_{ij}$)
+\end{frame}
+\begin{frame}
+\frametitle{Fase de eliminación}
+Los elementos diagonales de $L$ no tienen que guardarse, ya que se entiende que cada uno de ellos es la unidad.
+\\
+\bigskip
+La forma final de la matriz de coeficientes sería una mezcla de $L$ y $U$:
+\begin{align*}
+\qty[ \mathbf{L \backslash U} ] =
+\begin{bmatrix}
+U_{11} & U_{12} & U_{13} \\
+L_{21} & U_{22} & U_{23} \\
+L_{31} & L_{32} & U_{33}
+\end{bmatrix}
+\end{align*}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Fase de eliminación Doolittle}
+El algoritmo para la descomposición de Doolittle es idéntico al procedimiento de eliminación de Gauss, excepto por que cada multiplicador $\lambda$ se almacena en la parte triangular inferior de $A$.
+\end{frame}
+\subsection{Fase de solución}
+\begin{frame}
+\frametitle{Fase de solución Doolittle}
+Considera ahora la fase de solución $L \, y=b$ por sustitución hacia adelante. La forma escalar de las ecuaciones es (recuerda que $L_{ii}=1$):
+\begin{align*}
+y_{1} &= b_{1} \\
+L_{21} \, y_{1} + y_{2} &=  b_{2} \\
+\vdots \\
+L_{k1} \, y_{1} + L_{k2} \, y_{2} + \ldots + L_{k, k+1} \, y_{k-1} + y_{k} &= b_{k} \\
+\vdots
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Fase de solución Doolittle}
+Resolviendo en la $k$-ésima ecuación para $y_{k}$ tenemos que
+\begin{align*}
+y_{k} = b_{k} - \sum_{j=1}^{k-1} L_{k j} \, y_{j} , \hspace{0.4cm} k = 2, 3, \ldots, n
+\end{align*}
+\pause
+Vemos que la fase de sustitución para resolver $\mathbf{U} \, x = \mathbf{y}$ es idéntica a la utilizada en el \funcionazul{método de Gauss}.
+\end{frame}
+\subsection{Algoritmo para Doolittle}
+\begin{frame}
+\frametitle{Elaborando un algoritmo}
+Como vimos en el \funcionazul{método de Gauss}, es posible construir un algoritmo computacional para las fases de eliminación y de solución del \funcionazul{método de Doolittle}.
+\\
+\bigskip
+Ocuparemos una serie de funciones de librería \funcionazul{scipy.linalg} que serían los equivalentes a el \funcionazul{método de Doolittle}.
+\end{frame}
+\begin{frame}
+\frametitle{Funciones de utilidad}
+Del módulo \funcionazul{scipy.linalg} ocuparemos las siguientes funciones:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item \funcionazul{lu}:
+\\
+Calcula la descomposición de una matriz $A$ en la forma $LU$ con pivote: $A = P \, L \, U$.
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Funciones de utilidad}
+Del módulo \funcionazul{scipy.linalg} ocuparemos las siguientes funciones:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\conti
+\item \funcionazul{lu\_factor}:
+\\
+Calcula la descomposición de una matriz $A$ en la forma $LU$ con pivote. Las matrices $L$ y $U$ están superpuestas en el mismo arreglo. \\
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Funciones de utilidad}
+Del módulo \funcionazul{scipy.linalg} ocuparemos las siguientes funciones:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\conti
+\item \funcionazul{lu\_solve}:
+\\
+Resuelve un sistema $a * x = b$ dada una factorización $LU$ de la matriz $a$.
+\end{enumerate}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{La función \texttt{sla.lu}}
+Los argumentos mínimos para la función son:
+\\
+\medskip
+\verb|sla.lu(a)|
+\\
+\medskip
+donde:
+\textbf{a}: Es una matriz de $M \cp N$ a factorizar.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{La función \texttt{sla.lu}}
+La función devuelve lo siguiente:
+\\
+\medskip
+\textbf{p}: Es la matriz de permtuación de tamaño $M \cp M$.
+\\
+\medskip
+\textbf{l}: Es la matriz triangular inferior o trapezoidal con elementos unitarios en la diagonal de tamaño $M \cp K$.
+\\
+\medskip
+\textbf{u}: Es la matriz triangular superior o trapezoidal de tamaño $K \cp N$.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejemplo de uso}
+\begin{exampleblock}{Ejemplo de uso de la función \texttt{sla.lu}}
+\textcolor{ao}{\texttt{In[x]: }} \texttt{import numpy as np} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[x]: }} \texttt{import scipy.linalg as sla} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[x]: }} \texttt{A = np.array([[2, 5, 8, 7], [5, 2, 2, 8], [7, 5, 6, 6], [5, 4, 4, 8]])} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[x]: }} \texttt{p, l, u = lu(A)}
+\end{exampleblock}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejemplo de uso}
+\begin{exampleblock}{Ejemplo de uso de la función \texttt{sla.lu}}
+\textcolor{ao}{\texttt{In[x]: }} \texttt{print(l)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[x]: }}
+\begin{table}
+\begin{tabular}{l l l l}
+\texttt{[[ 1.} & \texttt{0.} & \texttt{0.} & \texttt{0.]} \\
+\texttt{[ 0.28571429} & \texttt{1.} & \texttt{0.} & \texttt{0.]} \\
+\texttt{[ 0.71428571} & \texttt{0.12} & \texttt{1.} & \texttt{0.]} \\
+\texttt{[ 0.71428571} & \texttt{-0.44} & \texttt{-0.46153846} & \texttt{1.]]}
+\end{tabular}
+\end{table}
+\end{exampleblock}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejemplo de uso}
+\begin{exampleblock}{Ejemplo de uso de la función \texttt{sla.lu}}\textcolor{ao}{\texttt{In[x]: }} \texttt{print(u)} \\
+\medskip    
+\pause
+\textcolor{red}{\texttt{Out[x]: }}
+\fontsize{12}{12}\selectfont
+\begin{table}
+\begin{tabular}{l l l l}
+\texttt{[[ 7.} & \texttt{5.} & \texttt{6.} & \texttt{6.]} \\
+\texttt{[ 0.} & \texttt{3.57142857} & \texttt{6.28571429} & \texttt{5.28571429]} \\
+\texttt{[ 0.} & \texttt{0.} & \texttt{-1.04} & \texttt{3.08]} \\
+\texttt{[ 0.} & \texttt{0.} & \texttt{0.0} & \texttt{7.46153846]]}
+\end{tabular}
+\end{table}
+\end{exampleblock}
+\end{frame}
+\begin{frame}
+\frametitle{Verificando el resultado}
+Comprobamos la factorización usando lo siguiente:
+\begin{exampleblock}{Comprobando el resultado obtenido}
+\textcolor{ao}{\texttt{In[x]: }} \texttt{np.allclose(A - p @ l @ u, np.zeros((4, 4)))} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[x]: }} \texttt{True}
+\end{exampleblock}
+\end{frame}
+\begin{frame}
+\frametitle{La función \texttt{sla.lu\_factor}}
+Esta función calcula la factorización $\mathbf{LU}$ con pivote.
+\\
+\bigskip
+La factorización es
+\begin{align*}
+\mathbf{A} =  P \, L \, U 
+\end{align*}
+donde $P$ es la matriz de permutación, $L$ es la matriz triangular inferior con los elementos unitarios en la diagonal, y $U$ es la matriz triangular superior.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Argumentos mínimos}
+Los argumentos mínimos son
+\\
+\medskip
+\verb|sla.lu_factor(a)|
+\\
+\medskip
+donde
+\\
+$\mathbf{a}$ : es un arreglo $M \cp M$. Es la matriz a factorizar.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Lo que devuelve la función}
+La función devuelve lo siguiente:
+\\
+\medskip
+$\mathbf{lu}$ : Arreglo de $N \cp N$. Es la matriz que contiene a $U$ y $L$, los elementos unitarios diagonales de $L$ no se almacenan.
+\\
+\medskip
+$\mathbf{piv}$ : Arreglo de tamaño $N$. Los índices del pivote representan la matriz de permutación $P$.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo de uso}
+\begin{exampleblock}{Uso de la función \texttt{lu\_factor}}
+\textcolor{ao}{\texttt{In[x]: }} \texttt{A = np.array([[2, 5, 8, 7], [5, 2, 2, 8], [7, 5, 6, 6], [5, 4, 4, 8]])} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[x]: }} \texttt{lu, piv = lu\_factor(A)} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[x]: }} \texttt{piv} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[x]: }} \\
+\texttt{[2 2 3 3]}
+\end{exampleblock}
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo de uso}
+\begin{exampleblock}{Uso de la función \texttt{lu\_factor}}
+\textcolor{ao}{\texttt{In[x]: }} \texttt{print(lu)} \\
+\medskip
+\pause
+\fontsize{10}{10}\selectfont
+\textcolor{red}{\texttt{Out[x]: }} \\
+\begin{table}
+\begin{tabular}{l l l l}
+\texttt{[[ 7.} & \texttt{5.} & \texttt{6.} & \texttt{6.]} \\
+\texttt{[0.28571429} & \texttt{3.57142857} & \texttt{6.28571429} & \texttt{5.28571429]} \\
+\texttt{[0.71428571} & \texttt{0.12} & \texttt{-1.04} & \texttt{3.08]} \\
+\texttt{[0.71428571} & \texttt{0.44} & \texttt{-0.46153846} & \texttt{7.46153846]]}
+\end{tabular}
+\end{table}
+\end{exampleblock}
+\end{frame}
+\begin{frame}
+\frametitle{La función \texttt{lu\_solve}}
+Esta función resuelve un sistema de ecuaciones del tipo
+\begin{align*}
+a \, x = b
+\end{align*}
+dada una factorización $LU$ de la matriz $a$.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Argumentos de la función}
+Los argumentos mínimos de la función son:
+\\
+\medskip
+\verb|lu_solve(lu_piv, b)|
+\\
+\medskip
+donde
+\textbf{lu, piv} : Es la factorización de la matriz $a$, dada por la función \funcionazul{lu\_factor}.
+\\
+\medskip
+\textbf{b} : Arreglo del lado derecho de la ecuación.
+\end{frame}
+\begin{frame}
+\frametitle{Lo que devuelve la función}
+La función devuelve:
+\\
+\medskip
+\textbf{x} : Arreglo. Corresponde a la solución del sistema de ecuaciones.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejemplo de uso}
+En el siguiente ejemplo veamos el uso de la función \funcionazul{lu\_solve}
+\begin{exampleblock}{Ejemplo de solución con la factorización $LU$ con comprobación}
+\textcolor{ao}{\texttt{In[x]: }} \texttt{A = np.array([[2, 5, 8, 7], [5, 2, 2, 8], [7, 5, 6, 6], [5, 4, 4, 8]])} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[x]: }} \texttt{b = np.array([1, 1, 1, 1])} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[x]: }} \texttt{lu, piv = sla.lu\_factor(A)} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[x]: }} \texttt{x = sla.lu\_solve((lu, piv), b)} \\
+\end{exampleblock}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejemplo de uso}
+\begin{exampleblock}{Ejemplo de solución con la factorización $LU$ con comprobación}
+\textcolor{ao}{\texttt{In[x]: }} \texttt{print(x)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[x]: }} \texttt{[ 0.05154639 -0.08247423  0.08247423  0.09278351]}
+\\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[x]: }} \texttt{np.allclose(A @ x - b, np.zeros((4,)))} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[x]: }} \texttt{True}
+\end{exampleblock}
+\end{frame}
+\subsection{Ejercicio 1}
+\begin{frame}
+\frametitle{Ejercicio 1}
+Resuelve con el método de Doolittle, $A \: x = b$ donde
+\begin{align*}
+A =
+\begin{bmatrix}
+-3 & 6 & -4 \\
+9 & -8 & 24 \\
+-12 & 24 & -26 
+\end{bmatrix}
+\hspace{1.5cm} b =
+\begin{bmatrix}
+-3 \\
+65 \\
+-42
+\end{bmatrix}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución al ejercicio}
+Como ya revisamos, para la solución de problemas con \python{} de sistemas de ecuaciones con matrices, contamos con funciones que nos van a simplificar la tarea.
+\\
+\bigskip
+Pero la intención es aprovechar al máximo ese apoyo, por lo que para cada ejercicio se deberá de realizar el siguiente proceso en un solo archivo *.py:
+\end{frame}
+\begin{frame}
+\frametitle{Solución a los ejercicios}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Presentar la matriz aumentada.
+\item Explorar las propiedades del sistema: valor del determinante, número de condición, norma de la matriz.
+\item Presentar las matrices $\mathbf{L}$ y $\mathbf{U}$ de la descomposición.
+\item Resolver el sistema de ecuaciones.
+\item Comprobar la solución obtenida.
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Propiedades de la matriz}
+El siguiente paso es revisar las propiedades de la matriz $\mathbf{A}$, tales como el determinante, el número de condición, la norma, ocupando las funciones de \funcionazul{scipy.linalg}:
+\begin{table}
+\begin{tabular}{l l}
+Propiedad & Valor \\ \hline
+Determinante & $300.00$\\ \hline
+Norma & $46.6690$ \\ \hline
+No. condición & $63.0749$ \\ \hline
+\end{tabular}
+\end{table}
+\end{frame}
+\begin{frame}
+\frametitle{Las matrices $\mathbf{L}$ y $\mathbf{U}$}
+El siguiente paso es mostrar las matrices que se obtienen en la descomposición $\mathbf{L \, U}$:
+\begin{exampleblock}{Las matriz $\mathbf{L}$}
+\textcolor{ao}{\texttt{In[x]: }} \texttt{p, l, u = sla.lu(A)} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[x]: }} \texttt{print(l)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[x]: }} 
+\begin{flushleft}
+\begin{tabular}{l l l}
+\texttt{[[1.} & \texttt{0.} & \texttt{ 0.]} \\
+\texttt{[-0.75} & \texttt{1.} & \texttt{0.]} \\
+\texttt{[ 0.25} & \texttt{0.} & \texttt{1.]]}    
+\end{tabular}
+\end{flushleft}
+\end{exampleblock}
+\end{frame}
+\begin{frame}
+\frametitle{Las matrices $\mathbf{L}$ y $\mathbf{U}$}
+\begin{exampleblock}{Las matriz $\mathbf{U}$ que se obtiene}
+\textcolor{ao}{\texttt{In[x]: }} \texttt{print(u)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[x]: }} \\
+\begin{flushleft}
+\begin{tabular}{l l l}
+\texttt{[[-12.} & \texttt{24.} & \texttt{-26.]} \\
+\texttt{[0.} & \texttt{10.} & \texttt{4.5]} \\
+\texttt{[0.} & \texttt{0.} & \texttt{2.5]]}    
+\end{tabular}
+\end{flushleft}
+\end{exampleblock}
+\end{frame}
+\begin{frame}
+\frametitle{Solución al sistema}
+Resolvemos el sistema
+\begin{exampleblock}{Solución con \texttt{lu\_factor} y \texttt{lu\_solve}}
+\textcolor{ao}{\texttt{In[x]: }} \texttt{lu, piv = sla.lu\_factor(A)} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[x]: }} \texttt{x = sla.lu\_solve((lu, piv), b)} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[x]: }} \texttt{print(x)} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{Out[x]: }} \texttt{[1. 2. 3.]} \\
+\medskip
+\pause
+\textcolor{ao}{\texttt{In[x]: }} \texttt{print(np.allclose(A @ x - b, np.zeros((3,))))} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[x]: }} \texttt{True}
+\end{exampleblock}
+\end{frame}
+\begin{frame}
+\frametitle{Criterios para entregar la solución}
+Se revisó el procedimiento para resolver un ejercicio con las funciones tanto de \funcionazul{numpy} y \funcionazul{scipy}.
+\\
+\bigskip
+Esperamos que en su código elaboren de una manera más completa la salida en terminal, es decir, incluir textos que muestren lo que presentan, no sólo que anoten el código y ver la solución.
+\end{frame}
+\section{Descomposición de Choleski}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Descripción del método}
+\begin{frame}
+\frametitle{Descomposición de Choleski}
+La descomposición de Choleski $\mathbf{A = L \: L}^{T}$ tiene dos limitaciones:
+\setbeamercolor{item projected}{bg=red!70!black,fg=white}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Dado que $\mathbf{L \: L}^{T}$ devuelve siempre una matriz simétrica, la descomposición de Choleski requiere que la matriz $\mathbf{A}$ sea simétrica.
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Descomposición de Choleski}
+\setbeamercolor{item projected}{bg=red!70!black,fg=white}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\conti
+\item El proceso de descomposición implica tomar raíces cuadradas de ciertas combinaciones de la elementos de $\mathbf{A}$.
+\\
+\bigskip
+Se puede demostrar que, para evitar los valores negativos de las raíces, la matriz $\mathbf{A}$ debe de ser definita positiva.
+\end{enumerate}
+\end{frame}
+\subsection*{Matriz definida positiva}
+\begin{frame}
+\frametitle{Definición de matriz definida positiva}
+Se dice que una matriz $\mathbf{M}$ es definida positiva, si para todo vector no nulo $x$, se tiene que
+\begin{align*}
+x^{T} \: M \: x > 0
+\end{align*}
+cumpliendo esto, también se cumple que, todos los eigenvalores de $M$, son positivos (definición alterna).
+\end{frame}
+\subsection*{Desventaja con Choleski}
+\begin{frame}
+\frametitle{Desventaja del método de Choleski}
+Aunque el número de multiplicaciones en todos los métodos de descomposición $LU$ es el mismo, la descomposición de Choleski no es tan popular en la solución de ecuaciones simultáneas, debido a las restricciones mencionadas anteriormente.
+\end{frame}
+\subsection{Factorización de Choleski}
+\begin{frame}
+\frametitle{El proceso de factorización de Choleski}
+Consideremos la matriz $\mathbf{A}$ de $3 \cp 3$
+\begin{align*}
+\mathbf{A = L \: L^{T}}
+\end{align*}
+tal que
+\begin{align*}
+\begin{bmatrix}
+A_{11} & A_{12} & A_{13} \\
+A_{21} & A_{22} & A_{23} \\
+A_{31} & A_{32} & A_{33}
+\end{bmatrix}
+= \begin{bmatrix}
+L_{11} & 0      & 0 \\
+L_{21} & L_{22} & 0 \\
+L_{31} & L_{32} & L_{33}
+\end{bmatrix}
+\begin{bmatrix}
+L_{11} & L_{21} & L_{31} \\
+0      & L_{22} & L_{32} \\
+0      & 0      & L_{33}
+\end{bmatrix}
+\end{align*}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Factorización de Choleski}
+Luego de resolver la multiplicación del lado derecho, resulta
+\fontsize{12}{12}\selectfont
+\begin{align*}
+&\begin{bmatrix}
+A_{11} & A_{12} & A_{13} \\
+A_{21} & A_{22} & A_{23} \\
+A_{31} & A_{32} & A_{33}
+\end{bmatrix} = \\
+&=
+\begin{bmatrix}
+L_{11}^{2} & L_{11}L_{21} & L_{11}L_{31} \\
+L_{11}L_{21} & L_{21}^{2} + L_{22}^{2} & L_{21}L_{31} + L_{22}L_{32} \\
+L_{11}L_{31} & L_{21}L_{31} + L_{22}L_{32} & L_{31}^{2} + L_{32}^{2} + L_{33}^{2}
+\end{bmatrix}
+\end{align*}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Factorización de Choleski}
+Vemos que la matriz del lado derecho es simétrica.
+
+\begin{align*}
+\begin{bmatrix}
+L_{11}^{2} & L_{11}L_{21} & L_{11}L_{31} \\
+L_{11}L_{21} & L_{21}^{2} + L_{22}^{2} & L_{21}L_{31} + L_{22}L_{32} \\
+L_{11}L_{31} & L_{21}L_{31} + L_{22}L_{32} & L_{31}^{2} + L_{32}^{2} + L_{33}^{2}
+\end{bmatrix}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Factorización de Choleski}
+Al igualar las matrices $\mathbf{A}$ y $\mathbf{L \: L}^{T}$ elemento a elemento, tendremos seis ecuaciones (revisando que hay simetría en los elementos triangulares superiores e inferiores)
+\end{frame}
+\begin{frame}
+\frametitle{Factorización de Choleski}
+Consideremos la parte triangular inferior de cada matriz, al igualar los elementos de la primera columna, empezando por la primera fila y hacia abajo:
+\end{frame}
+\begin{frame}
+\frametitle{Factorización de Choleski}
+Calculando $L_{11}$, $L_{21}$ y $L_{31}$ en ese orden:
+\begin{align*}
+\begin{array}{l l l l l}
+A_{11} & {=L_{11}^{2}}   & \rightarrow & L_{11} & {=\sqrt{A_{11}}} \\
+&                 &             &        &  \\
+A_{21} & {=L_{11}L_{21}} & \rightarrow & L_{21} & {=\dfrac{A_{21}}{L_{11}}} \\
+&                 &             &        &  \\
+A_{31} & {=L_{11}L_{31}} & \rightarrow & L_{31} & {=\dfrac{A_{31}}{L_{11}}}
+\end{array}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Factorización de Choleski}
+De la segunda columna, iniciamos con la segunda fila, para obtener $L_{22}$ y $L_{32}$:
+\begin{align*}
+ A_{22} &= L_{21}^{2} + L_{22}^{2} \hspace{0.5cm} \rightarrow L_{22} = \sqrt{A_{22}-L_{21}^{2}} \\[0.5em]
+A_{32} &= L_{21} \, L_{31} + L_{22} \, L_{32} \hspace{0.25cm} \rightarrow L_{32} =\dfrac{A_{32} - L_{21} \, L_{31}}{L_{22}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Factorización de Choleski}
+Finalmente con la tercera columna y de la tercera fila, obtenemos $L_{33}$:
+\begin{align*}
+A_{33} &= L_{31}^{2} + L_{32}^{2} + L_{33}^{2} \hspace{0.5cm} \rightarrow \\[0.5em]
+&\rightarrow \hspace{0.5cm} L_{33} =\sqrt{A_{33} - L_{31}^{2} - L_{32}^{2}}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Factorización de Choleski}
+Podemos extrapolar los resultados para una matriz de $n \cp n$.
+\\
+\bigskip
+\pause
+Para un elemento en la parte triangular inferior de $\mathbf{LL}^{T}$ resulta:
+\begin{align*}
+\mathbf{LL}^{T}_{ij} &= L_{i1} \, L_{j1} + L_{i2} \, L_{j2} + \ldots + L_{ij} \, L_{jj} = \\
+&= \sum_{k=1}^{j} L_{ik}\, L_{jk} \hspace{1.5cm} i \geq j
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Factorización de Choleski}
+Igualando los términos para los correspondientes elementos de $\mathbf{A}$:
+\begin{align*}
+A_{ij} = \sum_{k=1}^{j} L_{ik} \, K_{jk} \hspace{0.5cm} i &= j, j+1,\ldots, n, \\
+j &= 1, 2, \ldots, n
+\end{align*}
+El intervalo de índices de los elementos mostrados limita a la parte triangular inferior. 
+\end{frame}
+\begin{frame}
+\frametitle{Factorización de Choleski}
+Para la primera columna ($j = 1$), obtenemos de la ecuación anterior:
+\begin{align*}
+L_{11} = \sqrt{A_{11}} \hspace{1.5cm} L_{i1} = \dfrac{A_{1j}}{L_{11}}, \hspace{0.5cm} i = 2, 3, \ldots, n
+\end{align*}
+\\
+\bigskip
+Continuando con las otras columnas, vemos que la incógnita en la ecuación es $L_{ij}$ (los otros elementos de $\mathbf{L}$ que aparecen en la ecuación, ya han sido calculados). 
+\end{frame}
+\begin{frame}
+\frametitle{Factorización de Choleski}
+Tomando el término que incluye a $L_{ij}$ fuera de la suma de la ecuación para los elementos de $\mathbf{A}$ tenemos:
+\begin{align*}
+A_{ij} = \sum_{k=1}^{j-1} L_{ik} \, L_{jk} + L_{ij} \, L_{jj}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Factorización de Choleski}
+Si $i = j$ (un elemento de la diagonal), la solución es:
+\begin{align*}
+L_{jj} = \sqrt{A_{jj} - \sum_{k=1}^{j-1} L_{jk}^{2}} \hspace{1cm} j = 2, 3, \ldots, n
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Factorización de Choleski}
+Para un elemento que no está en la diagonal:
+\begin{align*}
+ L_{ij} = \dfrac{\left( A_{ij} - \sum\limits_{k = 1}^{j-1} \: L_{ik} \: L_{jk} \right)}{L_{jj}}
+\end{align*}
+donde
+\begin{align*}
+j =2, 3, \ldots, n-1, \hspace{0.5cm} i = j+1, j+2, \ldots, n
+\end{align*}
+\end{frame}
+\subsection{Algoritmo para el método}
+\begin{frame}
+\frametitle{Algoritmo para Cholesky}
+Al igual que con el \funcionazul{método de Doolittle}, podemos construir un algoritmo y por ende un código para reproducir la fase de factorización y de solución.
+\\
+\bigskip
+Haremos uso nuevamente del módulo \funcionazul{scipy.linalg} para ocupar un conjunto de funciones disponible para este método.
+\end{frame}
+\begin{frame}
+\frametitle{Funciones de utilidad}
+Del módulo \funcionazul{scipy.linalg} ocuparemos las siguientes funciones:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item \funcionazul{cholesky}: \\
+Calcula la factorización de Cholesky para una matriz. Devuelve la factorización $\mathbf{A = L \, L^{T}}$ o $\mathbf{A = U^{T} \, U}$ para una matriz $\mathbf{A}$definida positiva.
+\seti
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Funciones de utilidad}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\conti
+\item \funcionazul{cho\_factor}: \\
+Calcula la factorización de Cholesky para una matriz para ser utilizada en la función \funcionazul{cho\_solve}.
+\seti
+\end{enumerate}
+\end{frame}    
+\begin{frame}
+\frametitle{Funciones de utilidad}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\conti
+\item \funcionazul{cho\_solve}: \\
+Resuelve un sistema de ecuaciones $A \, x = b$ dada la factorización de Cholesky para una matriz $\mathbf{A}$
+\end{enumerate}
+\end{frame} 
+\begin{frame}[fragile]
+\frametitle{La función \texttt{cholesky}}
+Los argumentos mínimos de la función son:
+\\
+\medskip
+\verb|sla.cholesky(a, lower=False)|
+\\
+\medskip
+donde:
+\\
+\textbf{a} : Es un arreglo de $M \cp M$, que es la matriz a factorizar.
+\\
+\medskip
+\textbf{lower} : Booleano, opcional. Ya sea para calcular la factorización Cholesky usando la matriz triangular superior o inferior. El valor por defecto es triangular superior.
+\end{frame}
+\begin{frame}
+\frametitle{Lo que devuelve la función}
+La función devuelve:
+\\
+\medskip
+\textbf{c} : Un arreglo de $M \cp M$. Es la matriz triangular superior o inferior de la factorización de la matriz $a$
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{La función \texttt{cho\_factor}}
+Los argumentos mínimos son:
+\\
+\medskip
+\verb|sla.cho_factor(a, lower=False)|
+\\
+\medskip
+donde:
+\\
+\textbf{a} : Arreglo de $M \cp M$. Es la matriz a factorizar.
+\\
+\medskip
+\textbf{lower} : Booleano, opcional.  Ya sea para calcular la factorización de Cholesky usando la matriz triangular superior o inferior. El valor por defecto es triangular superior.
+\end{frame}
+\begin{frame}
+\frametitle{Lo que devuelve la función}
+La función devuelve:
+\\
+\medskip
+\textbf{c} : Un arreglo de $M \cp M$. Es la matriz triangular superior o inferior de la factorización de la matriz $a$. Algunas partes de la matriz contienen datos aleatorios.
+\\
+\medskip
+\textbf{lower} : Booleano. Bandera que indica si el factor está en el triángulo inferior o superior.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{La función \texttt{cho\_solve}}
+Los argumentos mínimos son:
+\\
+\medskip
+\verb|sla.cho_solve((c, lower), b)|
+\\
+\medskip
+donde:
+\\
+\textbf{c, lower} : Es la factorización de Cholesky obtenida por la función \funcionazul{cho\_factor}.
+\\
+\medskip
+\textbf{b} : Arreglo.  La parte derecha de la ecuación del sistema.
+\end{frame}
+\begin{frame}
+\frametitle{Lo que devuelve la función}
+La función devuelve:
+\\
+\medskip
+\textbf{x }: Es la solución del sistema $A \, x =  b$
+\end{frame}
+\subsection{Ejercicio 1}
+\begin{frame}
+\frametitle{Ejercicio 1}
+Resuelve el siguiente sistema mediante la factorización de Choleski:
+\begin{align*}
+\mathbf{A} =
+\begin{bmatrix}
+1 & 1 & 1 \\
+1 & 2 & 2 \\
+1 & 2 & 3
+\end{bmatrix}
+\hspace{1cm}
+\mathbf{b}=
+\begin{bmatrix}
+1 \\
+3/2 \\
+3
+\end{bmatrix}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Procedimiento de solución}
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Se debe de revisar que la matriz $\mathbf{A}$, es una matriz definida positiva, para ello calculamos los valores propios de la matriz y revisamos que sean todos positivos.
+\item Calculamos la matriz triangular inferior $\mathbf{L}$.
+\item Resolvemos el sistema de ecuaciones.
+\item Comprobamos la solución.
+\end{enumerate}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Función adicional}
+Para evaluar los valores propios de una matriz, ocuparemos la función \funcionazul{sla.eigvals}:
+\\
+\medskip
+\verb|sla.eigvals(a)|
+\\
+\medskip
+Que devuelve los valores propios de la matriz, revisa con cuidado que la respuesta se presenta en formato de número complejo.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Cálculo de los valores propios}
+\begin{exampleblock}{Cálculo de los valores propios}
+\textcolor{ao}{\texttt{In[x]: }} \texttt{sla.eigvals(A)} \\
+\medskip
+\pause
+\textcolor{red}{\texttt{Out[x]: }} \\
+\texttt{[5.04891734+0.j 0.64310413+0.j 0.30797853+0.j]}
+\end{exampleblock}
+Nótese que el formato de salida es de número complejo.
+\end{frame}
+\begin{frame}[allowframebreaks, fragile]
+\frametitle{Código para resolver el problema}
+\begin{lstlisting}[caption=Código para el ejercicio de factorización Cholesky, basicstyle=\linespread{1.1}\ttfamily=\small, columns=fullflexible]
+import scipy.linalg as sla
+import numpy as np
+import scipy as sc
+
+A = sc.array([[ 1, 1, 1], [1, 2, 2], [1, 2, 3]])
+b = sc.array([1., 3./2, 3.])
+
+L = sla.cholesky(A, lower=True)
+
+print('\nLa matriz triangular inferior es:\n')
+print(L)
+
+print('\nSe comprueba que L multiplicada por la transpuesta L^T es la matriz A\n')
+print(L @ L.T)
+
+c, low = sla.cho_factor(A)
+
+x =  sla.cho_solve((c, low), b)
+
+print('\nEl vector solucion es:')
+print(x)
+
+print('\nLa comprobacion de la solucion es:')
+print(np.allclose(A @ x - b, np.zeros(3)))
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Solución del sistema}
+La solución que se obtiene es:
+\begin{exampleblock}{Solución con la factorización de Cholesky}
+\texttt{El vector solución es:} \\
+\texttt{[ 0.5 -1.   1.5]}
+   
+\end{exampleblock}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Requerimiento en la solución}
+Deberás de incorporar en el código, una parte que indique si la matriz $\mathbf{A}$ es definida positiva:
+\begin{exampleblock}{Parte de código que debe de incluirse}
+\fontsize{12}{12}\selectfont
+\texttt{Los valores propios de la matriz A son:} \\
+
+\texttt{[5.04891734+0.j 0.64310413+0.j 0.30797853+0.j]} \\
+
+\texttt{La matriz es definida positiva.}
+\end{exampleblock}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Requerimiento en la solución}
+Debe de haber una parte que evalúe la parte real de cada valor propio (\funcionazul{cmath.real}), si alguno de ellos no es positivo, entonces la matriz es \emph{no definida positiva}.
+\\
+\bigskip
+En caso de que todos los valores propios sean positivos, debe indicarse un mensaje: \emph{la matriz es definida positiva.}
+\end{frame}
+\section{M. con coeficientes simétricos y en banda}
+\frame[allowframebreaks]{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Definición de matrices especiales}
+\begin{frame}
+\frametitle{Coeficientes simétricos y en banda}
+Algunos problemas en física e ingeniería plantean la necesidad de trabajar con matrices \emph{escasamente pobladas}, en inglés \emph{sparse}, donde la gran mayoría de los elementos de la matriz, son cero.
+\end{frame}
+\begin{frame}
+\frametitle{Coeficientes simétricos y en banda}
+Si todos los elementos no nulos de la matriz se ubican sobre la diagonal principal, se dice entonces que la matriz es una \emph{matriz en banda}.
+\end{frame}
+\begin{frame}
+\frametitle{Matriz tridiagonal}
+Sea la matriz
+\begin{align*}
+A = \begin{bmatrix}
+X & X & 0 & 0 & 0 \\
+X & X & X & 0 & 0 \\
+0 & X & X & X & 0 \\
+0 & 0 & X & X & X \\
+0 & 0 & 0 & X & X
+\end{bmatrix}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Matriz tridiagonal}
+En donde $X$ indica un elemento no nulo, dando la forma de una banda (considera que algunos de éstos elementos, aún así, pueden ser cero).
+\\
+\bigskip
+Todos los demás elementos fuera de la banda, son nulos.
+\end{frame}
+\begin{frame}
+\frametitle{Propiedades de las matrices \textbf{L} y \textbf{U}}
+Si una matriz en banda se descompone de la forma $\mathbf{A} = \mathbf{L} \mathbf{U}$, donde $\mathbf{L}$ y $\mathbf{U}$ mantienen la estructura en banda de $\mathbf{A}$, por ejemplo, si descomponemos la matriz mostrada anteriormente, obtendremos:
+\end{frame}
+\begin{frame}
+\frametitle{Propiedades de las matrices \textbf{L} y \textbf{U}}
+\begin{align*}
+\mathbf{L} = \begin{bmatrix}
+X & 0 & 0 & 0 & 0 \\
+X & X & 0 & 0 & 0 \\
+0 & X & X & 0 & 0 \\
+0 & 0 & X & X & 0 \\
+0 & 0 & 0 & X & X
+\end{bmatrix} \hspace{0.75cm}
+\mathbf{U} = \begin{bmatrix}
+X & X & 0 & 0 & 0 \\
+0 & X & X & 0 & 0 \\
+0 & 0 & X & X & 0 \\
+0 & 0 & 0 & X & X \\
+0 & 0 & 0 & 0 & X
+\end{bmatrix}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Propiedades de las matrices \textbf{L} y \textbf{U}}
+La estructura en banda de una matriz de coeficientes pues aprovecharse para guardar valores y reducir el tiempo de cálculo. 
+\\
+\medskip
+Si la matriz es de coeficientes, y además es simétrica, la economía de operaciones sobre la misma, es mayor.
+\end{frame}
+\subsection{Matriz de coeficientes tridiagonal}
+\begin{frame}
+\frametitle{Matriz de coeficientes tridiagonal}
+Considera la solución de un sistema $\mathbf{A} \, x = \mathbf{b}$ mediante la descomposición de Doolittle, donde $\mathbf{A}$ es una matriz triadiagonal de $n\times n$
+\end{frame}
+\begin{frame}
+\frametitle{Matriz de coeficientes tridiagonal}
+\begin{align*}
+\mathbf{A} = 
+ \begin{bmatrix}
+d_{1} & e_{1} & 0 & 0 & \ldots & 0 \\
+c_{1} & d_{2} & e_{2} & 0 & \ldots & 0 \\
+0 & c_{2} & d_{3} & e_{3} & \ldots & 0 \\
+0 & 0 & c_{3}& d_{4} & \ldots & 0 \\
+\vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \ldots & 0 & c_{n-1} & d_{n}
+\end{bmatrix}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Matriz de coeficientes tridiagonal}
+Como la notación lo indica, podemos almacenar los elementos no nulos de $\mathbf{A}$ en los vectores
+\begin{align*}
+\mathbf{c} = \begin{bmatrix}
+c_{1} \\
+c_{2} \\
+\vdots \\
+c_{n-1}
+\end{bmatrix}
+\hspace{1cm}
+\mathbf{d} = \begin{bmatrix}
+d_{1} \\
+d_{2} \\
+\vdots \\
+d_{n-1} \\
+d_{n}
+\end{bmatrix}
+\hspace{1cm}
+\mathbf{e} = \begin{bmatrix}
+e_{1} \\
+e_{2} \\
+\vdots \\
+e_{n-1}
+\end{bmatrix}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Matriz de coeficientes tridiagonal}
+El ahorro resultante de almacenamiento puede ser significativo.
+\\
+\bigskip
+Por ejemplo, una matriz tridiagonal de $100 \times 100$, contiene $10000$ elementos, que pueden almacenarse en solo $99+100+99=298$ entradas, lo cual representa una compresión de $33:1$.
+\end{frame}
+\begin{frame}[plain]
+\frametitle{Considera la siguiente matriz en banda}
+\fontsize{12}{12}\selectfont
+\begin{align*}
+\begin{bmatrix}
+1 & -5 & 3 & 0 & 0 & 0 & 0 & 0 \\
+3 & 2 & -3 & 5 & 0 & 0 & 0 & 0 \\
+0 & -2 & 1 & 5 & 9 & 0 & 0 & 0 \\
+0 & 0 & 9 & -1 & 5 & 4 & 0 & 0 \\
+0 & 0 & 0 & 0 & 2 & -3 & -2 & 0 \\
+0 & 0 & 0 & 0 & 2 & 0 & 1 & -6 \\
+0 & 0 & 0 & 0 & 0 & -3 & 2 & 7 \\
+0 & 0 & 0 & 0 & 0 & 0 & 9 & 1 
+\end{bmatrix}
+\end{align*}
+\end{frame}
+\subsection{Representación de la matriz en banda}
+\begin{frame}[plain]
+\frametitle{Marcando la diagonal y las codiagonales}
+\begin{figure}
+    \centering
+    \includestandalone[scale=0.8]{Figuras/matriz_marcada_04}    
+\end{figure}
+\end{frame}
+\subsection{Arreglo de las codiagonales}
+\begin{frame}
+\frametitle{Arreglo de las codiagonales}
+\begin{figure}
+    \centering
+    \includestandalone[scale=0.8]{Figuras/matriz_marcada_05}    
+\end{figure}
+\begin{itemize}
+\item Las codiagonales superiores tienen ceros a la izquierda.
+\item Las codiagonales inferiores tienen ceros al final.
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Nueva representación de la matriz}
+La matriz en banda se puede representar por una matriz no cuadrada del tipo
+\\
+\bigskip
+\pause
+\begin{align*}
+\begin{blockarray}{ccccccccc}
+\begin{block}{c(cccccccc)}
+g & 0 & 0 & 3 & 5 & 9 & 4 & -2 & -6 \\
+c & 0 & -5 & -3 & 5 & 5 & -3 & 1 & 7 \\
+d & 1 & 2 & 1 & -1 & 2 & 0 & 2 & 1 \\
+f & 3 & -2 & 9 & 0 & 2 & -3 & 9 & 0 \\
+\end{block}
+\end{blockarray}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Solución a sistemas tridiagonales}
+Para la solución de sistemas tridiagonales podemos ocupar el estudio previo para desarrollar un código que resuelva este tipo de matrices.
+\\
+\bigskip
+La gran ventaja que tenemos es que el tipo de matrices especiales reduce y simplifica las operaciones que se tienen que implementar.
+\end{frame}
+\begin{frame}
+\frametitle{Apoyo con \texttt{scipy.linalg}}
+Ocuparemos una de las funciones incluidas en el módulo \funcionazul{sla} que resuelve sistemas en banda.
+\\
+\bigskip
+Recordemos que los sistemas en banda pueden ser simétricos o no, pero la función que veremos resuelve una matriz en banda general.
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Resolviendo matrices en banda}
+Para resolver un sistema de ecuaciones con una matriz en banda, usaremos la función \funcionazul{sla.solve\_banded}.
+\\
+\bigskip
+\pause
+La sintaxis mínima para esta función es la siguiente
+\begin{alltt}
+\funcionazul{solve\_banded((l,u), cm, rhs)}
+\end{alltt}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Resolviendo matrices en banda}
+\begin{alltt}
+\funcionazul{solve\_banded((l,u), cm, rhs)}
+\end{alltt}
+Donde:
+\begin{itemize}[<+->]
+\item \funcionazul{(l, u)} es una tupla, donde $l$ es el número de codiagonales inferiores no nulas, y $u$ es el número de codiagonales superiores no nulas.
+\item \funcionazul{cm} es la matriz en banda de coeficientes.
+\item \funcionazul{rhs} es el vector de constantes del lado derecho.
+\end{itemize}
+\end{frame}
+\subsection{Ejercicio 1}
+\begin{frame}[plain]
+\frametitle{Ejercicio 1 - Matriz en banda}
+Resuelve el siguiente sistema algebraico
+\begin{align*}
+\begin{bmatrix}
+1 & -5 & 3 & 0 & 0 & 0 & 0 & 0 \\
+3 & 2 & -3 & 5 & 0 & 0 & 0 & 0 \\
+0 & -2 & 1 & 5 & 9 & 0 & 0 & 0 \\
+0 & 0 & 9 & -1 & 5 & 4 & 0 & 0 \\
+0 & 0 & 0 & 0 & 2 & -3 & -2 & 0 \\
+0 & 0 & 0 & 0 & 2 & 0 & 1 & -6 \\
+0 & 0 & 0 & 0 & 0 & -3 & 2 & 7 \\
+0 & 0 & 0 & 0 & 0 & 0 & 9 & 1 
+\end{bmatrix}
+\begin{bmatrix}
+x_{1} \\
+x_{2} \\
+x_{3} \\
+x_{4} \\
+x_{5} \\
+x_{6} \\
+x_{7} \\
+x_{8}
+\end{bmatrix}
+=
+\begin{bmatrix}
+5 \\
+3 \\
+-3 \\
+2 \\
+0 \\
+7 \\
+8 \\
+1
+\end{bmatrix}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Nueva representación de la matriz}
+Pasamos la matriz en banda inicial a una representación de una matriz no cuadrada:
+\\
+\bigskip
+\pause
+\begin{align*}
+\begin{blockarray}{ccccccccc}
+\begin{block}{c(cccccccc)}
+g & 0 & 0 & 3 & 5 & 9 & 4 & -2 & -6 \\
+c & 0 & -5 & -3 & 5 & 5 & -3 & 1 & 7 \\
+d & 1 & 2 & 1 & -1 & 2 & 0 & 2 & 1 \\
+f & 3 & -2 & 9 & 0 & 2 & -3 & 9 & 0 \\
+\end{block}
+\end{blockarray}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Valores para la función}
+El acomodo de la matriz inicial nos permite identificar el valor de la tupla \funcionazul{(l, u)}:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Número de codiagonales inferiores no nulas $l =  1$
+\item Número de codiagonales superiores no nulas $u = 2$
+\end{enumerate}
+\end{frame}
+\begin{frame}[allowframebreaks, fragile, plain]
+\frametitle{Orden de los vectores renglón}
+Hay que tener cuidado al momento de organizar los vectores renglón que conformarán el arreglo \funcionazul{cm}:
+\begin{lstlisting}[caption=Definición de los vectores renglón, basicstyle=\linespread{1.1}\ttfamily=\small, columns=fullflexible]
+import scipy.linalg as sla
+import numpy as np
+
+g = [0. ,0, 3, 5, 9, 4, -2, -6]
+c = [0., -5, -3, 5, 5, -3, 1, 7]
+d = [1., 2, 1, -1, 2, 0, 2, 1]
+e = [3., -2, 9, 0, 2, -3, 9, 0]
+
+b = np.array([5., 3, -3, 2, 0, 7, 8, 1])
+
+cm = np.array([g, c, d, e])
+
+x = sla.solve_banded((1,2), cm, b)
+\end{lstlisting}
+\end{frame}
+\begin{frame}
+\frametitle{Solución al problema}
+El vector $x$ contiene los $x_{i}$ que son solución al sistema de ecuaciones inicial.
+\\
+\bigskip
+Implementado una pequeña rutina para visualizar el contenido tendremos la siguiente tabla:
+\end{frame}
+\begin{frame}
+\frametitle{Solución al problema}
+\fontsize{12}{12}\selectfont
+\begin{table}
+\begin{tabular}{c c}
+$x_{i}$ & Solución \\ \hline
+$x_{0}$ & $200.639937$ \\ \hline
+$x_{1}$ & $-25.491352$ \\ \hline
+$x_{2}$ & $-107.698899$ \\ \hline
+$x_{3}$ & $-174.206761$ \\ \hline
+$x_{4}$ & $102.750000$ \\ \hline
+$x_{5}$ & $70.833333$ \\ \hline
+$x_{6}$ & $-3.500000$ \\ \hline
+$x_{7}$ & $32.5000$ \\
+\end{tabular}
+\end{table}
+\end{frame}
+\section{Ejercicios a cuenta}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Ejercicios a resolver}
+\begin{frame}
+\frametitle{Para resolver los ejercicios a cuenta}
+Ya tienes los elementos necesarios para resolver los ejercicios a cuenta para este tema.
+\\
+\bigskip
+Procura seguir el procedimiento de solución para cada ejercicio.
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio 1}
+Resolver la ecuación $\mathbf{Ax} = \mathbf{b}$ con el método de eliminación de Gauss, donde
+\begin{align*}
+\mathbf{A} =
+\begin{pmatrix}
+0 & 0 & 2 & 1 & 2 \\
+0 & 1 & 0 & 2 & -1 \\
+1 & 2 & 0 & -2 & 0 \\
+0 & 0 & 0 & -1 & 1 \\
+0 & 1 & -1 & 1 & -1
+\end{pmatrix} \hspace{1.5cm}
+\mathbf{b} =	
+\begin{pmatrix}
+1 \\
+1 \\
+-4 \\
+-2 \\
+-1
+\end{pmatrix}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio 2}
+Encontrar $\mathbf{L}$ y $\mathbf{U}$ tales que:
+\begin{align*}
+\mathbf{A} = \mathbf{LU} =
+\begin{pmatrix}
+4 & -1 & 0 \\
+-1 & 4 & -4 \\
+0 & -1 & 4
+\end{pmatrix}
+\end{align*}
+usando a) la descomposición de Doolittle y b) la descomposición de Choleski.
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio 3}
+Resolver $\mathbf{Ax} = \mathbf{b}$ por el método de descomposición de Doolittle, donde
+\begin{align*}
+\mathbf{A} =
+\begin{pmatrix}
+2.34 & -4.10 & 1.78 \\
+-1.98 & 3.47 & -2.22 \\
+2.36 & -15.17 & 6.18 \\
+\end{pmatrix} \hspace{1.25cm}
+\mathbf{b} =	
+\begin{pmatrix}
+0.02 \\
+-0.73 \\
+-6.63
+\end{pmatrix}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio 4}
+Determinar $\mathbf{L}$ que resulta de la descomposición de Choleski para la matriz diagonal
+\begin{align*}
+\begin{pmatrix}
+\alpha_{1} & 0 & 0 \ldots \\
+0 & \alpha_{2} & 0 & \ldots \\
+0 & 0 & \alpha_{3} & \ldots \\
+\vdots & \vdots &\vdots & \ddots
+\end{pmatrix}
+\end{align*}
+\fontsize{12}{12}\selectfont
+Este ejercicio hay que resolverlo a mano y enviar la solución ya sea escanenado o tomando una foto de la(s) hoja(s) que ocupes.
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio 5}
+Un ejemplo clásico de una matriz mal condicionada, es la matriz de Hilbert
+\begin{align*}
+\mathbf{A} = 
+\begin{bmatrix}
+1 & 1/2 & 1/3 & \ldots \\
+1/2 & 1/3 & 1/4 & \ldots \\
+1/3 & 1/4 & 1/5 & \ldots \\
+\vdots & \vdots & \vdots & \ddots
+\end{bmatrix}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio 5}
+Escribe un programa en python que resuelva el sistema $\mathbf{A}\mathbf{x} = \mathbf{b}$ por el método de Doolittle, donde $\mathbf{A}$ es una matriz de Hilbert arbitraria de $n \times n$ y \[ b_{i} = \sum_{j=1}^{n} A_{ij} \]
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio 5}
+El programa no debe de utilizar un valor inicial para $n$, sino que en tiempo de ejecución, se determine para qué valor de $n$, la solución es exacta al menos hasta seis cifras significativas comparada con la solución exacta
+\[\mathbf{x} = [1 \hspace{0.2cm} 1 \hspace{0.2cm} 1 \hspace{0.2cm} \ldots ]^{T} \]
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio 6}
+Resolver el sistema de ecuaciones simétricas tridiagonales:
+\begin{align*}
+4 x_{1} - x_{2} &= 9 \\
+-x_{i-1} + 4x_{i} - x_{i+1} &= 5, \hspace{1cm} i=2,\ldots,n-1 \\
+-x_{n-1} + 4 x_{n} &= 5
+\end{align*}
+con $n=10$.
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio 7}
+El sistema mostrado en la siguiente figura consiste en $n$ resortes lineales que soportan $n$ masas.
+\\
+\bigskip
+La constante de los resortes se indican por $k_{i}$, mientras que el peso de las masas, es $W_{i}$ y $x_{i}$ son los desplazamientos de las masas (medidos de la posición donde el resorte no está deformado).
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio 7}
+\begin{figure}[H]
+	\centering
+	\includestandalone[scale=0.75]{Figuras/Sistema_Masas_Tarea}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio 7}
+La llamada \emph{formulación de desplazamiento} se obtiene escribiendo la ecuación de equilibrio para cada masa y sustituyendo $F_{i} = k_{i}(x_{i + 1} - x_{i})$ para la fuerza en los resortes. 
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio 7}
+El resultado es un conjunto de ecuaciones simétricas y tridiagonal:
+\fontsize{12}{12}\selectfont
+\begin{align*}
+(k_{1} + k_{2}) \: x_{1} - k_{2} \: x_{2} &= \: W_{1} \\
+-k_{i} \: x_{i-1} + (k_{i} + k_{i+1}) \: x_{i} - k_{i+1} \: x_{i+1} &= \:  W_{i}, \\
+-k_{n} \:  x_{n-1} + k_{n} \: x_{n} &= \: W_{n} \\
+i &= 2, 3, \ldots, n-1
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Ejercicio 7}
+Escribe un programa que resuelva este conjunto de ecuaciones para los valores dados de $n$, $k$ y $W$. Considera $n = 5$ y 
+\begin{align*}
+k_{1} &= k_{2} = k_{3} = 10 \mbox{ N/mm} \\
+k_{4} &= k_{5} = 5 \mbox{ N/mm} \\
+W_{1} &= W_{3} = W_{5} = 100 \mbox{ N} \\
+W_{2} &= W_{4} = 50 \mbox{ N}
+\end{align*}
+\end{frame}
+\end{document}

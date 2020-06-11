@@ -26,6 +26,11 @@
 \usepackage{bookmark}
 \usepackage{longtable}
 \usepackage{graphicx}
+% \usepackage{catoptions}
+
+% % before loading circuitikz
+% \usepackage{silence}
+% \WarningFilter{catoptions}{Option}
 \usepackage{tikz}
 \usepackage[siunitx, RPvoltages]{circuitikz}
 \usetikzlibrary{mindmap}
@@ -130,4 +135,10 @@
 
 \makeatother
 
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
 
