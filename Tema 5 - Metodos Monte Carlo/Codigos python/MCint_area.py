@@ -47,15 +47,22 @@ def f1(x):
 
 a = 1; b = 2; n = 1000000; N = 10000; fmax = f1(b)
 
-t0 = time.clock()
-print (MCint_area(f1, a, b, n, fmax))
-t1 = time.clock()
-print (MCint_area_vec(f1, a, b, n, fmax))
-t2 = time.clock()
-print ('fraccion bucle/vectorizada:', (t1-t0)/(t2-t1))
+print('Método \t\t Integral')
+print('-'*30)
+
+t0 = time.process_time()
+print('Bucle \t\t {0:1.6f}'.format(MCint_area(f1, a, b, n, fmax)))
+
+t1 = time.process_time()
+print('Vectorización \t {0:1.6f}'.format(MCint_area_vec(f1, a, b, n, fmax)))
+
+t2 = time.process_time()
+fraccion = (t1-t0)/(t2-t1)
 
 k, I = MCint3_area(f1, a, b, n, fmax, N)
-print (I[-1])
+print('Puntos abajo \t {0:1.6f}'.format(I[-1]))
+
+print('fraccion puntos/bucle \t {0:1.8f}'.format(1/fraccion))
 
 error = 6.5 - np.array(I)
 
@@ -63,5 +70,7 @@ plt.plot(k, error)
 plt.xlabel('Número de muestras', fontproperties=font_prop)
 plt.ylabel('Error', fontproperties=font_prop)
 plt.title('Integración Monte Carlo por puntos', fontproperties=font_prop)
+plt.axhline(y=0, lw=0.7, ls='dashed', color='k')
+plt.ticklabel_format(axis="x", style="sci", scilimits=(0,0))
 plt.savefig('integracionPuntos.eps')
 plt.show()

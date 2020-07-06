@@ -380,44 +380,45 @@ xA_2_B, yA_2_B = generaazar(muestra, 500)
  \includegraphics[scale=0.5]{Imagenes/Secuencia_aleatoria_05.eps}
 \end{figure}
 \end{frame}
-\section{La aguja de Buffon}
-\frame{\tableofcontents[currentsection, hideothersubsections]}
-\subsection{Planteamiento}
-\begin{frame}
-\frametitle{La aguja de Buffon}
-Resulta que $\pi$ también desempeña un papel importante en un experimento llamado \enquote{el problema de la aguja de Buffon}.
-\\
-\bigskip
-\pause
-El cual determina la probabilidad de que una aguja de longitud $\ell$, arrojada aleatoriamente aterrice en medio o atravesando una serie de líneas paralelas en el suelo.
-\end{frame}
-\begin{frame}
-\begin{figure}
-	\centering
-	\includegraphics[scale=0.10]{Imagenes/aguja-de-buffon.eps}
-\end{figure}
-La separación entre las líneas es constante.
-\end{frame}
-\begin{frame}
-\frametitle{La aguja de Buffon}
-Resulta que si la distancia entre las líneas paralelas es la misma que la longitud $\ell$ de la aguja lanzada, el número de veces que la aguja cae atravesando las líneas (luego de un gran número de lanzamientos), nos servirá para calcular el valor de $\pi$.
-\end{frame}
-\subsection{Aproximación al valor de $\pi$}
-\begin{frame}
-\frametitle{Aproximación al valor de $\pi$}
-De esa manera: 
-\begin{align*}
-\pi = \dfrac {2 \, N}{A}
-\end{align*}
-siendo $N$ el número total de intentos y $A$ el número de veces que la aguja ha cruzado alguna línea.
-\end{frame}
-\begin{frame}
-\frametitle{Primer problema de tarea}
-Considera el caso en el que la longitud de la aguja es igual a la separación entre las rayas, es decir $\ell = h$.
-\\
-\bigskip
-Si la aguja cruza una línea de manera oblicua, es decir, existe un ángulo de inclinación con respecto a la línea, puedes deducir la relación a partir de la \enquote{función} que describe el caso de las agujas que tocan las líneas.
-\end{frame}
+% \section{La aguja de Buffon}
+% \frame{\tableofcontents[currentsection, hideothersubsections]}
+% \subsection{Planteamiento}
+% \begin{frame}
+% \frametitle{La aguja de Buffon}
+% Resulta que $\pi$ también desempeña un papel importante en un experimento llamado \enquote{el problema de la aguja de Buffon}.
+% \\
+% \bigskip
+% \pause
+% El cual determina la probabilidad de que una aguja de longitud $\ell$, arrojada aleatoriamente aterrice en medio o atravesando una serie de líneas paralelas en el suelo.
+% \end{frame}
+% \begin{frame}
+% \frametitle{El lanzamiento de la aguja}
+% \begin{figure}
+% 	\centering
+% 	\includegraphics[scale=0.10]{Imagenes/aguja-de-buffon.eps}
+% \end{figure}
+% La separación entre las líneas es constante.
+% \end{frame}
+% \begin{frame}
+% \frametitle{La aguja de Buffon}
+% Resulta que si la distancia entre las líneas paralelas es la misma que la longitud $\ell$ de la aguja lanzada, el número de veces que la aguja cae atravesando las líneas (luego de un gran número de lanzamientos), nos servirá para calcular el valor de $\pi$.
+% \end{frame}
+% \subsection{Aproximación al valor de pi}
+% \begin{frame}
+% \frametitle{Aproximación al valor de $\pi$}
+% De esa manera: 
+% \begin{align*}
+% \pi = \dfrac {2 \, N}{A}
+% \end{align*}
+% siendo $N$ el número total de intentos y $A$ el número de veces que la aguja ha cruzado alguna línea.
+% \end{frame}
+% \begin{frame}
+% \frametitle{Primer problema de tarea}
+% Considera el caso en el que la longitud de la aguja es igual a la separación entre las rayas, es decir $\ell = h$.
+% \\
+% \bigskip
+% Si la aguja cruza una línea de manera oblicua, es decir, existe un ángulo de inclinación con respecto a la línea, puedes deducir la relación a partir de la \enquote{función} que describe el caso de las agujas que tocan las líneas.
+% \end{frame}
 % \begin{frame}
 % \frametitle{Segundo problema de tarea}
 % Una vez que has deducido el problema, implementa en python un programa que calcule el valor aproximado de $\pi$, a partir del número de lanzamientos, y el número de agujas que cruzan una línea.
@@ -470,4 +471,459 @@ Si la aguja cruza una línea de manera oblicua, es decir, existe un ángulo de i
 %  \includegraphics[scale=0.6]{aproximacionPi_1000000.eps}
 % \end{figure}
 % \end{frame}
+%Referencia. Langtangen. A primer on scientific programming with pyhon. Chap. 8. Random
+% numbers and simple games
+\section{Integración Monte Carlo}
+\frame{\tableofcontents[currentsection, hideothersubsections]}
+\subsection{Definición}
+\begin{frame}
+\frametitle{Integración Monte Carlo}
+Una de las primeras aplicaciones con el uso de números aleatorios ha sido el cálculo numérico de integrales, es decir, un problema no aleatorio (determinista).
+\\
+\bigskip
+Veamos un primer método para calcular la siguiente integral
+\begin{align*}
+\int_{a}^{b} f(x) \; \dd{x}
+\end{align*}
+\end{frame}
+\begin{frame}
+\frametitle{Integración estándar Monte Carlo}
+Sea $x_{1}, x_{2}, \ldots, x_{n}$ la secuencia de números aleatorios uniformemente distribuidos entre $a$ y $b$, puntos de un intervalo.
+\\
+\bigskip
+Entonces
+\begin{align}
+(b - a) \; \dfrac{1}{n} \; \sum_{i=1}^{n} f(x_{i})
+\label{eq:ecuacion_08_07}
+\end{align}
+\end{frame}
+\subsection{Aproximación a la integral}
+\begin{frame}
+\frametitle{Aproximación a la integral}
+Es una aproximación a la integral 
+\begin{align}
+\int_{a}^{b} f(x) \dd{x} 
+\end{align}
+Este método se denomina generalmente \emph{integración de Monte Carlo}.
+\end{frame}
+\begin{frame}
+\frametitle{Aproximación a la integral}
+Es fácil de interpretar la ec. (\ref{eq:ecuacion_08_07}): Un resultado bien conocido del cálculo es que la integral de una función $f$ sobre $[a, b]$ es igual al valor medio de $f$ sobre $[a, b]$ multiplicado por la longitud del intervalo, $(b - a)$.
+\end{frame}
+\begin{frame}
+\frametitle{Aproximación a la integral}
+Si aproximamos el valor medio de $f(x)$ por la media de $n$ evaluaciones de la función distribuidas al azar $f(x_{i})$, obtenemos el método de integración descrito.
+\\
+\bigskip
+Podemos implementar la ec. (\ref{eq:ecuacion_08_07}) en una pequeña función de \python:
+\end{frame}
+\subsection{Estimando con \texttt{python}}
+\begin{frame}[allowframebreaks, plain, fragile]
+\frametitle{Estimado la integral con python}
+\begin{lstlisting}[caption=Función para aproximar la integral, style=codigopython]
+import random
+
+def MCint(f, a, b, n):
+    s = 0
+    for i in range(n):
+        x = random.uniform(a, b)
+        s += f(x)
+    I = (float(b-a)/n) * s
+    return I
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Versión más rápida del código}
+Normalmente se necesita un valor de $n$ grande para obtener buenos resultados con este método, por lo que es útil contar con una versión vectorizada, que es más rápida que la función anterior:
+\end{frame}
+\begin{frame}[plain, fragile]
+\frametitle{Versión más rápida del código}
+\begin{lstlisting}[caption=Función vectorizada para la aproximación de la integral, style=codigopython]
+import random
+from numpy import *
+
+def MCintvec(f, a, b, n):
+    x = random.uniform(a, b, n)
+    s = sum(f(x))
+    I = (float(b-a)/n) * s
+    return I
+\end{lstlisting}
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo}
+Vamos a probar el método de integración de Monte Carlo en una función simple, sea $f(x) = 2 + 3 \: x$, y calculemos la integral en $[1, 2]$.
+\\
+\bigskip
+La mayoría de los otros métodos de integración numérica resolverán exactamente esa función lineal, independientemente del número de evaluaciones de la función.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo}
+Pero este no es el caso de la integración de Monte Carlo. 
+\\
+\bigskip
+Sería interesante ver cómo la calidad de la aproximación de Monte Carlo se incrementa, conforme crece el valor de $n$.
+\end{frame}
+\begin{frame}
+\frametitle{Ejemplo}
+Para graficar la evolución de la aproximación con la integral, debemos almacenar los valores intermedios $I$, por lo que debemos de modificar el código:
+\end{frame}
+\begin{frame}[allowframebreaks, plain, fragile]
+\begin{lstlisting}[caption=Código para el ejercicio, style=codigopython]
+def MCintA_2_B(f, a, b, n):
+    # se guardan las aproximaciones intermedias de la integral en el arreglo I,
+    # donde I[k-1] es k veces la funcion evaluada
+    s = 0
+
+    I = np.zeros(n)
+
+    for k in range(1, n+1):
+        x = random.uniform(a, b)
+        s += f(x)
+        I[k-1] = (float(b-a)/k) * s
+    return I
+\end{lstlisting}
+\end{frame}
+\begin{frame}
+\frametitle{Consideraciones para la solución}
+Toma en cuenta que hacemos que $k$ vaya de $1$ a $n$ mientras que los índices en $I$, como de costumbre, van de $0$ a $n-1$.
+\end{frame}
+\begin{frame}
+\frametitle{Consideraciones para la solución}
+Dado que $n$ puede ser muy grande, el arreglo $I$ puede consumir más memoria de lo que tenemos disponible en la computadora.
+\\
+\bigskip
+Por lo tanto, decidimos almacenar sólo cada $N$ valores de la aproximación. El determinar si un valor debe ser almacenado o no puede ser calculado por la función \texttt{mod}:
+\end{frame}
+\begin{frame}[plain, fragile]
+\frametitle{Consideraciones para la solución}
+\begin{lstlisting}[caption=Almacenamiento de valores, style=codigopython]
+for k in range(1, n+1):
+    if k % N == 0:
+    	#se guarda
+\end{lstlisting}
+Es decir, cada vez que $k$ se divide $N$ sin ningún residuo, almacenamos el valor.
+\end{frame}
+\begin{frame}[plain, allowframebreaks, fragile]
+\frametitle{La función completa sería:}
+\begin{lstlisting}[caption=Código completo para el ejercicio, style=codigopython]
+def MCintA_3_B(f, a, b, n, N=100):
+    s = 0
+    Ivalores = []
+    kvalores = []
+    
+    for k in range(1, n+1):
+        x = random.uniform(a, b)
+        s += f(x)
+        if k % N == 0:
+            I = (float(b-a)/k) * s
+            Ivalores.append(I)
+            kvalores.append(k)
+    
+    return k_valores, I_valores
+\end{lstlisting}
+\end{frame}
+\begin{frame}[plain, fragile]
+\frametitle{Estimación del error}
+Ahora podemos revisar el error que se genera al usar la función:
+\begin{lstlisting}[caption=Estimación del error del procedimiento, style=codigopython]
+def fA_1_B(x):
+    return 2 + 3*x
+
+k, I = MCintA_3_B(fA_1_B, 1, 2, 1000000, N=10000)
+error = 6.5 - np.array(I)
+\end{lstlisting}
+\end{frame}
+\begin{frame}
+\frametitle{Agregar rutina de graficación}
+Como en otras ocasiones, hay que incluir una rutina de graficación para obtener el resultado que se verá en la siguiente diapositiva. 
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Gráfica del error vs $N$}
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.5]{Imagenes/integracionMC01.eps}
+	\caption{Convergencia de la integración de Monte Carlo para $f(x)$}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Velocidad de convergencia}
+Para funciones de una variable, el método (\ref{eq:ecuacion_08_07}) requiere de muchos puntos y es ineficiente comparado con otras reglas de integración.
+\\
+\bigskip
+La mayoría de las reglas de integración tienen un error que se reduce mientras se incrementa $n$, normalmente de la manera $n^{-r}$ para un $r>0$.
+\end{frame}
+\begin{frame}
+\frametitle{Velocidad de convergencia}
+Para la regla del trapecio, $r = 2$, mientras que para la integración de Monte Carlo $r = 1/2$
+\\
+\bigskip
+Esto significa que este método converge muy lentamente en comparación con la regla del trapecio.
+\end{frame}
+\subsection{Integración en varias variables}
+\begin{frame}
+\frametitle{Integración en varias variables}
+Sin embargo, para funciones de varias variables, la integración de Monte Carlo en espacios de dimensiones mayores supera completamente a métodos como la regla del trapecio y la regla de Simpson.
+\end{frame}
+\begin{frame}
+\frametitle{Mejoras para el cálculo de la integral}
+Existen diferentes maneras de mejorar el rendimiento de la ec. (\ref{eq:ecuacion_08_07}), básicamente por ser \enquote{aplicados} al momento de graficar los números aleatorios, conocidas como \emph{técnicas de reducción de la varianza}.
+\end{frame}
+\subsection{Calculando áreas con puntos aleatorios}
+\begin{frame}
+\frametitle{Calculando áreas con puntos aleatorios}
+Pensemos en alguna región geométrica $G$ en el plano y una caja circundante $B$ con geometría $[x_{L}, x_{H}] \cp [y_{L}, y_{H}]$.
+\\
+\bigskip
+Una forma de calcular el área de $G$ es dibujar $N$ puntos aleatorios dentro de $B$ y contar cuántos de ellos $M$, están dentro de $G$.
+\end{frame}
+\begin{frame}
+\frametitle{Puntos dentro de la región}
+El área de $G$ es entonces la fracción $M/N$ (fracción de $G$ en el área de $B$) veces el área de $B$, $(x_{H} - x_{L})(y_{H} - y_{L})$.
+\end{frame}
+\begin{frame}
+\frametitle{Puntos dentro de la región}
+Expresado de forma distinta, este método es una especie de juego de dardos en el que se cuentan los que caen dentro de $G$, si cada lanzamiento llega de manera uniforme dentro de $B$.
+\end{frame}
+\begin{frame}
+\frametitle{Calculando una integral}
+Veamos cómo será la expresión para calcular la integral
+\begin{align*}
+\int_{a}^{b} f(x) \: \dd{x}
+\end{align*}
+\pause
+Como nota relevante, consideremos que esta integral es el área debajo de la curva $y = f(x)$ y sobre el eje $x$, entre $x = a$ y $x = b$.
+\end{frame}
+\begin{frame}
+\frametitle{Calculando una integral}
+Introducimos un rectángulo $B$, tal que
+\begin{align*}
+B = \{ (x, y) \vert : a \leq x \leq b, \hspace{0.3cm} 0 \leq y \leq m \}
+\end{align*}
+donde $m \leq \max_{x \in [a, b]} \; f(x)$
+\end{frame}
+\begin{frame}
+\frametitle{Calculando una integral}
+El algoritmo para calcular el área bajo la curva se basa en dibujar $N$ puntos aleatorios dentro de $B$ y contar cuántos de ellos, $M$, están por encima del eje $x$  y cuántos por debajo de la curva $y = f(x)$, como se aprecia en la siguiente figura:
+\end{frame}
+\begin{frame}
+\frametitle{Método del dardo}
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.4]{Imagenes/integracionCaja.eps}
+	\caption{\tiny{Cuando $M$ de $N$ puntos aleatorios en el rectángulo $[0, 2] \cp [0, 2.4]$ se encuentran bajo la curva, el área bajo la curva se estima como la fracción $M / N$ del área del rectángulo.}}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Valor de la integral}
+El área o el valor de la integral se estima por la expresión
+\begin{align*}
+\dfrac{M}{N} \: m \: (b - a)
+\end{align*}
+\\
+\bigskip
+\pause
+El código para el método del dardo sería:
+\end{frame}
+\begin{frame}[plain, fragile]
+\frametitle{Código para la integral}
+\begin{lstlisting}[caption=Código para el método del dardo, style=codigopython]
+def MCint_area(f, a, b, n, m):
+    porDebajo = 0 
+    for i in range(n):
+        x = random.uniform(a, b)
+        y = random.uniform(0, m)
+        if y <= f(x):
+            porDebajo += 1
+    area = porDebajo/float(n) * m * (b - a)
+    
+    return area
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Consideración importante}
+Toma en cuenta que este método opera con el doble de números aleatorios que el método anterior.
+\\
+\bigskip
+Una implementación vectorizada del código es la siguiente:
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Versión vectorizada}
+\begin{lstlisting}[caption=Método del dardo en modo vectorizado, style=codigopython]
+def MCint_area_vec(f, a, b, n, m):
+    x = random.uniform(a, b, n)
+    y = random.uniform(0, m, n)
+    porDebajo = np.sum(y < f(x))
+    area = porDebajo/float(n) * m * (b - a)
+    
+    return area
+\end{lstlisting}
+\end{frame}
+\begin{frame}
+\frametitle{Ventaja de la versión vectorizada}
+Podemos ejecutar el código para un conjunto de 2 millones de números al azar, la versión de bucle sencillo no es tan lenta.
+\\
+\bigskip
+\pause
+Sin embargo, si necesita que la integración se repita muchas veces dentro de otro cálculo, puede ser importante la eficacia superior de la versión vectorizada.
+\end{frame}
+\begin{frame}[plain, allowframebreaks, fragile]
+\frametitle{Función completa}
+\begin{lstlisting}[caption=Función para el método del dardo, style=codigopython]
+def MCintA_3_Barea(f, a, b, n, m, N=1000):
+    Ivalores = []
+    kvalores = []
+    porDebajo = 0
+    for k in range(1, n+1):
+        x = random.uniform(a, b)
+        y = random.uniform(0, m)
+        if y <= f(x):
+            porDebajo += 1
+        area = porDebajo/float(k) * m * (b-a)
+        if k % N == 0:
+            I = area
+            Ivalores.append(I)
+            kvalores.append(2 * k)
+    return kvalores, Ivalores
+\end{lstlisting}
+\end{frame}
+\begin{frame}
+\frametitle{Implementación del código}
+Al contar con los elementos necesarios, podemos implementar el código completo para estimar el valor de la integral a partir de generar puntos aleatorios.
+\\
+\bigskip
+Haremos una estimación del tiempo que tarda en resolverse el problema usando el bucle y la versión vectorizada.
+\end{frame}
+\begin{frame}
+\frametitle{La librería \texttt{time}}
+La librería \funcionazul{time} proporciona un conjunto de funciones para registrar el tiempo en el equipo de cómputo.
+\\
+\bigskip
+Revisa la documentación de la librería, ya que \emph{tiene como punto particular el hecho de medir el tiempo a partir del 1 de enero de 1970}, al momento actual en el equipo.
+\end{frame}
+\begin{frame}
+\frametitle{Para medir un intervalo}
+Para el ejercicio que haremos, se requiere medir un intervalo de tiempo entre dos eventos, por lo que no es necesario hacer alguna conversión de tiempo.
+\\
+\bigskip
+La función \funcionazul{time.process\_time()} hará el registro del tiempo en el equipo, para el intervalo, basta con que hagamos un segundo registro y tomar la diferencia entre éstos.
+\end{frame}
+\begin{frame}[plain, allowframebreaks, fragile]
+\begin{lstlisting}[caption=Implementación del código, style=codigopython]
+def fA_1_B(x):
+    return 2 + 3 * x
+
+a = 1; b = 2; n = 1000000; N = 10000; fmax = fA_1_B(b)
+
+print('Metodo \t\t Integral')
+print('-'*30)
+
+tA_0_B = time.process_time()
+print('Bucle \t\t {0:1.6f}'.format(MCint_area(fA_1_B, a, b, n, fmax)))
+
+tA_1_B = time.process_time()
+print('Vectorizacion \t {0:1.6f}'.format(MCint_area_vec(fA_1_B, a, b, n, fmax)))
+
+tA_2_B = time.process_time()
+fraccion = (tA_1_B-tA_0_B)/(tA_2_B-tA_1_B)
+
+k, I = MCintA_3_B_area(fA_1_B, a, b, n, fmax, N)
+print('Puntos abajo \t {0:1.6f}'.format(I[-1]))
+
+print('fraccion puntos/bucle \t {0:1.8f}'.format(1/fraccion))
+
+error = 6.5 - np.array(I)
+\end{lstlisting}
+\end{frame}
+\begin{frame}
+\frametitle{Resultado en la terminal}
+El resultado obtenido es el siguente:
+\begin{table}
+\begin{tabular}{l c}
+Método & Integral \\ \hline
+Bucle & $6.501944$ \\ \hline
+Vectorización & $6.492040$ \\ \hline
+Puntos abajo & $6.501160$ \\ \hline
+fraccion puntos/bucle & $0.04958678$ \\
+\end{tabular}
+\end{table}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Gráfica del error}
+El error obtenido se presenta a continuación:
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.45]{Imagenes/integracion_area_01.eps}
+    \caption{Comportamiento del error con el método del dardo.}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Graficando los puntos con el método}
+A continuación se presenta una gráfica con los puntos aleatorios debajo de la función y por arriba de ésta, modificando el valor de $N$ para representar el método del dardo, se le ha puesto un color diferente para señalar cuando un punto está por debajo de la función y con otro color, cuando el punto está por arriba.
+\end{frame}
+\begin{frame}
+\frametitle{Gráfica de la función en $[1, 2]$}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.55]{Imagenes/area_puntos_01.eps}
+    \caption{Función inicial.}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Gráfica al incluir puntos aleatorios}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.55]{Imagenes/area_puntos_02.eps}
+    \caption{Puntos por arriba y por debajo de la función.}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Gráfica al incluir puntos aleatorios}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.55]{Imagenes/area_puntos_03.eps}
+    \caption{Se va saturando el área debajo de la curva.}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Gráfica al incluir puntos aleatorios}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.55]{Imagenes/area_puntos_04.eps}
+    \caption{Casi se cubre el área debajo de la curva.}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Gráfica al incluir puntos aleatorios}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.55]{Imagenes/area_puntos_05.png}
+    \caption{Podríamos pensar que ya tenemos el valor de la integral.}
+\end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Gráfica al incluir puntos aleatorios}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.55]{Imagenes/area_puntos_06.png}
+    \caption{El resultado del cálculo de la integral es exacto.}
+\end{figure}
+\end{frame}
+% \begin{frame}
+% \frametitle{Gráfica del error vs. número de muestras}
+% \begin{figure}
+%     \centering
+%     \includegraphics[scale=0.55]{Imagenes/area_puntos_07_error.eps}
+%     \caption{Comportamiento del error.}
+% \end{figure}
+% \end{frame}
+\begin{frame}
+\frametitle{Ejercicios a cuenta}
+Incorpora una rutina de graficación para obtener las imágenes obtenidas en las secciones:
+\setbeamercolor{item projected}{bg=blue!70!black,fg=yellow}
+\setbeamertemplate{enumerate items}[circle]
+\begin{enumerate}[<+->]
+\item Secuencia aleatoria (5 gráficas, dos de ellas se obtienen con el mismo código, en dos momentos distintos)
+\item Integración Monte Carlo (8 gráficas, la imagen en la diapositiva 90, es un ejemplo, no ejercicio)
+\end{enumerate}
+\end{frame}
 \end{document}

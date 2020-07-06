@@ -44,20 +44,25 @@ def f1(x):
 
 a = 1; b = 2; n = 1000000; N = 10000; fmax = f1(b)
 
-t0 = time.clock()
-print (MCint_area(f1, a, b, n, fmax))
-t1 = time.clock()
-print (MCint_area_vec(f1, a, b, n, fmax))
-t2 = time.clock()
-print ('loop/vectorized fraction:', (t1-t0)/(t2-t1))
+t0 = time.process_time()
+print(MCint_area(f1, a, b, n, fmax))
+
+t1 = time.process_time()
+print(MCint3_area(f1, a, b, n, fmax))
+
+t2 = time.process_time()
+print ('Fracción bucle/vectorizada', (t1-t0)/(t2-t1))
 
 k, I = MCint3_area(f1, a, b, n, fmax, N)
 print (I[-1])
 
 error = 6.5 - np.array(I)
 
-plt.plot(k, error, label='Monte Carlo integration')
-plt.xlabel('number of samples')
+plt.plot(k, error)
+plt.title('Integración Monte Carlo')
+plt.xlabel('número de muestras')
 plt.ylabel('error')
-plt.savefig('tmp.pdf')
+plt.axhline(y=0, lw=0.7, ls='dashed', color='k')
+plt.ticklabel_format(axis="x", style="sci", scilimits=(0,0))
+#plt.savefig('tmp.pdf')
 plt.show()
